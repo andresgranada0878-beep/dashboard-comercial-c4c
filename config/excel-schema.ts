@@ -2,7 +2,6 @@ import type { IndicatorKey } from "@/types/dashboard"
 
 // Esquema esperado del archivo Excel. Permite detectar hojas y columnas faltantes
 // sin acoplar la lectura a nombres exactos (se normalizan al comparar).
-
 export const EXPECTED_SHEETS = [
   "base director",
   "Tabla dinam gestion comercial",
@@ -16,7 +15,21 @@ export const EXPECTED_SHEETS = [
 
 export const OPTIONAL_SHEETS = ["Trimestre", "X territorio", "mensual", "Director"] as const
 
-// Columnas mínimas requeridas por hoja base (para el reporte de calidad).
+export const SHEET_ALIASES = [
+  "base director",
+  "tabla dinam gestion comercial",
+  "tecnico",
+  "fincas",
+  "territorios",
+  "act campo",
+  "leads",
+  "resumen ejecutivo",
+  "trimestre",
+  "x territorio",
+  "mensual",
+  "director",
+] as const
+
 export const REQUIRED_COLUMNS: Record<string, string[]> = {
   "base director": ["Comercial", "Indicador", "Cumplimiento", "Meta", "Peso", "Meta Esperada"],
   "Tabla dinam gestion comercial": ["Empleado", "Comercial", "Territorio", "Empresa", "Mes", "Cargo"],
@@ -24,6 +37,8 @@ export const REQUIRED_COLUMNS: Record<string, string[]> = {
   Territorios: ["Territorio de ventas", "Ciudad", "Encargado"],
   "Act Campo": ["ID", "Cliente", "Territorio de ventas", "Organización de ventas"],
   "Resumen ejecutivo": ["valor", "nombre", "Mensaje"],
+  Tecnico: ["Territorio", "Ppto", "Valor Recomendaciones", "Meta Referencias", "Mes"],
+  Fincas: ["Unidad de Negocio", "des_territorio", "atr_desc_empleado", "Héctareas", "Mes"],
 }
 
 /**
