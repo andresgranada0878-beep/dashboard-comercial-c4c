@@ -1,19 +1,17 @@
+import { readFile } from "node:fs/promises"
+import path from "node:path"
 import { read } from "xlsx"
-import { DEFAULT_EXCEL_NAME, DEFAULT_EXCEL_PATH } from "@/config/excel-schema"
+import { DEFAULT_EXCEL_NAME } from "@/config/excel-schema"
 import { normalizeWorkbook } from "@/lib/excel-normalizer"
 import type { NormalizedDashboardData } from "@/types/dashboard"
 
 /**
- * Carga el archivo por defecto alojado en la aplicación.
- * Agrega un parámetro de actualización para evitar el uso de caché.
+ * Carga el archivo por defecto alojado en la aplicación (lectura desde el sistema
+ * de archivos del servidor, no por HTTP).
  */
 export async function loadDefaultExcel(): Promise<NormalizedDashboardData> {
-  const url = `${DEFAULT_EXCEL_PATH}?t=${Date.now()}`
-  const res = await fetch(url, { cache: "no-store" })
-  if (!res.ok) {
-    throw new Error(`No fue posible cargar el archivo predeterminado (HTTP ${res.status}).`)
-  }
-  const buffer = await res.arrayBuffer()
+  const filePath = path.join(process.cwd(), "public", "data", "informe-c4c.xlsx")
+  const buffer = await readFile(filePath)
   const wb = read(buffer, { cellDates: true })
   return normalizeWorkbook(wb, { fileName: DEFAULT_EXCEL_NAME, source: "default" })
 }

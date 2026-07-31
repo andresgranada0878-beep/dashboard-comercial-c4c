@@ -39,6 +39,18 @@ export const COMPANY_MAP: Record<CompanyKey, CompanyConfig> = COMPANY_CONFIGS.re
 
 export const COMPANY_ORDER: CompanyKey[] = ["perez-cardona", "galagro", "tierragro"]
 
+/** Nombre legible de una empresa (o etiqueta neutra si no está clasificada). */
+export function getCompanyName(key: CompanyKey | null): string {
+  if (!key) return "Sin clasificar"
+  return COMPANY_MAP[key]?.name ?? key
+}
+
+/** Logo de una empresa (o null si no aplica). */
+export function getCompanyLogo(key: CompanyKey | null): string | null {
+  if (!key) return null
+  return COMPANY_MAP[key]?.logo ?? null
+}
+
 /** Quita acentos, colapsa espacios y pasa a minúsculas para comparar de forma robusta. */
 export function canonical(text: unknown): string {
   if (text === null || text === undefined) return ""
