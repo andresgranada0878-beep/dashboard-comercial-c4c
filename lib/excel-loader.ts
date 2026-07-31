@@ -18,21 +18,21 @@ import {
 } from "@/types/dashboard"
 
 export function resolveExcelFilePath(candidatePath?: string): string {
-  const candidates = candidatePath
-    ? [candidatePath]
-    : [
-        "data/informe-c4c.xlsx",
-        "public/data/informe-c4c.xlsx",
-        "./data/informe-c4c.xlsx",
-        "./public/data/informe-c4c.xlsx",
-      ]
-
-  for (const candidate of candidates) {
-    const absolute = path.isAbsolute(candidate) ? candidate : path.resolve(process.cwd(), candidate)
-    if (fs.existsSync(absolute)) return absolute
+  if (candidatePath) {
+    const direct = path.isAbsolute(candidatePath) ? candidatePath : path.resolve(process.cwd(), candidatePath)
+    if (fs.existsSync(direct) && fs.statSync(direct).isFile()) return direct
   }
 
-  return path.resolve(process.cwd(), "public/data/informe-c4c.xlsx")
+  const dataDirectory = path.resolve(process.cwd(), "data")
+  if (!fs.existsSync(dataDirectory)) return dataDirectory
+
+  const entries = fs.readdirSync(dataDirectory, { withFileTypes: true })
+  const firstExcel = entries
+    .filter((entry) => entry.isFile() && /\.(xlsx|xls)$/i.test(entry.name))
+    .map((entry) => path.join(dataDirectory, entry.name))
+    .sort((left, right) => left.localeCompare(right))[0]
+
+  return firstExcel ?? dataDirectory
 }
 
 function isEmptyCell(value: unknown): boolean {
@@ -141,11 +141,12 @@ function buildSheetData(sheetName: string, rawRows: unknown[][]): RawExcelSheet 
 export async function readExcelWorkbook(filePath?: string): Promise<RawExcelWorkbook> {
   const resolvedPath = resolveExcelFilePath(filePath)
 
-  if (!fs.existsSync(resolvedPath)) {
+  if (!fs.existsSync(resolvedPath) || !fs.statSync(resolvedPath).isFile()) {
     throw new Error(`No se encontró el archivo Excel en la ruta: ${resolvedPath}`)
   }
 
-  const workbook = XLSX.readFile(resolvedPath)
+  const buffer = await fs.promises.readFile(resolvedPath)
+  const workbook = XLSX.read(buffer, { type: "buffer", cellDates: true })
   const sheets: RawExcelSheet[] = []
 
   for (const sheetName of workbook.SheetNames) {

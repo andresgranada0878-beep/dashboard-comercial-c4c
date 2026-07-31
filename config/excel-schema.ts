@@ -62,6 +62,6 @@ export const INDICATOR_NAME_TO_KEY: { match: string; key: IndicatorKey }[] = [
 // Errores de Excel que deben convertirse en nulos.
 export const EXCEL_ERROR_VALUES = ["#VALUE!", "#DIV/0!", "#NAME?", "#N/A", "#REF!", "#NULL!", "#NUM!"]
 
-// Ruta por defecto del archivo alojado en la aplicación.
-export const DEFAULT_EXCEL_PATH = "/data/informe-c4c.xlsx"
-export const DEFAULT_EXCEL_NAME = "informe Q1 - Final.xlsx"
+// Ruta por defecto del directorio de archivos Excel. Los nombres reales se detectan dinámicamente.
+export const DEFAULT_EXCEL_PATH = "data"
+export const DEFAULT_EXCEL_NAME = "excel"
