@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useEffect, useMemo, useState } from "react"
 import type { CSSProperties } from "react"
 import type {
@@ -55,11 +56,21 @@ function toneStyle(tone: string) {
   return { background: "#f3f4f6", color: "#4b5563", border: "#e5e7eb" }
 }
 
+function personSort(a: string, b: string) {
+  const aVacant = a.toLocaleLowerCase("es").includes("vacante")
+  const bVacant = b.toLocaleLowerCase("es").includes("vacante")
+  if (aVacant !== bVacant) return aVacant ? 1 : -1
+  return a.localeCompare(b, "es", { sensitivity: "base" })
+}
+
 function sourceSort(a: IndividualSource, b: IndividualSource) {
   const report = REPORT_ORDER.indexOf(a.report) - REPORT_ORDER.indexOf(b.report)
   if (report !== 0) return report
   const profile = a.profile.localeCompare(b.profile, "es")
   if (profile !== 0) return profile
+  const person = personSort(a.person, b.person)
+  if (person !== 0) return person
+  if (a.year !== b.year) return a.year - b.year
   return (QUARTER_ORDER[a.quarter] ?? 0) - (QUARTER_ORDER[b.quarter] ?? 0)
 }
 
@@ -129,17 +140,22 @@ export function DashboardShell() {
   }
 
   function selectYear(year: number) {
-    chooseSource((data?.sources ?? []).filter((source) => source.report === selected?.report && source.profile === selected?.profile && source.year === year))
+    const candidates = (data?.sources ?? []).filter(
+      (source) => source.report === selected?.report && source.profile === selected?.profile && source.year === year,
+    )
+    const samePerson = candidates.filter((source) => source.person === selected?.person)
+    chooseSource(samePerson.length ? samePerson : candidates)
   }
 
   function selectQuarter(quarter: string) {
-    const candidate = (data?.sources ?? []).find(
+    const candidates = (data?.sources ?? []).filter(
       (source) =>
         source.report === selected?.report &&
         source.profile === selected?.profile &&
         source.year === selected?.year &&
         source.quarter === quarter,
     )
+    const candidate = candidates.find((source) => source.person === selected?.person) ?? candidates[0]
     if (candidate) {
       setSelectedSourceId(candidate.id)
       setMonth(candidate.months[0] ?? "")
@@ -161,7 +177,7 @@ export function DashboardShell() {
   const profileOptions = unique((data?.sources ?? []).filter((source) => source.report === selected?.report).map((source) => source.profile))
   const yearOptions = unique((data?.sources ?? []).filter((source) => source.report === selected?.report && source.profile === selected?.profile).map((source) => source.year)).sort((a, b) => b - a)
   const quarterOptions = unique((data?.sources ?? []).filter((source) => source.report === selected?.report && source.profile === selected?.profile && source.year === selected?.year).map((source) => source.quarter)).sort((a, b) => (QUARTER_ORDER[a] ?? 0) - (QUARTER_ORDER[b] ?? 0))
-  const personOptions = unique((data?.sources ?? []).filter((source) => source.report === selected?.report && source.profile === selected?.profile && source.year === selected?.year && source.quarter === selected?.quarter).map((source) => source.person))
+  const personOptions = unique((data?.sources ?? []).filter((source) => source.report === selected?.report && source.profile === selected?.profile && source.year === selected?.year && source.quarter === selected?.quarter).map((source) => source.person)).sort(personSort)
 
   const indicatorRows = useMemo(() => {
     if (!selected) return []
@@ -202,9 +218,19 @@ export function DashboardShell() {
               <h1 style={{ margin: "4px 0 0", fontSize: 28, lineHeight: 1.15 }}>Indicadores individuales C4C</h1>
               <div style={{ marginTop: 6, color: "#64748b", fontSize: 13 }}>Agrícola Antioquia · Galagro Antioquia · Galagro Nacional</div>
             </div>
-            <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
-              <button onClick={() => void loadData()} type="button" style={secondaryButton}>Actualizar datos</button>
-              <button type="button" disabled title="Se habilitará después de validar la información" style={{ ...primaryButton, opacity: 0.48, cursor: "not-allowed" }}>PDF próximamente</button>
+            <div style={{ display: "flex", gap: 18, alignItems: "center", flexWrap: "wrap", justifyContent: "flex-end" }}>
+              <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }} aria-label="Empresas del tablero">
+                <div style={{ width: 176, height: 62, display: "flex", alignItems: "center", justifyContent: "center", background: "#ffffff", border: "1px solid #e4ece6", borderRadius: 12, padding: 8 }}>
+                  <Image src="/logos/perez-cardona.png" alt="Pérez y Cardona" width={1656} height={644} priority style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                </div>
+                <div style={{ width: 104, height: 62, display: "flex", alignItems: "center", justifyContent: "center", background: "#ffffff", border: "1px solid #e4ece6", borderRadius: 12, padding: 6 }}>
+                  <Image src="/logos/galagro.png" alt="Galagro" width={1000} height={700} priority style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                </div>
+              </div>
+              <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+                <button onClick={() => void loadData()} type="button" style={secondaryButton}>Actualizar datos</button>
+                <button type="button" disabled title="Se habilitará después de validar la información" style={{ ...primaryButton, opacity: 0.48, cursor: "not-allowed" }}>PDF próximamente</button>
+              </div>
             </div>
           </div>
 
@@ -256,6 +282,7 @@ export function DashboardShell() {
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: 12, marginTop: 20 }}>
             <SummaryCard label="Perfil" value={selected.profile} />
+            <SummaryCard label="Equipo disponible" value={`${personOptions.length} personas/posiciones`} />
             <SummaryCard label="Periodo" value={view === "trimestral" ? `${selected.quarter} · ${selected.months.join(", ")}` : `${month} · ${selected.year}`} />
             <SummaryCard label="Indicadores evaluados" value={`${validIndicators} de ${indicatorRows.length}`} />
             <SummaryCard label="Validación trimestral" value={selected.validationStatus} />
@@ -278,7 +305,7 @@ export function DashboardShell() {
           <div style={{ display: "flex", justifyContent: "space-between", gap: 14, flexWrap: "wrap" }}>
             <div>
               <h3 style={{ margin: 0, fontSize: 18 }}>Control de la fuente</h3>
-              <div style={{ color: "#64748b", fontSize: 13, marginTop: 5 }}>Esta fase usa los Excel para validar las fórmulas individuales. Power BI se conectará después como fuente de gestión real.</div>
+              <div style={{ color: "#64748b", fontSize: 13, marginTop: 5 }}>La fuente actual son los ocho Excel Q1–Q2. El tablero aplica las fórmulas, metas, pesos y topes individuales ya validados.</div>
             </div>
             <span style={{ alignSelf: "start", border: "1px solid #b7ddc2", background: "#e8f5ec", color: "#174f2b", padding: "7px 10px", borderRadius: 999, fontSize: 12, fontWeight: 800 }}>{selected.validationStatus}</span>
           </div>
