@@ -1,7 +1,32 @@
 import { EXCEL_ERROR_VALUES } from "@/config/excel-schema"
 import { MONTH_ORDER } from "@/config/indicators"
 
-export { canonical } from "@/config/companies"
+export function canonical(value: unknown): string {
+  if (value === null || value === undefined) return ""
+  return String(value)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase()
+}
+
+export function normalizeText(value: unknown): string | null {
+  if (value === null || value === undefined) return null
+  if (isExcelError(value)) return null
+
+  const safe = String(value)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+
+  return safe.length ? safe : null
+}
+
+export function normalizeHeader(value: unknown): string {
+  return normalizeText(value)?.replace(/[^a-zA-Z0-9]+/g, " ").replace(/\s+/g, "_").toLowerCase() ?? "column"
+}
 
 /** Detecta si un valor es un error de fórmula de Excel. */
 export function isExcelError(value: unknown): boolean {

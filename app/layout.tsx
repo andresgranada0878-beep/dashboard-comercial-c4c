@@ -13,7 +13,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Indicadores C4C | Pérez y Cardona',
   description:
-    'Portal ejecutivo de indicadores comerciales C4C de Pérez y Cardona, Galagro y Tierragro. Gestión comercial trimestral.',
+    'Portal de resultados individuales C4C para Agrícola Antioquia, Galagro Antioquia y Galagro Nacional, con vista mensual y trimestral.',
   generator: 'v0.app',
 }
 

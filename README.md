@@ -1,33 +1,59 @@
-# dashboard-comercial-c4c
+# Dashboard individual C4C
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [v0](https://v0.app).
+Primera fase del portal de indicadores C4C. Se concentra únicamente en resultados individuales de:
 
-## Built with v0
+- Agrícola Antioquia.
+- Galagro Antioquia.
+- Galagro Nacional, comerciales.
+- Galagro Nacional, promotores.
 
-This repository is linked to a [v0](https://v0.app) project. You can continue developing by visiting the link below -- start new chats to make changes, and v0 will push commits directly to this repo. Every merge to `main` will automatically deploy.
+Incluye vista trimestral validada contra los archivos Excel y una vista mensual derivada con las reglas de cada indicador.
 
-[Continue working on v0 →](https://v0.app/chat/projects/prj_CHkF47Zbse1I5I5sKBU6y7jSL8sG)
-
-## Getting Started
-
-First, run the development server:
+## Ejecutar
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Datos usados por la página
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+La aplicación consume:
 
-## Learn More
+```text
+data/generated/individual-c4c.json
+```
 
-To learn more, take a look at the following resources:
+Ese JSON ya está incluido y permite desplegar la aplicación sin publicar los Excel originales.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [v0 Documentation](https://v0.app/docs) - learn about v0 and how to use it.
+## Regenerar los datos desde los Excel
+
+1. Colocar los ocho archivos fuente en `data/fuentes/` con estos nombres:
+
+```text
+informe Q1 - Final.xlsx
+informe Q2 - Final.xlsx
+informe Q1 - Galagro Ant Final.xlsx
+informe Q2 - Galagro Ant Final.xlsx
+informe Q1 - Galagro Nacional.xlsx
+informe Q2 - Galagro Nacional.xlsx
+informe Q1 - Galagro Nacional - Promotor.xlsx
+informe Q2 - Galagro Nacional - Promotor.xlsx
+```
+
+2. Ejecutar:
+
+```bash
+npm run build:data
+```
+
+3. Confirmar que los ocho resultados indiquen `Coincide`.
+
+Los Excel están ignorados por Git. No deben publicarse en el repositorio ni quedar accesibles desde `public/`.
+
+## Alcance pendiente
+
+- Conexión autenticada con los tres modelos de Power BI.
+- Inclusión de todos los colaboradores, no solo los casos guardados en los Excel de validación.
+- Reportes de director y territorio.
+- Descarga en PDF.

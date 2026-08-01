@@ -21,6 +21,88 @@ export type PerformanceLevelKey = "requiere-mejora" | "en-desarrollo" | "destaca
 
 export type DataQualitySeverity = "ok" | "sin-info" | "warning"
 
+export type WorkbookStatus = "ok" | "warning" | "error"
+
+export interface WorkbookWarning {
+  sheet: string
+  code: string
+  message: string
+}
+
+export interface CompanyRecord {
+  id: string
+  empresa: string | null
+  territorio: string | null
+  comercial: string | null
+  cargo: string | null
+  empleado: string | null
+  mes: string | null
+  trimestre: string | null
+}
+
+export interface RawExcelCell {
+  raw: unknown
+  normalized: unknown
+  isError: boolean
+}
+
+export interface ExcelSheetRecord {
+  rowNumber: number
+  sheet: string
+  original: Record<string, unknown>
+  normalized: Record<string, unknown>
+}
+
+export interface RawExcelSheet {
+  name: string
+  headers: string[]
+  normalizedHeaders: string[]
+  duplicateHeaders: string[]
+  rows: ExcelSheetRecord[]
+}
+
+export interface ExcelWorkbookSummary {
+  fileName: string
+  loadedAt: string
+  sheetsFound: string[]
+  sheetsMissing: string[]
+  recordsProcessed: number
+  recordsDiscarded: number
+  errors: string[]
+  warnings: string[]
+  updatedAt: string
+  status: WorkbookStatus
+}
+
+export interface RawExcelWorkbook {
+  fileName: string
+  filePath: string
+  workbookName: string
+  sheets: RawExcelSheet[]
+  summary: ExcelWorkbookSummary
+}
+
+export interface ExcelNormalizedData {
+  companies: CompanyRecord[]
+  units: string[]
+  territories: string[]
+  advisors: string[]
+  cargos: string[]
+  months: string[]
+  quarters: string[]
+  indicators: string[]
+  metas: Array<{ key: string; value: unknown }>
+  results: Array<{ key: string; value: unknown }>
+  weights: Array<{ key: string; value: unknown }>
+  warnings: WorkbookWarning[]
+  summary: ExcelWorkbookSummary
+  meta: {
+    fileName: string
+    loadedAt: string
+    source: "default" | "upload"
+  }
+}
+
 /** Definición estática de un indicador (nombre, peso, límite, criterio). */
 export interface IndicatorDefinition {
   key: IndicatorKey

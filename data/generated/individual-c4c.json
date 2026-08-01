@@ -1,0 +1,4313 @@
+{
+  "generatedAt": "2026-07-31T21:30:00-05:00",
+  "scope": "Resultados individuales",
+  "source": "Excel de validación; Power BI será la fuente posterior de gestión real",
+  "reports": [
+    {
+      "key": "PYC-AGR-ANT",
+      "workspace_id": "ab209cbd-db36-4a5d-ae91-30ea734a118d",
+      "report_id": "00444fcc-5673-460e-999a-71cb001d6174",
+      "company": "Pérez y Cardona",
+      "unit": "Agrícola Antioquia"
+    },
+    {
+      "key": "GAL-NAC",
+      "workspace_id": "ab209cbd-db36-4a5d-ae91-30ea734a118d",
+      "report_id": "4bbfc2c1-ee9e-4d01-be48-826f2e2693ca",
+      "company": "Galagro",
+      "unit": "Galagro Nacional"
+    },
+    {
+      "key": "GAL-ANT",
+      "workspace_id": "ab209cbd-db36-4a5d-ae91-30ea734a118d",
+      "report_id": "41227149-14cc-4f81-b4df-e55a00765ba6",
+      "company": "Galagro",
+      "unit": "Galagro Antioquia"
+    }
+  ],
+  "sources": [
+    {
+      "id": "PYC-AGR-ANT-General-2026-Q1",
+      "sourceKey": "PYC-AGR-ANT",
+      "company": "Pérez y Cardona",
+      "report": "Agrícola Antioquia",
+      "profile": "Comercial",
+      "configuredProfile": "General",
+      "year": 2026,
+      "quarter": "Q1",
+      "months": [
+        "Enero",
+        "Febrero",
+        "Marzo"
+      ],
+      "sourceFile": "informe Q1 - Final.xlsx",
+      "workspaceId": "ab209cbd-db36-4a5d-ae91-30ea734a118d",
+      "reportId": "00444fcc-5673-460e-999a-71cb001d6174",
+      "person": "Jairo Jesús Morales Doria",
+      "cargo": "RTC CORDOBA",
+      "territory": "PYC AGRÍCOLA ANT CÓRDOBA",
+      "companyExcel": "Pérez y Cardona",
+      "originalQuarterResult": 0.3423196517412936,
+      "calculatedQuarterResult": 0.3423196517412936,
+      "validationDifference": 0.0,
+      "validationStatus": "Coincide",
+      "warning": "",
+      "indicators": [
+        {
+          "id": "ejecucion_visitas",
+          "label": "Ejecución Visitas",
+          "row": 14,
+          "calculationType": "ratio",
+          "formula": "IFERROR(MIN(100%,SUM(G14:I14)/($J14*3)),0)",
+          "weight": 0.1,
+          "cap": 1.0,
+          "targetThreshold": 0.9,
+          "rawTarget": 67.0,
+          "criterion": "Mide el cumplimiento acumulado de visitas del período. Se suman las visitas realizadas en los tres meses y se comparan contra la meta mensual multiplicada por el número de meses evaluados.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 21.0,
+            "Marzo": 26.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 67.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 21.0,
+              "target": 67.0,
+              "rawCompliance": 0.31343283582089554,
+              "recognizedCompliance": 0.31343283582089554,
+              "contribution": 0.03134328358208956
+            },
+            {
+              "month": "Marzo",
+              "actual": 26.0,
+              "target": 67.0,
+              "rawCompliance": 0.3880597014925373,
+              "recognizedCompliance": 0.3880597014925373,
+              "contribution": 0.038805970149253737
+            }
+          ],
+          "quarter": {
+            "actual": 47.0,
+            "target": 201.0,
+            "rawCompliance": 0.23383084577114427,
+            "recognizedCompliance": 0.23383084577114427,
+            "contribution": 0.023383084577114428
+          }
+        },
+        {
+          "id": "cobertura_clientes",
+          "label": "Cobertura Clientes",
+          "row": 15,
+          "calculationType": "ratio",
+          "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
+          "weight": 0.1,
+          "cap": 1.0,
+          "targetThreshold": 0.9,
+          "rawTarget": 22.333333333333332,
+          "criterion": "Mide el cumplimiento acumulado. Se suman las visitas realizadas en los tres meses y se comparan contra la meta esperada para el trimestre. Si el resultado supera la meta, el cumplimiento máximo reconocido es del 100%.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 20.0,
+            "Marzo": 22.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 22.333333333333332,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 20.0,
+              "target": 22.333333333333332,
+              "rawCompliance": 0.8955223880597015,
+              "recognizedCompliance": 0.8955223880597015,
+              "contribution": 0.08955223880597016
+            },
+            {
+              "month": "Marzo",
+              "actual": 22.0,
+              "target": 22.333333333333332,
+              "rawCompliance": 0.9850746268656717,
+              "recognizedCompliance": 0.9850746268656717,
+              "contribution": 0.09850746268656718
+            }
+          ],
+          "quarter": {
+            "actual": 42.0,
+            "target": 67.0,
+            "rawCompliance": 0.6268656716417911,
+            "recognizedCompliance": 0.6268656716417911,
+            "contribution": 0.06268656716417911
+          }
+        },
+        {
+          "id": "nuevos_clientes",
+          "label": "Nuevos Clientes",
+          "row": 16,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G16/J16,H16/J16,I16/J16),0)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 48.0,
+          "criterion": "Cuenta clientes nuevos y recuperados que registran una gestión o una venta durante el período. El resultado toma el total acumulado alcanzado y lo compara contra la meta esperada.",
+          "monthValues": {
+            "Enero": 7.0,
+            "Febrero": 7.0,
+            "Marzo": 7.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 7.0,
+              "target": 48.0,
+              "rawCompliance": 0.14583333333333334,
+              "recognizedCompliance": 0.14583333333333334,
+              "contribution": 0.014583333333333335
+            },
+            {
+              "month": "Febrero",
+              "actual": 7.0,
+              "target": 48.0,
+              "rawCompliance": 0.14583333333333334,
+              "recognizedCompliance": 0.14583333333333334,
+              "contribution": 0.014583333333333335
+            },
+            {
+              "month": "Marzo",
+              "actual": 7.0,
+              "target": 48.0,
+              "rawCompliance": 0.14583333333333334,
+              "recognizedCompliance": 0.14583333333333334,
+              "contribution": 0.014583333333333335
+            }
+          ],
+          "quarter": {
+            "actual": 7.0,
+            "target": 48.0,
+            "rawCompliance": 0.14583333333333334,
+            "recognizedCompliance": 0.14583333333333334,
+            "contribution": 0.014583333333333335
+          }
+        },
+        {
+          "id": "recomendaciones",
+          "label": "Recomendaciones",
+          "row": 18,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(MIN(150%,SUM(G18:I18)/J18),0)",
+          "weight": 0.2,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 624282058.0,
+          "criterion": "Suma las recomendaciones generadas durante el período evaluado y compara ese total contra la meta acumulada. El resultado muestra el porcentaje de cumplimiento alcanzado frente a la meta del trimestre.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 0.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 208094019.33333334,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 0.0,
+              "target": 208094019.33333334,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 208094019.33333334,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 624282058.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "referencias",
+          "label": "Referencias",
+          "row": 19,
+          "calculationType": "ratio",
+          "formula": "IFERROR(((G19+H19+I19)/J19),\"0\")",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 292.0,
+          "criterion": "Mide el cumplimiento de referencias gestionadas frente a la meta esperada del período. Se suman las referencias generadas en los meses evaluados y se comparan contra la meta (SKU activas). El resultado muestra el porcentaje de cumplimiento alcanzado.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 0.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 292.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 0.0,
+              "target": 292.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 292.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 876.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "leads_calificados",
+          "label": "Leads calificados",
+          "row": 20,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(SUM(G20:I20)/J20,0%)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide la generación de leads frente a la meta esperada. La meta considera mínimo 1 lead por mes evaluado y aumenta según los leads generados, con el fin de incentivar la creación constante de oportunidades comerciales. Si no se generan leads, el cumplimiento es 0%.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 0.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 3.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "leads_calificados_tiempo",
+          "label": "Leads calificados a tiempo",
+          "row": 21,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(SUM(G21:I21)/J21,0%)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide el porcentaje de leads que fueron calificados dentro del tiempo establecido (48 horas despues de generado). Se compara la cantidad de leads calificados oportunamente frente al total de leads que debían ser gestionados en el período.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 0.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 3.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "actividades_campo",
+          "label": "Impacto en clientes  (Actividades de campo)",
+          "row": 22,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G22:I22)/J22,0%),150%)",
+          "weight": 0.1,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.5,
+          "criterion": "Mide el cumplimiento de actividades y parcelas frente a la meta del territorio. Por cada promotor se esperan 3 actividades trimestrales y 0,5 parcelas, con reconocimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 1.0,
+            "Marzo": 15.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 1.1666666666666667,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 1.0,
+              "target": 1.1666666666666667,
+              "rawCompliance": 0.8571428571428571,
+              "recognizedCompliance": 0.8571428571428571,
+              "contribution": 0.08571428571428572
+            },
+            {
+              "month": "Marzo",
+              "actual": 15.0,
+              "target": 1.1666666666666667,
+              "rawCompliance": 12.857142857142856,
+              "recognizedCompliance": 1.5,
+              "contribution": 0.15000000000000002
+            }
+          ],
+          "quarter": {
+            "actual": 16.0,
+            "target": 3.5,
+            "rawCompliance": 1.5,
+            "recognizedCompliance": 1.5,
+            "contribution": 0.15000000000000002
+          }
+        },
+        {
+          "id": "hectareas",
+          "label": "Hectáreas de cultivos impactados",
+          "row": 23,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G23:I23)/J23,0%),150%)",
+          "weight": 0.05,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 90.0,
+          "criterion": "Mide las hectáreas gestionadas en el período frente a la meta del territorio. Cada promotor debe gestionar 30 hectáreas mensuales, equivalentes a 90 por trimestre, con reconocimiento de cumplimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 799.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 30.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 799.0,
+              "target": 30.0,
+              "rawCompliance": 26.633333333333333,
+              "recognizedCompliance": 1.5,
+              "contribution": 0.07500000000000001
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 30.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 799.0,
+            "target": 90.0,
+            "rawCompliance": 1.5,
+            "recognizedCompliance": 1.5,
+            "contribution": 0.07500000000000001
+          }
+        },
+        {
+          "id": "cultivos",
+          "label": "Cultivos impactados",
+          "row": 24,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G24:I24)/J24,0%),150%)",
+          "weight": 0.05,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide los cultivos gestionados en el período frente a la meta del territorio. Cada promotor debe gestionar mínimo 1 cultivo mensual, equivalente a 3 por trimestre, con reconocimiento de cumplimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 1.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 1.0,
+              "target": 1.0,
+              "rawCompliance": 1.0,
+              "recognizedCompliance": 1.0,
+              "contribution": 0.05
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 1.0,
+            "target": 3.0,
+            "rawCompliance": 0.3333333333333333,
+            "recognizedCompliance": 0.3333333333333333,
+            "contribution": 0.016666666666666666
+          }
+        }
+      ]
+    },
+    {
+      "id": "PYC-AGR-ANT-General-2026-Q2",
+      "sourceKey": "PYC-AGR-ANT",
+      "company": "Pérez y Cardona",
+      "report": "Agrícola Antioquia",
+      "profile": "Promotor",
+      "configuredProfile": "General",
+      "year": 2026,
+      "quarter": "Q2",
+      "months": [
+        "Abril",
+        "Mayo",
+        "Junio"
+      ],
+      "sourceFile": "informe Q2 - Final.xlsx",
+      "workspaceId": "ab209cbd-db36-4a5d-ae91-30ea734a118d",
+      "reportId": "00444fcc-5673-460e-999a-71cb001d6174",
+      "person": "Juan Felipe Botero Gómez",
+      "cargo": "PROMOTOR TÉCNICO SUMITOMO",
+      "territory": "PYC AGRÍCOLA ANT VALLE ABURRÁ",
+      "companyExcel": "Pérez y Cardona",
+      "originalQuarterResult": 0.2725187192431919,
+      "calculatedQuarterResult": 0.2725187192431919,
+      "validationDifference": 0.0,
+      "validationStatus": "Coincide",
+      "warning": "",
+      "indicators": [
+        {
+          "id": "ejecucion_visitas",
+          "label": "Ejecución visitas",
+          "row": 15,
+          "calculationType": "ratio",
+          "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
+          "weight": 0.1,
+          "cap": 1.0,
+          "targetThreshold": 0.9,
+          "rawTarget": 60.0,
+          "criterion": "Mide el cumplimiento acumulado de visitas del período. Se suman las visitas realizadas en los tres meses y se comparan contra la meta mensual multiplicada por el número de meses evaluados.",
+          "monthValues": {
+            "Abril": 37.0,
+            "Mayo": 47.0,
+            "Junio": 44.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 37.0,
+              "target": 60.0,
+              "rawCompliance": 0.6166666666666667,
+              "recognizedCompliance": 0.6166666666666667,
+              "contribution": 0.061666666666666675
+            },
+            {
+              "month": "Mayo",
+              "actual": 47.0,
+              "target": 60.0,
+              "rawCompliance": 0.7833333333333333,
+              "recognizedCompliance": 0.7833333333333333,
+              "contribution": 0.07833333333333334
+            },
+            {
+              "month": "Junio",
+              "actual": 44.0,
+              "target": 60.0,
+              "rawCompliance": 0.7333333333333333,
+              "recognizedCompliance": 0.7333333333333333,
+              "contribution": 0.07333333333333333
+            }
+          ],
+          "quarter": {
+            "actual": 128.0,
+            "target": 180.0,
+            "rawCompliance": 0.7111111111111111,
+            "recognizedCompliance": 0.7111111111111111,
+            "contribution": 0.07111111111111111
+          }
+        },
+        {
+          "id": "cobertura_clientes",
+          "label": "Cobertura clientes",
+          "row": 16,
+          "calculationType": "ratio",
+          "formula": "IFERROR(MIN(100%,SUM(G16:I16)/($J16*3)),0)",
+          "weight": 0.1,
+          "cap": 1.0,
+          "targetThreshold": 0.9,
+          "rawTarget": 21.333333333333332,
+          "criterion": "Mide la cobertura promedio de clientes visitados frente a la meta esperada. Se comparan los clientes cubiertos durante el período evaluado contra la meta definida.",
+          "monthValues": {
+            "Abril": 3.0,
+            "Mayo": 9.0,
+            "Junio": 9.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 3.0,
+              "target": 21.333333333333332,
+              "rawCompliance": 0.140625,
+              "recognizedCompliance": 0.140625,
+              "contribution": 0.0140625
+            },
+            {
+              "month": "Mayo",
+              "actual": 9.0,
+              "target": 21.333333333333332,
+              "rawCompliance": 0.421875,
+              "recognizedCompliance": 0.421875,
+              "contribution": 0.0421875
+            },
+            {
+              "month": "Junio",
+              "actual": 9.0,
+              "target": 21.333333333333332,
+              "rawCompliance": 0.421875,
+              "recognizedCompliance": 0.421875,
+              "contribution": 0.0421875
+            }
+          ],
+          "quarter": {
+            "actual": 21.0,
+            "target": 64.0,
+            "rawCompliance": 0.328125,
+            "recognizedCompliance": 0.328125,
+            "contribution": 0.0328125
+          }
+        },
+        {
+          "id": "nuevos_clientes",
+          "label": "Nuevos clientes",
+          "row": 17,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Cuenta clientes nuevos y recuperados que registran una gestión o una venta durante el período. El resultado toma el total acumulado alcanzado y lo compara contra la meta esperada.",
+          "monthValues": {
+            "Abril": 0.0,
+            "Mayo": 0.0,
+            "Junio": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 0.0,
+              "target": 3.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 3.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 0.0,
+              "target": 3.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 3.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "recomendaciones",
+          "label": "Recomendados",
+          "row": 19,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(MIN(150%,SUM(G19:I19)/J19),0)",
+          "weight": 0.2,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 835862195.0,
+          "criterion": "Suma las recomendaciones generadas durante el período evaluado y compara ese total contra la meta acumulada. El resultado muestra el porcentaje de cumplimiento alcanzado frente a la meta del trimestre.",
+          "monthValues": {
+            "Abril": 36274900.0,
+            "Mayo": 28572500.0,
+            "Junio": 18319800.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 36274900.0,
+              "target": 278620731.6666667,
+              "rawCompliance": 0.1301945472004509,
+              "recognizedCompliance": 0.1301945472004509,
+              "contribution": 0.026038909440090182
+            },
+            {
+              "month": "Mayo",
+              "actual": 28572500.0,
+              "target": 278620731.6666667,
+              "rawCompliance": 0.10254979889358436,
+              "recognizedCompliance": 0.10254979889358436,
+              "contribution": 0.020509959778716873
+            },
+            {
+              "month": "Junio",
+              "actual": 18319800.0,
+              "target": 278620731.6666667,
+              "rawCompliance": 0.06575174751144236,
+              "recognizedCompliance": 0.06575174751144236,
+              "contribution": 0.013150349502288473
+            }
+          ],
+          "quarter": {
+            "actual": 83167200.0,
+            "target": 835862195.0,
+            "rawCompliance": 0.09949869786849254,
+            "recognizedCompliance": 0.09949869786849254,
+            "contribution": 0.01989973957369851
+          }
+        },
+        {
+          "id": "referencias",
+          "label": "Referencias",
+          "row": 20,
+          "calculationType": "ratio",
+          "formula": "IFERROR(((G20+H20+I20)/J20),\"0\")",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 292.0,
+          "criterion": "Mide el cumplimiento de referencias gestionadas frente a la meta esperada del período. Se suman las referencias generadas en los meses evaluados y se comparan contra la meta acumulada.",
+          "monthValues": {
+            "Abril": 59.0,
+            "Mayo": 53.0,
+            "Junio": 58.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 59.0,
+              "target": 292.0,
+              "rawCompliance": 0.20205479452054795,
+              "recognizedCompliance": 0.20205479452054795,
+              "contribution": 0.020205479452054795
+            },
+            {
+              "month": "Mayo",
+              "actual": 53.0,
+              "target": 292.0,
+              "rawCompliance": 0.1815068493150685,
+              "recognizedCompliance": 0.1815068493150685,
+              "contribution": 0.01815068493150685
+            },
+            {
+              "month": "Junio",
+              "actual": 58.0,
+              "target": 292.0,
+              "rawCompliance": 0.19863013698630136,
+              "recognizedCompliance": 0.19863013698630136,
+              "contribution": 0.01986301369863014
+            }
+          ],
+          "quarter": {
+            "actual": 170.0,
+            "target": 876.0,
+            "rawCompliance": 0.5821917808219178,
+            "recognizedCompliance": 0.5821917808219178,
+            "contribution": 0.058219178082191785
+          }
+        },
+        {
+          "id": "leads_calificados",
+          "label": "Leads calificados",
+          "row": 21,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(SUM(G21:I21)/J21,0%)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide la generación de leads frente a la meta esperada del período. La meta considera mínimo 1 lead por mes evaluado e incentiva la creación constante de oportunidades comerciales.",
+          "monthValues": {
+            "Abril": 1.0,
+            "Mayo": 0.0,
+            "Junio": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 1.0,
+              "target": 1.0,
+              "rawCompliance": 1.0,
+              "recognizedCompliance": 1.0,
+              "contribution": 0.1
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 1.0,
+            "target": 3.0,
+            "rawCompliance": 0.3333333333333333,
+            "recognizedCompliance": 0.3333333333333333,
+            "contribution": 0.03333333333333333
+          }
+        },
+        {
+          "id": "leads_calificados_tiempo",
+          "label": "Leads calificados a tiempo",
+          "row": 22,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(SUM(G22:I22)/J22,0%)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide los leads gestionados oportunamente frente a la meta esperada del período, considerando el tiempo definido para su atención (48 horas).",
+          "monthValues": {
+            "Abril": 0.0,
+            "Mayo": 0.0,
+            "Junio": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 3.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "actividades_campo",
+          "label": "Impacto en clientes (actividades de campo)",
+          "row": 23,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G23:I23)/J23,0%),150%)",
+          "weight": 0.1,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.5,
+          "criterion": "Mide el cumplimiento de actividades y parcelas frente a la meta del territorio. Por cada promotor se esperan 3 actividades trimestrales y 0,5 parcelas, con reconocimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Abril": 1.0,
+            "Mayo": 0.0,
+            "Junio": 1.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 1.0,
+              "target": 1.1666666666666667,
+              "rawCompliance": 0.8571428571428571,
+              "recognizedCompliance": 0.8571428571428571,
+              "contribution": 0.08571428571428572
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 1.1666666666666667,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 1.0,
+              "target": 1.1666666666666667,
+              "rawCompliance": 0.8571428571428571,
+              "recognizedCompliance": 0.8571428571428571,
+              "contribution": 0.08571428571428572
+            }
+          ],
+          "quarter": {
+            "actual": 2.0,
+            "target": 3.5,
+            "rawCompliance": 0.5714285714285714,
+            "recognizedCompliance": 0.5714285714285714,
+            "contribution": 0.05714285714285714
+          }
+        },
+        {
+          "id": "hectareas",
+          "label": "Hectáreas de cultivos impactados",
+          "row": 24,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G24:I24)/J24,0%),150%)",
+          "weight": 0.05,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 90.0,
+          "criterion": "Mide las hectáreas gestionadas en el período frente a la meta del territorio. Cada promotor debe gestionar 30 hectáreas mensuales, equivalentes a 90 por trimestre, con reconocimiento de cumplimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Abril": 0.0,
+            "Mayo": 0.0,
+            "Junio": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 0.0,
+              "target": 30.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 30.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 0.0,
+              "target": 30.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 90.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "cultivos",
+          "label": "Cultivos impactados",
+          "row": 25,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G25:I25)/J25,0%),150%)",
+          "weight": 0.05,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide los cultivos gestionados en el período frente a la meta del territorio. Cada promotor debe gestionar mínimo 1 cultivo mensual, equivalente a 3 por trimestre, con reconocimiento de cumplimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Abril": 0.0,
+            "Mayo": 0.0,
+            "Junio": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 3.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "GAL-ANT-General-2026-Q1",
+      "sourceKey": "GAL-ANT",
+      "company": "Galagro",
+      "report": "Galagro Antioquia",
+      "profile": "Promotor",
+      "configuredProfile": "General",
+      "year": 2026,
+      "quarter": "Q1",
+      "months": [
+        "Enero",
+        "Febrero",
+        "Marzo"
+      ],
+      "sourceFile": "informe Q1 - Galagro Ant Final.xlsx",
+      "workspaceId": "ab209cbd-db36-4a5d-ae91-30ea734a118d",
+      "reportId": "41227149-14cc-4f81-b4df-e55a00765ba6",
+      "person": "Estefania Osorio Usuga",
+      "cargo": "PROMOTOR GALAGRO VALLE DE ABURRA",
+      "territory": "GALAGRO VALLE DE ABURRA ANT.",
+      "companyExcel": "GALAGRO",
+      "originalQuarterResult": 0.23895221667305477,
+      "calculatedQuarterResult": 0.23895221667305477,
+      "validationDifference": 0.0,
+      "validationStatus": "Coincide",
+      "warning": "",
+      "indicators": [
+        {
+          "id": "ejecucion_visitas",
+          "label": "Ejecución visitas",
+          "row": 15,
+          "calculationType": "ratio",
+          "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
+          "weight": 0.1,
+          "cap": 1.0,
+          "targetThreshold": 0.9,
+          "rawTarget": 60.0,
+          "criterion": "Mide el cumplimiento acumulado de visitas del período. Se suman las visitas realizadas en los tres meses y se comparan contra la meta mensual multiplicada por el número de meses evaluados.",
+          "monthValues": {
+            "Enero": 36.0,
+            "Febrero": 21.0,
+            "Marzo": 29.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 36.0,
+              "target": 60.0,
+              "rawCompliance": 0.6,
+              "recognizedCompliance": 0.6,
+              "contribution": 0.06
+            },
+            {
+              "month": "Febrero",
+              "actual": 21.0,
+              "target": 60.0,
+              "rawCompliance": 0.35,
+              "recognizedCompliance": 0.35,
+              "contribution": 0.034999999999999996
+            },
+            {
+              "month": "Marzo",
+              "actual": 29.0,
+              "target": 60.0,
+              "rawCompliance": 0.48333333333333334,
+              "recognizedCompliance": 0.48333333333333334,
+              "contribution": 0.04833333333333334
+            }
+          ],
+          "quarter": {
+            "actual": 86.0,
+            "target": 180.0,
+            "rawCompliance": 0.4777777777777778,
+            "recognizedCompliance": 0.4777777777777778,
+            "contribution": 0.04777777777777778
+          }
+        },
+        {
+          "id": "cobertura_clientes",
+          "label": "Cobertura clientes",
+          "row": 16,
+          "calculationType": "ratio",
+          "formula": "IFERROR(MIN(100%,SUM(G16:I16)/($J16*3)),0)",
+          "weight": 0.1,
+          "cap": 1.0,
+          "targetThreshold": 0.9,
+          "rawTarget": 2.6666666666666665,
+          "criterion": "Mide el cumplimiento acumulado. Se suman las visitas realizadas en los tres meses y se comparan contra la meta esperada para el trimestre. Si el resultado supera la meta, el cumplimiento máximo reconocido es del 100%.",
+          "monthValues": {
+            "Enero": 1.0,
+            "Febrero": 2.0,
+            "Marzo": 4.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 1.0,
+              "target": 2.6666666666666665,
+              "rawCompliance": 0.375,
+              "recognizedCompliance": 0.375,
+              "contribution": 0.037500000000000006
+            },
+            {
+              "month": "Febrero",
+              "actual": 2.0,
+              "target": 2.6666666666666665,
+              "rawCompliance": 0.75,
+              "recognizedCompliance": 0.75,
+              "contribution": 0.07500000000000001
+            },
+            {
+              "month": "Marzo",
+              "actual": 4.0,
+              "target": 2.6666666666666665,
+              "rawCompliance": 1.5,
+              "recognizedCompliance": 1.0,
+              "contribution": 0.1
+            }
+          ],
+          "quarter": {
+            "actual": 7.0,
+            "target": 8.0,
+            "rawCompliance": 0.875,
+            "recognizedCompliance": 0.875,
+            "contribution": 0.08750000000000001
+          }
+        },
+        {
+          "id": "nuevos_clientes",
+          "label": "Nuevos clientes",
+          "row": 17,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 5.0,
+          "criterion": "Cuenta clientes nuevos y recuperados que registran una gestión o una venta durante el período. El resultado toma el total acumulado alcanzado y lo compara contra la meta esperada.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 0.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 5.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 0.0,
+              "target": 5.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 5.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 5.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "recomendaciones",
+          "label": "Recomendaciones",
+          "row": 19,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(MIN(150%,SUM(G19:I19)/J19),0)",
+          "weight": 0.2,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 810608054.0,
+          "criterion": "Suma las recomendaciones generadas durante el período evaluado y compara ese total contra la meta acumulada. El resultado muestra el porcentaje de cumplimiento alcanzado frente a la meta del trimestre.",
+          "monthValues": {
+            "Enero": 112312100.0,
+            "Febrero": 20716400.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 112312100.0,
+              "target": 270202684.6666667,
+              "rawCompliance": 0.41565871241639546,
+              "recognizedCompliance": 0.41565871241639546,
+              "contribution": 0.08313174248327909
+            },
+            {
+              "month": "Febrero",
+              "actual": 20716400.0,
+              "target": 270202684.6666667,
+              "rawCompliance": 0.07666985257957971,
+              "recognizedCompliance": 0.07666985257957971,
+              "contribution": 0.015333970515915944
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 270202684.6666667,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 133028500.0,
+            "target": 810608054.0,
+            "rawCompliance": 0.16410952166532508,
+            "recognizedCompliance": 0.16410952166532508,
+            "contribution": 0.03282190433306502
+          }
+        },
+        {
+          "id": "referencias",
+          "label": "Referencias",
+          "row": 20,
+          "calculationType": "ratio",
+          "formula": "IFERROR(((G20+H20+I20)/J20),\"0\")",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 248.0,
+          "criterion": "Mide el cumplimiento de referencias gestionadas frente a la meta esperada del período. Se suman las referencias generadas en los meses evaluados y se comparan contra la meta (SKU activas). El resultado muestra el porcentaje de cumplimiento alcanzado.",
+          "monthValues": {
+            "Enero": 24.0,
+            "Febrero": 10.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 24.0,
+              "target": 248.0,
+              "rawCompliance": 0.0967741935483871,
+              "recognizedCompliance": 0.0967741935483871,
+              "contribution": 0.00967741935483871
+            },
+            {
+              "month": "Febrero",
+              "actual": 10.0,
+              "target": 248.0,
+              "rawCompliance": 0.04032258064516129,
+              "recognizedCompliance": 0.04032258064516129,
+              "contribution": 0.004032258064516129
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 248.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 34.0,
+            "target": 744.0,
+            "rawCompliance": 0.13709677419354838,
+            "recognizedCompliance": 0.13709677419354838,
+            "contribution": 0.013709677419354839
+          }
+        },
+        {
+          "id": "leads_calificados",
+          "label": "Leads calificados",
+          "row": 22,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(SUM(G22:I22)/J22,0%)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide la generación de leads frente a la meta esperada. La meta considera mínimo 1 lead por mes evaluado y aumenta según los leads generados, con el fin de incentivar la creación constante de oportunidades comerciales. Si no se generan leads, el cumplimiento es 0%.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 0.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 3.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "leads_calificados_tiempo",
+          "label": "Leads calificados a tiempo",
+          "row": 23,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(SUM(G23:I23)/J23,0%)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide el porcentaje de leads que fueron calificados dentro del tiempo establecido (48 horas después de generado). Se compara la cantidad de leads calificados oportunamente frente al total de leads que debían ser gestionados en el período.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 0.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 3.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "actividades_campo",
+          "label": "Impacto en clientes  (Actividades de campo)",
+          "row": 24,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G24:I24)/J24,0%),150%)",
+          "weight": 0.1,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.5,
+          "criterion": "Mide el cumplimiento de actividades y parcelas frente a la meta del territorio. Por cada promotor se esperan 3 actividades trimestrales y 0,5 parcelas, con reconocimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 2.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 1.1666666666666667,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 2.0,
+              "target": 1.1666666666666667,
+              "rawCompliance": 1.7142857142857142,
+              "recognizedCompliance": 1.5,
+              "contribution": 0.15000000000000002
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 1.1666666666666667,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 2.0,
+            "target": 3.5,
+            "rawCompliance": 0.5714285714285714,
+            "recognizedCompliance": 0.5714285714285714,
+            "contribution": 0.05714285714285714
+          }
+        },
+        {
+          "id": "hectareas",
+          "label": "Hectáreas de cultivos impactados",
+          "row": 25,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G25:I25)/J25,0%),150%)",
+          "weight": 0.05,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 90.0,
+          "criterion": "Mide las hectáreas gestionadas en el período frente a la meta del territorio. Cada promotor debe gestionar 30 hectáreas mensuales, equivalentes a 90 por trimestre, con reconocimiento de cumplimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 0.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 30.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 0.0,
+              "target": 30.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 30.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 90.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "cultivos",
+          "label": "Cultivos impactados",
+          "row": 26,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G26:I26)/J26,0%),150%)",
+          "weight": 0.05,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide los cultivos gestionados en el período frente a la meta del territorio. Cada promotor debe gestionar mínimo 1 cultivo mensual, equivalente a 3 por trimestre, con reconocimiento de cumplimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 0.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 3.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "GAL-ANT-General-2026-Q2",
+      "sourceKey": "GAL-ANT",
+      "company": "Galagro",
+      "report": "Galagro Antioquia",
+      "profile": "Promotor",
+      "configuredProfile": "General",
+      "year": 2026,
+      "quarter": "Q2",
+      "months": [
+        "Abril",
+        "Mayo",
+        "Junio"
+      ],
+      "sourceFile": "informe Q2 - Galagro Ant Final.xlsx",
+      "workspaceId": "ab209cbd-db36-4a5d-ae91-30ea734a118d",
+      "reportId": "41227149-14cc-4f81-b4df-e55a00765ba6",
+      "person": "Estefania Osorio Usuga",
+      "cargo": "PROMOTOR GALAGRO VALLE DE ABURRA",
+      "territory": "GALAGRO VALLE DE ABURRA ANT.",
+      "companyExcel": "GALAGRO",
+      "originalQuarterResult": 0.27782781159506637,
+      "calculatedQuarterResult": 0.27782781159506637,
+      "validationDifference": 0.0,
+      "validationStatus": "Coincide",
+      "warning": "",
+      "indicators": [
+        {
+          "id": "ejecucion_visitas",
+          "label": "Ejecución visitas",
+          "row": 15,
+          "calculationType": "ratio",
+          "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
+          "weight": 0.1,
+          "cap": 1.0,
+          "targetThreshold": 0.9,
+          "rawTarget": 60.0,
+          "criterion": "Mide el cumplimiento acumulado de visitas del período. Se suman las visitas realizadas en los tres meses y se comparan contra la meta mensual multiplicada por el número de meses evaluados.",
+          "monthValues": {
+            "Abril": 32.0,
+            "Mayo": 33.0,
+            "Junio": 41.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 32.0,
+              "target": 60.0,
+              "rawCompliance": 0.5333333333333333,
+              "recognizedCompliance": 0.5333333333333333,
+              "contribution": 0.05333333333333334
+            },
+            {
+              "month": "Mayo",
+              "actual": 33.0,
+              "target": 60.0,
+              "rawCompliance": 0.55,
+              "recognizedCompliance": 0.55,
+              "contribution": 0.05500000000000001
+            },
+            {
+              "month": "Junio",
+              "actual": 41.0,
+              "target": 60.0,
+              "rawCompliance": 0.6833333333333333,
+              "recognizedCompliance": 0.6833333333333333,
+              "contribution": 0.06833333333333334
+            }
+          ],
+          "quarter": {
+            "actual": 106.0,
+            "target": 180.0,
+            "rawCompliance": 0.5888888888888889,
+            "recognizedCompliance": 0.5888888888888889,
+            "contribution": 0.05888888888888889
+          }
+        },
+        {
+          "id": "cobertura_clientes",
+          "label": "Cobertura clientes",
+          "row": 16,
+          "calculationType": "ratio",
+          "formula": "IFERROR(MIN(100%,SUM(G16:I16)/($J16*3)),0)",
+          "weight": 0.1,
+          "cap": 1.0,
+          "targetThreshold": 0.9,
+          "rawTarget": 2.6666666666666665,
+          "criterion": "Mide el cumplimiento acumulado. Se suman las visitas realizadas en los tres meses y se comparan contra la meta esperada para el trimestre. Si el resultado supera la meta, el cumplimiento máximo reconocido es del 100%.",
+          "monthValues": {
+            "Abril": 2.0,
+            "Mayo": 4.0,
+            "Junio": 4.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 2.0,
+              "target": 2.6666666666666665,
+              "rawCompliance": 0.75,
+              "recognizedCompliance": 0.75,
+              "contribution": 0.07500000000000001
+            },
+            {
+              "month": "Mayo",
+              "actual": 4.0,
+              "target": 2.6666666666666665,
+              "rawCompliance": 1.5,
+              "recognizedCompliance": 1.0,
+              "contribution": 0.1
+            },
+            {
+              "month": "Junio",
+              "actual": 4.0,
+              "target": 2.6666666666666665,
+              "rawCompliance": 1.5,
+              "recognizedCompliance": 1.0,
+              "contribution": 0.1
+            }
+          ],
+          "quarter": {
+            "actual": 10.0,
+            "target": 8.0,
+            "rawCompliance": 1.0,
+            "recognizedCompliance": 1.0,
+            "contribution": 0.1
+          }
+        },
+        {
+          "id": "nuevos_clientes",
+          "label": "Nuevos clientes",
+          "row": 17,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 5.0,
+          "criterion": "Cuenta clientes nuevos y recuperados que registran una gestión o una venta durante el período. El resultado toma el total acumulado alcanzado y lo compara contra la meta esperada.",
+          "monthValues": {
+            "Abril": 0.0,
+            "Mayo": 0.0,
+            "Junio": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 0.0,
+              "target": 5.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 5.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 0.0,
+              "target": 5.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 5.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "recomendaciones",
+          "label": "Recomendaciones",
+          "row": 19,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(MIN(150%,SUM(G19:I19)/J19),0)",
+          "weight": 0.2,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 903417581.0,
+          "criterion": "Suma las recomendaciones generadas durante el período evaluado y compara ese total contra la meta acumulada. El resultado muestra el porcentaje de cumplimiento alcanzado frente a la meta del trimestre.",
+          "monthValues": {
+            "Abril": 0.0,
+            "Mayo": 0.0,
+            "Junio": 233603100.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 0.0,
+              "target": 301139193.6666667,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 301139193.6666667,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 233603100.0,
+              "target": 301139193.6666667,
+              "rawCompliance": 0.7757313060304502,
+              "recognizedCompliance": 0.7757313060304502,
+              "contribution": 0.15514626120609004
+            }
+          ],
+          "quarter": {
+            "actual": 233603100.0,
+            "target": 903417581.0,
+            "rawCompliance": 0.25857710201015005,
+            "recognizedCompliance": 0.25857710201015005,
+            "contribution": 0.05171542040203001
+          }
+        },
+        {
+          "id": "referencias",
+          "label": "Referencias",
+          "row": 20,
+          "calculationType": "ratio",
+          "formula": "IFERROR(((G20+H20+I20)/J20),\"0\")",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 248.0,
+          "criterion": "Mide el cumplimiento de referencias gestionadas frente a la meta esperada del período. Se suman las referencias generadas en los meses evaluados y se comparan contra la meta (SKU activas). El resultado muestra el porcentaje de cumplimiento alcanzado.",
+          "monthValues": {
+            "Abril": 0.0,
+            "Mayo": 0.0,
+            "Junio": 25.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 0.0,
+              "target": 248.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 248.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 25.0,
+              "target": 248.0,
+              "rawCompliance": 0.10080645161290322,
+              "recognizedCompliance": 0.10080645161290322,
+              "contribution": 0.010080645161290322
+            }
+          ],
+          "quarter": {
+            "actual": 25.0,
+            "target": 744.0,
+            "rawCompliance": 0.10080645161290322,
+            "recognizedCompliance": 0.10080645161290322,
+            "contribution": 0.010080645161290322
+          }
+        },
+        {
+          "id": "leads_calificados",
+          "label": "Leads calificados",
+          "row": 22,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(SUM(G22:I22)/J22,0%)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide la generación de leads frente a la meta esperada. La meta considera mínimo 1 lead por mes evaluado y aumenta según los leads generados, con el fin de incentivar la creación constante de oportunidades comerciales. Si no se generan leads, el cumplimiento es 0%.",
+          "monthValues": {
+            "Abril": 0.0,
+            "Mayo": 0.0,
+            "Junio": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 3.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "leads_calificados_tiempo",
+          "label": "Leads calificados a tiempo",
+          "row": 23,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(SUM(G23:I23)/J23,0%)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide el porcentaje de leads que fueron calificados dentro del tiempo establecido (48 horas después de generado). Se compara la cantidad de leads calificados oportunamente frente al total de leads que debían ser gestionados en el período.",
+          "monthValues": {
+            "Abril": 0.0,
+            "Mayo": 0.0,
+            "Junio": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 3.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "actividades_campo",
+          "label": "Impacto en clientes  (Actividades de campo)",
+          "row": 24,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G24:I24)/J24,0%),150%)",
+          "weight": 0.1,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.5,
+          "criterion": "Mide el cumplimiento de actividades y parcelas frente a la meta del territorio. Por cada promotor se esperan 3 actividades trimestrales y 0,5 parcelas, con reconocimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Abril": 2.0,
+            "Mayo": 0.0,
+            "Junio": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 2.0,
+              "target": 1.1666666666666667,
+              "rawCompliance": 1.7142857142857142,
+              "recognizedCompliance": 1.5,
+              "contribution": 0.15000000000000002
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 1.1666666666666667,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 0.0,
+              "target": 1.1666666666666667,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 2.0,
+            "target": 3.5,
+            "rawCompliance": 0.5714285714285714,
+            "recognizedCompliance": 0.5714285714285714,
+            "contribution": 0.05714285714285714
+          }
+        },
+        {
+          "id": "hectareas",
+          "label": "Hectáreas de cultivos impactados",
+          "row": 25,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G25:I25)/J25,0%),150%)",
+          "weight": 0.05,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 90.0,
+          "criterion": "Mide las hectáreas gestionadas en el período frente a la meta del territorio. Cada promotor debe gestionar 30 hectáreas mensuales, equivalentes a 90 por trimestre, con reconocimiento de cumplimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Abril": 0.0,
+            "Mayo": 0.0,
+            "Junio": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 0.0,
+              "target": 30.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 30.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 0.0,
+              "target": 30.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 90.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "cultivos",
+          "label": "Cultivos impactados",
+          "row": 26,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G26:I26)/J26,0%),150%)",
+          "weight": 0.05,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide los cultivos gestionados en el período frente a la meta del territorio. Cada promotor debe gestionar mínimo 1 cultivo mensual, equivalente a 3 por trimestre, con reconocimiento de cumplimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Abril": 0.0,
+            "Mayo": 0.0,
+            "Junio": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 3.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "GAL-NAC-Comercial-2026-Q1",
+      "sourceKey": "GAL-NAC",
+      "company": "Galagro",
+      "report": "Galagro Nacional",
+      "profile": "Comercial",
+      "configuredProfile": "Comercial",
+      "year": 2026,
+      "quarter": "Q1",
+      "months": [
+        "Enero",
+        "Febrero",
+        "Marzo"
+      ],
+      "sourceFile": "informe Q1 - Galagro Nacional.xlsx",
+      "workspaceId": "ab209cbd-db36-4a5d-ae91-30ea734a118d",
+      "reportId": "4bbfc2c1-ee9e-4d01-be48-826f2e2693ca",
+      "person": "Gustavo Eduardo Mera Florez",
+      "cargo": "RTC GALAGRO NAL NARIÑO",
+      "territory": "GALAGRO NARIÑO NAL.",
+      "companyExcel": "GALAGRO",
+      "originalQuarterResult": 0.24408907155945841,
+      "calculatedQuarterResult": 0.2440890715594584,
+      "validationDifference": 2.7755575615628914e-17,
+      "validationStatus": "Coincide",
+      "warning": "",
+      "indicators": [
+        {
+          "id": "cobertura_cliente_final",
+          "label": "Ejecución Cobertura Cliente Final",
+          "row": 15,
+          "calculationType": "ratio",
+          "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
+          "weight": 0.1,
+          "cap": 1.0,
+          "targetThreshold": 0.9,
+          "rawTarget": 56.333333333333336,
+          "criterion": "Mide la cobertura de clientes finales. Se suman las visitas a clientes finales únicos realizadas en los tres meses y se comparan contra la meta mensual.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 0.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 56.333333333333336,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 0.0,
+              "target": 56.333333333333336,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 56.333333333333336,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 169.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "ejecucion_visitas_cliente_final",
+          "label": "Ejecución visitas cliente final",
+          "row": 16,
+          "calculationType": "ratio",
+          "formula": "IFERROR(MIN(100%,SUM(G16:I16)/($J16*3)),0)",
+          "weight": 0.1,
+          "cap": 1.0,
+          "targetThreshold": 0.9,
+          "rawTarget": 60.0,
+          "criterion": "Mide el cumplimiento de visitas a clientes finales visitables. Se suman las visitas realizadas en los tres meses y se comparan contra la meta mensual.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 0.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 60.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 0.0,
+              "target": 60.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 60.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 180.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "cobertura_cliente_potencial",
+          "label": "Cobertura Cliente Potencial",
+          "row": 17,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
+          "weight": 0.05,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 5.0,
+          "criterion": "Mide la cobertura de clientes potenciales. Se suman las visitas a clientes unicos realizadas en los tres meses y se comparan contra la meta mensual multiplicada por el número de meses evaluados.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 0.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 5.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 0.0,
+              "target": 5.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 5.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 5.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "nuevos_clientes",
+          "label": "Ejecucion clientes nuevos",
+          "row": 18,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G18/J18,H18/J18,I18/J18),0)",
+          "weight": 0.05,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 10.0,
+          "criterion": "Cuenta clientes nuevos y recuperados que registran una gestión o una venta durante el período. El resultado toma el total acumulado alcanzado y lo compara contra la meta esperada.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 0.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 10.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 0.0,
+              "target": 10.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 10.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 10.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "recomendaciones",
+          "label": "Recomendaciones",
+          "row": 20,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(MIN(150%,SUM(G20:I20)/J20),0)",
+          "weight": 0.2,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 345000000.0,
+          "criterion": "Suma las recomendaciones generadas durante el período evaluado y compara ese total contra la meta acumulada. El resultado muestra el porcentaje de cumplimiento alcanzado frente a la meta del trimestre.",
+          "monthValues": {
+            "Enero": 10413200.0,
+            "Febrero": 34853400.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 10413200.0,
+              "target": 115000000.0,
+              "rawCompliance": 0.0905495652173913,
+              "recognizedCompliance": 0.0905495652173913,
+              "contribution": 0.01810991304347826
+            },
+            {
+              "month": "Febrero",
+              "actual": 34853400.0,
+              "target": 115000000.0,
+              "rawCompliance": 0.30307304347826086,
+              "recognizedCompliance": 0.30307304347826086,
+              "contribution": 0.060614608695652175
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 115000000.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 45266600.0,
+            "target": 345000000.0,
+            "rawCompliance": 0.13120753623188405,
+            "recognizedCompliance": 0.13120753623188405,
+            "contribution": 0.026241507246376812
+          }
+        },
+        {
+          "id": "referencias",
+          "label": "Referencias",
+          "row": 21,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G21:I21)/J21,0)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 58.0,
+          "criterion": "Mide el promedio mensual de referencias gestionadas frente a las SKU activas esperadas.",
+          "monthValues": {
+            "Enero": 3.0,
+            "Febrero": 11.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 3.0,
+              "target": 58.0,
+              "rawCompliance": 0.05172413793103448,
+              "recognizedCompliance": 0.05172413793103448,
+              "contribution": 0.005172413793103448
+            },
+            {
+              "month": "Febrero",
+              "actual": 11.0,
+              "target": 58.0,
+              "rawCompliance": 0.1896551724137931,
+              "recognizedCompliance": 0.1896551724137931,
+              "contribution": 0.01896551724137931
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 58.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 4.666666666666667,
+            "target": 58.0,
+            "rawCompliance": 0.08045977011494253,
+            "recognizedCompliance": 0.08045977011494253,
+            "contribution": 0.008045977011494253
+          }
+        },
+        {
+          "id": "leads_calificados",
+          "label": "Leads calificados",
+          "row": 23,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(SUM(G23:I23)/J23,0%)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide los leads generados frente a la meta mensual de mínimo 1. Sin leads, el cumplimiento es 0%.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 0.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 3.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "leads_calificados_tiempo",
+          "label": "Leads calificados a tiempo",
+          "row": 24,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(SUM(G24:I24)/J24,0%)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide el porcentaje de leads calificados dentro de las 48 horas frente al total que debía gestionarse.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 0.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 3.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "actividades_campo",
+          "label": "Impacto en clientes  (Actividades de campo)",
+          "row": 25,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G25:I25)/J25,0%),150%)",
+          "weight": 0.1,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 7.0,
+          "criterion": "Mide el cumplimiento de actividades y parcelas frente a la meta del territorio. Por cada promotor se esperan 3 actividades trimestrales y 0,5 parcelas, con reconocimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 4.0,
+            "Marzo": 6.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 2.3333333333333335,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 4.0,
+              "target": 2.3333333333333335,
+              "rawCompliance": 1.7142857142857142,
+              "recognizedCompliance": 1.5,
+              "contribution": 0.15000000000000002
+            },
+            {
+              "month": "Marzo",
+              "actual": 6.0,
+              "target": 2.3333333333333335,
+              "rawCompliance": 2.571428571428571,
+              "recognizedCompliance": 1.5,
+              "contribution": 0.15000000000000002
+            }
+          ],
+          "quarter": {
+            "actual": 10.0,
+            "target": 7.0,
+            "rawCompliance": 1.4285714285714286,
+            "recognizedCompliance": 1.4285714285714286,
+            "contribution": 0.14285714285714288
+          }
+        },
+        {
+          "id": "hectareas",
+          "label": "Hectáreas de cultivos impactados",
+          "row": 26,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G26:I26)/J26,0%),150%)",
+          "weight": 0.05,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 180.0,
+          "criterion": "Mide las hectáreas gestionadas frente a la meta territorial: 30 mensuales por promotor, equivalentes a 90 trimestrales, con cumplimiento máximo del 150%.",
+          "monthValues": {
+            "Enero": 26.0,
+            "Febrero": 32.0,
+            "Marzo": 3.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 26.0,
+              "target": 60.0,
+              "rawCompliance": 0.43333333333333335,
+              "recognizedCompliance": 0.43333333333333335,
+              "contribution": 0.021666666666666667
+            },
+            {
+              "month": "Febrero",
+              "actual": 32.0,
+              "target": 60.0,
+              "rawCompliance": 0.5333333333333333,
+              "recognizedCompliance": 0.5333333333333333,
+              "contribution": 0.02666666666666667
+            },
+            {
+              "month": "Marzo",
+              "actual": 3.0,
+              "target": 60.0,
+              "rawCompliance": 0.05,
+              "recognizedCompliance": 0.05,
+              "contribution": 0.0025000000000000005
+            }
+          ],
+          "quarter": {
+            "actual": 61.0,
+            "target": 180.0,
+            "rawCompliance": 0.3388888888888889,
+            "recognizedCompliance": 0.3388888888888889,
+            "contribution": 0.016944444444444446
+          }
+        },
+        {
+          "id": "cultivos",
+          "label": "Cultivos impactados",
+          "row": 27,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G27:I27)/J27,0%),150%)",
+          "weight": 0.05,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 6.0,
+          "criterion": "Mide los cultivos gestionados en el período frente a la meta del territorio. Cada promotor debe gestionar mínimo 1 cultivo mensual, equivalente a 3 por trimestre, con reconocimiento de cumplimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Enero": 3.0,
+            "Febrero": 2.0,
+            "Marzo": 1.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 3.0,
+              "target": 2.0,
+              "rawCompliance": 1.5,
+              "recognizedCompliance": 1.5,
+              "contribution": 0.07500000000000001
+            },
+            {
+              "month": "Febrero",
+              "actual": 2.0,
+              "target": 2.0,
+              "rawCompliance": 1.0,
+              "recognizedCompliance": 1.0,
+              "contribution": 0.05
+            },
+            {
+              "month": "Marzo",
+              "actual": 1.0,
+              "target": 2.0,
+              "rawCompliance": 0.5,
+              "recognizedCompliance": 0.5,
+              "contribution": 0.025
+            }
+          ],
+          "quarter": {
+            "actual": 6.0,
+            "target": 6.0,
+            "rawCompliance": 1.0,
+            "recognizedCompliance": 1.0,
+            "contribution": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "GAL-NAC-Comercial-2026-Q2",
+      "sourceKey": "GAL-NAC",
+      "company": "Galagro",
+      "report": "Galagro Nacional",
+      "profile": "Comercial",
+      "configuredProfile": "Comercial",
+      "year": 2026,
+      "quarter": "Q2",
+      "months": [
+        "Abril",
+        "Mayo",
+        "Junio"
+      ],
+      "sourceFile": "informe Q2 - Galagro Nacional.xlsx",
+      "workspaceId": "ab209cbd-db36-4a5d-ae91-30ea734a118d",
+      "reportId": "4bbfc2c1-ee9e-4d01-be48-826f2e2693ca",
+      "person": "Rafael Ricardo Peña Sánchez",
+      "cargo": "RTC GALAGRO NAL BOYACA",
+      "territory": "GALAGRO BOYACA NAL.",
+      "companyExcel": "GALAGRO",
+      "originalQuarterResult": 0.6171828390804599,
+      "calculatedQuarterResult": 0.6171828390804598,
+      "validationDifference": 1.1102230246251565e-16,
+      "validationStatus": "Coincide",
+      "warning": "",
+      "indicators": [
+        {
+          "id": "ejecucion_visitas_cliente_final",
+          "label": "Ejecución visitas Cliente Final",
+          "row": 15,
+          "calculationType": "ratio",
+          "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
+          "weight": 0.1,
+          "cap": 1.0,
+          "targetThreshold": 0.9,
+          "rawTarget": 60.0,
+          "criterion": "Mide el cumplimiento acumulado de visitas del período. Se suman las visitas realizadas en los tres meses y se comparan contra la meta mensual multiplicada por el número de meses evaluados.",
+          "monthValues": {
+            "Abril": 30.0,
+            "Mayo": 27.0,
+            "Junio": 29.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 30.0,
+              "target": 60.0,
+              "rawCompliance": 0.5,
+              "recognizedCompliance": 0.5,
+              "contribution": 0.05
+            },
+            {
+              "month": "Mayo",
+              "actual": 27.0,
+              "target": 60.0,
+              "rawCompliance": 0.45,
+              "recognizedCompliance": 0.45,
+              "contribution": 0.045000000000000005
+            },
+            {
+              "month": "Junio",
+              "actual": 29.0,
+              "target": 60.0,
+              "rawCompliance": 0.48333333333333334,
+              "recognizedCompliance": 0.48333333333333334,
+              "contribution": 0.04833333333333334
+            }
+          ],
+          "quarter": {
+            "actual": 86.0,
+            "target": 180.0,
+            "rawCompliance": 0.4777777777777778,
+            "recognizedCompliance": 0.4777777777777778,
+            "contribution": 0.04777777777777778
+          }
+        },
+        {
+          "id": "cobertura_clientes",
+          "label": "Cobertura clientes",
+          "row": 16,
+          "calculationType": "ratio",
+          "formula": "IFERROR(MIN(100%,SUM(G16:I16)/($J16*3)),0)",
+          "weight": 0.1,
+          "cap": 1.0,
+          "targetThreshold": 0.9,
+          "rawTarget": 1.0,
+          "criterion": "Mide cuántos clientes del territorio fueron visitados frente a la meta mensual asignada. Se calcula con el promedio de clientes visitados durante los meses evaluados y se compara contra la meta de cobertura. La meta no se acumula entre meses. Si el resultado supera la meta, el cumplimiento máximo reconocido es del 100%.",
+          "monthValues": {
+            "Abril": 0.0,
+            "Mayo": 0.0,
+            "Junio": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 3.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "cobertura_cliente_potencial",
+          "label": "Meta Cobertura Cliente Potencial",
+          "row": 17,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 26.0,
+          "criterion": "Cuenta clientes nuevos y recuperados que registran una gestión o una venta durante el período. El resultado toma el total acumulado alcanzado y lo compara contra la meta esperada.",
+          "monthValues": {
+            "Abril": 4.0,
+            "Mayo": 9.0,
+            "Junio": 3.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 4.0,
+              "target": 26.0,
+              "rawCompliance": 0.15384615384615385,
+              "recognizedCompliance": 0.15384615384615385,
+              "contribution": 0.015384615384615385
+            },
+            {
+              "month": "Mayo",
+              "actual": 9.0,
+              "target": 26.0,
+              "rawCompliance": 0.34615384615384615,
+              "recognizedCompliance": 0.34615384615384615,
+              "contribution": 0.03461538461538462
+            },
+            {
+              "month": "Junio",
+              "actual": 3.0,
+              "target": 26.0,
+              "rawCompliance": 0.11538461538461539,
+              "recognizedCompliance": 0.11538461538461539,
+              "contribution": 0.011538461538461539
+            }
+          ],
+          "quarter": {
+            "actual": 5.333333333333333,
+            "target": 26.0,
+            "rawCompliance": 0.20512820512820515,
+            "recognizedCompliance": 0.20512820512820515,
+            "contribution": 0.020512820512820516
+          }
+        },
+        {
+          "id": "recomendaciones",
+          "label": "Recomendaciones",
+          "row": 19,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(MIN(150%,SUM(G19:I19)/J19),0)",
+          "weight": 0.2,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 260000000.0,
+          "criterion": "Suma las recomendaciones generadas durante el período evaluado y compara ese total contra la meta acumulada. El resultado muestra el porcentaje de cumplimiento alcanzado frente a la meta del trimestre.",
+          "monthValues": {
+            "Abril": 82113100.0,
+            "Mayo": 159964000.0,
+            "Junio": 79042200.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 82113100.0,
+              "target": 86666666.66666667,
+              "rawCompliance": 0.9474588461538461,
+              "recognizedCompliance": 0.9474588461538461,
+              "contribution": 0.18949176923076924
+            },
+            {
+              "month": "Mayo",
+              "actual": 159964000.0,
+              "target": 86666666.66666667,
+              "rawCompliance": 1.8457384615384613,
+              "recognizedCompliance": 1.5,
+              "contribution": 0.30000000000000004
+            },
+            {
+              "month": "Junio",
+              "actual": 79042200.0,
+              "target": 86666666.66666667,
+              "rawCompliance": 0.9120253846153845,
+              "recognizedCompliance": 0.9120253846153845,
+              "contribution": 0.18240507692307692
+            }
+          ],
+          "quarter": {
+            "actual": 321119300.0,
+            "target": 260000000.0,
+            "rawCompliance": 1.2350742307692308,
+            "recognizedCompliance": 1.2350742307692308,
+            "contribution": 0.24701484615384617
+          }
+        },
+        {
+          "id": "referencias",
+          "label": "Referencias",
+          "row": 20,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G20:I20)/J20,0)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 58.0,
+          "criterion": "Mide el cumplimiento de referencias gestionadas frente a la meta esperada del período. Se suman las referencias generadas en los meses evaluados y se comparan contra la meta (SKU activas). El resultado muestra el porcentaje de cumplimiento alcanzado.",
+          "monthValues": {
+            "Abril": 33.0,
+            "Mayo": 35.0,
+            "Junio": 30.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 33.0,
+              "target": 58.0,
+              "rawCompliance": 0.5689655172413793,
+              "recognizedCompliance": 0.5689655172413793,
+              "contribution": 0.056896551724137934
+            },
+            {
+              "month": "Mayo",
+              "actual": 35.0,
+              "target": 58.0,
+              "rawCompliance": 0.603448275862069,
+              "recognizedCompliance": 0.603448275862069,
+              "contribution": 0.0603448275862069
+            },
+            {
+              "month": "Junio",
+              "actual": 30.0,
+              "target": 58.0,
+              "rawCompliance": 0.5172413793103449,
+              "recognizedCompliance": 0.5172413793103449,
+              "contribution": 0.05172413793103449
+            }
+          ],
+          "quarter": {
+            "actual": 32.666666666666664,
+            "target": 58.0,
+            "rawCompliance": 0.5632183908045977,
+            "recognizedCompliance": 0.5632183908045977,
+            "contribution": 0.05632183908045977
+          }
+        },
+        {
+          "id": "leads_calificados",
+          "label": "Leads calificados",
+          "row": 22,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(SUM(G22:I22)/J22,0%)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide la generación de leads frente a la meta esperada. La meta considera mínimo 1 lead por mes evaluado y aumenta según los leads generados, con el fin de incentivar la creación constante de oportunidades comerciales. Si no se generan leads, el cumplimiento es 0%.",
+          "monthValues": {
+            "Abril": 0.0,
+            "Mayo": 0.0,
+            "Junio": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 3.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "leads_calificados_tiempo",
+          "label": "Leads calificados a tiempo",
+          "row": 23,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(SUM(G23:I23)/J23,0%)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide el porcentaje de leads que fueron calificados dentro del tiempo establecido (48 horas después de generado). Se compara la cantidad de leads calificados oportunamente frente al total de leads que debían ser gestionados en el período.",
+          "monthValues": {
+            "Abril": 0.0,
+            "Mayo": 0.0,
+            "Junio": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 3.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "actividades_campo",
+          "label": "Impacto en clientes  (Actividades de campo)",
+          "row": 24,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G24:I24)/J24,0%),150%)",
+          "weight": 0.1,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 7.0,
+          "criterion": "Mide el cumplimiento de actividades y parcelas frente a la meta del territorio. Por cada promotor se esperan 3 actividades trimestrales y 0,5 parcelas, con reconocimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Abril": 5.0,
+            "Mayo": 7.0,
+            "Junio": 6.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 5.0,
+              "target": 2.3333333333333335,
+              "rawCompliance": 2.142857142857143,
+              "recognizedCompliance": 1.5,
+              "contribution": 0.15000000000000002
+            },
+            {
+              "month": "Mayo",
+              "actual": 7.0,
+              "target": 2.3333333333333335,
+              "rawCompliance": 3.0,
+              "recognizedCompliance": 1.5,
+              "contribution": 0.15000000000000002
+            },
+            {
+              "month": "Junio",
+              "actual": 6.0,
+              "target": 2.3333333333333335,
+              "rawCompliance": 2.571428571428571,
+              "recognizedCompliance": 1.5,
+              "contribution": 0.15000000000000002
+            }
+          ],
+          "quarter": {
+            "actual": 18.0,
+            "target": 7.0,
+            "rawCompliance": 1.5,
+            "recognizedCompliance": 1.5,
+            "contribution": 0.15000000000000002
+          }
+        },
+        {
+          "id": "hectareas",
+          "label": "Hectáreas de cultivos impactados",
+          "row": 25,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G25:I25)/J25,0%),150%)",
+          "weight": 0.05,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 180.0,
+          "criterion": "Mide las hectáreas gestionadas en el período frente a la meta del territorio. Cada promotor debe gestionar 30 hectáreas mensuales, equivalentes a 90 por trimestre, con reconocimiento de cumplimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Abril": 3.0,
+            "Mayo": 39.0,
+            "Junio": 32.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 3.0,
+              "target": 60.0,
+              "rawCompliance": 0.05,
+              "recognizedCompliance": 0.05,
+              "contribution": 0.0025000000000000005
+            },
+            {
+              "month": "Mayo",
+              "actual": 39.0,
+              "target": 60.0,
+              "rawCompliance": 0.65,
+              "recognizedCompliance": 0.65,
+              "contribution": 0.0325
+            },
+            {
+              "month": "Junio",
+              "actual": 32.0,
+              "target": 60.0,
+              "rawCompliance": 0.5333333333333333,
+              "recognizedCompliance": 0.5333333333333333,
+              "contribution": 0.02666666666666667
+            }
+          ],
+          "quarter": {
+            "actual": 74.0,
+            "target": 180.0,
+            "rawCompliance": 0.4111111111111111,
+            "recognizedCompliance": 0.4111111111111111,
+            "contribution": 0.020555555555555556
+          }
+        },
+        {
+          "id": "cultivos",
+          "label": "Cultivos impactados",
+          "row": 26,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G26:I26)/J26,0%),150%)",
+          "weight": 0.05,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 6.0,
+          "criterion": "Mide los cultivos gestionados en el período frente a la meta del territorio. Cada promotor debe gestionar mínimo 1 cultivo mensual, equivalente a 3 por trimestre, con reconocimiento de cumplimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Abril": 3.0,
+            "Mayo": 8.0,
+            "Junio": 13.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 3.0,
+              "target": 2.0,
+              "rawCompliance": 1.5,
+              "recognizedCompliance": 1.5,
+              "contribution": 0.07500000000000001
+            },
+            {
+              "month": "Mayo",
+              "actual": 8.0,
+              "target": 2.0,
+              "rawCompliance": 4.0,
+              "recognizedCompliance": 1.5,
+              "contribution": 0.07500000000000001
+            },
+            {
+              "month": "Junio",
+              "actual": 13.0,
+              "target": 2.0,
+              "rawCompliance": 6.5,
+              "recognizedCompliance": 1.5,
+              "contribution": 0.07500000000000001
+            }
+          ],
+          "quarter": {
+            "actual": 24.0,
+            "target": 6.0,
+            "rawCompliance": 1.5,
+            "recognizedCompliance": 1.5,
+            "contribution": 0.07500000000000001
+          }
+        }
+      ]
+    },
+    {
+      "id": "GAL-NAC-Promotor-2026-Q1",
+      "sourceKey": "GAL-NAC",
+      "company": "Galagro",
+      "report": "Galagro Nacional",
+      "profile": "Promotor",
+      "configuredProfile": "Promotor",
+      "year": 2026,
+      "quarter": "Q1",
+      "months": [
+        "Enero",
+        "Febrero",
+        "Marzo"
+      ],
+      "sourceFile": "informe Q1 - Galagro Nacional - Promotor.xlsx",
+      "workspaceId": "ab209cbd-db36-4a5d-ae91-30ea734a118d",
+      "reportId": "4bbfc2c1-ee9e-4d01-be48-826f2e2693ca",
+      "person": "Vladimir Leonardo Rondón Basto",
+      "cargo": "PROMOTOR GALAGRO NAL NORTE SANTANDER 2",
+      "territory": "GALAGRO NORTE DE SANTANDER NAL.",
+      "companyExcel": "GALAGRO",
+      "originalQuarterResult": 0.22080083256617306,
+      "calculatedQuarterResult": 0.22080083256617306,
+      "validationDifference": 0.0,
+      "validationStatus": "Coincide",
+      "warning": "",
+      "indicators": [
+        {
+          "id": "ejecucion_visitas_cliente_final",
+          "label": "Ejecución visitas Cliente Final",
+          "row": 15,
+          "calculationType": "ratio",
+          "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
+          "weight": 0.1,
+          "cap": 1.0,
+          "targetThreshold": 0.9,
+          "rawTarget": 60.0,
+          "criterion": "Mide el cumplimiento acumulado de visitas del período. Se suman las visitas realizadas en los tres meses y se comparan contra la meta mensual multiplicada por el número de meses evaluados.",
+          "monthValues": {
+            "Enero": 34.0,
+            "Febrero": 50.0,
+            "Marzo": 42.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 34.0,
+              "target": 60.0,
+              "rawCompliance": 0.5666666666666667,
+              "recognizedCompliance": 0.5666666666666667,
+              "contribution": 0.05666666666666667
+            },
+            {
+              "month": "Febrero",
+              "actual": 50.0,
+              "target": 60.0,
+              "rawCompliance": 0.8333333333333334,
+              "recognizedCompliance": 0.8333333333333334,
+              "contribution": 0.08333333333333334
+            },
+            {
+              "month": "Marzo",
+              "actual": 42.0,
+              "target": 60.0,
+              "rawCompliance": 0.7,
+              "recognizedCompliance": 0.7,
+              "contribution": 0.06999999999999999
+            }
+          ],
+          "quarter": {
+            "actual": 126.0,
+            "target": 180.0,
+            "rawCompliance": 0.7,
+            "recognizedCompliance": 0.7,
+            "contribution": 0.06999999999999999
+          }
+        },
+        {
+          "id": "cobertura_clientes",
+          "label": "Cobertura clientes",
+          "row": 16,
+          "calculationType": "ratio",
+          "formula": "IFERROR(MIN(100%,SUM(G16:I16)/($J16*3)),0)",
+          "weight": 0.1,
+          "cap": 1.0,
+          "targetThreshold": 0.9,
+          "rawTarget": 50.666666666666664,
+          "criterion": "Mide cuántos clientes del territorio fueron visitados frente a la meta mensual asignada. Se calcula con el promedio de clientes visitados durante los meses evaluados y se compara contra la meta de cobertura. La meta no se acumula entre meses. Si el resultado supera la meta, el cumplimiento máximo reconocido es del 100%.",
+          "monthValues": {
+            "Enero": 23.0,
+            "Febrero": 22.0,
+            "Marzo": 20.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 23.0,
+              "target": 50.666666666666664,
+              "rawCompliance": 0.45394736842105265,
+              "recognizedCompliance": 0.45394736842105265,
+              "contribution": 0.045394736842105265
+            },
+            {
+              "month": "Febrero",
+              "actual": 22.0,
+              "target": 50.666666666666664,
+              "rawCompliance": 0.4342105263157895,
+              "recognizedCompliance": 0.4342105263157895,
+              "contribution": 0.04342105263157895
+            },
+            {
+              "month": "Marzo",
+              "actual": 20.0,
+              "target": 50.666666666666664,
+              "rawCompliance": 0.39473684210526316,
+              "recognizedCompliance": 0.39473684210526316,
+              "contribution": 0.03947368421052632
+            }
+          ],
+          "quarter": {
+            "actual": 65.0,
+            "target": 152.0,
+            "rawCompliance": 0.4276315789473684,
+            "recognizedCompliance": 0.4276315789473684,
+            "contribution": 0.04276315789473684
+          }
+        },
+        {
+          "id": "nuevos_clientes",
+          "label": "Clientes Nuevos",
+          "row": 17,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 10.0,
+          "criterion": "Cuenta clientes nuevos y recuperados que registran una gestión o una venta durante el período. El resultado toma el total acumulado alcanzado y lo compara contra la meta esperada.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 0.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 10.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 0.0,
+              "target": 10.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 10.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 10.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "recomendaciones",
+          "label": "Recomendaciones",
+          "row": 19,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(MIN(150%,SUM(G19:I19)/J19),0)",
+          "weight": 0.2,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 437000000.0,
+          "criterion": "Suma las recomendaciones generadas durante el período evaluado y compara ese total contra la meta acumulada. El resultado muestra el porcentaje de cumplimiento alcanzado frente a la meta del trimestre.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 0.0,
+            "Marzo": 442300.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 145666666.66666666,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 0.0,
+              "target": 145666666.66666666,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Marzo",
+              "actual": 442300.0,
+              "target": 145666666.66666666,
+              "rawCompliance": 0.0030363844393592678,
+              "recognizedCompliance": 0.0030363844393592678,
+              "contribution": 0.0006072768878718536
+            }
+          ],
+          "quarter": {
+            "actual": 442300.0,
+            "target": 437000000.0,
+            "rawCompliance": 0.0010121281464530892,
+            "recognizedCompliance": 0.0010121281464530892,
+            "contribution": 0.00020242562929061785
+          }
+        },
+        {
+          "id": "referencias",
+          "label": "Referencias",
+          "row": 20,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G20:I20)/J20,0)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 58.0,
+          "criterion": "Mide el cumplimiento de referencias gestionadas frente a la meta esperada del período. Se suman las referencias generadas durante los meses evaluados y se comparan contra la meta mensual de SKU activas multiplicada por el número de meses.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 0.0,
+            "Marzo": 3.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 58.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 0.0,
+              "target": 58.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Marzo",
+              "actual": 3.0,
+              "target": 58.0,
+              "rawCompliance": 0.05172413793103448,
+              "recognizedCompliance": 0.05172413793103448,
+              "contribution": 0.005172413793103448
+            }
+          ],
+          "quarter": {
+            "actual": 1.0,
+            "target": 58.0,
+            "rawCompliance": 0.017241379310344827,
+            "recognizedCompliance": 0.017241379310344827,
+            "contribution": 0.0017241379310344827
+          }
+        },
+        {
+          "id": "leads_calificados",
+          "label": "Leads calificados",
+          "row": 22,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(SUM(G22:I22)/J22,0%)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide la generación de leads frente a la meta esperada. La meta considera mínimo 1 lead por mes evaluado y aumenta según los leads generados, con el fin de incentivar la creación constante de oportunidades comerciales. Si no se generan leads, el cumplimiento es 0%.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 0.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 3.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "leads_calificados_tiempo",
+          "label": "Leads calificados a tiempo",
+          "row": 23,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(SUM(G23:I23)/J23,0%)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide el porcentaje de leads que fueron calificados dentro del tiempo establecido (48 horas después de generado). Se compara la cantidad de leads calificados oportunamente frente al total de leads que debían ser gestionados en el período.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 0.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 3.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "actividades_campo",
+          "label": "Impacto en clientes  (Actividades de campo)",
+          "row": 24,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G24:I24)/J24,0%),150%)",
+          "weight": 0.1,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.5,
+          "criterion": "Mide el cumplimiento de actividades y parcelas frente a la meta del territorio. Por cada promotor se esperan 3 actividades trimestrales y 0,5 parcelas, con reconocimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Enero": 0.0,
+            "Febrero": 0.0,
+            "Marzo": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 0.0,
+              "target": 1.1666666666666667,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Febrero",
+              "actual": 0.0,
+              "target": 1.1666666666666667,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Marzo",
+              "actual": 0.0,
+              "target": 1.1666666666666667,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 3.5,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "hectareas",
+          "label": "Hectáreas de cultivos impactados",
+          "row": 25,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G25:I25)/J25,0%),150%)",
+          "weight": 0.05,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 90.0,
+          "criterion": "Mide las hectáreas gestionadas en el período frente a la meta del territorio. Cada promotor debe gestionar 30 hectáreas mensuales, equivalentes a 90 por trimestre, con reconocimiento de cumplimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Enero": 1.0,
+            "Febrero": 16.0,
+            "Marzo": 39.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 1.0,
+              "target": 30.0,
+              "rawCompliance": 0.03333333333333333,
+              "recognizedCompliance": 0.03333333333333333,
+              "contribution": 0.0016666666666666668
+            },
+            {
+              "month": "Febrero",
+              "actual": 16.0,
+              "target": 30.0,
+              "rawCompliance": 0.5333333333333333,
+              "recognizedCompliance": 0.5333333333333333,
+              "contribution": 0.02666666666666667
+            },
+            {
+              "month": "Marzo",
+              "actual": 39.0,
+              "target": 30.0,
+              "rawCompliance": 1.3,
+              "recognizedCompliance": 1.3,
+              "contribution": 0.065
+            }
+          ],
+          "quarter": {
+            "actual": 56.0,
+            "target": 90.0,
+            "rawCompliance": 0.6222222222222222,
+            "recognizedCompliance": 0.6222222222222222,
+            "contribution": 0.031111111111111114
+          }
+        },
+        {
+          "id": "cultivos",
+          "label": "Cultivos impactados",
+          "row": 26,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G26:I26)/J26,0%),150%)",
+          "weight": 0.05,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide los cultivos gestionados en el período frente a la meta del territorio. Cada promotor debe gestionar mínimo 1 cultivo mensual, equivalente a 3 por trimestre, con reconocimiento de cumplimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Enero": 1.0,
+            "Febrero": 7.0,
+            "Marzo": 6.0
+          },
+          "monthly": [
+            {
+              "month": "Enero",
+              "actual": 1.0,
+              "target": 1.0,
+              "rawCompliance": 1.0,
+              "recognizedCompliance": 1.0,
+              "contribution": 0.05
+            },
+            {
+              "month": "Febrero",
+              "actual": 7.0,
+              "target": 1.0,
+              "rawCompliance": 7.0,
+              "recognizedCompliance": 1.5,
+              "contribution": 0.07500000000000001
+            },
+            {
+              "month": "Marzo",
+              "actual": 6.0,
+              "target": 1.0,
+              "rawCompliance": 6.0,
+              "recognizedCompliance": 1.5,
+              "contribution": 0.07500000000000001
+            }
+          ],
+          "quarter": {
+            "actual": 14.0,
+            "target": 3.0,
+            "rawCompliance": 1.5,
+            "recognizedCompliance": 1.5,
+            "contribution": 0.07500000000000001
+          }
+        }
+      ]
+    },
+    {
+      "id": "GAL-NAC-Promotor-2026-Q2",
+      "sourceKey": "GAL-NAC",
+      "company": "Galagro",
+      "report": "Galagro Nacional",
+      "profile": "Promotor",
+      "configuredProfile": "Promotor",
+      "year": 2026,
+      "quarter": "Q2",
+      "months": [
+        "Abril",
+        "Mayo",
+        "Junio"
+      ],
+      "sourceFile": "informe Q2 - Galagro Nacional - Promotor.xlsx",
+      "workspaceId": "ab209cbd-db36-4a5d-ae91-30ea734a118d",
+      "reportId": "4bbfc2c1-ee9e-4d01-be48-826f2e2693ca",
+      "person": "Vladimir Leonardo Rondón Basto",
+      "cargo": "PROMOTOR GALAGRO NAL NORTE SANTANDER 2",
+      "territory": "GALAGRO NORTE DE SANTANDER NAL.",
+      "companyExcel": "GALAGRO",
+      "originalQuarterResult": 0.2451545530492899,
+      "calculatedQuarterResult": 0.2451545530492899,
+      "validationDifference": 0.0,
+      "validationStatus": "Coincide",
+      "warning": "",
+      "indicators": [
+        {
+          "id": "ejecucion_visitas_cliente_final",
+          "label": "Ejecución visitas Cliente Final",
+          "row": 15,
+          "calculationType": "ratio",
+          "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
+          "weight": 0.1,
+          "cap": 1.0,
+          "targetThreshold": 0.9,
+          "rawTarget": 60.0,
+          "criterion": "Mide el cumplimiento acumulado de visitas del período. Se suman las visitas realizadas en los tres meses y se comparan contra la meta mensual multiplicada por el número de meses evaluados.",
+          "monthValues": {
+            "Abril": 34.0,
+            "Mayo": 37.0,
+            "Junio": 28.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 34.0,
+              "target": 60.0,
+              "rawCompliance": 0.5666666666666667,
+              "recognizedCompliance": 0.5666666666666667,
+              "contribution": 0.05666666666666667
+            },
+            {
+              "month": "Mayo",
+              "actual": 37.0,
+              "target": 60.0,
+              "rawCompliance": 0.6166666666666667,
+              "recognizedCompliance": 0.6166666666666667,
+              "contribution": 0.061666666666666675
+            },
+            {
+              "month": "Junio",
+              "actual": 28.0,
+              "target": 60.0,
+              "rawCompliance": 0.4666666666666667,
+              "recognizedCompliance": 0.4666666666666667,
+              "contribution": 0.04666666666666667
+            }
+          ],
+          "quarter": {
+            "actual": 99.0,
+            "target": 180.0,
+            "rawCompliance": 0.55,
+            "recognizedCompliance": 0.55,
+            "contribution": 0.05500000000000001
+          }
+        },
+        {
+          "id": "cobertura_clientes",
+          "label": "Cobertura clientes",
+          "row": 16,
+          "calculationType": "ratio",
+          "formula": "IFERROR(MIN(100%,SUM(G16:I16)/($J16*3)),0)",
+          "weight": 0.1,
+          "cap": 1.0,
+          "targetThreshold": 0.9,
+          "rawTarget": 50.666666666666664,
+          "criterion": "Mide cuántos clientes del territorio fueron visitados frente a la meta mensual asignada. Se calcula con el promedio de clientes visitados durante los meses evaluados y se compara contra la meta de cobertura. La meta no se acumula entre meses. Si el resultado supera la meta, el cumplimiento máximo reconocido es del 100%.",
+          "monthValues": {
+            "Abril": 21.0,
+            "Mayo": 21.0,
+            "Junio": 20.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 21.0,
+              "target": 50.666666666666664,
+              "rawCompliance": 0.4144736842105263,
+              "recognizedCompliance": 0.4144736842105263,
+              "contribution": 0.041447368421052636
+            },
+            {
+              "month": "Mayo",
+              "actual": 21.0,
+              "target": 50.666666666666664,
+              "rawCompliance": 0.4144736842105263,
+              "recognizedCompliance": 0.4144736842105263,
+              "contribution": 0.041447368421052636
+            },
+            {
+              "month": "Junio",
+              "actual": 20.0,
+              "target": 50.666666666666664,
+              "rawCompliance": 0.39473684210526316,
+              "recognizedCompliance": 0.39473684210526316,
+              "contribution": 0.03947368421052632
+            }
+          ],
+          "quarter": {
+            "actual": 62.0,
+            "target": 152.0,
+            "rawCompliance": 0.40789473684210525,
+            "recognizedCompliance": 0.40789473684210525,
+            "contribution": 0.04078947368421053
+          }
+        },
+        {
+          "id": "nuevos_clientes",
+          "label": "Clientes Nuevos",
+          "row": 17,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 10.0,
+          "criterion": "Cuenta clientes nuevos y recuperados que registran una gestión o una venta durante el período. El resultado toma el total acumulado alcanzado y lo compara contra la meta esperada.",
+          "monthValues": {
+            "Abril": 0.0,
+            "Mayo": 0.0,
+            "Junio": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 0.0,
+              "target": 10.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 10.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 0.0,
+              "target": 10.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 10.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "recomendaciones",
+          "label": "Recomendaciones",
+          "row": 19,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(MIN(150%,SUM(G19:I19)/J19),0)",
+          "weight": 0.2,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 494000000.0,
+          "criterion": "Suma las recomendaciones generadas durante el período evaluado y compara ese total contra la meta acumulada. El resultado muestra el porcentaje de cumplimiento alcanzado frente a la meta del trimestre.",
+          "monthValues": {
+            "Abril": 0.0,
+            "Mayo": 0.0,
+            "Junio": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 0.0,
+              "target": 164666666.66666666,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 164666666.66666666,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 0.0,
+              "target": 164666666.66666666,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 494000000.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "referencias",
+          "label": "Referencias",
+          "row": 20,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G20:I20)/J20,0)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 58.0,
+          "criterion": "Mide el cumplimiento de referencias gestionadas frente a la meta esperada del período. Se suman las referencias generadas durante los meses evaluados y se comparan contra la meta mensual de SKU activas multiplicada por el número de meses.",
+          "monthValues": {
+            "Abril": 0.0,
+            "Mayo": 0.0,
+            "Junio": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 0.0,
+              "target": 58.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 58.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 0.0,
+              "target": 58.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 58.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "leads_calificados",
+          "label": "Leads calificados",
+          "row": 22,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(MIN(SUM(G22:I22)/J22,100%),0%)",
+          "weight": 0.1,
+          "cap": 1.0,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide la generación de leads frente a la meta esperada. La meta considera mínimo 1 lead por mes evaluado y aumenta según los leads generados, con el fin de incentivar la creación constante de oportunidades comerciales. Si no se generan leads, el cumplimiento es 0%.",
+          "monthValues": {
+            "Abril": 0.0,
+            "Mayo": 0.0,
+            "Junio": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 3.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "leads_calificados_tiempo",
+          "label": "Leads calificados a tiempo",
+          "row": 23,
+          "calculationType": "ratio_acumulado",
+          "formula": "IFERROR(SUM(G23:I23)/J23,0%)",
+          "weight": 0.1,
+          "cap": null,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide el porcentaje de leads que fueron calificados dentro del tiempo establecido (48 horas después de generado). Se compara la cantidad de leads calificados oportunamente frente al total de leads que debían ser gestionados en el período.",
+          "monthValues": {
+            "Abril": 0.0,
+            "Mayo": 0.0,
+            "Junio": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 0.0,
+            "target": 3.0,
+            "rawCompliance": 0.0,
+            "recognizedCompliance": 0.0,
+            "contribution": 0.0
+          }
+        },
+        {
+          "id": "actividades_campo",
+          "label": "Impacto en clientes  (Actividades de campo)",
+          "row": 24,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G24:I24)/J24,0%),150%)",
+          "weight": 0.1,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.5,
+          "criterion": "Mide el cumplimiento de actividades y parcelas frente a la meta del territorio. Por cada promotor se esperan 3 actividades trimestrales y 0,5 parcelas, con reconocimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Abril": 0.0,
+            "Mayo": 0.0,
+            "Junio": 2.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 0.0,
+              "target": 1.1666666666666667,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Mayo",
+              "actual": 0.0,
+              "target": 1.1666666666666667,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            },
+            {
+              "month": "Junio",
+              "actual": 2.0,
+              "target": 1.1666666666666667,
+              "rawCompliance": 1.7142857142857142,
+              "recognizedCompliance": 1.5,
+              "contribution": 0.15000000000000002
+            }
+          ],
+          "quarter": {
+            "actual": 2.0,
+            "target": 3.5,
+            "rawCompliance": 0.5714285714285714,
+            "recognizedCompliance": 0.5714285714285714,
+            "contribution": 0.05714285714285714
+          }
+        },
+        {
+          "id": "hectareas",
+          "label": "Hectáreas de cultivos impactados",
+          "row": 25,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G25:I25)/J25,0%),150%)",
+          "weight": 0.05,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 90.0,
+          "criterion": "Mide las hectáreas gestionadas en el período frente a la meta del territorio. Cada promotor debe gestionar 30 hectáreas mensuales, equivalentes a 90 por trimestre, con reconocimiento de cumplimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Abril": 24.0,
+            "Mayo": 7.0,
+            "Junio": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 24.0,
+              "target": 30.0,
+              "rawCompliance": 0.8,
+              "recognizedCompliance": 0.8,
+              "contribution": 0.04000000000000001
+            },
+            {
+              "month": "Mayo",
+              "actual": 7.0,
+              "target": 30.0,
+              "rawCompliance": 0.23333333333333334,
+              "recognizedCompliance": 0.23333333333333334,
+              "contribution": 0.011666666666666667
+            },
+            {
+              "month": "Junio",
+              "actual": 0.0,
+              "target": 30.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 31.0,
+            "target": 90.0,
+            "rawCompliance": 0.34444444444444444,
+            "recognizedCompliance": 0.34444444444444444,
+            "contribution": 0.017222222222222222
+          }
+        },
+        {
+          "id": "cultivos",
+          "label": "Cultivos impactados",
+          "row": 26,
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(IFERROR(SUM(G26:I26)/J26,0%),150%)",
+          "weight": 0.05,
+          "cap": 1.5,
+          "targetThreshold": 0.9,
+          "rawTarget": 3.0,
+          "criterion": "Mide los cultivos gestionados en el período frente a la meta del territorio. Cada promotor debe gestionar mínimo 1 cultivo mensual, equivalente a 3 por trimestre, con reconocimiento de cumplimiento máximo hasta el 150%.",
+          "monthValues": {
+            "Abril": 5.0,
+            "Mayo": 1.0,
+            "Junio": 0.0
+          },
+          "monthly": [
+            {
+              "month": "Abril",
+              "actual": 5.0,
+              "target": 1.0,
+              "rawCompliance": 5.0,
+              "recognizedCompliance": 1.5,
+              "contribution": 0.07500000000000001
+            },
+            {
+              "month": "Mayo",
+              "actual": 1.0,
+              "target": 1.0,
+              "rawCompliance": 1.0,
+              "recognizedCompliance": 1.0,
+              "contribution": 0.05
+            },
+            {
+              "month": "Junio",
+              "actual": 0.0,
+              "target": 1.0,
+              "rawCompliance": 0.0,
+              "recognizedCompliance": 0.0,
+              "contribution": 0.0
+            }
+          ],
+          "quarter": {
+            "actual": 6.0,
+            "target": 3.0,
+            "rawCompliance": 1.5,
+            "recognizedCompliance": 1.5,
+            "contribution": 0.07500000000000001
+          }
+        }
+      ]
+    }
+  ],
+  "errors": []
+}
