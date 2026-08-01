@@ -24,3 +24,5 @@ next-env.d.ts
 
 # Datos internos de validación: se conservan localmente y no deben subirse al repositorio
 data/fuentes/*.xlsx
+data/*.xlsx
+*.zip
