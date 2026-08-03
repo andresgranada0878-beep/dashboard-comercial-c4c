@@ -3,6 +3,8 @@ import path from "node:path"
 import process from "node:process"
 import * as XLSX from "xlsx"
 
+XLSX.set_fs(fs)
+
 const root = process.cwd()
 const configPath = path.join(root, "data", "configuracion-c4c.json")
 const sourcesDir = path.join(root, "data", "fuentes")
@@ -36,14 +38,32 @@ const sourceRows = config.source_rows.map((row) => ({
   sourceFile: fileAliases.get(row[7]) ?? row[7],
   workspaceId: row[8],
   reportId: row[9],
+  sheetName: "mensual",
 }))
 
+sourceRows.push(
+  ...sourceRows
+    .filter((source) =>
+      ["PYC-AGR-ANT", "GAL-ANT"].includes(source.sourceKey),
+    )
+    .map((source) => ({
+      ...source,
+      configuredProfile: "Director",
+      sheetName: "Director",
+    })),
+)
+
 const resultRows = config.result_rows
-  .filter((row) => row[6] === "Individual" && row[7] === "mensual")
+  .filter(
+    (row) =>
+      (row[6] === "Individual" && row[7] === "mensual") ||
+      (row[6] === "Director / consolidado" && row[7] === "Director"),
+  )
   .map((row) => ({
     sourceKey: row[0],
     year: Number(row[4]),
     quarter: row[5],
+    sheetName: row[7],
     name: row[8],
     cargo: row[9],
     territory: row[10],
@@ -190,19 +210,68 @@ for (const source of sourceRows) {
 
   try {
     const workbook = XLSX.readFile(filePath, { cellDates: true, cellFormula: true })
-    const sheet = workbook.Sheets.mensual
+    const sheet = workbook.Sheets[source.sheetName ?? "mensual"]
     if (!sheet) {
-      errors.push(`${source.sourceFile}: no tiene hoja mensual`)
+      errors.push(
+        `${source.sourceFile}: no tiene hoja ${source.sheetName ?? "mensual"}`,
+      )
       continue
     }
 
     const meta = findMetadata(sheet)
     const resultReference = resultRows.find(
-      (row) => row.sourceKey === source.sourceKey && row.year === source.year && row.quarter === source.quarter && row.sourceFile === source.sourceFile,
+      (row) =>
+        row.sourceKey === source.sourceKey &&
+        row.year === source.year &&
+        row.quarter === source.quarter &&
+        row.sourceFile === source.sourceFile &&
+        row.sheetName === source.sheetName,
     )
-    const matchingRules = ruleRows.filter(
-      (rule) => rule.sourceKey === source.sourceKey && rule.year === source.year && rule.quarter === source.quarter && rule.configuredProfile === source.configuredProfile,
+    const rulesProfile =
+      source.configuredProfile === "Director"
+        ? "General"
+        : source.configuredProfile
+
+    const baseRules = ruleRows.filter(
+      (rule) =>
+        rule.sourceKey === source.sourceKey &&
+        rule.year === source.year &&
+        rule.quarter === source.quarter &&
+        rule.configuredProfile === rulesProfile,
     )
+
+    const matchingRules =
+      source.configuredProfile === "Director"
+        ? Array.from({ length: 11 }, (_, index) => index + 14)
+            .map((rowNumber) => {
+              const label = String(
+                readCell(sheet, `B${rowNumber}`) ?? "",
+              )
+                .replace(/\s+/g, " ")
+                .trim()
+
+              const normalizedLabel = normalized(label)
+
+              const expectedIndicatorId = config.equiv_rows.find(
+                ([originalName]) =>
+                  normalized(originalName) === normalizedLabel,
+              )?.[1]
+
+              const rule =
+                baseRules.find(
+                  (item) =>
+                    expectedIndicatorId &&
+                    item.indicatorId === expectedIndicatorId,
+                ) ??
+                baseRules.find(
+                  (item) =>
+                    normalized(item.indicatorName) === normalizedLabel,
+                )
+
+              return rule ? { ...rule, rowNumber } : null
+            })
+            .filter(Boolean)
+        : baseRules
 
     const indicators = matchingRules.map((rule) => {
       const row = rule.rowNumber

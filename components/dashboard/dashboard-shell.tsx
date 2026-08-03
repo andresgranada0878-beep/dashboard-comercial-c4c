@@ -181,10 +181,30 @@ export function DashboardShell() {
 
   const indicatorRows = useMemo(() => {
     if (!selected) return []
-    return selected.indicators.map((indicator) => {
+
+    const indicators =
+      selected.report === "Galagro Nacional" &&
+      selected.profile === "Director"
+        ? selected.indicators.filter((indicator) => {
+            const isHectares =
+              indicator.id === "hectareas" ||
+              indicator.label === "Hectáreas de cultivos impactados"
+
+            if (!isHectares) return true
+
+            return (
+              indicator.calculationType ===
+                "promedio_cumplimiento_equipo" &&
+              indicator.quarter?.target === 100
+            )
+          })
+        : selected.indicators
+
+    return indicators.map((indicator) => {
       const metric = view === "trimestral"
         ? indicator.quarter
         : indicator.monthly.find((item) => item.month === month) ?? null
+
       return { indicator, metric }
     })
   }, [selected, view, month])

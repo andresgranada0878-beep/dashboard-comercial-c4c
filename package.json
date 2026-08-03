@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "build:data": "node scripts/build-individual-data.mjs"
+    "build:data": "node scripts/build-individual-data.mjs && node scripts/expand-antioquia-team.mjs && node scripts/expand-galagro-nacional-team.mjs && node scripts/build-galagro-nacional-director.mjs && node scripts/dedupe-galagro-nacional-director.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
