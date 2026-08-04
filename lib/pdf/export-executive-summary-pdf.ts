@@ -19,6 +19,7 @@ type ExportExecutiveSummaryPdfParams = {
   year: number
   profile: string
   territory: string
+  period: string
   view: DashboardView
   months: string[]
   unitResults: Record<string, number | null>
@@ -111,6 +112,7 @@ export async function exportExecutiveSummaryPdf({
   year,
   profile,
   territory,
+  period,
   view,
   months,
   unitResults,
@@ -164,38 +166,62 @@ export async function exportExecutiveSummaryPdf({
   doc.setTextColor(24, 58, 42)
   doc.setFont("helvetica", "bold")
   doc.setFontSize(12)
-  doc.text(
+  const comparisonTitle =
     view === "trimestral"
-      ? "Comparativo trimestral Q1 - Q2"
-      : "Comparativo mensual del equipo",
-    14,
-    47,
-  )
+      ? period === "Todos"
+        ? "Comparativo trimestral Q1 - Q2"
+        : `Resumen trimestral ${period}`
+      : period === "Todos"
+        ? "Comparativo mensual del equipo"
+        : `Comparativo mensual ${period}`
+
+  doc.text(comparisonTitle, 14, 47)
 
   const resultScope =
     profile !== "Todos" || territory !== "Todos"
       ? "equipo filtrado"
       : "unidad"
 
+  const visibleQuarters =
+    period === "Todos"
+      ? ["Q1", "Q2"]
+      : [period]
+
+  const peopleLabel = `${rows.length} ${
+    rows.length === 1 ? "persona" : "personas"
+  }`
+
   const summaryItems =
     view === "trimestral"
-      ? [
-          ["Rol", profile],
-          ["Territorio", territory],
-          ["Equipo incluido", `${rows.length} personas`],
-          [
-            `Resultado ${resultScope} Q1`,
-            formatPercent(unitResults.Q1, 2),
-          ],
-          [
-            `Resultado ${resultScope} Q2`,
-            formatPercent(unitResults.Q2, 2),
-          ],
-        ]
+      ? period === "Todos"
+        ? [
+            ["Rol", profile],
+            ["Territorio", territory],
+            ["Equipo incluido", peopleLabel],
+            [
+              `Resultado ${resultScope} Q1`,
+              formatPercent(unitResults.Q1, 2),
+            ],
+            [
+              `Resultado ${resultScope} Q2`,
+              formatPercent(unitResults.Q2, 2),
+            ],
+          ]
+        : [
+            ["Rol", profile],
+            ["Territorio", territory],
+            ["Periodo", period],
+            ["Equipo incluido", peopleLabel],
+            [
+              `Resultado ${resultScope} ${period}`,
+              formatPercent(unitResults[period], 2),
+            ],
+          ]
       : [
           ["Rol", profile],
           ["Territorio", territory],
-          ["Equipo incluido", `${rows.length} personas`],
+          ["Periodo", period],
+          ["Equipo incluido", peopleLabel],
           ["Meses", months.join(", ")],
         ]
 
@@ -234,9 +260,8 @@ export async function exportExecutiveSummaryPdf({
           "Cargo",
           "Rol",
           "Territorio",
-          "Q1",
-          "Q2",
-          "Variación",
+          ...visibleQuarters,
+          ...(period === "Todos" ? ["Variación"] : []),
         ]]
       : [[
           "Colaborador",
@@ -253,9 +278,16 @@ export async function exportExecutiveSummaryPdf({
           row.cargo,
           row.profile,
           row.territory,
-          formatPercent(row.q1),
-          formatPercent(row.q2),
-          formatVariation(row.variation),
+          ...visibleQuarters.map((quarter) =>
+            formatPercent(
+              quarter === "Q1"
+                ? row.q1
+                : row.q2,
+            ),
+          ),
+          ...(period === "Todos"
+            ? [formatVariation(row.variation)]
+            : []),
         ])
       : rows.map((row) => [
           row.person,
@@ -269,15 +301,23 @@ export async function exportExecutiveSummaryPdf({
 
   const columnStyles =
     view === "trimestral"
-      ? {
-          0: { cellWidth: 48 },
-          1: { cellWidth: 54 },
-          2: { cellWidth: 25, halign: "center" as const },
-          3: { cellWidth: 47 },
-          4: { cellWidth: 23, halign: "center" as const },
-          5: { cellWidth: 23, halign: "center" as const },
-          6: { cellWidth: 25, halign: "center" as const },
-        }
+      ? period === "Todos"
+        ? {
+            0: { cellWidth: 48 },
+            1: { cellWidth: 54 },
+            2: { cellWidth: 25, halign: "center" as const },
+            3: { cellWidth: 47 },
+            4: { cellWidth: 23, halign: "center" as const },
+            5: { cellWidth: 23, halign: "center" as const },
+            6: { cellWidth: 25, halign: "center" as const },
+          }
+        : {
+            0: { cellWidth: 55 },
+            1: { cellWidth: 62 },
+            2: { cellWidth: 30, halign: "center" as const },
+            3: { cellWidth: 75 },
+            4: { cellWidth: 30, halign: "center" as const },
+          }
       : {
           0: { cellWidth: 42 },
           1: { cellWidth: 44 },
@@ -286,7 +326,10 @@ export async function exportExecutiveSummaryPdf({
         }
 
   autoTable(doc, {
-    startY: 78,
+    startY:
+      view === "trimestral" && period !== "Todos"
+        ? 75
+        : 78,
     pageBreak: "auto",
     rowPageBreak: "avoid",
     head,
@@ -299,8 +342,16 @@ export async function exportExecutiveSummaryPdf({
     },
     styles: {
       font: "helvetica",
-      fontSize: view === "trimestral" ? 7.5 : 6.7,
-      cellPadding: 2.1,
+      fontSize:
+        view === "trimestral"
+          ? period === "Todos"
+            ? 7.5
+            : 7.1
+          : 6.7,
+      cellPadding:
+        view === "trimestral" && period !== "Todos"
+          ? 1.6
+          : 2.1,
       lineColor: [225, 234, 227],
       lineWidth: 0.2,
       textColor: [37, 61, 48],
@@ -347,7 +398,7 @@ export async function exportExecutiveSummaryPdf({
     doc.setTextColor(100, 116, 139)
 
     doc.text(
-      `Unidad: ${report} | Rol: ${profile} | Territorio: ${territory}`,
+      `Unidad: ${report} | Rol: ${profile} | Territorio: ${territory} | Periodo: ${period}`,
       12,
       pageHeight - 7,
     )
@@ -372,6 +423,7 @@ export async function exportExecutiveSummaryPdf({
     safeFileName(report),
     safeFileName(profile),
     safeFileName(territory),
+    safeFileName(period),
     String(year),
     view,
   ].join("-")

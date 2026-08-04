@@ -322,6 +322,7 @@ export function GeneralSummary({
   const [year, setYear] = useState<number>(years[0] ?? 2026)
   const [profile, setProfile] = useState<string>("Todos")
   const [territory, setTerritory] = useState<string>("Todos")
+  const [period, setPeriod] = useState<string>("Todos")
   const [view, setView] = useState<DashboardView>("trimestral")
   const [expandedPerson, setExpandedPerson] = useState<string>("")
   const [exportingPdf, setExportingPdf] = useState(false)
@@ -392,10 +393,20 @@ export function GeneralSummary({
     [reportSources, profile, activeTerritory],
   )
 
+  const periodSources = useMemo(
+    () =>
+      filteredSources.filter(
+        (source) =>
+          period === "Todos" ||
+          source.quarter === period,
+      ),
+    [filteredSources, period],
+  )
+
   const rows = useMemo<PersonSummary[]>(() => {
     const people = new Map<string, PersonSummary>()
 
-    for (const source of filteredSources) {
+    for (const source of periodSources) {
       const key = `${source.profile}|||${source.person}`
       const current = people.get(key)
 
@@ -424,14 +435,14 @@ export function GeneralSummary({
         sensitivity: "base",
       })
     })
-  }, [filteredSources])
+  }, [periodSources])
 
   const months = useMemo(
     () =>
       unique(
-        filteredSources.flatMap((source) => source.months),
+        periodSources.flatMap((source) => source.months),
       ).sort(monthSort),
-    [filteredSources],
+    [periodSources],
   )
 
   const unitResults = useMemo(() => {
@@ -470,9 +481,16 @@ export function GeneralSummary({
     return result
   }, [filteredSources])
 
+  const visibleQuarters =
+    period === "Todos"
+      ? ["Q1", "Q2"]
+      : [period]
+
   const tableColumns =
     view === "trimestral"
-      ? 7
+      ? 4 +
+        visibleQuarters.length +
+        (period === "Todos" ? 1 : 0)
       : 4 + months.length
 
   async function handleDownloadPdf() {
@@ -523,6 +541,7 @@ export function GeneralSummary({
         year: selectedYear,
         profile: activeProfile,
         territory: activeTerritory,
+        period,
         view,
         months,
         unitResults,
@@ -654,6 +673,13 @@ export function GeneralSummary({
             options={territoryOptions}
             onChange={setTerritory}
           />
+
+          <SelectField
+            label="Periodo"
+            value={period}
+            options={["Todos", "Q1", "Q2"]}
+            onChange={setPeriod}
+          />
         </div>
 
           <div
@@ -701,7 +727,7 @@ export function GeneralSummary({
             marginTop: 18,
           }}
         >
-          {["Q1", "Q2"].map((quarter) => {
+          {visibleQuarters.map((quarter) => {
             const value = unitResults[quarter]
             const tone = performance(value)
 
@@ -724,7 +750,10 @@ export function GeneralSummary({
                     letterSpacing: "0.07em",
                   }}
                 >
-                  Resultado de la unidad {quarter}
+                  {profile !== "Todos" ||
+                  activeTerritory !== "Todos"
+                    ? `Resultado del equipo filtrado ${quarter}`
+                    : `Resultado de la unidad ${quarter}`}
                 </div>
 
                 <div
@@ -843,20 +872,33 @@ export function GeneralSummary({
                 <th style={headerCellStyle}>Cargo</th>
                 <th style={headerCellStyle}>Rol</th>
 
-                {view === "trimestral" ? (
-                  <>
-                    <th style={centerHeaderCellStyle}>Q1</th>
-                    <th style={centerHeaderCellStyle}>Q2</th>
-                    <th style={centerHeaderCellStyle}>Variación</th>
-                  </>
-                ) : (
-                  months.map((month) => (
-                    <th key={month} style={centerHeaderCellStyle}>
-                      {month}
-                    </th>
-                  ))
-                )}
+                  {view === "trimestral" ? (
+                    <>
+                      {visibleQuarters.map((quarter) => (
+                        <th
+                          key={quarter}
+                          style={centerHeaderCellStyle}
+                        >
+                          {quarter}
+                        </th>
+                      ))}
 
+                      {period === "Todos" ? (
+                        <th style={centerHeaderCellStyle}>
+                          Variación
+                        </th>
+                      ) : null}
+                    </>
+                  ) : (
+                    months.map((month) => (
+                      <th
+                        key={month}
+                        style={centerHeaderCellStyle}
+                      >
+                        {month}
+                      </th>
+                    ))
+                  )}
                 <th style={centerHeaderCellStyle}>Detalle</th>
               </tr>
             </thead>
@@ -928,57 +970,66 @@ export function GeneralSummary({
                         </span>
                       </td>
 
-                      {view === "trimestral" ? (
-                        <Fragment key={row.key}>
-                          <td style={centerBodyCellStyle}>
-                            <ResultCell value={q1} />
-                          </td>
+                        {view === "trimestral" ? (
+                          <>
+                            {visibleQuarters.map((quarter) => (
+                              <td
+                                key={quarter}
+                                style={centerBodyCellStyle}
+                              >
+                                <ResultCell
+                                  value={
+                                    quarter === "Q1"
+                                      ? q1
+                                      : q2
+                                  }
+                                />
+                              </td>
+                            ))}
 
-                          <td style={centerBodyCellStyle}>
-                            <ResultCell value={q2} />
-                          </td>
+                            {period === "Todos" ? (
+                              <td style={centerBodyCellStyle}>
+                                <span
+                                  style={{
+                                    fontWeight: 850,
+                                    color:
+                                      variation === null
+                                        ? "#7a8b81"
+                                        : variation >= 0
+                                          ? "#2f6b3d"
+                                          : "#b42318",
+                                    whiteSpace: "nowrap",
+                                  }}
+                                >
+                                  {variation === null
+                                    ? "—"
+                                    : `${variation >= 0 ? "+" : ""}${(
+                                        variation * 100
+                                      ).toFixed(2)} pp`}
+                                </span>
+                              </td>
+                            ) : null}
+                          </>
+                        ) : (
+                          months.map((month) => {
+                            const source =
+                              getSourceForMonth(row, month)
 
-                          <td style={centerBodyCellStyle}>
-                            <span
-                              style={{
-                                fontWeight: 850,
-                                color:
-                                  variation === null
-                                    ? "#7a8b81"
-                                    : variation >= 0
-                                      ? "#2f6b3d"
-                                      : "#b42318",
-                                whiteSpace: "nowrap",
-                              }}
-                            >
-                              {variation === null
-                                ? "—"
-                                : `${variation >= 0 ? "+" : ""}${(
-                                    variation * 100
-                                  ).toFixed(2)} pp`}
-                            </span>
-                          </td>
-                  </Fragment>
-                      ) : (
-                        months.map((month) => {
-                          const source = getSourceForMonth(row, month)
-
-                          return (
-                            <td
-                              key={month}
-                              style={centerBodyCellStyle}
-                            >
-                              <ResultCell
-                                value={monthlyGlobalResult(
-                                  source,
-                                  month,
-                                )}
-                              />
-                            </td>
-                          )
-                        })
-                      )}
-
+                            return (
+                              <td
+                                key={month}
+                                style={centerBodyCellStyle}
+                              >
+                                <ResultCell
+                                  value={monthlyGlobalResult(
+                                    source,
+                                    month,
+                                  )}
+                                />
+                              </td>
+                            )
+                          })
+                        )}
                       <td style={centerBodyCellStyle}>
                         <button
                           type="button"
@@ -1051,29 +1102,31 @@ export function GeneralSummary({
                                     Indicador
                                   </th>
 
-                                  {view === "trimestral" ? (
-                                    <>
-                                      <th
-                                        style={centerHeaderCellStyle}
-                                      >
-                                        Q1
-                                      </th>
-                                      <th
-                                        style={centerHeaderCellStyle}
-                                      >
-                                        Q2
-                                      </th>
-                                    </>
-                                  ) : (
-                                    months.map((month) => (
-                                      <th
-                                        key={month}
-                                        style={centerHeaderCellStyle}
-                                      >
-                                        {month}
-                                      </th>
-                                    ))
-                                  )}
+                                    {view === "trimestral" ? (
+                                      visibleQuarters.map(
+                                        (quarter) => (
+                                          <th
+                                            key={quarter}
+                                            style={
+                                              centerHeaderCellStyle
+                                            }
+                                          >
+                                            {quarter}
+                                          </th>
+                                        ),
+                                      )
+                                    ) : (
+                                      months.map((month) => (
+                                        <th
+                                          key={month}
+                                          style={
+                                            centerHeaderCellStyle
+                                          }
+                                        >
+                                          {month}
+                                        </th>
+                                      ))
+                                    )}
                                 </tr>
                               </thead>
 
@@ -1113,7 +1166,7 @@ export function GeneralSummary({
                                       </td>
 
                                       {view === "trimestral" ? (
-                                        ["Q1", "Q2"].map(
+                                        visibleQuarters.map(
                                           (quarter) => {
                                             const source =
                                               getSourceForQuarter(
