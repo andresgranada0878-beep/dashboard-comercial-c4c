@@ -186,10 +186,10 @@ function buildPersonSource(source, workbook, person) {
     return divideNewByThree ? value / 3 : value
   })
   const newTarget = roundUp(sumWhere(management, 7, personCriteria) / 12)
-  const newQuarterFormula = String(monthlySheet[`D${newTemplate?.row}`]?.f ?? "").toUpperCase()
-  const newUsesMax = newQuarterFormula.includes("MAX(")
-  const newQuarterActual = newUsesMax ? Math.max(...newActuals, 0) : newActuals.reduce((a, b) => a + b, 0)
-  const newQuarterTarget = newUsesMax ? newTarget : newTarget * months.length
+  // Clientes nuevos es un indicador acumulado:
+  // se toma el mayor acumulado registrado y se compara contra la meta de los meses evaluados.
+  const newQuarterActual = Math.max(...newActuals, 0)
+  const newQuarterTarget = newTarget * months.length
   const newCompliance = clamp(safeDivide(newQuarterActual, newQuarterTarget), 1.5)
 
   const recommendationActuals = months.map((month) =>
@@ -254,6 +254,8 @@ function buildPersonSource(source, workbook, person) {
       quarterActual: newQuarterActual,
       compliance: newCompliance,
       cap: 1.5,
+      calculationType: "ratio_acumulado",
+      formula: "MIN(150%, acumulado máximo / meta trimestral)",
       monthlyTargets: months.map(() => newTarget),
     },
     {
@@ -348,6 +350,15 @@ function buildPersonSource(source, workbook, person) {
       cap: definition.cap,
       monthlyTargets: definition.monthlyTargets,
     })
+
+    if (definition.calculationType) {
+      indicator.calculationType = definition.calculationType
+    }
+
+    if (definition.formula) {
+      indicator.formula = definition.formula
+    }
+
     indicator.monthValues = Object.fromEntries(months.map((month, index) => [month, definition.actuals[index]]))
     indicator.monthly = indicator.monthly.map((item, index) => ({ ...item, month: months[index] }))
     return indicator

@@ -4,6 +4,7 @@ import Image from "next/image"
 import { useEffect, useMemo, useState } from "react"
 import type { CSSProperties } from "react"
 import { GeneralSummary } from "@/components/dashboard/general-summary"
+import { exportIndividualPdf } from "@/lib/pdf/export-individual-pdf"
 import type {
   DashboardView,
   IndividualDashboardPayload,
@@ -250,8 +251,24 @@ export function DashboardShell() {
                 </div>
               </div>
               <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+                <a href="/resumen" style={{ ...secondaryButton, textDecoration: "none", display: "inline-flex", alignItems: "center" }}>Resumen ejecutivo</a>
                 <button onClick={() => void loadData()} type="button" style={secondaryButton}>Actualizar datos</button>
-                <button type="button" disabled title="Se habilitará después de validar la información" style={{ ...primaryButton, opacity: 0.48, cursor: "not-allowed" }}>PDF próximamente</button>
+                <button
+                    type="button"
+                    onClick={() =>
+                      void exportIndividualPdf({
+                        source: selected,
+                        view,
+                        month,
+                        globalResult,
+                        rows: indicatorRows,
+                        generatedAt: data.generatedAt,
+                      })
+                    }
+                    style={{ ...primaryButton, cursor: "pointer" }}
+                  >
+                    Descargar PDF
+                  </button>
               </div>
             </div>
           </div>
@@ -285,7 +302,7 @@ export function DashboardShell() {
       <div style={{ maxWidth: 1380, margin: "0 auto", padding: "22px 24px 48px", display: dashboardMode === "individual" ? "block" : "none" }}>
         <section style={panelStyle}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(175px, 1fr))", gap: 14 }}>
-            <SelectField label="Perfil" value={selected.profile} options={profileOptions} onChange={selectProfile} />
+            <SelectField label="Rol" value={selected.profile} options={profileOptions} onChange={selectProfile} />
             <SelectField label="Colaborador" value={selected.person} options={personOptions} onChange={selectPerson} />
             <SelectField label="Año" value={String(selected.year)} options={yearOptions.map(String)} onChange={(value) => selectYear(Number(value))} />
             <SelectField label="Trimestre" value={selected.quarter} options={quarterOptions} onChange={selectQuarter} />
@@ -309,7 +326,7 @@ export function DashboardShell() {
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: 12, marginTop: 20 }}>
-            <SummaryCard label="Perfil" value={selected.profile} />
+            <SummaryCard label="Rol" value={selected.profile} />
             <SummaryCard label="Equipo disponible" value={`${personOptions.length} personas/posiciones`} />
             <SummaryCard label="Periodo" value={view === "trimestral" ? `${selected.quarter} · ${selected.months.join(", ")}` : `${month} · ${selected.year}`} />
             <SummaryCard label="Indicadores evaluados" value={`${validIndicators} de ${indicatorRows.length}`} />
