@@ -1,6 +1,7 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { Fragment, useMemo, useState } from "react"
+import { exportExecutiveSummaryPdf } from "@/lib/pdf/export-executive-summary-pdf"
 import type {
   DashboardView,
   IndividualDashboardPayload,
@@ -320,8 +321,10 @@ export function GeneralSummary({
 
   const [year, setYear] = useState<number>(years[0] ?? 2026)
   const [profile, setProfile] = useState<string>("Todos")
+  const [territory, setTerritory] = useState<string>("Todos")
   const [view, setView] = useState<DashboardView>("trimestral")
   const [expandedPerson, setExpandedPerson] = useState<string>("")
+  const [exportingPdf, setExportingPdf] = useState(false)
 
   const selectedYear = years.includes(year) ? year : (years[0] ?? year)
 
@@ -345,13 +348,48 @@ export function GeneralSummary({
     [reportSources],
   )
 
+  const territoryOptions = useMemo(
+    () => [
+      "Todos",
+      ...unique(
+        reportSources
+          .filter((source) => source.profile !== "Director")
+          .map(
+            (source) =>
+              source.territory?.trim() ||
+              "Territorio sin identificar",
+          ),
+      ).sort((a, b) =>
+        a.localeCompare(b, "es", {
+          sensitivity: "base",
+        }),
+      ),
+    ],
+    [reportSources],
+  )
+
+  const activeTerritory = territoryOptions.includes(territory)
+    ? territory
+    : "Todos"
+
   const filteredSources = useMemo(
     () =>
-      reportSources.filter(
-        (source) =>
-          profile === "Todos" || source.profile === profile,
-      ),
-    [reportSources, profile],
+      reportSources.filter((source) => {
+        const sourceTerritory =
+          source.territory?.trim() ||
+          "Territorio sin identificar"
+
+        const matchesRole =
+          profile === "Todos" ||
+          source.profile === profile
+
+        const matchesTerritory =
+          activeTerritory === "Todos" ||
+          sourceTerritory === activeTerritory
+
+        return matchesRole && matchesTerritory
+      }),
+    [reportSources, profile, activeTerritory],
   )
 
   const rows = useMemo<PersonSummary[]>(() => {
@@ -403,7 +441,7 @@ export function GeneralSummary({
     }
 
     for (const quarter of ["Q1", "Q2"]) {
-      const quarterSources = reportSources.filter(
+      const quarterSources = filteredSources.filter(
         (source) => source.quarter === quarter,
       )
 
@@ -430,12 +468,71 @@ export function GeneralSummary({
     }
 
     return result
-  }, [reportSources])
+  }, [filteredSources])
 
   const tableColumns =
     view === "trimestral"
       ? 7
       : 4 + months.length
+
+  async function handleDownloadPdf() {
+    setExportingPdf(true)
+
+    try {
+      const activeProfile = profileOptions.includes(profile)
+        ? profile
+        : "Todos"
+
+      const pdfRows = rows.map((row) => {
+        const q1 =
+          getSourceForQuarter(row, "Q1")
+            ?.originalQuarterResult ?? null
+
+        const q2 =
+          getSourceForQuarter(row, "Q2")
+            ?.originalQuarterResult ?? null
+
+        const monthly = Object.fromEntries(
+          months.map((month) => {
+            const source = getSourceForMonth(row, month)
+
+            return [
+              month,
+              monthlyGlobalResult(source, month),
+            ]
+          }),
+        )
+
+        return {
+          person: row.person,
+          cargo: row.cargo,
+          profile: row.profile,
+          territory: row.territory,
+          q1,
+          q2,
+          variation:
+            q1 !== null && q2 !== null
+              ? q2 - q1
+              : null,
+          monthly,
+        }
+      })
+
+      await exportExecutiveSummaryPdf({
+        report,
+        year: selectedYear,
+        profile: activeProfile,
+        territory: activeTerritory,
+        view,
+        months,
+        unitResults,
+        rows: pdfRows,
+        generatedAt: data.generatedAt,
+      })
+    } finally {
+      setExportingPdf(false)
+    }
+  }
 
   return (
     <section>
@@ -545,12 +642,53 @@ export function GeneralSummary({
           />
 
           <SelectField
-            label="Perfil"
+            label="Rol"
             value={profileOptions.includes(profile) ? profile : "Todos"}
             options={profileOptions}
             onChange={setProfile}
           />
+
+          <SelectField
+            label="Territorio"
+            value={activeTerritory}
+            options={territoryOptions}
+            onChange={setTerritory}
+          />
         </div>
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              marginTop: 16,
+            }}
+          >
+            <button
+              type="button"
+              disabled={exportingPdf || rows.length === 0}
+              onClick={() => void handleDownloadPdf()}
+              style={{
+                border: "1px solid #245c3a",
+                background:
+                  exportingPdf || rows.length === 0
+                    ? "#9db8a5"
+                    : "#245c3a",
+                color: "#ffffff",
+                borderRadius: 11,
+                padding: "10px 14px",
+                fontSize: 13,
+                fontWeight: 850,
+                cursor:
+                  exportingPdf || rows.length === 0
+                    ? "not-allowed"
+                    : "pointer",
+              }}
+            >
+              {exportingPdf
+                ? "Generando PDF..."
+                : "Descargar PDF del resumen"}
+            </button>
+          </div>
       </div>
 
       {view === "trimestral" ? (
@@ -703,7 +841,7 @@ export function GeneralSummary({
               <tr style={{ background: "#f3f8f4" }}>
                 <th style={headerCellStyle}>Colaborador</th>
                 <th style={headerCellStyle}>Cargo</th>
-                <th style={headerCellStyle}>Perfil</th>
+                <th style={headerCellStyle}>Rol</th>
 
                 {view === "trimestral" ? (
                   <>
@@ -739,7 +877,7 @@ export function GeneralSummary({
                 const expanded = expandedPerson === row.key
 
                 return (
-                  <>
+                  <Fragment key={row.key}>
                     <tr
                       key={row.key}
                       style={{
@@ -791,7 +929,7 @@ export function GeneralSummary({
                       </td>
 
                       {view === "trimestral" ? (
-                        <>
+                        <Fragment key={row.key}>
                           <td style={centerBodyCellStyle}>
                             <ResultCell value={q1} />
                           </td>
@@ -820,7 +958,7 @@ export function GeneralSummary({
                                   ).toFixed(2)} pp`}
                             </span>
                           </td>
-                        </>
+                  </Fragment>
                       ) : (
                         months.map((month) => {
                           const source = getSourceForMonth(row, month)
@@ -1086,7 +1224,7 @@ export function GeneralSummary({
                         </td>
                       </tr>
                     ) : null}
-                  </>
+                  </Fragment>
                 )
               })}
 

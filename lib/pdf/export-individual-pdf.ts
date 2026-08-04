@@ -214,7 +214,7 @@ export async function exportIndividualPdf({
   const boxGap = 4
 
   const summaries = [
-    ["Perfil", source.profile],
+    ["Rol", source.profile],
     ["Periodo", period],
     ["Resultado", formatPercent(globalResult, 2)],
     ["Nivel", performanceLabel(globalResult)],

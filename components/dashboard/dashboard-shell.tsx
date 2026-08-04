@@ -302,7 +302,7 @@ export function DashboardShell() {
       <div style={{ maxWidth: 1380, margin: "0 auto", padding: "22px 24px 48px", display: dashboardMode === "individual" ? "block" : "none" }}>
         <section style={panelStyle}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(175px, 1fr))", gap: 14 }}>
-            <SelectField label="Perfil" value={selected.profile} options={profileOptions} onChange={selectProfile} />
+            <SelectField label="Rol" value={selected.profile} options={profileOptions} onChange={selectProfile} />
             <SelectField label="Colaborador" value={selected.person} options={personOptions} onChange={selectPerson} />
             <SelectField label="Año" value={String(selected.year)} options={yearOptions.map(String)} onChange={(value) => selectYear(Number(value))} />
             <SelectField label="Trimestre" value={selected.quarter} options={quarterOptions} onChange={selectQuarter} />
@@ -326,7 +326,7 @@ export function DashboardShell() {
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: 12, marginTop: 20 }}>
-            <SummaryCard label="Perfil" value={selected.profile} />
+            <SummaryCard label="Rol" value={selected.profile} />
             <SummaryCard label="Equipo disponible" value={`${personOptions.length} personas/posiciones`} />
             <SummaryCard label="Periodo" value={view === "trimestral" ? `${selected.quarter} · ${selected.months.join(", ")}` : `${month} · ${selected.year}`} />
             <SummaryCard label="Indicadores evaluados" value={`${validIndicators} de ${indicatorRows.length}`} />
