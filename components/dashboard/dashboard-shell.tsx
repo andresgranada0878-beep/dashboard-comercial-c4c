@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { useEffect, useMemo, useState } from "react"
 import type { CSSProperties } from "react"
+import { GeneralSummary } from "@/components/dashboard/general-summary"
 import type {
   DashboardView,
   IndividualDashboardPayload,
@@ -88,6 +89,7 @@ export function DashboardShell() {
   const [selectedSourceId, setSelectedSourceId] = useState<string>("")
   const [view, setView] = useState<DashboardView>("trimestral")
   const [month, setMonth] = useState<string>("")
+    const [dashboardMode, setDashboardMode] = useState<"individual" | "resumen">("individual")
 
   async function loadData() {
     setLoading(true)
@@ -235,7 +237,7 @@ export function DashboardShell() {
           <div style={{ display: "flex", justifyContent: "space-between", gap: 20, alignItems: "center", flexWrap: "wrap" }}>
             <div>
               <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: "0.11em", color: "#4f8a5b", textTransform: "uppercase" }}>Gestión comercial</div>
-              <h1 style={{ margin: "4px 0 0", fontSize: 28, lineHeight: 1.15 }}>Indicadores individuales C4C</h1>
+              <h1 style={{ margin: "4px 0 0", fontSize: 28, lineHeight: 1.15 }}>{dashboardMode === "individual" ? "Indicadores individuales C4C" : "Resumen general C4C"}</h1>
               <div style={{ marginTop: 6, color: "#64748b", fontSize: 13 }}>Agrícola Antioquia · Galagro Antioquia · Galagro Nacional</div>
             </div>
             <div style={{ display: "flex", gap: 18, alignItems: "center", flexWrap: "wrap", justifyContent: "flex-end" }}>
@@ -274,7 +276,13 @@ export function DashboardShell() {
         </div>
       </header>
 
-      <div style={{ maxWidth: 1380, margin: "0 auto", padding: "22px 24px 48px" }}>
+      {dashboardMode === "resumen" ? (
+        <div style={{ maxWidth: 1380, margin: "0 auto", padding: "22px 24px 48px" }}>
+          <GeneralSummary data={data} report={selected.report} />
+        </div>
+      ) : null}
+
+      <div style={{ maxWidth: 1380, margin: "0 auto", padding: "22px 24px 48px", display: dashboardMode === "individual" ? "block" : "none" }}>
         <section style={panelStyle}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(175px, 1fr))", gap: 14 }}>
             <SelectField label="Perfil" value={selected.profile} options={profileOptions} onChange={selectProfile} />

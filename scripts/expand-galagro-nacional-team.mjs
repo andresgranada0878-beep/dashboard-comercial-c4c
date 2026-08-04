@@ -696,7 +696,7 @@ function buildSourceFromDefinitions(source, person, definitions) {
     const templateIndicator = findTemplateIndicator(source, definition.aliases)
     return makeIndicator({
       templateIndicator,
-      label: templateIndicator?.label ?? definition.label,
+      label: definition.label,
       actuals: definition.actuals,
       rawTarget: definition.rawTarget,
       quarterTarget: definition.quarterTarget,
@@ -708,42 +708,22 @@ function buildSourceFromDefinitions(source, person, definitions) {
     })
   })
 
-  const hectareIndex = indicators.findIndex((indicator) =>
-    normalize(indicator.label).includes("hectareas"),
-  )
-  const cropIndex = indicators.findIndex(
-    (indicator) => normalize(indicator.label) === "cultivos impactados",
-  )
 
-  if (hectareIndex >= 0 && cropIndex >= 0) {
-    indicators.push({
-      id: "gestion-cultivos-impactados",
-      label: "Gestión de Cultivos Impactados",
-      row: null,
-      calculationType: "promedio",
-      formula: "Promedio de hectáreas y cultivos impactados",
-      weight: 0,
-      cap: 1.5,
-      targetThreshold: 0.9,
-      rawTarget: null,
-      criterion: "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-      monthValues: {},
-      monthly: [],
-      quarter: {
-        actual: null,
-        target: null,
-        rawCompliance:
-          (indicators[hectareIndex].quarter.recognizedCompliance +
-            indicators[cropIndex].quarter.recognizedCompliance) /
-          2,
-        recognizedCompliance:
-          (indicators[hectareIndex].quarter.recognizedCompliance +
-            indicators[cropIndex].quarter.recognizedCompliance) /
-          2,
-        contribution: 0,
-      },
-    })
+  const canonicalIndicatorIds = {
+    "impacto en clientes (actividades de campo)": "actividades_campo",
+    "hectareas de cultivos impactados": "hectareas",
+    "cultivos impactados": "cultivos",
   }
+
+  for (const indicator of indicators) {
+    const normalizedLabel = normalize(indicator.label)
+    const canonicalId = canonicalIndicatorIds[normalizedLabel]
+
+    if (canonicalId) {
+      indicator.id = canonicalId
+    }
+  }
+
 
   const calculatedQuarterResult = indicators.reduce(
     (sum, indicator) => sum + number(indicator.quarter.contribution),

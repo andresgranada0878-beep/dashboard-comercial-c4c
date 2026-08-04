@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-03T21:53:14.449Z",
+  "generatedAt": "2026-08-04T02:06:45.258Z",
   "scope": "Resultados individuales y de dirección",
   "source": "Excel de validación; Power BI será la fuente posterior de gestión real",
   "reports": [
@@ -32021,7 +32021,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Ejecucion clientes nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 18,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G18/J18,H18/J18,I18/J18),0)",
@@ -32418,27 +32418,6 @@
             "recognizedCompliance": 1.5,
             "contribution": 0.07500000000000001
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0.8527777777777777,
-            "recognizedCompliance": 0.8527777777777777,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -32621,7 +32600,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Ejecucion clientes nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 18,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G18/J18,H18/J18,I18/J18),0)",
@@ -33018,27 +32997,6 @@
             "recognizedCompliance": 0,
             "contribution": 0
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0,
-            "recognizedCompliance": 0,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -33221,7 +33179,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Ejecucion clientes nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 18,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G18/J18,H18/J18,I18/J18),0)",
@@ -33618,27 +33576,6 @@
             "recognizedCompliance": 0.3333333333333333,
             "contribution": 0.016666666666666666
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0.25277777777777777,
-            "recognizedCompliance": 0.25277777777777777,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -33821,7 +33758,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Ejecucion clientes nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 18,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G18/J18,H18/J18,I18/J18),0)",
@@ -34218,27 +34155,6 @@
             "recognizedCompliance": 0.3333333333333333,
             "contribution": 0.016666666666666666
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0.19444444444444442,
-            "recognizedCompliance": 0.19444444444444442,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -34421,7 +34337,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Ejecucion clientes nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 18,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G18/J18,H18/J18,I18/J18),0)",
@@ -34818,27 +34734,6 @@
             "recognizedCompliance": 0,
             "contribution": 0
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0,
-            "recognizedCompliance": 0,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -35021,7 +34916,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Ejecucion clientes nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 18,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G18/J18,H18/J18,I18/J18),0)",
@@ -35418,27 +35313,6 @@
             "recognizedCompliance": 1,
             "contribution": 0.05
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0.6694444444444445,
-            "recognizedCompliance": 0.6694444444444445,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -35463,14 +35337,14 @@
       "cargo": "RTC GALAGRO NAL BOYACA",
       "territory": "GALAGRO BOYACA NAL.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.6002141993531995,
-      "calculatedQuarterResult": 0.6002141993531995,
+      "originalQuarterResult": 0.6565360384336592,
+      "calculatedQuarterResult": 0.6565360384336592,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
       "indicators": [
         {
-          "id": "ejecucion_visitas_cliente_final",
+          "id": "cobertura_cliente_final",
           "label": "Ejecución Cobertura Cliente Final",
           "row": 15,
           "calculationType": "ratio",
@@ -35520,7 +35394,7 @@
           }
         },
         {
-          "id": "cobertura_clientes",
+          "id": "ejecucion_visitas_cliente_final",
           "label": "Ejecución visitas cliente final",
           "row": 16,
           "calculationType": "ratio",
@@ -35620,16 +35494,16 @@
           }
         },
         {
-          "id": "ejecucion-clientes-nuevos",
+          "id": "nuevos_clientes",
           "label": "Ejecución clientes nuevos",
           "row": null,
-          "calculationType": "ratio",
-          "formula": "",
-          "weight": 0,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G18/J18,H18/J18,I18/J18),0)",
+          "weight": 0.05,
           "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 10,
-          "criterion": "",
+          "criterion": "Cuenta clientes nuevos y recuperados que registran una gestión o una venta durante el período. El resultado toma el total acumulado alcanzado y lo compara contra la meta esperada.",
           "monthValues": {
             "Abril": 0,
             "Mayo": 0,
@@ -35674,12 +35548,12 @@
           "label": "Recomendaciones",
           "row": 19,
           "calculationType": "ratio_acumulado",
-          "formula": "IFERROR(MIN(150%,SUM(G19:I19)/J19),0)",
+          "formula": "IFERROR(MIN(150%,SUM(G20:I20)/J20),0)",
           "weight": 0.2,
           "cap": 1.5,
           "targetThreshold": 0.9,
           "rawTarget": 260000000,
-          "criterion": "Criterios de medición",
+          "criterion": "Suma las recomendaciones generadas durante el período evaluado y compara ese total contra la meta acumulada. El resultado muestra el porcentaje de cumplimiento alcanzado frente a la meta del trimestre.",
           "monthValues": {
             "Abril": 82113100,
             "Mayo": 159964000,
@@ -35723,13 +35597,13 @@
           "id": "referencias",
           "label": "Referencias",
           "row": null,
-          "calculationType": "ratio",
-          "formula": "",
-          "weight": 0,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G21:I21)/J21,0)",
+          "weight": 0.1,
           "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 58,
-          "criterion": "",
+          "criterion": "Mide el promedio mensual de referencias gestionadas frente a las SKU activas esperadas.",
           "monthValues": {
             "Abril": 33,
             "Mayo": 35,
@@ -35742,7 +35616,7 @@
               "target": 58,
               "rawCompliance": 0.5689655172413793,
               "recognizedCompliance": 0.5689655172413793,
-              "contribution": 0
+              "contribution": 0.056896551724137934
             },
             {
               "month": "Mayo",
@@ -35750,7 +35624,7 @@
               "target": 58,
               "rawCompliance": 0.603448275862069,
               "recognizedCompliance": 0.603448275862069,
-              "contribution": 0
+              "contribution": 0.0603448275862069
             },
             {
               "month": "Junio",
@@ -35758,7 +35632,7 @@
               "target": 58,
               "rawCompliance": 0.5172413793103449,
               "recognizedCompliance": 0.5172413793103449,
-              "contribution": 0
+              "contribution": 0.05172413793103449
             }
           ],
           "quarter": {
@@ -35766,7 +35640,7 @@
             "target": 58,
             "rawCompliance": 0.5632183908045977,
             "recognizedCompliance": 0.5632183908045977,
-            "contribution": 0
+            "contribution": 0.05632183908045977
           }
         },
         {
@@ -35774,12 +35648,12 @@
           "label": "Leads calificados",
           "row": 22,
           "calculationType": "ratio_acumulado",
-          "formula": "IFERROR(SUM(G22:I22)/J22,0%)",
+          "formula": "IFERROR(SUM(G23:I23)/J23,0%)",
           "weight": 0.1,
           "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 3,
-          "criterion": "Criterios de medición",
+          "criterion": "Mide los leads generados frente a la meta mensual de mínimo 1. Sin leads, el cumplimiento es 0%.",
           "monthValues": {
             "Abril": 0,
             "Mayo": 0,
@@ -35820,7 +35694,7 @@
           }
         },
         {
-          "id": "actividades_campo",
+          "id": "leads_calificados_tiempo",
           "label": "Leads calificados a tiempo",
           "row": 24,
           "calculationType": "ratio_acumulado",
@@ -35870,7 +35744,7 @@
           }
         },
         {
-          "id": "hectareas",
+          "id": "actividades_campo",
           "label": "Impacto en clientes (Actividades de campo)",
           "row": 25,
           "calculationType": "ratio_acumulado",
@@ -35920,7 +35794,7 @@
           }
         },
         {
-          "id": "cultivos",
+          "id": "hectareas",
           "label": "Hectáreas de cultivos impactados",
           "row": 26,
           "calculationType": "ratio_acumulado",
@@ -35971,15 +35845,15 @@
         },
         {
           "id": "cultivos",
-          "label": "Hectáreas de cultivos impactados",
+          "label": "Cultivos impactados",
           "row": 26,
           "calculationType": "ratio_acumulado",
-          "formula": "MIN(IFERROR(SUM(G26:I26)/J26,0%),150%)",
+          "formula": "MIN(IFERROR(SUM(G27:I27)/J27,0%),150%)",
           "weight": 0.05,
           "cap": 1.5,
           "targetThreshold": 0.9,
           "rawTarget": 6,
-          "criterion": "Mide las hectáreas gestionadas frente a la meta territorial: 30 mensuales por promotor, equivalentes a 90 trimestrales, con cumplimiento máximo del 150%.",
+          "criterion": "Mide los cultivos gestionados en el período frente a la meta del territorio. Cada promotor debe gestionar mínimo 1 cultivo mensual, equivalente a 3 por trimestre, con reconocimiento de cumplimiento máximo hasta el 150%.",
           "monthValues": {
             "Abril": 3,
             "Mayo": 8,
@@ -36042,14 +35916,14 @@
       "cargo": "RTC GALAGRO NAL CAUCA",
       "territory": "GALAGRO CAUCA NAL.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.1032731601363355,
-      "calculatedQuarterResult": 0.1032731601363355,
+      "originalQuarterResult": 0.11361798772254239,
+      "calculatedQuarterResult": 0.11361798772254239,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
       "indicators": [
         {
-          "id": "ejecucion_visitas_cliente_final",
+          "id": "cobertura_cliente_final",
           "label": "Ejecución Cobertura Cliente Final",
           "row": 15,
           "calculationType": "ratio",
@@ -36099,7 +35973,7 @@
           }
         },
         {
-          "id": "cobertura_clientes",
+          "id": "ejecucion_visitas_cliente_final",
           "label": "Ejecución visitas cliente final",
           "row": 16,
           "calculationType": "ratio",
@@ -36199,16 +36073,16 @@
           }
         },
         {
-          "id": "ejecucion-clientes-nuevos",
+          "id": "nuevos_clientes",
           "label": "Ejecución clientes nuevos",
           "row": null,
-          "calculationType": "ratio",
-          "formula": "",
-          "weight": 0,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G18/J18,H18/J18,I18/J18),0)",
+          "weight": 0.05,
           "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 10,
-          "criterion": "",
+          "criterion": "Cuenta clientes nuevos y recuperados que registran una gestión o una venta durante el período. El resultado toma el total acumulado alcanzado y lo compara contra la meta esperada.",
           "monthValues": {
             "Abril": 0,
             "Mayo": 0,
@@ -36253,12 +36127,12 @@
           "label": "Recomendaciones",
           "row": 19,
           "calculationType": "ratio_acumulado",
-          "formula": "IFERROR(MIN(150%,SUM(G19:I19)/J19),0)",
+          "formula": "IFERROR(MIN(150%,SUM(G20:I20)/J20),0)",
           "weight": 0.2,
           "cap": 1.5,
           "targetThreshold": 0.9,
           "rawTarget": 182000000,
-          "criterion": "Criterios de medición",
+          "criterion": "Suma las recomendaciones generadas durante el período evaluado y compara ese total contra la meta acumulada. El resultado muestra el porcentaje de cumplimiento alcanzado frente a la meta del trimestre.",
           "monthValues": {
             "Abril": 10578800,
             "Mayo": 4807400,
@@ -36302,13 +36176,13 @@
           "id": "referencias",
           "label": "Referencias",
           "row": null,
-          "calculationType": "ratio",
-          "formula": "",
-          "weight": 0,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G21:I21)/J21,0)",
+          "weight": 0.1,
           "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 58,
-          "criterion": "",
+          "criterion": "Mide el promedio mensual de referencias gestionadas frente a las SKU activas esperadas.",
           "monthValues": {
             "Abril": 7,
             "Mayo": 7,
@@ -36321,7 +36195,7 @@
               "target": 58,
               "rawCompliance": 0.1206896551724138,
               "recognizedCompliance": 0.1206896551724138,
-              "contribution": 0
+              "contribution": 0.012068965517241381
             },
             {
               "month": "Mayo",
@@ -36329,7 +36203,7 @@
               "target": 58,
               "rawCompliance": 0.1206896551724138,
               "recognizedCompliance": 0.1206896551724138,
-              "contribution": 0
+              "contribution": 0.012068965517241381
             },
             {
               "month": "Junio",
@@ -36337,7 +36211,7 @@
               "target": 58,
               "rawCompliance": 0.06896551724137931,
               "recognizedCompliance": 0.06896551724137931,
-              "contribution": 0
+              "contribution": 0.006896551724137931
             }
           ],
           "quarter": {
@@ -36345,7 +36219,7 @@
             "target": 58,
             "rawCompliance": 0.10344827586206896,
             "recognizedCompliance": 0.10344827586206896,
-            "contribution": 0
+            "contribution": 0.010344827586206896
           }
         },
         {
@@ -36353,12 +36227,12 @@
           "label": "Leads calificados",
           "row": 22,
           "calculationType": "ratio_acumulado",
-          "formula": "IFERROR(SUM(G22:I22)/J22,0%)",
+          "formula": "IFERROR(SUM(G23:I23)/J23,0%)",
           "weight": 0.1,
           "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 3,
-          "criterion": "Criterios de medición",
+          "criterion": "Mide los leads generados frente a la meta mensual de mínimo 1. Sin leads, el cumplimiento es 0%.",
           "monthValues": {
             "Abril": 0,
             "Mayo": 0,
@@ -36399,7 +36273,7 @@
           }
         },
         {
-          "id": "actividades_campo",
+          "id": "leads_calificados_tiempo",
           "label": "Leads calificados a tiempo",
           "row": 24,
           "calculationType": "ratio_acumulado",
@@ -36449,7 +36323,7 @@
           }
         },
         {
-          "id": "hectareas",
+          "id": "actividades_campo",
           "label": "Impacto en clientes (Actividades de campo)",
           "row": 25,
           "calculationType": "ratio_acumulado",
@@ -36499,7 +36373,7 @@
           }
         },
         {
-          "id": "cultivos",
+          "id": "hectareas",
           "label": "Hectáreas de cultivos impactados",
           "row": 26,
           "calculationType": "ratio_acumulado",
@@ -36550,15 +36424,15 @@
         },
         {
           "id": "cultivos",
-          "label": "Hectáreas de cultivos impactados",
+          "label": "Cultivos impactados",
           "row": 26,
           "calculationType": "ratio_acumulado",
-          "formula": "MIN(IFERROR(SUM(G26:I26)/J26,0%),150%)",
+          "formula": "MIN(IFERROR(SUM(G27:I27)/J27,0%),150%)",
           "weight": 0.05,
           "cap": 1.5,
           "targetThreshold": 0.9,
           "rawTarget": 3,
-          "criterion": "Mide las hectáreas gestionadas frente a la meta territorial: 30 mensuales por promotor, equivalentes a 90 trimestrales, con cumplimiento máximo del 150%.",
+          "criterion": "Mide los cultivos gestionados en el período frente a la meta del territorio. Cada promotor debe gestionar mínimo 1 cultivo mensual, equivalente a 3 por trimestre, con reconocimiento de cumplimiento máximo hasta el 150%.",
           "monthValues": {
             "Abril": 0,
             "Mayo": 0,
@@ -36621,14 +36495,14 @@
       "cargo": "RTC GALAGRO NAL EJE CAFETERO",
       "territory": "GALAGRO EJE CAFETERO Y VALLE NORTE NAL.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.09960648561964353,
-      "calculatedQuarterResult": 0.09960648561964353,
+      "originalQuarterResult": 0.11339958906791939,
+      "calculatedQuarterResult": 0.11339958906791939,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
       "indicators": [
         {
-          "id": "ejecucion_visitas_cliente_final",
+          "id": "cobertura_cliente_final",
           "label": "Ejecución Cobertura Cliente Final",
           "row": 15,
           "calculationType": "ratio",
@@ -36678,7 +36552,7 @@
           }
         },
         {
-          "id": "cobertura_clientes",
+          "id": "ejecucion_visitas_cliente_final",
           "label": "Ejecución visitas cliente final",
           "row": 16,
           "calculationType": "ratio",
@@ -36778,16 +36652,16 @@
           }
         },
         {
-          "id": "ejecucion-clientes-nuevos",
+          "id": "nuevos_clientes",
           "label": "Ejecución clientes nuevos",
           "row": null,
-          "calculationType": "ratio",
-          "formula": "",
-          "weight": 0,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G18/J18,H18/J18,I18/J18),0)",
+          "weight": 0.05,
           "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 10,
-          "criterion": "",
+          "criterion": "Cuenta clientes nuevos y recuperados que registran una gestión o una venta durante el período. El resultado toma el total acumulado alcanzado y lo compara contra la meta esperada.",
           "monthValues": {
             "Abril": 0,
             "Mayo": 0,
@@ -36832,12 +36706,12 @@
           "label": "Recomendaciones",
           "row": 19,
           "calculationType": "ratio_acumulado",
-          "formula": "IFERROR(MIN(150%,SUM(G19:I19)/J19),0)",
+          "formula": "IFERROR(MIN(150%,SUM(G20:I20)/J20),0)",
           "weight": 0.2,
           "cap": 1.5,
           "targetThreshold": 0.9,
           "rawTarget": 416000000,
-          "criterion": "Criterios de medición",
+          "criterion": "Suma las recomendaciones generadas durante el período evaluado y compara ese total contra la meta acumulada. El resultado muestra el porcentaje de cumplimiento alcanzado frente a la meta del trimestre.",
           "monthValues": {
             "Abril": 10777700,
             "Mayo": 2854500,
@@ -36881,13 +36755,13 @@
           "id": "referencias",
           "label": "Referencias",
           "row": null,
-          "calculationType": "ratio",
-          "formula": "",
-          "weight": 0,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G21:I21)/J21,0)",
+          "weight": 0.1,
           "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 58,
-          "criterion": "",
+          "criterion": "Mide el promedio mensual de referencias gestionadas frente a las SKU activas esperadas.",
           "monthValues": {
             "Abril": 6,
             "Mayo": 7,
@@ -36900,7 +36774,7 @@
               "target": 58,
               "rawCompliance": 0.10344827586206896,
               "recognizedCompliance": 0.10344827586206896,
-              "contribution": 0
+              "contribution": 0.010344827586206896
             },
             {
               "month": "Mayo",
@@ -36908,7 +36782,7 @@
               "target": 58,
               "rawCompliance": 0.1206896551724138,
               "recognizedCompliance": 0.1206896551724138,
-              "contribution": 0
+              "contribution": 0.012068965517241381
             },
             {
               "month": "Junio",
@@ -36916,7 +36790,7 @@
               "target": 58,
               "rawCompliance": 0.1896551724137931,
               "recognizedCompliance": 0.1896551724137931,
-              "contribution": 0
+              "contribution": 0.01896551724137931
             }
           ],
           "quarter": {
@@ -36924,7 +36798,7 @@
             "target": 58,
             "rawCompliance": 0.13793103448275862,
             "recognizedCompliance": 0.13793103448275862,
-            "contribution": 0
+            "contribution": 0.013793103448275862
           }
         },
         {
@@ -36932,12 +36806,12 @@
           "label": "Leads calificados",
           "row": 22,
           "calculationType": "ratio_acumulado",
-          "formula": "IFERROR(SUM(G22:I22)/J22,0%)",
+          "formula": "IFERROR(SUM(G23:I23)/J23,0%)",
           "weight": 0.1,
           "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 3,
-          "criterion": "Criterios de medición",
+          "criterion": "Mide los leads generados frente a la meta mensual de mínimo 1. Sin leads, el cumplimiento es 0%.",
           "monthValues": {
             "Abril": 0,
             "Mayo": 0,
@@ -36978,7 +36852,7 @@
           }
         },
         {
-          "id": "actividades_campo",
+          "id": "leads_calificados_tiempo",
           "label": "Leads calificados a tiempo",
           "row": 24,
           "calculationType": "ratio_acumulado",
@@ -37028,7 +36902,7 @@
           }
         },
         {
-          "id": "hectareas",
+          "id": "actividades_campo",
           "label": "Impacto en clientes (Actividades de campo)",
           "row": 25,
           "calculationType": "ratio_acumulado",
@@ -37078,7 +36952,7 @@
           }
         },
         {
-          "id": "cultivos",
+          "id": "hectareas",
           "label": "Hectáreas de cultivos impactados",
           "row": 26,
           "calculationType": "ratio_acumulado",
@@ -37129,15 +37003,15 @@
         },
         {
           "id": "cultivos",
-          "label": "Hectáreas de cultivos impactados",
+          "label": "Cultivos impactados",
           "row": 26,
           "calculationType": "ratio_acumulado",
-          "formula": "MIN(IFERROR(SUM(G26:I26)/J26,0%),150%)",
+          "formula": "MIN(IFERROR(SUM(G27:I27)/J27,0%),150%)",
           "weight": 0.05,
           "cap": 1.5,
           "targetThreshold": 0.9,
           "rawTarget": 6,
-          "criterion": "Mide las hectáreas gestionadas frente a la meta territorial: 30 mensuales por promotor, equivalentes a 90 trimestrales, con cumplimiento máximo del 150%.",
+          "criterion": "Mide los cultivos gestionados en el período frente a la meta del territorio. Cada promotor debe gestionar mínimo 1 cultivo mensual, equivalente a 3 por trimestre, con reconocimiento de cumplimiento máximo hasta el 150%.",
           "monthValues": {
             "Abril": 0,
             "Mayo": 0,
@@ -37207,7 +37081,7 @@
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
       "indicators": [
         {
-          "id": "ejecucion_visitas_cliente_final",
+          "id": "cobertura_cliente_final",
           "label": "Ejecución Cobertura Cliente Final",
           "row": 15,
           "calculationType": "ratio",
@@ -37257,7 +37131,7 @@
           }
         },
         {
-          "id": "cobertura_clientes",
+          "id": "ejecucion_visitas_cliente_final",
           "label": "Ejecución visitas cliente final",
           "row": 16,
           "calculationType": "ratio",
@@ -37357,16 +37231,16 @@
           }
         },
         {
-          "id": "ejecucion-clientes-nuevos",
+          "id": "nuevos_clientes",
           "label": "Ejecución clientes nuevos",
           "row": null,
-          "calculationType": "ratio",
-          "formula": "",
-          "weight": 0,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G18/J18,H18/J18,I18/J18),0)",
+          "weight": 0.05,
           "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 10,
-          "criterion": "",
+          "criterion": "Cuenta clientes nuevos y recuperados que registran una gestión o una venta durante el período. El resultado toma el total acumulado alcanzado y lo compara contra la meta esperada.",
           "monthValues": {
             "Abril": 0,
             "Mayo": 0,
@@ -37411,12 +37285,12 @@
           "label": "Recomendaciones",
           "row": 19,
           "calculationType": "ratio_acumulado",
-          "formula": "IFERROR(MIN(150%,SUM(G19:I19)/J19),0)",
+          "formula": "IFERROR(MIN(150%,SUM(G20:I20)/J20),0)",
           "weight": 0.2,
           "cap": 1.5,
           "targetThreshold": 0.9,
           "rawTarget": 234000000,
-          "criterion": "Criterios de medición",
+          "criterion": "Suma las recomendaciones generadas durante el período evaluado y compara ese total contra la meta acumulada. El resultado muestra el porcentaje de cumplimiento alcanzado frente a la meta del trimestre.",
           "monthValues": {
             "Abril": 0,
             "Mayo": 0,
@@ -37460,13 +37334,13 @@
           "id": "referencias",
           "label": "Referencias",
           "row": null,
-          "calculationType": "ratio",
-          "formula": "",
-          "weight": 0,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G21:I21)/J21,0)",
+          "weight": 0.1,
           "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 58,
-          "criterion": "",
+          "criterion": "Mide el promedio mensual de referencias gestionadas frente a las SKU activas esperadas.",
           "monthValues": {
             "Abril": 0,
             "Mayo": 0,
@@ -37511,12 +37385,12 @@
           "label": "Leads calificados",
           "row": 22,
           "calculationType": "ratio_acumulado",
-          "formula": "IFERROR(SUM(G22:I22)/J22,0%)",
+          "formula": "IFERROR(SUM(G23:I23)/J23,0%)",
           "weight": 0.1,
           "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 3,
-          "criterion": "Criterios de medición",
+          "criterion": "Mide los leads generados frente a la meta mensual de mínimo 1. Sin leads, el cumplimiento es 0%.",
           "monthValues": {
             "Abril": 0,
             "Mayo": 0,
@@ -37557,7 +37431,7 @@
           }
         },
         {
-          "id": "actividades_campo",
+          "id": "leads_calificados_tiempo",
           "label": "Leads calificados a tiempo",
           "row": 24,
           "calculationType": "ratio_acumulado",
@@ -37607,7 +37481,7 @@
           }
         },
         {
-          "id": "hectareas",
+          "id": "actividades_campo",
           "label": "Impacto en clientes (Actividades de campo)",
           "row": 25,
           "calculationType": "ratio_acumulado",
@@ -37657,7 +37531,7 @@
           }
         },
         {
-          "id": "cultivos",
+          "id": "hectareas",
           "label": "Hectáreas de cultivos impactados",
           "row": 26,
           "calculationType": "ratio_acumulado",
@@ -37708,15 +37582,15 @@
         },
         {
           "id": "cultivos",
-          "label": "Hectáreas de cultivos impactados",
+          "label": "Cultivos impactados",
           "row": 26,
           "calculationType": "ratio_acumulado",
-          "formula": "MIN(IFERROR(SUM(G26:I26)/J26,0%),150%)",
+          "formula": "MIN(IFERROR(SUM(G27:I27)/J27,0%),150%)",
           "weight": 0.05,
           "cap": 1.5,
           "targetThreshold": 0.9,
           "rawTarget": 3,
-          "criterion": "Mide las hectáreas gestionadas frente a la meta territorial: 30 mensuales por promotor, equivalentes a 90 trimestrales, con cumplimiento máximo del 150%.",
+          "criterion": "Mide los cultivos gestionados en el período frente a la meta del territorio. Cada promotor debe gestionar mínimo 1 cultivo mensual, equivalente a 3 por trimestre, con reconocimiento de cumplimiento máximo hasta el 150%.",
           "monthValues": {
             "Abril": 1,
             "Mayo": 0,
@@ -37779,14 +37653,14 @@
       "cargo": "RTC GALAGRO NAL META",
       "territory": "GALAGRO META NAL.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.35206906661695253,
-      "calculatedQuarterResult": 0.35206906661695253,
+      "originalQuarterResult": 0.3762069976514353,
+      "calculatedQuarterResult": 0.3762069976514353,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
       "indicators": [
         {
-          "id": "ejecucion_visitas_cliente_final",
+          "id": "cobertura_cliente_final",
           "label": "Ejecución Cobertura Cliente Final",
           "row": 15,
           "calculationType": "ratio",
@@ -37836,7 +37710,7 @@
           }
         },
         {
-          "id": "cobertura_clientes",
+          "id": "ejecucion_visitas_cliente_final",
           "label": "Ejecución visitas cliente final",
           "row": 16,
           "calculationType": "ratio",
@@ -37936,16 +37810,16 @@
           }
         },
         {
-          "id": "ejecucion-clientes-nuevos",
+          "id": "nuevos_clientes",
           "label": "Ejecución clientes nuevos",
           "row": null,
-          "calculationType": "ratio",
-          "formula": "",
-          "weight": 0,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G18/J18,H18/J18,I18/J18),0)",
+          "weight": 0.05,
           "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 10,
-          "criterion": "",
+          "criterion": "Cuenta clientes nuevos y recuperados que registran una gestión o una venta durante el período. El resultado toma el total acumulado alcanzado y lo compara contra la meta esperada.",
           "monthValues": {
             "Abril": 0,
             "Mayo": 0,
@@ -37990,12 +37864,12 @@
           "label": "Recomendaciones",
           "row": 19,
           "calculationType": "ratio_acumulado",
-          "formula": "IFERROR(MIN(150%,SUM(G19:I19)/J19),0)",
+          "formula": "IFERROR(MIN(150%,SUM(G20:I20)/J20),0)",
           "weight": 0.2,
           "cap": 1.5,
           "targetThreshold": 0.9,
           "rawTarget": 156000000,
-          "criterion": "Criterios de medición",
+          "criterion": "Suma las recomendaciones generadas durante el período evaluado y compara ese total contra la meta acumulada. El resultado muestra el porcentaje de cumplimiento alcanzado frente a la meta del trimestre.",
           "monthValues": {
             "Abril": 21483100,
             "Mayo": 23818600,
@@ -38039,13 +37913,13 @@
           "id": "referencias",
           "label": "Referencias",
           "row": null,
-          "calculationType": "ratio",
-          "formula": "",
-          "weight": 0,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G21:I21)/J21,0)",
+          "weight": 0.1,
           "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 58,
-          "criterion": "",
+          "criterion": "Mide el promedio mensual de referencias gestionadas frente a las SKU activas esperadas.",
           "monthValues": {
             "Abril": 15,
             "Mayo": 13,
@@ -38058,7 +37932,7 @@
               "target": 58,
               "rawCompliance": 0.25862068965517243,
               "recognizedCompliance": 0.25862068965517243,
-              "contribution": 0
+              "contribution": 0.025862068965517244
             },
             {
               "month": "Mayo",
@@ -38066,7 +37940,7 @@
               "target": 58,
               "rawCompliance": 0.22413793103448276,
               "recognizedCompliance": 0.22413793103448276,
-              "contribution": 0
+              "contribution": 0.02241379310344828
             },
             {
               "month": "Junio",
@@ -38074,7 +37948,7 @@
               "target": 58,
               "rawCompliance": 0.2413793103448276,
               "recognizedCompliance": 0.2413793103448276,
-              "contribution": 0
+              "contribution": 0.024137931034482762
             }
           ],
           "quarter": {
@@ -38082,7 +37956,7 @@
             "target": 58,
             "rawCompliance": 0.2413793103448276,
             "recognizedCompliance": 0.2413793103448276,
-            "contribution": 0
+            "contribution": 0.024137931034482762
           }
         },
         {
@@ -38090,12 +37964,12 @@
           "label": "Leads calificados",
           "row": 22,
           "calculationType": "ratio_acumulado",
-          "formula": "IFERROR(SUM(G22:I22)/J22,0%)",
+          "formula": "IFERROR(SUM(G23:I23)/J23,0%)",
           "weight": 0.1,
           "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 3,
-          "criterion": "Criterios de medición",
+          "criterion": "Mide los leads generados frente a la meta mensual de mínimo 1. Sin leads, el cumplimiento es 0%.",
           "monthValues": {
             "Abril": 0,
             "Mayo": 0,
@@ -38136,7 +38010,7 @@
           }
         },
         {
-          "id": "actividades_campo",
+          "id": "leads_calificados_tiempo",
           "label": "Leads calificados a tiempo",
           "row": 24,
           "calculationType": "ratio_acumulado",
@@ -38186,7 +38060,7 @@
           }
         },
         {
-          "id": "hectareas",
+          "id": "actividades_campo",
           "label": "Impacto en clientes (Actividades de campo)",
           "row": 25,
           "calculationType": "ratio_acumulado",
@@ -38236,7 +38110,7 @@
           }
         },
         {
-          "id": "cultivos",
+          "id": "hectareas",
           "label": "Hectáreas de cultivos impactados",
           "row": 26,
           "calculationType": "ratio_acumulado",
@@ -38287,15 +38161,15 @@
         },
         {
           "id": "cultivos",
-          "label": "Hectáreas de cultivos impactados",
+          "label": "Cultivos impactados",
           "row": 26,
           "calculationType": "ratio_acumulado",
-          "formula": "MIN(IFERROR(SUM(G26:I26)/J26,0%),150%)",
+          "formula": "MIN(IFERROR(SUM(G27:I27)/J27,0%),150%)",
           "weight": 0.05,
           "cap": 1.5,
           "targetThreshold": 0.9,
           "rawTarget": 3,
-          "criterion": "Mide las hectáreas gestionadas frente a la meta territorial: 30 mensuales por promotor, equivalentes a 90 trimestrales, con cumplimiento máximo del 150%.",
+          "criterion": "Mide los cultivos gestionados en el período frente a la meta del territorio. Cada promotor debe gestionar mínimo 1 cultivo mensual, equivalente a 3 por trimestre, con reconocimiento de cumplimiento máximo hasta el 150%.",
           "monthValues": {
             "Abril": 0,
             "Mayo": 1,
@@ -38359,13 +38233,13 @@
       "territory": "GALAGRO NARIÑO NAL.",
       "companyExcel": "GALAGRO",
       "originalQuarterResult": 0.11128926285209045,
-      "calculatedQuarterResult": 0.10841569963369962,
-      "validationDifference": 0.002873563218390829,
+      "calculatedQuarterResult": 0.11128926285209045,
+      "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
       "indicators": [
         {
-          "id": "ejecucion_visitas_cliente_final",
+          "id": "cobertura_cliente_final",
           "label": "Ejecución Cobertura Cliente Final",
           "row": 15,
           "calculationType": "ratio",
@@ -38415,7 +38289,7 @@
           }
         },
         {
-          "id": "cobertura_clientes",
+          "id": "ejecucion_visitas_cliente_final",
           "label": "Ejecución visitas cliente final",
           "row": 16,
           "calculationType": "ratio",
@@ -38515,16 +38389,16 @@
           }
         },
         {
-          "id": "ejecucion-clientes-nuevos",
+          "id": "nuevos_clientes",
           "label": "Ejecución clientes nuevos",
           "row": null,
-          "calculationType": "ratio",
-          "formula": "",
-          "weight": 0,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G18/J18,H18/J18,I18/J18),0)",
+          "weight": 0.05,
           "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 10,
-          "criterion": "",
+          "criterion": "Cuenta clientes nuevos y recuperados que registran una gestión o una venta durante el período. El resultado toma el total acumulado alcanzado y lo compara contra la meta esperada.",
           "monthValues": {
             "Abril": 0,
             "Mayo": 0,
@@ -38569,12 +38443,12 @@
           "label": "Recomendaciones",
           "row": 19,
           "calculationType": "ratio_acumulado",
-          "formula": "IFERROR(MIN(150%,SUM(G19:I19)/J19),0)",
+          "formula": "IFERROR(MIN(150%,SUM(G20:I20)/J20),0)",
           "weight": 0.2,
           "cap": 1.5,
           "targetThreshold": 0.9,
           "rawTarget": 390000000,
-          "criterion": "Criterios de medición",
+          "criterion": "Suma las recomendaciones generadas durante el período evaluado y compara ese total contra la meta acumulada. El resultado muestra el porcentaje de cumplimiento alcanzado frente a la meta del trimestre.",
           "monthValues": {
             "Abril": 624900,
             "Mayo": 0,
@@ -38618,13 +38492,13 @@
           "id": "referencias",
           "label": "Referencias",
           "row": null,
-          "calculationType": "ratio",
-          "formula": "",
-          "weight": 0,
+          "calculationType": "promedio_mensual",
+          "formula": "IFERROR(AVERAGE(G21:I21)/J21,0)",
+          "weight": 0.1,
           "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 58,
-          "criterion": "",
+          "criterion": "Mide el promedio mensual de referencias gestionadas frente a las SKU activas esperadas.",
           "monthValues": {
             "Abril": 5,
             "Mayo": 0,
@@ -38637,7 +38511,7 @@
               "target": 58,
               "rawCompliance": 0.08620689655172414,
               "recognizedCompliance": 0.08620689655172414,
-              "contribution": 0
+              "contribution": 0.008620689655172415
             },
             {
               "month": "Mayo",
@@ -38661,7 +38535,7 @@
             "target": 58,
             "rawCompliance": 0.028735632183908046,
             "recognizedCompliance": 0.028735632183908046,
-            "contribution": 0
+            "contribution": 0.0028735632183908046
           }
         },
         {
@@ -38669,12 +38543,12 @@
           "label": "Leads calificados",
           "row": 22,
           "calculationType": "ratio_acumulado",
-          "formula": "IFERROR(SUM(G22:I22)/J22,0%)",
+          "formula": "IFERROR(SUM(G23:I23)/J23,0%)",
           "weight": 0.1,
           "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 3,
-          "criterion": "Criterios de medición",
+          "criterion": "Mide los leads generados frente a la meta mensual de mínimo 1. Sin leads, el cumplimiento es 0%.",
           "monthValues": {
             "Abril": 0,
             "Mayo": 0,
@@ -38715,7 +38589,7 @@
           }
         },
         {
-          "id": "actividades_campo",
+          "id": "leads_calificados_tiempo",
           "label": "Leads calificados a tiempo",
           "row": 24,
           "calculationType": "ratio_acumulado",
@@ -38765,7 +38639,7 @@
           }
         },
         {
-          "id": "hectareas",
+          "id": "actividades_campo",
           "label": "Impacto en clientes (Actividades de campo)",
           "row": 25,
           "calculationType": "ratio_acumulado",
@@ -38815,7 +38689,7 @@
           }
         },
         {
-          "id": "cultivos",
+          "id": "hectareas",
           "label": "Hectáreas de cultivos impactados",
           "row": 26,
           "calculationType": "ratio_acumulado",
@@ -38866,15 +38740,15 @@
         },
         {
           "id": "cultivos",
-          "label": "Hectáreas de cultivos impactados",
+          "label": "Cultivos impactados",
           "row": 26,
           "calculationType": "ratio_acumulado",
-          "formula": "MIN(IFERROR(SUM(G26:I26)/J26,0%),150%)",
+          "formula": "MIN(IFERROR(SUM(G27:I27)/J27,0%),150%)",
           "weight": 0.05,
           "cap": 1.5,
           "targetThreshold": 0.9,
           "rawTarget": 6,
-          "criterion": "Mide las hectáreas gestionadas frente a la meta territorial: 30 mensuales por promotor, equivalentes a 90 trimestrales, con cumplimiento máximo del 150%.",
+          "criterion": "Mide los cultivos gestionados en el período frente a la meta del territorio. Cada promotor debe gestionar mínimo 1 cultivo mensual, equivalente a 3 por trimestre, con reconocimiento de cumplimiento máximo hasta el 150%.",
           "monthValues": {
             "Abril": 2,
             "Mayo": 0,
@@ -38945,7 +38819,7 @@
       "indicators": [
         {
           "id": "ejecucion_visitas_cliente_final",
-          "label": "Ejecución visitas Cliente Final",
+          "label": "Ejecución visitas cliente final",
           "row": 15,
           "calculationType": "ratio",
           "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
@@ -39045,7 +38919,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Clientes Nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 17,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
@@ -39442,27 +39316,6 @@
             "recognizedCompliance": 1.5,
             "contribution": 0.07500000000000001
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0.8527777777777777,
-            "recognizedCompliance": 0.8527777777777777,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -39495,7 +39348,7 @@
       "indicators": [
         {
           "id": "ejecucion_visitas_cliente_final",
-          "label": "Ejecución visitas Cliente Final",
+          "label": "Ejecución visitas cliente final",
           "row": 15,
           "calculationType": "ratio",
           "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
@@ -39595,7 +39448,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Clientes Nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 17,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
@@ -39992,27 +39845,6 @@
             "recognizedCompliance": 1.5,
             "contribution": 0.07500000000000001
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0.8527777777777777,
-            "recognizedCompliance": 0.8527777777777777,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -40045,7 +39877,7 @@
       "indicators": [
         {
           "id": "ejecucion_visitas_cliente_final",
-          "label": "Ejecución visitas Cliente Final",
+          "label": "Ejecución visitas cliente final",
           "row": 15,
           "calculationType": "ratio",
           "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
@@ -40145,7 +39977,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Clientes Nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 17,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
@@ -40542,27 +40374,6 @@
             "recognizedCompliance": 1,
             "contribution": 0.05
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0.6694444444444445,
-            "recognizedCompliance": 0.6694444444444445,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -40595,7 +40406,7 @@
       "indicators": [
         {
           "id": "ejecucion_visitas_cliente_final",
-          "label": "Ejecución visitas Cliente Final",
+          "label": "Ejecución visitas cliente final",
           "row": 15,
           "calculationType": "ratio",
           "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
@@ -40695,7 +40506,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Clientes Nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 17,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
@@ -41092,27 +40903,6 @@
             "recognizedCompliance": 1,
             "contribution": 0.05
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0.6694444444444445,
-            "recognizedCompliance": 0.6694444444444445,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -41145,7 +40935,7 @@
       "indicators": [
         {
           "id": "ejecucion_visitas_cliente_final",
-          "label": "Ejecución visitas Cliente Final",
+          "label": "Ejecución visitas cliente final",
           "row": 15,
           "calculationType": "ratio",
           "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
@@ -41245,7 +41035,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Clientes Nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 17,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
@@ -41642,27 +41432,6 @@
             "recognizedCompliance": 1.5,
             "contribution": 0.07500000000000001
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 1.0611111111111111,
-            "recognizedCompliance": 1.0611111111111111,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -41695,7 +41464,7 @@
       "indicators": [
         {
           "id": "ejecucion_visitas_cliente_final",
-          "label": "Ejecución visitas Cliente Final",
+          "label": "Ejecución visitas cliente final",
           "row": 15,
           "calculationType": "ratio",
           "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
@@ -41795,7 +41564,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Clientes Nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 17,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
@@ -42192,27 +41961,6 @@
             "recognizedCompliance": 0.3333333333333333,
             "contribution": 0.016666666666666666
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0.25277777777777777,
-            "recognizedCompliance": 0.25277777777777777,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -42245,7 +41993,7 @@
       "indicators": [
         {
           "id": "ejecucion_visitas_cliente_final",
-          "label": "Ejecución visitas Cliente Final",
+          "label": "Ejecución visitas cliente final",
           "row": 15,
           "calculationType": "ratio",
           "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
@@ -42345,7 +42093,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Clientes Nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 17,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
@@ -42742,27 +42490,6 @@
             "recognizedCompliance": 0.3333333333333333,
             "contribution": 0.016666666666666666
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0.25277777777777777,
-            "recognizedCompliance": 0.25277777777777777,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -42795,7 +42522,7 @@
       "indicators": [
         {
           "id": "ejecucion_visitas_cliente_final",
-          "label": "Ejecución visitas Cliente Final",
+          "label": "Ejecución visitas cliente final",
           "row": 15,
           "calculationType": "ratio",
           "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
@@ -42895,7 +42622,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Clientes Nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 17,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
@@ -43292,27 +43019,6 @@
             "recognizedCompliance": 1.3333333333333333,
             "contribution": 0.06666666666666667
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0.8055555555555556,
-            "recognizedCompliance": 0.8055555555555556,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -43345,7 +43051,7 @@
       "indicators": [
         {
           "id": "ejecucion_visitas_cliente_final",
-          "label": "Ejecución visitas Cliente Final",
+          "label": "Ejecución visitas cliente final",
           "row": 15,
           "calculationType": "ratio",
           "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
@@ -43445,7 +43151,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Clientes Nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 17,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
@@ -43842,27 +43548,6 @@
             "recognizedCompliance": 0.6666666666666666,
             "contribution": 0.03333333333333333
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0.40555555555555556,
-            "recognizedCompliance": 0.40555555555555556,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -43895,7 +43580,7 @@
       "indicators": [
         {
           "id": "ejecucion_visitas_cliente_final",
-          "label": "Ejecución visitas Cliente Final",
+          "label": "Ejecución visitas cliente final",
           "row": 15,
           "calculationType": "ratio",
           "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
@@ -43995,7 +43680,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Clientes Nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 17,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
@@ -44148,9 +43833,9 @@
           "label": "Leads calificados",
           "row": 22,
           "calculationType": "ratio_acumulado",
-          "formula": "IFERROR(MIN(SUM(G22:I22)/J22,100%),0%)",
+          "formula": "IFERROR(SUM(G22:I22)/J22,0%)",
           "weight": 0.1,
-          "cap": 1,
+          "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 3,
           "criterion": "Mide la generación de leads frente a la meta esperada. La meta considera mínimo 1 lead por mes evaluado y aumenta según los leads generados, con el fin de incentivar la creación constante de oportunidades comerciales. Si no se generan leads, el cumplimiento es 0%.",
@@ -44392,27 +44077,6 @@
             "recognizedCompliance": 1.5,
             "contribution": 0.07500000000000001
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0.9555555555555555,
-            "recognizedCompliance": 0.9555555555555555,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -44445,7 +44109,7 @@
       "indicators": [
         {
           "id": "ejecucion_visitas_cliente_final",
-          "label": "Ejecución visitas Cliente Final",
+          "label": "Ejecución visitas cliente final",
           "row": 15,
           "calculationType": "ratio",
           "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
@@ -44545,7 +44209,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Clientes Nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 17,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
@@ -44698,9 +44362,9 @@
           "label": "Leads calificados",
           "row": 22,
           "calculationType": "ratio_acumulado",
-          "formula": "IFERROR(MIN(SUM(G22:I22)/J22,100%),0%)",
+          "formula": "IFERROR(SUM(G22:I22)/J22,0%)",
           "weight": 0.1,
-          "cap": 1,
+          "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 3,
           "criterion": "Mide la generación de leads frente a la meta esperada. La meta considera mínimo 1 lead por mes evaluado y aumenta según los leads generados, con el fin de incentivar la creación constante de oportunidades comerciales. Si no se generan leads, el cumplimiento es 0%.",
@@ -44942,27 +44606,6 @@
             "recognizedCompliance": 1.5,
             "contribution": 0.07500000000000001
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0.9555555555555555,
-            "recognizedCompliance": 0.9555555555555555,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -44995,7 +44638,7 @@
       "indicators": [
         {
           "id": "ejecucion_visitas_cliente_final",
-          "label": "Ejecución visitas Cliente Final",
+          "label": "Ejecución visitas cliente final",
           "row": 15,
           "calculationType": "ratio",
           "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
@@ -45095,7 +44738,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Clientes Nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 17,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
@@ -45248,9 +44891,9 @@
           "label": "Leads calificados",
           "row": 22,
           "calculationType": "ratio_acumulado",
-          "formula": "IFERROR(MIN(SUM(G22:I22)/J22,100%),0%)",
+          "formula": "IFERROR(SUM(G22:I22)/J22,0%)",
           "weight": 0.1,
-          "cap": 1,
+          "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 3,
           "criterion": "Mide la generación de leads frente a la meta esperada. La meta considera mínimo 1 lead por mes evaluado y aumenta según los leads generados, con el fin de incentivar la creación constante de oportunidades comerciales. Si no se generan leads, el cumplimiento es 0%.",
@@ -45492,27 +45135,6 @@
             "recognizedCompliance": 0.6666666666666666,
             "contribution": 0.03333333333333333
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0.36666666666666664,
-            "recognizedCompliance": 0.36666666666666664,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -45545,7 +45167,7 @@
       "indicators": [
         {
           "id": "ejecucion_visitas_cliente_final",
-          "label": "Ejecución visitas Cliente Final",
+          "label": "Ejecución visitas cliente final",
           "row": 15,
           "calculationType": "ratio",
           "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
@@ -45645,7 +45267,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Clientes Nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 17,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
@@ -45798,9 +45420,9 @@
           "label": "Leads calificados",
           "row": 22,
           "calculationType": "ratio_acumulado",
-          "formula": "IFERROR(MIN(SUM(G22:I22)/J22,100%),0%)",
+          "formula": "IFERROR(SUM(G22:I22)/J22,0%)",
           "weight": 0.1,
-          "cap": 1,
+          "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 3,
           "criterion": "Mide la generación de leads frente a la meta esperada. La meta considera mínimo 1 lead por mes evaluado y aumenta según los leads generados, con el fin de incentivar la creación constante de oportunidades comerciales. Si no se generan leads, el cumplimiento es 0%.",
@@ -46042,27 +45664,6 @@
             "recognizedCompliance": 0.6666666666666666,
             "contribution": 0.03333333333333333
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0.36666666666666664,
-            "recognizedCompliance": 0.36666666666666664,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -46095,7 +45696,7 @@
       "indicators": [
         {
           "id": "ejecucion_visitas_cliente_final",
-          "label": "Ejecución visitas Cliente Final",
+          "label": "Ejecución visitas cliente final",
           "row": 15,
           "calculationType": "ratio",
           "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
@@ -46195,7 +45796,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Clientes Nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 17,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
@@ -46348,9 +45949,9 @@
           "label": "Leads calificados",
           "row": 22,
           "calculationType": "ratio_acumulado",
-          "formula": "IFERROR(MIN(SUM(G22:I22)/J22,100%),0%)",
+          "formula": "IFERROR(SUM(G22:I22)/J22,0%)",
           "weight": 0.1,
-          "cap": 1,
+          "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 3,
           "criterion": "Mide la generación de leads frente a la meta esperada. La meta considera mínimo 1 lead por mes evaluado y aumenta según los leads generados, con el fin de incentivar la creación constante de oportunidades comerciales. Si no se generan leads, el cumplimiento es 0%.",
@@ -46592,27 +46193,6 @@
             "recognizedCompliance": 1.5,
             "contribution": 0.07500000000000001
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0.9222222222222223,
-            "recognizedCompliance": 0.9222222222222223,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -46645,7 +46225,7 @@
       "indicators": [
         {
           "id": "ejecucion_visitas_cliente_final",
-          "label": "Ejecución visitas Cliente Final",
+          "label": "Ejecución visitas cliente final",
           "row": 15,
           "calculationType": "ratio",
           "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
@@ -46745,7 +46325,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Clientes Nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 17,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
@@ -46898,9 +46478,9 @@
           "label": "Leads calificados",
           "row": 22,
           "calculationType": "ratio_acumulado",
-          "formula": "IFERROR(MIN(SUM(G22:I22)/J22,100%),0%)",
+          "formula": "IFERROR(SUM(G22:I22)/J22,0%)",
           "weight": 0.1,
-          "cap": 1,
+          "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 3,
           "criterion": "Mide la generación de leads frente a la meta esperada. La meta considera mínimo 1 lead por mes evaluado y aumenta según los leads generados, con el fin de incentivar la creación constante de oportunidades comerciales. Si no se generan leads, el cumplimiento es 0%.",
@@ -47142,27 +46722,6 @@
             "recognizedCompliance": 0.5,
             "contribution": 0.025
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0.25833333333333336,
-            "recognizedCompliance": 0.25833333333333336,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -47195,7 +46754,7 @@
       "indicators": [
         {
           "id": "ejecucion_visitas_cliente_final",
-          "label": "Ejecución visitas Cliente Final",
+          "label": "Ejecución visitas cliente final",
           "row": 15,
           "calculationType": "ratio",
           "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
@@ -47295,7 +46854,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Clientes Nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 17,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
@@ -47448,9 +47007,9 @@
           "label": "Leads calificados",
           "row": 22,
           "calculationType": "ratio_acumulado",
-          "formula": "IFERROR(MIN(SUM(G22:I22)/J22,100%),0%)",
+          "formula": "IFERROR(SUM(G22:I22)/J22,0%)",
           "weight": 0.1,
-          "cap": 1,
+          "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 3,
           "criterion": "Mide la generación de leads frente a la meta esperada. La meta considera mínimo 1 lead por mes evaluado y aumenta según los leads generados, con el fin de incentivar la creación constante de oportunidades comerciales. Si no se generan leads, el cumplimiento es 0%.",
@@ -47692,27 +47251,6 @@
             "recognizedCompliance": 0.5,
             "contribution": 0.025
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0.25833333333333336,
-            "recognizedCompliance": 0.25833333333333336,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -47745,7 +47283,7 @@
       "indicators": [
         {
           "id": "ejecucion_visitas_cliente_final",
-          "label": "Ejecución visitas Cliente Final",
+          "label": "Ejecución visitas cliente final",
           "row": 15,
           "calculationType": "ratio",
           "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
@@ -47845,7 +47383,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Clientes Nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 17,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
@@ -47998,9 +47536,9 @@
           "label": "Leads calificados",
           "row": 22,
           "calculationType": "ratio_acumulado",
-          "formula": "IFERROR(MIN(SUM(G22:I22)/J22,100%),0%)",
+          "formula": "IFERROR(SUM(G22:I22)/J22,0%)",
           "weight": 0.1,
-          "cap": 1,
+          "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 3,
           "criterion": "Mide la generación de leads frente a la meta esperada. La meta considera mínimo 1 lead por mes evaluado y aumenta según los leads generados, con el fin de incentivar la creación constante de oportunidades comerciales. Si no se generan leads, el cumplimiento es 0%.",
@@ -48242,27 +47780,6 @@
             "recognizedCompliance": 0.3333333333333333,
             "contribution": 0.016666666666666666
           }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
-            "rawCompliance": 0.2111111111111111,
-            "recognizedCompliance": 0.2111111111111111,
-            "contribution": 0
-          }
         }
       ]
     },
@@ -48295,7 +47812,7 @@
       "indicators": [
         {
           "id": "ejecucion_visitas_cliente_final",
-          "label": "Ejecución visitas Cliente Final",
+          "label": "Ejecución visitas cliente final",
           "row": 15,
           "calculationType": "ratio",
           "formula": "IFERROR(MIN(100%,SUM(G15:I15)/($J15*3)),0)",
@@ -48395,7 +47912,7 @@
         },
         {
           "id": "nuevos_clientes",
-          "label": "Clientes Nuevos",
+          "label": "Ejecución clientes nuevos",
           "row": 17,
           "calculationType": "promedio_mensual",
           "formula": "IFERROR(AVERAGE(G17/J17,H17/J17,I17/J17),0)",
@@ -48548,9 +48065,9 @@
           "label": "Leads calificados",
           "row": 22,
           "calculationType": "ratio_acumulado",
-          "formula": "IFERROR(MIN(SUM(G22:I22)/J22,100%),0%)",
+          "formula": "IFERROR(SUM(G22:I22)/J22,0%)",
           "weight": 0.1,
-          "cap": 1,
+          "cap": null,
           "targetThreshold": 0.9,
           "rawTarget": 3,
           "criterion": "Mide la generación de leads frente a la meta esperada. La meta considera mínimo 1 lead por mes evaluado y aumenta según los leads generados, con el fin de incentivar la creación constante de oportunidades comerciales. Si no se generan leads, el cumplimiento es 0%.",
@@ -48788,27 +48305,6 @@
           "quarter": {
             "actual": 0,
             "target": 3,
-            "rawCompliance": 0,
-            "recognizedCompliance": 0,
-            "contribution": 0
-          }
-        },
-        {
-          "id": "gestion-cultivos-impactados",
-          "label": "Gestión de Cultivos Impactados",
-          "row": null,
-          "calculationType": "promedio",
-          "formula": "Promedio de hectáreas y cultivos impactados",
-          "weight": 0,
-          "cap": 1.5,
-          "targetThreshold": 0.9,
-          "rawTarget": null,
-          "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados.",
-          "monthValues": {},
-          "monthly": [],
-          "quarter": {
-            "actual": null,
-            "target": null,
             "rawCompliance": 0,
             "recognizedCompliance": 0,
             "contribution": 0
@@ -49367,8 +48863,8 @@
       "cargo": "DIR GALAGRO NACIONAL",
       "territory": "GALAGRO NACIONAL DIRECCIÓN",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.30664212946749014,
-      "calculatedQuarterResult": 0.30664212946749014,
+      "originalQuarterResult": 0.31577175909711974,
+      "calculatedQuarterResult": 0.31577175909711974,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Visitas y leads corresponden a la gestión propia de Juana Andrea Moncaleano. Los demás indicadores son promedios simples del cumplimiento de 6 comerciales y 9 promotores activos.",
@@ -49835,42 +49331,42 @@
           "rawTarget": 100,
           "criterion": "Promedio simple del cumplimiento de cultivos impactados de comerciales y promotores activos.",
           "monthValues": {
-            "Abril": 50.888888888888886,
-            "Mayo": 32.77777777777778,
-            "Junio": 58.22222222222223
+            "Abril": 73.33333333333333,
+            "Mayo": 43.333333333333336,
+            "Junio": 80
           },
           "monthly": [
             {
               "month": "Abril",
-              "actual": 50.888888888888886,
+              "actual": 73.33333333333333,
               "target": 100,
-              "rawCompliance": 0.5088888888888888,
-              "recognizedCompliance": 0.5088888888888888,
-              "contribution": 0.025444444444444443
+              "rawCompliance": 0.7333333333333333,
+              "recognizedCompliance": 0.7333333333333333,
+              "contribution": 0.03666666666666667
             },
             {
               "month": "Mayo",
-              "actual": 32.77777777777778,
+              "actual": 43.333333333333336,
               "target": 100,
-              "rawCompliance": 0.3277777777777778,
-              "recognizedCompliance": 0.3277777777777778,
-              "contribution": 0.01638888888888889
+              "rawCompliance": 0.43333333333333335,
+              "recognizedCompliance": 0.43333333333333335,
+              "contribution": 0.021666666666666667
             },
             {
               "month": "Junio",
-              "actual": 58.22222222222223,
+              "actual": 80,
               "target": 100,
-              "rawCompliance": 0.5822222222222223,
-              "recognizedCompliance": 0.5822222222222223,
-              "contribution": 0.029111111111111115
+              "rawCompliance": 0.8,
+              "recognizedCompliance": 0.8,
+              "contribution": 0.04000000000000001
             }
           ],
           "quarter": {
-            "actual": 51.74074074074074,
+            "actual": 70,
             "target": 100,
-            "rawCompliance": 0.5174074074074074,
-            "recognizedCompliance": 0.5174074074074074,
-            "contribution": 0.025870370370370373
+            "rawCompliance": 0.7000000000000001,
+            "recognizedCompliance": 0.7000000000000001,
+            "contribution": 0.035
           }
         }
       ],
