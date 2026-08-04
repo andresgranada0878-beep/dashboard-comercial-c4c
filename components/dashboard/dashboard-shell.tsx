@@ -250,6 +250,7 @@ export function DashboardShell() {
                 </div>
               </div>
               <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+                <a href="/resumen" style={{ ...secondaryButton, textDecoration: "none", display: "inline-flex", alignItems: "center" }}>Resumen ejecutivo</a>
                 <button onClick={() => void loadData()} type="button" style={secondaryButton}>Actualizar datos</button>
                 <button type="button" disabled title="Se habilitará después de validar la información" style={{ ...primaryButton, opacity: 0.48, cursor: "not-allowed" }}>PDF próximamente</button>
               </div>
