@@ -4,6 +4,7 @@ import Image from "next/image"
 import { useEffect, useMemo, useState } from "react"
 import type { CSSProperties } from "react"
 import { GeneralSummary } from "@/components/dashboard/general-summary"
+import { exportIndividualPdf } from "@/lib/pdf/export-individual-pdf"
 import type {
   DashboardView,
   IndividualDashboardPayload,
@@ -252,7 +253,22 @@ export function DashboardShell() {
               <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
                 <a href="/resumen" style={{ ...secondaryButton, textDecoration: "none", display: "inline-flex", alignItems: "center" }}>Resumen ejecutivo</a>
                 <button onClick={() => void loadData()} type="button" style={secondaryButton}>Actualizar datos</button>
-                <button type="button" disabled title="Se habilitará después de validar la información" style={{ ...primaryButton, opacity: 0.48, cursor: "not-allowed" }}>PDF próximamente</button>
+                <button
+                    type="button"
+                    onClick={() =>
+                      void exportIndividualPdf({
+                        source: selected,
+                        view,
+                        month,
+                        globalResult,
+                        rows: indicatorRows,
+                        generatedAt: data.generatedAt,
+                      })
+                    }
+                    style={{ ...primaryButton, cursor: "pointer" }}
+                  >
+                    Descargar PDF
+                  </button>
               </div>
             </div>
           </div>

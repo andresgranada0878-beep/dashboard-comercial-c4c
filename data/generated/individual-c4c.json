@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-04T02:06:45.258Z",
+  "generatedAt": "2026-08-04T14:15:53.606Z",
   "scope": "Resultados individuales y de dirección",
   "source": "Excel de validación; Power BI será la fuente posterior de gestión real",
   "reports": [
@@ -2163,8 +2163,8 @@
       "cargo": "RTC CORDOBA",
       "territory": "PYC AGRÍCOLA ANT CÓRDOBA",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.3352508291873964,
-      "calculatedQuarterResult": 0.3352508291873964,
+      "originalQuarterResult": 0.2949730514096186,
+      "calculatedQuarterResult": 0.2949730514096186,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -2273,8 +2273,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 16,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G16,H16,I16)/J16,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -2313,10 +2313,10 @@
           ],
           "quarter": {
             "actual": 29,
-            "target": 48,
-            "rawCompliance": 0.6041666666666666,
-            "recognizedCompliance": 0.6041666666666666,
-            "contribution": 0.06041666666666667
+            "target": 144,
+            "rawCompliance": 0.2013888888888889,
+            "recognizedCompliance": 0.2013888888888889,
+            "contribution": 0.02013888888888889
           }
         },
         {
@@ -2713,8 +2713,8 @@
       "cargo": "RTC NORTE",
       "territory": "PYC AGRÍCOLA ANT NORTE Y BAJO CAUCA",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.31423505572441746,
-      "calculatedQuarterResult": 0.31423505572441746,
+      "originalQuarterResult": 0.24756838905775078,
+      "calculatedQuarterResult": 0.24756838905775078,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -2823,8 +2823,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 16,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G16,H16,I16)/J16,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -2863,10 +2863,10 @@
           ],
           "quarter": {
             "actual": 45,
-            "target": 18,
-            "rawCompliance": 1.5,
-            "recognizedCompliance": 1.5,
-            "contribution": 0.15000000000000002
+            "target": 54,
+            "rawCompliance": 0.8333333333333334,
+            "recognizedCompliance": 0.8333333333333334,
+            "contribution": 0.08333333333333334
           }
         },
         {
@@ -3373,8 +3373,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 16,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G16,H16,I16)/J16,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -3413,7 +3413,7 @@
           ],
           "quarter": {
             "actual": 0,
-            "target": 30,
+            "target": 90,
             "rawCompliance": 0,
             "recognizedCompliance": 0,
             "contribution": 0
@@ -3923,8 +3923,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 16,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G16,H16,I16)/J16,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -3963,7 +3963,7 @@
           ],
           "quarter": {
             "actual": 35,
-            "target": 4,
+            "target": 12,
             "rawCompliance": 1.5,
             "recognizedCompliance": 1.5,
             "contribution": 0.15000000000000002
@@ -4363,8 +4363,8 @@
       "cargo": "PROMOTOR TECNICO SUMITOMO ORIENTE A",
       "territory": "PYC AGRÍCOLA ANT ORIENTE A",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.29825036075036077,
-      "calculatedQuarterResult": 0.29825036075036077,
+      "originalQuarterResult": 0.280472582972583,
+      "calculatedQuarterResult": 0.280472582972583,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -4473,8 +4473,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 16,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G16,H16,I16)/J16,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -4513,10 +4513,10 @@
           ],
           "quarter": {
             "actual": 8,
-            "target": 30,
-            "rawCompliance": 0.26666666666666666,
-            "recognizedCompliance": 0.26666666666666666,
-            "contribution": 0.02666666666666667
+            "target": 90,
+            "rawCompliance": 0.08888888888888889,
+            "recognizedCompliance": 0.08888888888888889,
+            "contribution": 0.008888888888888889
           }
         },
         {
@@ -4913,8 +4913,8 @@
       "cargo": "PROMOTOR AGRICOLA ANT ORIENTE A",
       "territory": "PYC AGRÍCOLA ANT ORIENTE A",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.17570111308700523,
-      "calculatedQuarterResult": 0.17570111308700523,
+      "originalQuarterResult": 0.15792333530922745,
+      "calculatedQuarterResult": 0.15792333530922745,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -5023,8 +5023,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 16,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G16,H16,I16)/J16,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -5063,10 +5063,10 @@
           ],
           "quarter": {
             "actual": 8,
-            "target": 30,
-            "rawCompliance": 0.26666666666666666,
-            "recognizedCompliance": 0.26666666666666666,
-            "contribution": 0.02666666666666667
+            "target": 90,
+            "rawCompliance": 0.08888888888888889,
+            "recognizedCompliance": 0.08888888888888889,
+            "contribution": 0.008888888888888889
           }
         },
         {
@@ -5573,8 +5573,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 16,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G16,H16,I16)/J16,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -5613,7 +5613,7 @@
           ],
           "quarter": {
             "actual": 26,
-            "target": 3,
+            "target": 9,
             "rawCompliance": 1.5,
             "recognizedCompliance": 1.5,
             "contribution": 0.15000000000000002
@@ -6013,8 +6013,8 @@
       "cargo": "PROMOTOR TÉCNICO ORIENTE B",
       "territory": "PYC AGRÍCOLA ANT ORIENTE B",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.4443393202178345,
-      "calculatedQuarterResult": 0.4443393202178345,
+      "originalQuarterResult": 0.42878376466227897,
+      "calculatedQuarterResult": 0.42878376466227897,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -6123,8 +6123,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 16,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G16,H16,I16)/J16,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -6163,10 +6163,10 @@
           ],
           "quarter": {
             "actual": 7,
-            "target": 30,
-            "rawCompliance": 0.23333333333333334,
-            "recognizedCompliance": 0.23333333333333334,
-            "contribution": 0.023333333333333334
+            "target": 90,
+            "rawCompliance": 0.07777777777777778,
+            "recognizedCompliance": 0.07777777777777778,
+            "contribution": 0.007777777777777778
           }
         },
         {
@@ -6563,8 +6563,8 @@
       "cargo": "RTC SUROESTE",
       "territory": "PYC AGRÍCOLA ANT SUROESTE",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.6450618904959029,
-      "calculatedQuarterResult": 0.6450618904959029,
+      "originalQuarterResult": 0.621252366686379,
+      "calculatedQuarterResult": 0.621252366686379,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -6673,8 +6673,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 16,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G16,H16,I16)/J16,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -6713,10 +6713,10 @@
           ],
           "quarter": {
             "actual": 53,
-            "target": 14,
-            "rawCompliance": 1.5,
-            "recognizedCompliance": 1.5,
-            "contribution": 0.15000000000000002
+            "target": 42,
+            "rawCompliance": 1.2619047619047619,
+            "recognizedCompliance": 1.2619047619047619,
+            "contribution": 0.1261904761904762
           }
         },
         {
@@ -7113,8 +7113,8 @@
       "cargo": "PROMOTOR TÉCNICO CONCORDIA BETULIA",
       "territory": "PYC AGRÍCOLA ANT SUROESTE",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.478332772619244,
-      "calculatedQuarterResult": 0.478332772619244,
+      "originalQuarterResult": 0.47611055039702177,
+      "calculatedQuarterResult": 0.47611055039702177,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -7223,8 +7223,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 16,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G16,H16,I16)/J16,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -7263,10 +7263,10 @@
           ],
           "quarter": {
             "actual": 1,
-            "target": 30,
-            "rawCompliance": 0.03333333333333333,
-            "recognizedCompliance": 0.03333333333333333,
-            "contribution": 0.0033333333333333335
+            "target": 90,
+            "rawCompliance": 0.011111111111111112,
+            "recognizedCompliance": 0.011111111111111112,
+            "contribution": 0.0011111111111111111
           }
         },
         {
@@ -7663,8 +7663,8 @@
       "cargo": "RTC VALLE DE ABURRA Y NORDESTE",
       "territory": "PYC AGRÍCOLA ANT VALLE ABURRÁ",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.3468229041196476,
-      "calculatedQuarterResult": 0.3468229041196476,
+      "originalQuarterResult": 0.2815451263418698,
+      "calculatedQuarterResult": 0.2815451263418698,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -7773,8 +7773,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 16,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G16,H16,I16)/J16,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -7813,10 +7813,10 @@
           ],
           "quarter": {
             "actual": 61,
-            "target": 24,
-            "rawCompliance": 1.5,
-            "recognizedCompliance": 1.5,
-            "contribution": 0.15000000000000002
+            "target": 72,
+            "rawCompliance": 0.8472222222222222,
+            "recognizedCompliance": 0.8472222222222222,
+            "contribution": 0.08472222222222223
           }
         },
         {
@@ -8213,8 +8213,8 @@
       "cargo": "PROMOTOR TÉCNICO SUMITOMO",
       "territory": "PYC AGRÍCOLA ANT VALLE ABURRÁ",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.21854794990719334,
-      "calculatedQuarterResult": 0.21854794990719334,
+      "originalQuarterResult": 0.21632572768497113,
+      "calculatedQuarterResult": 0.21632572768497113,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -8323,8 +8323,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 16,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G16,H16,I16)/J16,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -8363,10 +8363,10 @@
           ],
           "quarter": {
             "actual": 1,
-            "target": 30,
-            "rawCompliance": 0.03333333333333333,
-            "recognizedCompliance": 0.03333333333333333,
-            "contribution": 0.0033333333333333335
+            "target": 90,
+            "rawCompliance": 0.011111111111111112,
+            "recognizedCompliance": 0.011111111111111112,
+            "contribution": 0.0011111111111111111
           }
         },
         {
@@ -8763,8 +8763,8 @@
       "cargo": "PROMOTOR AGRICOLA ANT ORIENTE B 1",
       "territory": "PYC AGRÍCOLA ANT ORIENTE B",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.2292708270671496,
-      "calculatedQuarterResult": 0.2292708270671496,
+      "originalQuarterResult": 0.21371527151159406,
+      "calculatedQuarterResult": 0.21371527151159406,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -8873,8 +8873,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 16,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G16,H16,I16)/J16,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -8913,10 +8913,10 @@
           ],
           "quarter": {
             "actual": 7,
-            "target": 30,
-            "rawCompliance": 0.23333333333333334,
-            "recognizedCompliance": 0.23333333333333334,
-            "contribution": 0.023333333333333334
+            "target": 90,
+            "rawCompliance": 0.07777777777777778,
+            "recognizedCompliance": 0.07777777777777778,
+            "contribution": 0.007777777777777778
           }
         },
         {
@@ -9313,8 +9313,8 @@
       "cargo": "PROMOTOR AGRICOLA ANT SUROESTE 3",
       "territory": "PYC AGRÍCOLA ANT SUROESTE",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.32696665240066475,
-      "calculatedQuarterResult": 0.32696665240066475,
+      "originalQuarterResult": 0.3247444301784425,
+      "calculatedQuarterResult": 0.3247444301784425,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -9423,8 +9423,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 16,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G16,H16,I16)/J16,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -9463,10 +9463,10 @@
           ],
           "quarter": {
             "actual": 1,
-            "target": 30,
-            "rawCompliance": 0.03333333333333333,
-            "recognizedCompliance": 0.03333333333333333,
-            "contribution": 0.0033333333333333335
+            "target": 90,
+            "rawCompliance": 0.011111111111111112,
+            "recognizedCompliance": 0.011111111111111112,
+            "contribution": 0.0011111111111111111
           }
         },
         {
@@ -9863,8 +9863,8 @@
       "cargo": "RTC CORDOBA",
       "territory": "PYC AGRÍCOLA ANT CÓRDOBA",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.20148217247097847,
-      "calculatedQuarterResult": 0.20148217247097847,
+      "originalQuarterResult": 0.18805624654505254,
+      "calculatedQuarterResult": 0.18805624654505254,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -9973,8 +9973,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -10013,10 +10013,10 @@
           ],
           "quarter": {
             "actual": 9.666666666666666,
-            "target": 48,
-            "rawCompliance": 0.20138888888888887,
-            "recognizedCompliance": 0.20138888888888887,
-            "contribution": 0.020138888888888887
+            "target": 144,
+            "rawCompliance": 0.06712962962962962,
+            "recognizedCompliance": 0.06712962962962962,
+            "contribution": 0.006712962962962962
           }
         },
         {
@@ -10413,8 +10413,8 @@
       "cargo": "RTC NORTE",
       "territory": "PYC AGRÍCOLA ANT NORTE Y BAJO CAUCA",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.42606382978723406,
-      "calculatedQuarterResult": 0.42606382978723406,
+      "originalQuarterResult": 0.37050827423167854,
+      "calculatedQuarterResult": 0.37050827423167854,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -10523,8 +10523,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -10563,10 +10563,10 @@
           ],
           "quarter": {
             "actual": 15,
-            "target": 18,
-            "rawCompliance": 0.8333333333333334,
-            "recognizedCompliance": 0.8333333333333334,
-            "contribution": 0.08333333333333334
+            "target": 54,
+            "rawCompliance": 0.2777777777777778,
+            "recognizedCompliance": 0.2777777777777778,
+            "contribution": 0.02777777777777778
           }
         },
         {
@@ -11073,8 +11073,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -11113,7 +11113,7 @@
           ],
           "quarter": {
             "actual": 0,
-            "target": 30,
+            "target": 90,
             "rawCompliance": 0,
             "recognizedCompliance": 0,
             "contribution": 0
@@ -11513,8 +11513,8 @@
       "cargo": "RTC ORIENTE A",
       "territory": "PYC AGRÍCOLA ANT ORIENTE A",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.4835560893750624,
-      "calculatedQuarterResult": 0.4835560893750624,
+      "originalQuarterResult": 0.4307783115972846,
+      "calculatedQuarterResult": 0.4307783115972846,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -11623,8 +11623,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -11663,10 +11663,10 @@
           ],
           "quarter": {
             "actual": 11.666666666666666,
-            "target": 4,
-            "rawCompliance": 1.5,
-            "recognizedCompliance": 1.5,
-            "contribution": 0.15000000000000002
+            "target": 12,
+            "rawCompliance": 0.9722222222222222,
+            "recognizedCompliance": 0.9722222222222222,
+            "contribution": 0.09722222222222222
           }
         },
         {
@@ -12063,8 +12063,8 @@
       "cargo": "PROMOTOR TECNICO SUMITOMO ORIENTE A",
       "territory": "PYC AGRÍCOLA ANT ORIENTE A",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.37492361074258373,
-      "calculatedQuarterResult": 0.37492361074258373,
+      "originalQuarterResult": 0.3689976848166578,
+      "calculatedQuarterResult": 0.3689976848166578,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -12173,8 +12173,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -12213,10 +12213,10 @@
           ],
           "quarter": {
             "actual": 2.6666666666666665,
-            "target": 30,
-            "rawCompliance": 0.08888888888888888,
-            "recognizedCompliance": 0.08888888888888888,
-            "contribution": 0.008888888888888889
+            "target": 90,
+            "rawCompliance": 0.029629629629629627,
+            "recognizedCompliance": 0.029629629629629627,
+            "contribution": 0.002962962962962963
           }
         },
         {
@@ -12613,8 +12613,8 @@
       "cargo": "PROMOTOR AGRICOLA ANT ORIENTE A",
       "territory": "PYC AGRÍCOLA ANT ORIENTE A",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.3147576356388493,
-      "calculatedQuarterResult": 0.3147576356388493,
+      "originalQuarterResult": 0.3088317097129234,
+      "calculatedQuarterResult": 0.3088317097129234,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -12723,8 +12723,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -12763,10 +12763,10 @@
           ],
           "quarter": {
             "actual": 2.6666666666666665,
-            "target": 30,
-            "rawCompliance": 0.08888888888888888,
-            "recognizedCompliance": 0.08888888888888888,
-            "contribution": 0.008888888888888889
+            "target": 90,
+            "rawCompliance": 0.029629629629629627,
+            "recognizedCompliance": 0.029629629629629627,
+            "contribution": 0.002962962962962963
           }
         },
         {
@@ -13163,8 +13163,8 @@
       "cargo": "RTC ORIENTE B",
       "territory": "PYC AGRÍCOLA ANT ORIENTE B",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.5113095158377047,
-      "calculatedQuarterResult": 0.5113095158377047,
+      "originalQuarterResult": 0.457605812134001,
+      "calculatedQuarterResult": 0.457605812134001,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -13273,8 +13273,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -13313,10 +13313,10 @@
           ],
           "quarter": {
             "actual": 8.666666666666666,
-            "target": 3,
-            "rawCompliance": 1.5,
-            "recognizedCompliance": 1.5,
-            "contribution": 0.15000000000000002
+            "target": 9,
+            "rawCompliance": 0.9629629629629629,
+            "recognizedCompliance": 0.9629629629629629,
+            "contribution": 0.0962962962962963
           }
         },
         {
@@ -13713,8 +13713,8 @@
       "cargo": "PROMOTOR TÉCNICO ORIENTE B",
       "territory": "PYC AGRÍCOLA ANT ORIENTE B",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.3305218446048278,
-      "calculatedQuarterResult": 0.3305218446048278,
+      "originalQuarterResult": 0.3253366594196426,
+      "calculatedQuarterResult": 0.3253366594196426,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -13823,8 +13823,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -13863,10 +13863,10 @@
           ],
           "quarter": {
             "actual": 2.3333333333333335,
-            "target": 30,
-            "rawCompliance": 0.07777777777777778,
-            "recognizedCompliance": 0.07777777777777778,
-            "contribution": 0.007777777777777778
+            "target": 90,
+            "rawCompliance": 0.02592592592592593,
+            "recognizedCompliance": 0.02592592592592593,
+            "contribution": 0.002592592592592593
           }
         },
         {
@@ -14263,8 +14263,8 @@
       "cargo": "RTC SUROESTE",
       "territory": "PYC AGRÍCOLA ANT SUROESTE",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.48455447965476794,
-      "calculatedQuarterResult": 0.48455447965476794,
+      "originalQuarterResult": 0.4004274955277838,
+      "calculatedQuarterResult": 0.4004274955277838,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -14373,8 +14373,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -14413,10 +14413,10 @@
           ],
           "quarter": {
             "actual": 17.666666666666668,
-            "target": 14,
-            "rawCompliance": 1.261904761904762,
-            "recognizedCompliance": 1.261904761904762,
-            "contribution": 0.12619047619047621
+            "target": 42,
+            "rawCompliance": 0.42063492063492064,
+            "recognizedCompliance": 0.42063492063492064,
+            "contribution": 0.04206349206349207
           }
         },
         {
@@ -14813,8 +14813,8 @@
       "cargo": "PROMOTOR TÉCNICO CONCORDIA BETULIA",
       "territory": "PYC AGRÍCOLA ANT SUROESTE",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.29859729476315683,
-      "calculatedQuarterResult": 0.29859729476315683,
+      "originalQuarterResult": 0.29785655402241606,
+      "calculatedQuarterResult": 0.29785655402241606,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -14923,8 +14923,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -14963,10 +14963,10 @@
           ],
           "quarter": {
             "actual": 0.3333333333333333,
-            "target": 30,
-            "rawCompliance": 0.01111111111111111,
-            "recognizedCompliance": 0.01111111111111111,
-            "contribution": 0.0011111111111111111
+            "target": 90,
+            "rawCompliance": 0.0037037037037037034,
+            "recognizedCompliance": 0.0037037037037037034,
+            "contribution": 0.00037037037037037035
           }
         },
         {
@@ -15363,8 +15363,8 @@
       "cargo": "RTC VALLE DE ABURRA Y NORDESTE",
       "territory": "PYC AGRÍCOLA ANT VALLE ABURRÁ",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.3598026808583922,
-      "calculatedQuarterResult": 0.3598026808583922,
+      "originalQuarterResult": 0.30332119937691066,
+      "calculatedQuarterResult": 0.30332119937691066,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -15473,8 +15473,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -15513,10 +15513,10 @@
           ],
           "quarter": {
             "actual": 20.333333333333332,
-            "target": 24,
-            "rawCompliance": 0.8472222222222222,
-            "recognizedCompliance": 0.8472222222222222,
-            "contribution": 0.08472222222222223
+            "target": 72,
+            "rawCompliance": 0.2824074074074074,
+            "recognizedCompliance": 0.2824074074074074,
+            "contribution": 0.02824074074074074
           }
         },
         {
@@ -15913,8 +15913,8 @@
       "cargo": "PROMOTOR TÉCNICO SUMITOMO",
       "territory": "PYC AGRÍCOLA ANT VALLE ABURRÁ",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.25164677426498555,
-      "calculatedQuarterResult": 0.25164677426498555,
+      "originalQuarterResult": 0.2509060335242448,
+      "calculatedQuarterResult": 0.2509060335242448,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -16023,8 +16023,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -16063,10 +16063,10 @@
           ],
           "quarter": {
             "actual": 0.3333333333333333,
-            "target": 30,
-            "rawCompliance": 0.01111111111111111,
-            "recognizedCompliance": 0.01111111111111111,
-            "contribution": 0.0011111111111111111
+            "target": 90,
+            "rawCompliance": 0.0037037037037037034,
+            "recognizedCompliance": 0.0037037037037037034,
+            "contribution": 0.00037037037037037035
           }
         },
         {
@@ -16463,8 +16463,8 @@
       "cargo": "PROMOTOR AGRICOLA ANT ORIENTE B 1",
       "territory": "PYC AGRÍCOLA ANT ORIENTE B",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.2496841032964504,
-      "calculatedQuarterResult": 0.2496841032964504,
+      "originalQuarterResult": 0.24449891811126523,
+      "calculatedQuarterResult": 0.24449891811126523,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -16573,8 +16573,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -16613,10 +16613,10 @@
           ],
           "quarter": {
             "actual": 2.3333333333333335,
-            "target": 30,
-            "rawCompliance": 0.07777777777777778,
-            "recognizedCompliance": 0.07777777777777778,
-            "contribution": 0.007777777777777778
+            "target": 90,
+            "rawCompliance": 0.02592592592592593,
+            "recognizedCompliance": 0.02592592592592593,
+            "contribution": 0.002592592592592593
           }
         },
         {
@@ -17013,8 +17013,8 @@
       "cargo": "PROMOTOR AGRICOLA ANT SUROESTE 3",
       "territory": "PYC AGRÍCOLA ANT SUROESTE",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.20037597841744315,
-      "calculatedQuarterResult": 0.20037597841744315,
+      "originalQuarterResult": 0.19963523767670238,
+      "calculatedQuarterResult": 0.19963523767670238,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -17123,8 +17123,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -17163,10 +17163,10 @@
           ],
           "quarter": {
             "actual": 0.3333333333333333,
-            "target": 30,
-            "rawCompliance": 0.01111111111111111,
-            "recognizedCompliance": 0.01111111111111111,
-            "contribution": 0.0011111111111111111
+            "target": 90,
+            "rawCompliance": 0.0037037037037037034,
+            "recognizedCompliance": 0.0037037037037037034,
+            "contribution": 0.00037037037037037035
           }
         },
         {
@@ -17563,8 +17563,8 @@
       "cargo": "RC GALAGRO BAJO CAUCA",
       "territory": "GALAGRO BAJO CAUCA ANT.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.2813364055299539,
-      "calculatedQuarterResult": 0.2813364055299539,
+      "originalQuarterResult": 0.19911418330773167,
+      "calculatedQuarterResult": 0.19911418330773167,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -17673,8 +17673,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -17713,10 +17713,10 @@
           ],
           "quarter": {
             "actual": 20.333333333333332,
-            "target": 10,
-            "rawCompliance": 1.5,
-            "recognizedCompliance": 1.5,
-            "contribution": 0.15000000000000002
+            "target": 30,
+            "rawCompliance": 0.6777777777777777,
+            "recognizedCompliance": 0.6777777777777777,
+            "contribution": 0.06777777777777777
           }
         },
         {
@@ -18113,8 +18113,8 @@
       "cargo": "RTC GALAGRO CORDOBA",
       "territory": "GALAGRO CORDOBA ANT.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.16138318670576735,
-      "calculatedQuarterResult": 0.16138318670576735,
+      "originalQuarterResult": 0.13067611599869666,
+      "calculatedQuarterResult": 0.13067611599869666,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -18223,8 +18223,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -18263,10 +18263,10 @@
           ],
           "quarter": {
             "actual": 25.333333333333332,
-            "target": 55,
-            "rawCompliance": 0.4606060606060606,
-            "recognizedCompliance": 0.4606060606060606,
-            "contribution": 0.04606060606060606
+            "target": 165,
+            "rawCompliance": 0.15353535353535352,
+            "recognizedCompliance": 0.15353535353535352,
+            "contribution": 0.015353535353535354
           }
         },
         {
@@ -18663,8 +18663,8 @@
       "cargo": "RC GALAGRO NORTE ANT",
       "territory": "GALAGRO NORTE ANT.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.33955200720475853,
-      "calculatedQuarterResult": 0.33955200720475853,
+      "originalQuarterResult": 0.25436682201957334,
+      "calculatedQuarterResult": 0.25436682201957334,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -18773,8 +18773,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -18813,10 +18813,10 @@
           ],
           "quarter": {
             "actual": 23.333333333333332,
-            "target": 12,
-            "rawCompliance": 1.5,
-            "recognizedCompliance": 1.5,
-            "contribution": 0.15000000000000002
+            "target": 36,
+            "rawCompliance": 0.6481481481481481,
+            "recognizedCompliance": 0.6481481481481481,
+            "contribution": 0.06481481481481481
           }
         },
         {
@@ -19323,8 +19323,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -19363,7 +19363,7 @@
           ],
           "quarter": {
             "actual": 0,
-            "target": 3,
+            "target": 9,
             "rawCompliance": 0,
             "recognizedCompliance": 0,
             "contribution": 0
@@ -19763,8 +19763,8 @@
       "cargo": "RC GALAGRO ORIENTE A ANT",
       "territory": "GALAGRO ORIENTE A ANT.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.3905752439650745,
-      "calculatedQuarterResult": 0.3905752439650745,
+      "originalQuarterResult": 0.2915853449751755,
+      "calculatedQuarterResult": 0.2915853449751755,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -19873,8 +19873,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -19913,10 +19913,10 @@
           ],
           "quarter": {
             "actual": 16.333333333333332,
-            "target": 11,
-            "rawCompliance": 1.4848484848484846,
-            "recognizedCompliance": 1.4848484848484846,
-            "contribution": 0.14848484848484847
+            "target": 33,
+            "rawCompliance": 0.4949494949494949,
+            "recognizedCompliance": 0.4949494949494949,
+            "contribution": 0.049494949494949494
           }
         },
         {
@@ -20313,8 +20313,8 @@
       "cargo": "PROMOTOR GALAGRO ORIENTE A ANT",
       "territory": "GALAGRO ORIENTE A ANT.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.41028037383177574,
-      "calculatedQuarterResult": 0.41028037383177574,
+      "originalQuarterResult": 0.3658359293873313,
+      "calculatedQuarterResult": 0.3658359293873313,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -20423,8 +20423,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -20463,10 +20463,10 @@
           ],
           "quarter": {
             "actual": 2,
-            "target": 3,
-            "rawCompliance": 0.6666666666666666,
-            "recognizedCompliance": 0.6666666666666666,
-            "contribution": 0.06666666666666667
+            "target": 9,
+            "rawCompliance": 0.2222222222222222,
+            "recognizedCompliance": 0.2222222222222222,
+            "contribution": 0.022222222222222223
           }
         },
         {
@@ -20863,8 +20863,8 @@
       "cargo": "RC GALAGRO ORIENTE B ANT",
       "territory": "GALAGRO ORIENTE B ANT.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.4043886075687021,
-      "calculatedQuarterResult": 0.4043886075687021,
+      "originalQuarterResult": 0.3395737927538872,
+      "calculatedQuarterResult": 0.3395737927538872,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -20973,8 +20973,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -21013,10 +21013,10 @@
           ],
           "quarter": {
             "actual": 7.666666666666667,
-            "target": 3,
-            "rawCompliance": 1.5,
-            "recognizedCompliance": 1.5,
-            "contribution": 0.15000000000000002
+            "target": 9,
+            "rawCompliance": 0.8518518518518519,
+            "recognizedCompliance": 0.8518518518518519,
+            "contribution": 0.0851851851851852
           }
         },
         {
@@ -21413,8 +21413,8 @@
       "cargo": "PROMOTOR GALAGRO ORIENTE B ANT",
       "territory": "GALAGRO ORIENTE B ANT.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.17723490196175906,
-      "calculatedQuarterResult": 0.17723490196175906,
+      "originalQuarterResult": 0.14019786492472203,
+      "calculatedQuarterResult": 0.14019786492472203,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -21523,8 +21523,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -21563,10 +21563,10 @@
           ],
           "quarter": {
             "actual": 1.6666666666666667,
-            "target": 3,
-            "rawCompliance": 0.5555555555555556,
-            "recognizedCompliance": 0.5555555555555556,
-            "contribution": 0.05555555555555556
+            "target": 9,
+            "rawCompliance": 0.1851851851851852,
+            "recognizedCompliance": 0.1851851851851852,
+            "contribution": 0.01851851851851852
           }
         },
         {
@@ -21963,8 +21963,8 @@
       "cargo": "RC GALAGRO SUROESTE ANT",
       "territory": "GALAGRO SUROESTE ANT.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.22049151296418565,
-      "calculatedQuarterResult": 0.22049151296418565,
+      "originalQuarterResult": 0.17802237716171657,
+      "calculatedQuarterResult": 0.17802237716171657,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -22073,8 +22073,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -22113,10 +22113,10 @@
           ],
           "quarter": {
             "actual": 28.666666666666668,
-            "target": 45,
-            "rawCompliance": 0.6370370370370371,
-            "recognizedCompliance": 0.6370370370370371,
-            "contribution": 0.0637037037037037
+            "target": 135,
+            "rawCompliance": 0.2123456790123457,
+            "recognizedCompliance": 0.2123456790123457,
+            "contribution": 0.02123456790123457
           }
         },
         {
@@ -22513,8 +22513,8 @@
       "cargo": "PROMOTOR GALAGRO SUROESTE ANT",
       "territory": "GALAGRO SUROESTE ANT.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.19459740794272215,
-      "calculatedQuarterResult": 0.19459740794272215,
+      "originalQuarterResult": 0.1871900005353148,
+      "calculatedQuarterResult": 0.1871900005353148,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -22623,8 +22623,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -22663,10 +22663,10 @@
           ],
           "quarter": {
             "actual": 0.3333333333333333,
-            "target": 3,
-            "rawCompliance": 0.1111111111111111,
-            "recognizedCompliance": 0.1111111111111111,
-            "contribution": 0.011111111111111112
+            "target": 9,
+            "rawCompliance": 0.037037037037037035,
+            "recognizedCompliance": 0.037037037037037035,
+            "contribution": 0.003703703703703704
           }
         },
         {
@@ -23063,8 +23063,8 @@
       "cargo": "RTC GALAGRO URABA",
       "territory": "GALAGRO URABA ANT.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.2884965222043874,
-      "calculatedQuarterResult": 0.2884965222043874,
+      "originalQuarterResult": 0.22182985553772072,
+      "calculatedQuarterResult": 0.22182985553772072,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -23173,8 +23173,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -23213,10 +23213,10 @@
           ],
           "quarter": {
             "actual": 24,
-            "target": 24,
-            "rawCompliance": 1,
-            "recognizedCompliance": 1,
-            "contribution": 0.1
+            "target": 72,
+            "rawCompliance": 0.3333333333333333,
+            "recognizedCompliance": 0.3333333333333333,
+            "contribution": 0.03333333333333333
           }
         },
         {
@@ -23613,8 +23613,8 @@
       "cargo": "RC GALAGRO VALLE DE ABURRA",
       "territory": "GALAGRO VALLE DE ABURRA ANT.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.33303951826035644,
-      "calculatedQuarterResult": 0.33303951826035644,
+      "originalQuarterResult": 0.2552617404825786,
+      "calculatedQuarterResult": 0.2552617404825786,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -23723,8 +23723,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -23763,10 +23763,10 @@
           ],
           "quarter": {
             "actual": 21,
-            "target": 18,
-            "rawCompliance": 1.1666666666666667,
-            "recognizedCompliance": 1.1666666666666667,
-            "contribution": 0.11666666666666668
+            "target": 54,
+            "rawCompliance": 0.3888888888888889,
+            "recognizedCompliance": 0.3888888888888889,
+            "contribution": 0.03888888888888889
           }
         },
         {
@@ -24273,8 +24273,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(MAX(G17,H17,I17)/J17,0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -24313,7 +24313,7 @@
           ],
           "quarter": {
             "actual": 0,
-            "target": 5,
+            "target": 15,
             "rawCompliance": 0,
             "recognizedCompliance": 0,
             "contribution": 0
@@ -24823,8 +24823,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(SUM(G17,H17,I17)/(J17*3),0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -24862,7 +24862,7 @@
             }
           ],
           "quarter": {
-            "actual": 183,
+            "actual": 61,
             "target": 30,
             "rawCompliance": 1.5,
             "recognizedCompliance": 1.5,
@@ -25263,8 +25263,8 @@
       "cargo": "RTC GALAGRO CORDOBA",
       "territory": "GALAGRO CORDOBA ANT.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.25888074291300095,
-      "calculatedQuarterResult": 0.25888074291300095,
+      "originalQuarterResult": 0.16675953079178885,
+      "calculatedQuarterResult": 0.16675953079178885,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -25373,8 +25373,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(SUM(G17,H17,I17)/(J17*3),0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -25412,11 +25412,11 @@
             }
           ],
           "quarter": {
-            "actual": 228,
+            "actual": 76,
             "target": 165,
-            "rawCompliance": 1.3818181818181818,
-            "recognizedCompliance": 1.3818181818181818,
-            "contribution": 0.13818181818181818
+            "rawCompliance": 0.46060606060606063,
+            "recognizedCompliance": 0.46060606060606063,
+            "contribution": 0.046060606060606066
           }
         },
         {
@@ -25923,8 +25923,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(SUM(G17,H17,I17)/(J17*3),0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -25962,7 +25962,7 @@
             }
           ],
           "quarter": {
-            "actual": 210,
+            "actual": 70,
             "target": 36,
             "rawCompliance": 1.5,
             "recognizedCompliance": 1.5,
@@ -26473,8 +26473,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(SUM(G17,H17,I17)/(J17*3),0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -26913,8 +26913,8 @@
       "cargo": "RC GALAGRO ORIENTE A ANT",
       "territory": "GALAGRO ORIENTE A ANT.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.3513510793177877,
-      "calculatedQuarterResult": 0.3513510793177877,
+      "originalQuarterResult": 0.3498359278026361,
+      "calculatedQuarterResult": 0.3498359278026361,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -27023,8 +27023,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(SUM(G17,H17,I17)/(J17*3),0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -27062,11 +27062,11 @@
             }
           ],
           "quarter": {
-            "actual": 147,
+            "actual": 49,
             "target": 33,
-            "rawCompliance": 1.5,
-            "recognizedCompliance": 1.5,
-            "contribution": 0.15000000000000002
+            "rawCompliance": 1.4848484848484849,
+            "recognizedCompliance": 1.4848484848484849,
+            "contribution": 0.1484848484848485
           }
         },
         {
@@ -27463,8 +27463,8 @@
       "cargo": "PROMOTOR GALAGRO ORIENTE A ANT",
       "territory": "GALAGRO ORIENTE A ANT.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.4394021907809061,
-      "calculatedQuarterResult": 0.4394021907809061,
+      "originalQuarterResult": 0.3560688574475727,
+      "calculatedQuarterResult": 0.3560688574475727,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -27573,8 +27573,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(SUM(G17,H17,I17)/(J17*3),0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -27612,11 +27612,11 @@
             }
           ],
           "quarter": {
-            "actual": 18,
+            "actual": 6,
             "target": 9,
-            "rawCompliance": 1.5,
-            "recognizedCompliance": 1.5,
-            "contribution": 0.15000000000000002
+            "rawCompliance": 0.6666666666666666,
+            "recognizedCompliance": 0.6666666666666666,
+            "contribution": 0.06666666666666667
           }
         },
         {
@@ -28123,8 +28123,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(SUM(G17,H17,I17)/(J17*3),0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -28162,7 +28162,7 @@
             }
           ],
           "quarter": {
-            "actual": 69,
+            "actual": 23,
             "target": 9,
             "rawCompliance": 1.5,
             "recognizedCompliance": 1.5,
@@ -28563,8 +28563,8 @@
       "cargo": "PROMOTOR GALAGRO ORIENTE B ANT",
       "territory": "GALAGRO ORIENTE B ANT.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.29729651099481524,
-      "calculatedQuarterResult": 0.29729651099481524,
+      "originalQuarterResult": 0.2028520665503708,
+      "calculatedQuarterResult": 0.2028520665503708,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -28673,8 +28673,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(SUM(G17,H17,I17)/(J17*3),0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -28712,11 +28712,11 @@
             }
           ],
           "quarter": {
-            "actual": 15,
+            "actual": 5,
             "target": 9,
-            "rawCompliance": 1.5,
-            "recognizedCompliance": 1.5,
-            "contribution": 0.15000000000000002
+            "rawCompliance": 0.5555555555555556,
+            "recognizedCompliance": 0.5555555555555556,
+            "contribution": 0.05555555555555556
           }
         },
         {
@@ -29113,8 +29113,8 @@
       "cargo": "RC GALAGRO SUROESTE ANT",
       "territory": "GALAGRO SUROESTE ANT.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.3243713843292208,
-      "calculatedQuarterResult": 0.3243713843292208,
+      "originalQuarterResult": 0.23807508803292451,
+      "calculatedQuarterResult": 0.23807508803292451,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -29223,8 +29223,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(SUM(G17,H17,I17)/(J17*3),0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -29262,11 +29262,11 @@
             }
           ],
           "quarter": {
-            "actual": 258,
+            "actual": 86,
             "target": 135,
-            "rawCompliance": 1.5,
-            "recognizedCompliance": 1.5,
-            "contribution": 0.15000000000000002
+            "rawCompliance": 0.6370370370370371,
+            "recognizedCompliance": 0.6370370370370371,
+            "contribution": 0.0637037037037037
           }
         },
         {
@@ -29663,8 +29663,8 @@
       "cargo": "PROMOTOR GALAGRO SUROESTE ANT",
       "territory": "GALAGRO SUROESTE ANT.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.1751852507562948,
-      "calculatedQuarterResult": 0.1751852507562948,
+      "originalQuarterResult": 0.15296302853407256,
+      "calculatedQuarterResult": 0.15296302853407256,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -29773,8 +29773,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(SUM(G17,H17,I17)/(J17*3),0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -29812,11 +29812,11 @@
             }
           ],
           "quarter": {
-            "actual": 3,
+            "actual": 1,
             "target": 9,
-            "rawCompliance": 0.3333333333333333,
-            "recognizedCompliance": 0.3333333333333333,
-            "contribution": 0.03333333333333333
+            "rawCompliance": 0.1111111111111111,
+            "recognizedCompliance": 0.1111111111111111,
+            "contribution": 0.011111111111111112
           }
         },
         {
@@ -30213,8 +30213,8 @@
       "cargo": "RTC GALAGRO URABA",
       "territory": "GALAGRO URABA ANT.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.37568218298555384,
-      "calculatedQuarterResult": 0.37568218298555384,
+      "originalQuarterResult": 0.32568218298555385,
+      "calculatedQuarterResult": 0.32568218298555385,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -30323,8 +30323,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(SUM(G17,H17,I17)/(J17*3),0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -30362,11 +30362,11 @@
             }
           ],
           "quarter": {
-            "actual": 216,
+            "actual": 72,
             "target": 72,
-            "rawCompliance": 1.5,
-            "recognizedCompliance": 1.5,
-            "contribution": 0.15000000000000002
+            "rawCompliance": 1,
+            "recognizedCompliance": 1,
+            "contribution": 0.1
           }
         },
         {
@@ -30763,8 +30763,8 @@
       "cargo": "RC GALAGRO VALLE DE ABURRA",
       "territory": "GALAGRO VALLE DE ABURRA ANT.",
       "companyExcel": "GALAGRO",
-      "originalQuarterResult": 0.2692765443139604,
-      "calculatedQuarterResult": 0.2692765443139604,
+      "originalQuarterResult": 0.23594321098062704,
+      "calculatedQuarterResult": 0.23594321098062704,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -30873,8 +30873,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(SUM(G17,H17,I17)/(J17*3),0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
@@ -30912,11 +30912,11 @@
             }
           ],
           "quarter": {
-            "actual": 189,
+            "actual": 63,
             "target": 54,
-            "rawCompliance": 1.5,
-            "recognizedCompliance": 1.5,
-            "contribution": 0.15000000000000002
+            "rawCompliance": 1.1666666666666667,
+            "recognizedCompliance": 1.1666666666666667,
+            "contribution": 0.11666666666666668
           }
         },
         {
@@ -31423,8 +31423,8 @@
           "id": "nuevos_clientes",
           "label": "Nuevos clientes",
           "row": 17,
-          "calculationType": "promedio_mensual",
-          "formula": "MIN(150%,IFERROR(SUM(G17,H17,I17)/(J17*3),0))",
+          "calculationType": "ratio_acumulado",
+          "formula": "MIN(150%, acumulado máximo / meta trimestral)",
           "weight": 0.1,
           "cap": 1.5,
           "targetThreshold": 0.9,
