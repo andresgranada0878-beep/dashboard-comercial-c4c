@@ -7,13 +7,16 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "build:data": "node scripts/build-individual-data.mjs && node scripts/expand-antioquia-team.mjs && node scripts/expand-galagro-nacional-team.mjs && node scripts/normalize-galagro-nacional-indicators.mjs && node scripts/build-galagro-nacional-director.mjs && node scripts/dedupe-galagro-nacional-director.mjs"
+    "build:data": "node scripts/build-individual-data.mjs && node scripts/expand-antioquia-team.mjs && node scripts/expand-galagro-nacional-team.mjs && node scripts/normalize-galagro-nacional-indicators.mjs && node scripts/build-galagro-nacional-director.mjs && node scripts/dedupe-galagro-nacional-director.mjs",
+    "sync:drive": "node scripts/sync-drive.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
     "@vercel/analytics": "1.6.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "dotenv": "^17.4.2",
+    "googleapis": "^174.0.1",
     "jspdf": "^4.2.1",
     "jspdf-autotable": "^5.0.8",
     "lucide-react": "^1.16.0",
@@ -34,10 +37,5 @@
     "postcss": "^8.5",
     "tailwindcss": "^4.3.3",
     "typescript": "5.7.3"
-  },
-  "pnpm": {
-    "overrides": {
-      "hono": "4.12.25"
-    }
   }
 }
