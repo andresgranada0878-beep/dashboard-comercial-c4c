@@ -83,48 +83,40 @@ jobs:
           const { execFileSync } = require("child_process")
 
           const file = "data/generated/individual-c4c.json"
-          const current = JSON.parse(fs.readFileSync(file, "utf8"))
 
-          let previous
+          const current = JSON.parse(
+            fs.readFileSync(file, "utf8"),
+          )
 
-          try {
-            previous = JSON.parse(
-              execFileSync(
-                "git",
-                ["show", `HEAD:${file}`],
-                { encoding: "utf8" },
-              ),
-            )
-          } catch {
-            process.exit(10)
-          }
+          const previous = JSON.parse(
+            execFileSync(
+              "git",
+              ["show", `HEAD:${file}`],
+              { encoding: "utf8" },
+            ),
+          )
 
-          // generatedAt cambia en cada ejecución y no representa
-          // un cambio real de los indicadores.
           delete current.generatedAt
           delete previous.generatedAt
 
-          const normalize = (value) => JSON.stringify(value)
+          const changed =
+            JSON.stringify(current) !== JSON.stringify(previous)
 
-          if (normalize(current) === normalize(previous)) {
+          if (!changed) {
             execFileSync("git", ["checkout", "--", file])
-            console.log("Los datos son iguales. No se publicará una actualización.")
-            process.exit(0)
           }
 
-          console.log("Se detectaron cambios reales en los datos.")
-          process.exit(10)
+          fs.appendFileSync(
+            process.env.GITHUB_OUTPUT,
+            `changed=${changed}\n`,
+          )
+
+          console.log(
+            changed
+              ? "Se detectaron cambios reales."
+              : "Los indicadores no cambiaron.",
+          )
           NODE
-
-          status=$?
-
-          if [ "$status" -eq 0 ]; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          elif [ "$status" -eq 10 ]; then
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          else
-            exit "$status"
-          fi
 
       - name: Guardar actualización
         if: steps.changes.outputs.changed == 'true'
@@ -136,4 +128,5 @@ jobs:
           git add data/generated/individual-c4c.json
           git commit -m "Actualizar indicadores desde Google Drive"
           git push
+
 
