@@ -1,0 +1,7 @@
+allowBuilds:
+  core-js: false
+  msw: false
+  sharp: true
+
+overrides:
+  hono: 4.12.25

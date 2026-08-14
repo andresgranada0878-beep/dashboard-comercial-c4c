@@ -1,0 +1,132 @@
+name: Actualizar dashboard desde Drive
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dashboard-drive-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.21.0
+          run_install: false
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Instalar dependencias
+        run: pnpm install --frozen-lockfile
+
+      - name: Configurar acceso de solo lectura a Drive
+        shell: bash
+        env:
+          GOOGLE_CLIENT_EMAIL: ${{ secrets.GOOGLE_CLIENT_EMAIL }}
+          GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY }}
+          GOOGLE_DRIVE_FOLDER_ID: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
+        run: |
+          node - <<'NODE'
+          const fs = require("fs")
+
+          const required = [
+            "GOOGLE_CLIENT_EMAIL",
+            "GOOGLE_PRIVATE_KEY",
+            "GOOGLE_DRIVE_FOLDER_ID",
+          ]
+
+          for (const key of required) {
+            if (!process.env[key]) {
+              throw new Error(`Falta el secret ${key}`)
+            }
+          }
+
+          const privateKey = process.env.GOOGLE_PRIVATE_KEY.replace(/\r?\n/g, "\\n")
+
+          fs.writeFileSync(
+            ".env.local",
+            [
+              `GOOGLE_CLIENT_EMAIL=${process.env.GOOGLE_CLIENT_EMAIL}`,
+              `GOOGLE_PRIVATE_KEY="${privateKey}"`,
+              `GOOGLE_DRIVE_FOLDER_ID=${process.env.GOOGLE_DRIVE_FOLDER_ID}`,
+              "",
+            ].join("\n"),
+          )
+          NODE
+
+      - name: Descargar Excel y regenerar dashboard
+        run: pnpm refresh:data
+
+      - name: Detectar cambios reales
+        id: changes
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs = require("fs")
+          const { execFileSync } = require("child_process")
+
+          const file = "data/generated/individual-c4c.json"
+
+          const current = JSON.parse(
+            fs.readFileSync(file, "utf8"),
+          )
+
+          const previous = JSON.parse(
+            execFileSync(
+              "git",
+              ["show", `HEAD:${file}`],
+              { encoding: "utf8" },
+            ),
+          )
+
+          delete current.generatedAt
+          delete previous.generatedAt
+
+          const changed =
+            JSON.stringify(current) !== JSON.stringify(previous)
+
+          if (!changed) {
+            execFileSync("git", ["checkout", "--", file])
+          }
+
+          fs.appendFileSync(
+            process.env.GITHUB_OUTPUT,
+            `changed=${changed}\n`,
+          )
+
+          console.log(
+            changed
+              ? "Se detectaron cambios reales."
+              : "Los indicadores no cambiaron.",
+          )
+          NODE
+
+      - name: Guardar actualización
+        if: steps.changes.outputs.changed == 'true'
+        shell: bash
+        run: |
+          git config user.name "Dashboard C4C Bot"
+          git config user.email "suenorealboutique1@gmail.com"
+
+          git add data/generated/individual-c4c.json
+          git commit -m "Actualizar indicadores desde Google Drive"
+          git push
+
+

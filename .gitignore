@@ -26,3 +26,7 @@ next-env.d.ts
 data/fuentes/*.xlsx
 data/*.xlsx
 *.zip
+
+data/fuentes/
+
+google-service-account.json
