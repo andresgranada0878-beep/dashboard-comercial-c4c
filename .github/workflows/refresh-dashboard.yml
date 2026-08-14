@@ -92,7 +92,7 @@ jobs:
             execFileSync(
               "git",
               ["show", `HEAD:${file}`],
-              { encoding: "utf8" },
+              { encoding: "utf8", maxBuffer: 20 * 1024 * 1024 },
             ),
           )
 
@@ -128,5 +128,6 @@ jobs:
           git add data/generated/individual-c4c.json
           git commit -m "Actualizar indicadores desde Google Drive"
           git push
+
 
 
