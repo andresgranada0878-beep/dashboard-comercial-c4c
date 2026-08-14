@@ -41,6 +41,10 @@ const aliases = new Map([
     "informe Q1 - Galagro Nacional - Promotor(1).xlsx",
     "informe Q1 - Galagro Nacional - Promotor.xlsx",
   ],
+  [
+    "informe Q2 - Galagro Nacional - Actualizado.xlsx",
+    "informe Q2 - Galagro Nacional.xlsx",
+  ],
 ])
 
 const expectedFiles = [
@@ -92,8 +96,19 @@ for (const file of files) {
   filesByName.set(file.name, file)
 }
 
+const driveAliases = new Map([
+  [
+    "informe Q2 - Galagro Nacional.xlsx",
+    "informe Q2 - Galagro Nacional - Actualizado.xlsx",
+  ],
+])
+
+const resolveDriveFile = (canonicalName) =>
+  filesByName.get(canonicalName) ??
+  filesByName.get(driveAliases.get(canonicalName))
+
 const missing = expectedFiles.filter(
-  (fileName) => !filesByName.has(fileName),
+  (fileName) => !resolveDriveFile(fileName),
 )
 
 console.log("")
@@ -120,7 +135,7 @@ console.log("")
 console.log("Descargando fuentes...")
 
 for (const fileName of expectedFiles) {
-  const file = filesByName.get(fileName)
+  const file = resolveDriveFile(fileName)
 
   const response = await drive.files.get(
     {
@@ -147,3 +162,5 @@ for (const fileName of expectedFiles) {
 
 console.log("")
 console.log(`Sincronización completada: ${expectedFiles.length} archivos.`)
+
+

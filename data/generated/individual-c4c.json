@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-04T14:15:53.606Z",
+  "generatedAt": "2026-08-14T23:03:27.387Z",
   "scope": "Resultados individuales y de dirección",
   "source": "Excel de validación; Power BI será la fuente posterior de gestión real",
   "reports": [
@@ -576,10 +576,10 @@
       "cargo": "DIR AGRICOLA ANTIOQUIA",
       "territory": "PYC AGRÍCOLA ANTIOQUIA DIRECCIÓN",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.5012294863397628,
-      "calculatedQuarterResult": 0.5012294863397628,
-      "validationDifference": 0,
-      "validationStatus": "Coincide",
+      "originalQuarterResult": 0.49202355367442585,
+      "calculatedQuarterResult": 0.5502427317566175,
+      "validationDifference": 0.05821917808219168,
+      "validationStatus": "Inconsistencia",
       "warning": "Resultado almacenado con error #DIV/0!; La hoja Q2 conserva etiqueta o periodo de Q1",
       "indicators": [
         {
@@ -794,42 +794,42 @@
           "rawTarget": 2628,
           "criterion": "Mide el cumplimiento de referencias gestionadas frente a la meta esperada del período. Se suman las referencias generadas en los meses evaluados y se comparan contra la meta (SKU activas). El resultado muestra el porcentaje de cumplimiento alcanzado.",
           "monthValues": {
-            "Abril": 66.25531114608225,
-            "Mayo": 68.3555755382928,
-            "Junio": 107.32102376068106
+            "Abril": 15,
+            "Mayo": 15,
+            "Junio": 15
           },
           "monthly": [
             {
               "month": "Abril",
-              "actual": 66.25531114608225,
+              "actual": 15,
               "target": 2628,
-              "rawCompliance": 0.025211305611142407,
-              "recognizedCompliance": 0.025211305611142407,
-              "contribution": 0.002521130561114241
+              "rawCompliance": 0.005707762557077625,
+              "recognizedCompliance": 0.005707762557077625,
+              "contribution": 0.0005707762557077625
             },
             {
               "month": "Mayo",
-              "actual": 68.3555755382928,
+              "actual": 15,
               "target": 2628,
-              "rawCompliance": 0.02601049297499726,
-              "recognizedCompliance": 0.02601049297499726,
-              "contribution": 0.002601049297499726
+              "rawCompliance": 0.005707762557077625,
+              "recognizedCompliance": 0.005707762557077625,
+              "contribution": 0.0005707762557077625
             },
             {
               "month": "Junio",
-              "actual": 107.32102376068106,
+              "actual": 15,
               "target": 2628,
-              "rawCompliance": 0.04083752806723023,
-              "recognizedCompliance": 0.04083752806723023,
-              "contribution": 0.004083752806723024
+              "rawCompliance": 0.005707762557077625,
+              "recognizedCompliance": 0.005707762557077625,
+              "contribution": 0.0005707762557077625
             }
           ],
           "quarter": {
-            "actual": 241.93191044505608,
+            "actual": 45,
             "target": 7884,
-            "rawCompliance": 0.0920593266533699,
-            "recognizedCompliance": 0.0920593266533699,
-            "contribution": 0.00920593266533699
+            "rawCompliance": 0.5821917808219178,
+            "recognizedCompliance": 0.5821917808219178,
+            "contribution": 0.058219178082191785
           }
         },
         {
@@ -17013,8 +17013,8 @@
       "cargo": "PROMOTOR AGRICOLA ANT SUROESTE 3",
       "territory": "PYC AGRÍCOLA ANT SUROESTE",
       "companyExcel": "Pérez y Cardona",
-      "originalQuarterResult": 0.19963523767670238,
-      "calculatedQuarterResult": 0.19963523767670238,
+      "originalQuarterResult": 0.22369940879969705,
+      "calculatedQuarterResult": 0.22369940879969705,
       "validationDifference": 0,
       "validationStatus": "Calculado",
       "warning": "Calculado directamente desde las hojas base del Excel para el colaborador seleccionado.",
@@ -17078,7 +17078,7 @@
           "weight": 0.1,
           "cap": 1,
           "targetThreshold": 0.9,
-          "rawTarget": 187,
+          "rawTarget": 22,
           "criterion": "Mide la cobertura promedio de clientes visitados frente a la meta esperada. Se comparan los clientes cubiertos durante el período evaluado contra la meta definida.",
           "monthValues": {
             "Abril": 0,
@@ -17089,7 +17089,7 @@
             {
               "month": "Abril",
               "actual": 0,
-              "target": 187,
+              "target": 22,
               "rawCompliance": 0,
               "recognizedCompliance": 0,
               "contribution": 0
@@ -17097,26 +17097,26 @@
             {
               "month": "Mayo",
               "actual": 4,
-              "target": 187,
-              "rawCompliance": 0.0213903743315508,
-              "recognizedCompliance": 0.0213903743315508,
-              "contribution": 0.0021390374331550803
+              "target": 22,
+              "rawCompliance": 0.18181818181818182,
+              "recognizedCompliance": 0.18181818181818182,
+              "contribution": 0.018181818181818184
             },
             {
               "month": "Junio",
               "actual": 14,
-              "target": 187,
-              "rawCompliance": 0.0748663101604278,
-              "recognizedCompliance": 0.0748663101604278,
-              "contribution": 0.0074866310160427805
+              "target": 22,
+              "rawCompliance": 0.6363636363636364,
+              "recognizedCompliance": 0.6363636363636364,
+              "contribution": 0.06363636363636364
             }
           ],
           "quarter": {
             "actual": 18,
-            "target": 561,
-            "rawCompliance": 0.03208556149732621,
-            "recognizedCompliance": 0.03208556149732621,
-            "contribution": 0.003208556149732621
+            "target": 66,
+            "rawCompliance": 0.2727272727272727,
+            "recognizedCompliance": 0.2727272727272727,
+            "contribution": 0.02727272727272727
           }
         },
         {

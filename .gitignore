@@ -28,3 +28,5 @@ data/*.xlsx
 *.zip
 
 data/fuentes/
+
+google-service-account.json
