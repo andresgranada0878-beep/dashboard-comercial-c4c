@@ -74,16 +74,56 @@ jobs:
       - name: Descargar Excel y regenerar dashboard
         run: pnpm refresh:data
 
-      - name: Detectar cambios
+      - name: Detectar cambios reales
         id: changes
         shell: bash
         run: |
-          if git diff --quiet -- data/generated/individual-c4c.json; then
+          node - <<'NODE'
+          const fs = require("fs")
+          const { execFileSync } = require("child_process")
+
+          const file = "data/generated/individual-c4c.json"
+          const current = JSON.parse(fs.readFileSync(file, "utf8"))
+
+          let previous
+
+          try {
+            previous = JSON.parse(
+              execFileSync(
+                "git",
+                ["show", `HEAD:${file}`],
+                { encoding: "utf8" },
+              ),
+            )
+          } catch {
+            process.exit(10)
+          }
+
+          // generatedAt cambia en cada ejecución y no representa
+          // un cambio real de los indicadores.
+          delete current.generatedAt
+          delete previous.generatedAt
+
+          const normalize = (value) => JSON.stringify(value)
+
+          if (normalize(current) === normalize(previous)) {
+            execFileSync("git", ["checkout", "--", file])
+            console.log("Los datos son iguales. No se publicará una actualización.")
+            process.exit(0)
+          }
+
+          console.log("Se detectaron cambios reales en los datos.")
+          process.exit(10)
+          NODE
+
+          status=$?
+
+          if [ "$status" -eq 0 ]; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
-            echo "No hay cambios en los datos."
-          else
+          elif [ "$status" -eq 10 ]; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
-            echo "El dashboard cambió."
+          else
+            exit "$status"
           fi
 
       - name: Guardar actualización
@@ -96,3 +136,4 @@ jobs:
           git add data/generated/individual-c4c.json
           git commit -m "Actualizar indicadores desde Google Drive"
           git push
+
