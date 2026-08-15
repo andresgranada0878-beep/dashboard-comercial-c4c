@@ -359,7 +359,7 @@ export function DashboardShell() {
             <Context label="Resultado Excel" value={percent(selected.originalQuarterResult, 4)} />
             <Context label="Resultado recalculado" value={percent(selected.calculatedQuarterResult, 4)} />
             <Context label="Diferencia" value={selected.validationDifference === null ? "No verificable" : `${(selected.validationDifference * 100).toFixed(4)} pp`} />
-            <Context label="Datos generados" value={dateTime(data.generatedAt)} />
+            <Context label="Última actualización válida" value={dateTime(data.generatedAt)} />
           </div>
           {selected.warning ? <div style={{ marginTop: 12, color: "#9a5d00", fontSize: 13 }}>{selected.warning}</div> : null}
           {data.errors.length ? <div style={{ marginTop: 12, color: "#b42318", fontSize: 13 }}>{data.errors.join(" · ")}</div> : null}

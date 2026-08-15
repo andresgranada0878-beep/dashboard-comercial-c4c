@@ -359,7 +359,7 @@ export async function exportIndividualPdf({
     )
 
     doc.text(
-      `Datos generados: ${formatDate(generatedAt)}`,
+      `Última actualización válida: ${formatDate(generatedAt)}`,
       pageWidth / 2,
       pageHeight - 7,
       { align: "center" },
