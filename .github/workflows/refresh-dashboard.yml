@@ -74,6 +74,8 @@ jobs:
       - name: Descargar Excel y regenerar dashboard
         run: pnpm refresh:data
 
+      - name: Validar integridad de los indicadores
+        run: node scripts/validate-generated-data.mjs
       - name: Detectar cambios reales
         id: changes
         shell: bash
@@ -118,7 +120,7 @@ jobs:
           )
           NODE
 
-      - name: Guardar actualización
+      - name: Guardar actualizaciÃ³n
         if: steps.changes.outputs.changed == 'true'
         shell: bash
         run: |
@@ -128,6 +130,3 @@ jobs:
           git add data/generated/individual-c4c.json
           git commit -m "Actualizar indicadores desde Google Drive"
           git push
-
-
-
