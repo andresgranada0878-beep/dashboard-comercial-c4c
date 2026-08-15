@@ -120,11 +120,11 @@ jobs:
           )
           NODE
 
-      - name: Guardar actualización
+      - name: Guardar actualizaciÃ³n
         if: steps.changes.outputs.changed == 'true'
         shell: bash
         run: |
-          git config user.name "Dashboard C4C Bot"
+          git config user.name "Mario Andres Granada"
           git config user.email "suenorealboutique1@gmail.com"
 
           git add data/generated/individual-c4c.json
