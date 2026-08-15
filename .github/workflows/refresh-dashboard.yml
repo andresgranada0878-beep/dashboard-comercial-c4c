@@ -2,6 +2,12 @@ name: Actualizar dashboard desde Drive
 
 on:
   workflow_dispatch:
+    inputs:
+      deploy_test:
+        description: "Probar despliegue automatico en Vercel"
+        required: false
+        default: false
+        type: boolean
   schedule:
     - cron: "*/15 * * * *"
 
@@ -120,13 +126,18 @@ jobs:
           )
           NODE
 
-      - name: Guardar actualizaciÃ³n
-        if: steps.changes.outputs.changed == 'true'
+      - name: Guardar actualizacion
+        if: steps.changes.outputs.changed == 'true' || inputs.deploy_test == true
         shell: bash
         run: |
           git config user.name "Mario Andres Granada"
           git config user.email "suenorealboutique1@gmail.com"
 
-          git add data/generated/individual-c4c.json
-          git commit -m "Actualizar indicadores desde Google Drive"
+          if [ "${{ steps.changes.outputs.changed }}" = "true" ]; then
+            git add data/generated/individual-c4c.json
+            git commit -m "Actualizar indicadores desde Google Drive"
+          else
+            git commit --allow-empty -m "Probar despliegue automatico en Vercel"
+          fi
+
           git push
