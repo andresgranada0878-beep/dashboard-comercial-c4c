@@ -139,7 +139,7 @@
       "cap": 1.5,
       "calculationType": "ratio_acumulado",
       "pending": [],
-      "criterion": "Actividades en estado Finalizado/Completado de tipo Día de campo, Evento Especial, Visita Mostrador Especial o Visita Formación (sin parcelas), contadas una vez por ID, frente a 3 actividades trimestrales por promotor activo (las vacantes no generan meta). RTC: alcance territorio asignado. Reconocimiento máximo 150%."
+      "criterion": "Actividades en estado Finalizado/Completado de tipo Día de campo, Evento Especial, Visita Mostrador Especial o Visita Formación (sin parcelas), contadas una vez por ID, frente a 3 actividades trimestrales por promotor activo (las vacantes no generan meta). Reconocimiento máximo 150%."
     },
     {
       "id": "hectareas",
@@ -148,7 +148,7 @@
       "cap": 1.5,
       "calculationType": "ratio_acumulado",
       "pending": [],
-      "criterion": "Hectáreas impactadas registradas en Fincas frente a 90 hectáreas trimestrales (30 mensuales) por promotor activo. RTC: alcance territorio asignado. La suma no representa fincas únicas. Reconocimiento máximo 150%."
+      "criterion": "Hectáreas impactadas registradas en Fincas frente a 90 hectáreas trimestrales (30 mensuales) por promotor activo. La suma no representa fincas únicas. Reconocimiento máximo 150%."
     },
     {
       "id": "cultivos",
@@ -157,7 +157,7 @@
       "cap": 1.5,
       "calculationType": "ratio_acumulado",
       "pending": [],
-      "criterion": "Cultivos impactados registrados en Fincas (cultivo × empleado × mes) frente a 3 cultivos trimestrales (1 mensual) por promotor activo. RTC: alcance territorio asignado. No representa cultivos únicos. Reconocimiento máximo 150%."
+      "criterion": "Cultivos impactados registrados en Fincas (cultivo × empleado × mes) frente a 3 cultivos trimestrales (1 mensual) por promotor activo. No representa cultivos únicos. Reconocimiento máximo 150%."
     },
     {
       "id": "gestion-cultivos-impactados",

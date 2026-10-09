@@ -33,9 +33,20 @@ export function formatShare(value: number) {
 
 const oneDecimal = (value: number) => new Intl.NumberFormat("es-CO", { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(value * 100)
 
+export const PARTIAL_LEVEL = "PARCIAL · Sin nivel de desempeño"
+
+export function partialDetail(summary: EntityPeriodSummary) {
+  return summary.evaluatedWeight < summary.totalWeight - 1e-9 ? "peso evaluado < 100 %" : "datos incompletos en algún indicador"
+}
+
 export function partialReason(summary: EntityPeriodSummary) {
   if (summary.complete) return null
-  return summary.evaluatedWeight < summary.totalWeight - 1e-9 ? "PARCIAL (peso evaluado < 100 %)" : "PARCIAL (datos incompletos en algún indicador)"
+  return `PARCIAL (${partialDetail(summary)})`
+}
+
+export function formatPoints(value: number | null) {
+  if (value === null) return "Sin resultado"
+  return `${new Intl.NumberFormat("es-CO", { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(value * 100)} puntos`
 }
 
 export function resultLabel(entity: Q3Entity, period: string) {
@@ -97,14 +108,14 @@ export function toPdfPage(entity: Q3Entity, reports: AgricolaReports, period: st
   const summary = entity.results[period]
   const draftReasons = [...entity.draftReasons]
   if (!summary.complete && period !== reports.quarter) draftReasons.push(`${partialReason(summary)} en el periodo`)
-  if (summary.result !== null) observations.unshift(pdfText(`Resultado: ${new Intl.NumberFormat("es-CO", { maximumFractionDigits: 1 }).format(summary.result * 100)} puntos de 100 (aporte ponderado, sin redistribuir pesos). Cumplimiento normalizado: ${normalizedLabel(entity, period)}.${summary.complete ? "" : ` ${partialReason(summary)}: sin nivel de desempeño.`}`))
+  if (summary.result !== null) observations.unshift(pdfText(`Resultado: ${new Intl.NumberFormat("es-CO", { maximumFractionDigits: 1 }).format(summary.result * 100)} puntos de 100 (aporte ponderado, sin redistribuir pesos). Cumplimiento normalizado: ${normalizedLabel(entity, period)}.${summary.complete ? "" : ` ${PARTIAL_LEVEL} (${partialDetail(summary)}).`}`))
   return {
     source, view: isQuarter ? "trimestral" : "mensual", month: isQuarter ? reports.months[0] : period,
     globalResult: summary.result, rows, generatedAt: loadedAt,
     extras: {
       reportTitle: KIND_TITLES[entity.kind],
       resultLabel: resultLabel(entity, period),
-      levelLabel: summary.complete ? undefined : "Sin nivel (parcial)",
+      levelLabel: summary.complete ? undefined : PARTIAL_LEVEL,
       draftReasons: (entity.reportState === "final" && summary.complete ? [] : draftReasons).map(pdfText),
       statusByIndicator: Object.fromEntries(entity.indicators.map((indicator) => [indicator.id, STATUS_LABELS[indicator.periods[period].status]])),
       observations,

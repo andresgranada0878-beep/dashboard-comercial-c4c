@@ -7,7 +7,7 @@ import type { CSSProperties } from "react"
 import config from "@/config/agricola-q3-2026.json"
 import { buildAgricolaReports } from "@/lib/agricola-q3/engine.mjs"
 import type { AgricolaConfig, AgricolaReports, PeriodStatus, Q3Entity } from "@/lib/agricola-q3/engine.mjs"
-import { formatShare, normalizedLabel, partialReason, STATUS_LABELS, toPdfPage } from "@/lib/agricola-q3/pdf-pages"
+import { formatPoints, formatShare, normalizedLabel, PARTIAL_LEVEL, partialDetail, STATUS_LABELS, toPdfPage } from "@/lib/agricola-q3/pdf-pages"
 import { readLoad, type StoredLoad } from "@/lib/agricola-q3/store"
 import { downloadTraceWorkbook } from "@/lib/agricola-q3/trace-workbook"
 import { exportIndividualPdf, exportIndividualPdfBundle } from "@/lib/pdf/export-individual-pdf"
@@ -191,10 +191,11 @@ function EntityView({ entity, reports, period, periodLabel, expanded, setExpande
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: 10, marginTop: 14 }}>
         <Summary label="Periodo" value={periodLabel} />
-        <Summary label="Aporte ponderado (sobre 100)" value={summary.result === null ? "Sin resultado" : percent(summary.result)} />
+        <Summary label="Aporte ponderado (sobre 100)" value={formatPoints(summary.result)} />
         <Summary label="Cumplimiento normalizado" value={normalizedLabel(entity, period)} />
-        <Summary label="Nivel" value={summary.complete ? performance(summary.result) : `${partialReason(summary)}: sin nivel`} />
-        <Summary label="Indicadores sin dato" value={summary.missing.length ? summary.missing.join(", ") : "Ninguno"} />
+        <Summary label="Nivel" value={summary.complete ? performance(summary.result) : `${PARTIAL_LEVEL} (${partialDetail(summary)})`} />
+        <Summary label="Indicadores sin dato" value={summary.withoutData.length ? summary.withoutData.join(", ") : "Ninguno"} />
+        {summary.withoutTarget.length > 0 && <Summary label="Indicadores sin meta" value={summary.withoutTarget.join(", ")} />}
       </div>
       {entity.observations.map((item, index) => <p key={index} style={{ color: "#92400e", fontSize: 13 }}>{item}</p>)}
       <div style={{ overflowX: "auto", marginTop: 14 }}>
@@ -214,7 +215,7 @@ function EntityView({ entity, reports, period, periodLabel, expanded, setExpande
                 <td style={tdNum}>{percent(indicator.weight, 0)}</td>
                 <td style={tdNum}>{percent(value.contribution, 2)}</td>
                 <td style={td}><span style={{ color, background, borderRadius: 999, padding: "2px 8px", fontSize: 12, fontWeight: 800 }}>{STATUS_LABELS[value.status]}</span></td>
-                <td style={td}>{indicator.attribution}</td>
+                <td style={{ ...td, whiteSpace: "nowrap" }}>{indicator.attribution}</td>
                 <td style={td}><button type="button" style={linkButton} onClick={() => setExpanded(open ? null : indicator.id)}>{open ? "Ocultar" : "Detalle"}</button></td>
               </tr>
               {open && <tr><td colSpan={10} style={{ ...td, background: "#fafcfb", fontSize: 13 }}>

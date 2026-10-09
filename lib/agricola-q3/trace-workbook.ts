@@ -17,7 +17,7 @@ export async function downloadTraceWorkbook(reports: AgricolaReports, load: Stor
       "Tipo de informe": KIND_LABELS[entity.kind], Nombre: entity.name, Rol: entity.profile, Territorios: entity.territoryLabel,
       Posición: entity.status, Periodo: period, "Resultado (aporte ponderado sobre 100)": summary.result,
       "Cumplimiento normalizado (aporte / peso evaluado)": summary.normalized, "Peso evaluado": summary.evaluatedWeight,
-      "Peso total": summary.totalWeight, Estado: state(summary), "Indicadores sin dato o sin meta": summary.missing.join(", "),
+      "Peso total": summary.totalWeight, Estado: state(summary), "Indicadores sin dato": summary.withoutData.join(", "), "Indicadores sin meta": summary.withoutTarget.join(", "),
       "Indicadores No aplica": summary.notApplicable.join(", "),
       "Estado del informe": entity.reportState, "Motivos de borrador": entity.draftReasons.join(". "),
     }

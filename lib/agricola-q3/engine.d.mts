@@ -41,6 +41,8 @@ export interface EntityPeriodSummary {
   totalWeight: number
   complete: boolean
   missing: string[]
+  withoutData: string[]
+  withoutTarget: string[]
   notApplicable: string[]
 }
 

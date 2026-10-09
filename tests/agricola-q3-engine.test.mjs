@@ -258,6 +258,10 @@ test("rule new clients: exported measure against Meta Clientes Recuperar, with a
   assert.equal(clients.label, "Recuperación de clientes (nuevos + recuperados)")
   assert.ok(clients.notes.some(note => note.includes("La fuente no permite verificar si la medida incluye clientes recuperados.")))
   assert.deepEqual(clients.pending, [])
+  const promoter = indicator("Promotor Uno", "nuevos_clientes")
+  assert.equal(promoter.attribution, "Territorio asignado")
+  assert.ok(promoter.notes.some(note => note.startsWith("Alcance: territorio asignado") && note.includes("no representa autoría individual")))
+  for (const id of ["actividades_campo", "hectareas", "cultivos"]) assert.ok(!indicator("Promotor Uno", id).criterion.includes("RTC"))
   assert.equal(clients.periods.Q3.status, "ok")
   assert.equal(clients.cap, 1.5)
 })
@@ -268,6 +272,9 @@ test("rule director: 20 visits per month; coverage without client universe is Si
   const coverage = indicator("Directora Ficticia", "cobertura_clientes")
   assert.equal(coverage.periods.Q3.status, "sin_meta")
   assert.ok(coverage.notes.some(note => note.includes("universo de clientes")))
+  const summary = entity("Directora Ficticia").results.Q3
+  assert.ok(summary.withoutTarget.includes(coverage.label))
+  assert.ok(!summary.withoutData.includes(coverage.label))
 })
 
 test("rule partial results: weights are not redistributed; normalized = points / evaluated weight; no level when partial", () => {
