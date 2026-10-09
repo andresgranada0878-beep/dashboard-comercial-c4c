@@ -121,7 +121,7 @@
       "cap": 1,
       "calculationType": "ratio_acumulado",
       "pending": [],
-      "criterion": "Cantidad real de leads calificados frente a los leads asignados (Meta Leads) en los meses con asignación. Asignados sin gestión = 0. Sin leads asignados: No aplica."
+      "criterion": "Cantidad real de leads calificados frente a la meta: mínimo 1 lead por mes evaluado, o la Meta Leads del mes si es mayor (trimestre completo: mínimo 3). Sin leads registrados = 0. Vacantes y posiciones sin titular: No aplica."
     },
     {
       "id": "leads_calificados_tiempo",
@@ -130,7 +130,7 @@
       "cap": 1,
       "calculationType": "ratio_acumulado",
       "pending": [],
-      "criterion": "Leads gestionados dentro del plazo definido (Calificados Oportunos) frente a los leads asignados. Asignados sin gestión = 0. Sin leads asignados: No aplica."
+      "criterion": "Leads gestionados dentro del plazo definido (Calificados Oportunos) frente a la meta: mínimo 1 lead por mes evaluado, o la Meta Leads del mes si es mayor (trimestre completo: mínimo 3). Sin leads registrados = 0. Vacantes y posiciones sin titular: No aplica."
     },
     {
       "id": "actividades_campo",
@@ -192,7 +192,7 @@
     {
       "id": "leads",
       "title": "Leads",
-      "detail": "Numerador de leads calificados = cantidad real de leads calificados (nunca Meta Leads). Leads a tiempo = gestión real dentro del plazo (Calificados Oportunos). Asignados sin gestión = 0. Sin leads asignados o sin aplicación al perfil = No aplica."
+      "detail": "Numerador de leads calificados = cantidad real de leads calificados (nunca Meta Leads). Leads a tiempo = gestión real dentro del plazo (Calificados Oportunos). Metodología Q1/Q2: meta mensual = mayor entre 1 y Meta Leads; un mes sin registros cuenta 0 contra 1, así que una persona activa sin leads queda 0 / 3 en el trimestre y conserva el 10 % de cada indicador. Asignados sin gestión = 0. No aplica solo para vacantes, posiciones sin titular o perfiles a los que no corresponde el indicador. Territorio = suma de las metas mensuales de las personas con territorio asignado."
     },
     {
       "id": "activities",

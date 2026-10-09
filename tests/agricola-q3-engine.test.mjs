@@ -171,30 +171,36 @@ test("recommendations and references keep blanks as missing", () => {
   assert.equal(refs.periods.Q3.target, 20)
 })
 
-test("rule leads: real qualified count over assigned leads; months without assignment are No aplica", () => {
+test("rule leads: real qualified count; monthly target = max(1, Meta Leads); a month without records is 0 against 1", () => {
   const qualified = indicator("Comercial Uno", "leads_calificados")
   assert.equal(qualified.periods.Julio.actual, 1)
   assert.equal(qualified.periods.Julio.target, 2)
-  assert.equal(qualified.periods.Agosto.status, "no_aplica")
+  assert.equal(qualified.periods.Agosto.actual, 0)
+  assert.equal(qualified.periods.Agosto.target, 1)
   assert.equal(qualified.periods.Q3.actual, 2, "never Meta Leads as numerator")
-  assert.equal(qualified.periods.Q3.target, 3)
+  assert.equal(qualified.periods.Q3.target, 2 + 1 + 1)
   assert.equal(qualified.periods.Q3.status, "ok")
   const onTime = indicator("Comercial Uno", "leads_calificados_tiempo")
   assert.equal(onTime.periods.Q3.actual, 1)
-  assert.equal(onTime.periods.Q3.target, 3)
+  assert.equal(onTime.periods.Q3.target, 4)
 })
 
-test("rule leads: assigned without management is 0; not assigned is No aplica; contradictory rows are not evaluated", () => {
+test("rule leads: an active person without leads is 0 / 3 and keeps the weight; only vacancies are No aplica; contradictory rows are not evaluated", () => {
   const unmanaged = indicator("Comercial Dos", "leads_calificados")
   assert.equal(unmanaged.periods.Julio.actual, 0)
   assert.equal(unmanaged.periods.Julio.target, 2)
   assert.equal(unmanaged.periods.Q3.recognizedCompliance, 0)
   assert.equal(indicator("Comercial Dos", "leads_calificados_tiempo").periods.Q3.actual, 0)
-  const notAssigned = indicator("Promotor Uno", "leads_calificados")
-  assert.equal(notAssigned.periods.Q3.status, "no_aplica")
-  assert.equal(notAssigned.periods.Q3.contribution, null)
-  assert.ok(entity("Promotor Uno").results.Q3.notApplicable.includes(notAssigned.label))
-  assert.ok(!entity("Promotor Uno").results.Q3.missing.includes(notAssigned.label))
+  for (const id of ["leads_calificados", "leads_calificados_tiempo"]) {
+    const none = indicator("Promotor Uno", id)
+    assert.equal(none.periods.Q3.actual, 0)
+    assert.equal(none.periods.Q3.target, 3)
+    assert.equal(none.periods.Q3.status, "ok")
+    assert.equal(none.periods.Q3.contribution, 0)
+    assert.ok(!entity("Promotor Uno").results.Q3.notApplicable.includes(none.label))
+    assert.equal(indicator("(Vacante) Persona Tres", id).periods.Q3.status, "no_aplica")
+  }
+  assert.equal(indicator("Alfa", "leads_calificados").periods.Q3.target, 4 + 3, "territory = Comercial Uno + Promotor Uno; the vacancy adds nothing")
   const contradictory = indicator("Promotor Dos", "leads_calificados")
   assert.equal(contradictory.periods.Agosto.status, "sin_dato")
   assert.ok(contradictory.periods.Agosto.notes.some(note => note.includes("inconsistente")))
