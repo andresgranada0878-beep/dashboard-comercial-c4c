@@ -5,7 +5,7 @@ import { STATUS_LABELS } from "./pdf-pages"
 const KIND_LABELS = { individual: "Individual", territorio: "Territorio", direccion: "Dirección" } as const
 const BLOCK_LABELS: Record<string, string> = {
   commercial: "Gestión comercial", promoters: "Gestión de promotores", technical: "Técnico",
-  leads: "Leads", farms: "Fincas", activities: "Actividades de campo",
+  leads: "Leads", farms: "Fincas", activities: "Actividades de campo", targets: "Metas auxiliares",
 }
 
 export async function downloadTraceWorkbook(reports: AgricolaReports, load: StoredLoad) {
@@ -16,7 +16,8 @@ export async function downloadTraceWorkbook(reports: AgricolaReports, load: Stor
     return {
       "Tipo de informe": KIND_LABELS[entity.kind], Nombre: entity.name, Rol: entity.profile, Territorios: entity.territoryLabel,
       Posición: entity.status, Periodo: period, Resultado: summary.result, "Peso evaluado": summary.evaluatedWeight,
-      "Peso total": summary.totalWeight, Estado: state(summary.complete), "Indicadores sin dato": summary.missing.join(", "),
+      "Peso total": summary.totalWeight, Estado: state(summary.complete), "Indicadores sin dato o sin meta": summary.missing.join(", "),
+      "Indicadores No aplica": summary.notApplicable.join(", "),
       "Estado del informe": entity.reportState, "Motivos de borrador": entity.draftReasons.join(". "),
     }
   }))
@@ -32,7 +33,10 @@ export async function downloadTraceWorkbook(reports: AgricolaReports, load: Stor
       "Reglas pendientes": reports.pendingRules.filter((rule) => indicator.pending.includes(rule.id)).map((rule) => rule.title).join(", "),
     }
   })))
-  const pending = reports.pendingRules.map((rule) => ({ Regla: rule.title, Estado: "Pendiente de validación", Detalle: rule.detail }))
+  const pending = [
+    ...reports.approvedRules.map((rule) => ({ Regla: rule.title, Estado: "Aprobada", Detalle: rule.detail })),
+    ...reports.pendingRules.map((rule) => ({ Regla: rule.title, Estado: "Pendiente de validación", Detalle: rule.detail })),
+  ]
   const observations = reports.observations.map((text) => ({ Observación: text }))
   const reconciliation = Object.entries(load.blocks).map(([id, block]) => ({
     Bloque: BLOCK_LABELS[id] ?? id, Archivo: block.fileName ?? "Pegado", Leídos: block.summary.read, Válidos: block.summary.selected,
@@ -47,7 +51,7 @@ export async function downloadTraceWorkbook(reports: AgricolaReports, load: Stor
   const add = (rows: Record<string, unknown>[], name: string) => XLSX.utils.book_append_sheet(workbook, XLSX.utils.json_to_sheet(rows.length ? rows : [{ "": "Sin registros" }]), name)
   add(results, "Resultados")
   add(trace, "Trazabilidad")
-  add(pending, "Reglas pendientes")
+  add(pending, "Reglas")
   add(observations, "Observaciones")
   add(reconciliation, "Conciliación")
   XLSX.writeFile(workbook, `trazabilidad-agricola-antioquia-${reports.quarter.toLowerCase()}-${reports.year}-borrador.xlsx`)

@@ -7,6 +7,7 @@ export const STATUS_LABELS: Record<PeriodStatus, string> = {
   parcial: "Parcial",
   sin_dato: "Sin dato",
   sin_meta: "Sin meta",
+  no_aplica: "No aplica",
 }
 
 export const KIND_TITLES: Record<Q3Entity["kind"], string> = {
@@ -81,7 +82,7 @@ export function toPdfPage(entity: Q3Entity, reports: AgricolaReports, period: st
   ].map(pdfText)
   const summary = entity.results[period]
   const draftReasons = [...entity.draftReasons]
-  if (!summary.complete && !draftReasons.includes("Indicadores sin dato o parciales en el trimestre")) draftReasons.push("Indicadores sin dato o parciales en el periodo")
+  if (!summary.complete && !draftReasons.includes("Indicadores sin dato, sin meta o parciales en el trimestre")) draftReasons.push("Indicadores sin dato, sin meta o parciales en el periodo")
   return {
     source, view: isQuarter ? "trimestral" : "mensual", month: isQuarter ? reports.months[0] : period,
     globalResult: summary.result, rows, generatedAt: loadedAt,

@@ -21,11 +21,11 @@ const commercial = tsv(
     [ALFA, "Comercial Uno", 20, 10, "", 12, "", 40, 6, "", "Agosto"],
     [ALFA, "Comercial Uno", 20, 7, "", 8, "", 40, 6, "", "Septiembre"],
     [BETA, "Comercial Dos", 10, 5, "", 6, "", 8, 2, "", "Julio"],
-    [GAMMA, "Comercial Dos", 5, 2, "", 2, "", 4, 2, "", "Julio"],
+    [GAMMA, "Comercial Dos", 5, 2, "", 2, "", 5, 2, "", "Julio"],
     [BETA, "Comercial Dos", 10, 4, "", 5, "", 8, 3, "", "Agosto"],
-    [GAMMA, "Comercial Dos", 5, "", "", "", "", 4, 3, "", "Agosto"],
+    [GAMMA, "Comercial Dos", 5, "", "", "", "", 5, 3, "", "Agosto"],
     [BETA, "Comercial Dos", 10, 6, "", 7, "", 8, 3, "", "Septiembre"],
-    [GAMMA, "Comercial Dos", 5, 1, "", 1, "", 4, 3, "", "Septiembre"],
+    [GAMMA, "Comercial Dos", 5, 1, "", 1, "", 5, 3, "", "Septiembre"],
   ],
 )
 const promoters = tsv(
@@ -51,7 +51,18 @@ const leads = tsv(
   [
     ["Agrícola Antioquia", "Comercial Uno", 2, 1, "", "50 %", "", "Julio"],
     ["Agrícola Antioquia", "Comercial Uno", 1, "", 1, "100 %", "", "Septiembre"],
+    ["Agrícola Antioquia", "Comercial Dos", 2, "", "", "", "", "Julio"],
+    ["Agrícola Antioquia", "Promotor Dos", 1, 1, "", "", 1, "Agosto"],
     ["Otra Unidad", "Comercial Uno", 9, 9, "", "100 %", "", "Julio"],
+  ],
+)
+const targets = tsv(
+  ["Nombre", "Meta Actividades Trimestre", "Meta Hectáreas Mes", "Meta Cultivos Mes"],
+  [
+    ["Promotor Uno", 3, 30, 1],
+    ["Alfa", 6, "", ""],
+    ["(Vacante) Persona Tres", 3, 30, 1],
+    ["Persona Inexistente", 1, 1, 1],
   ],
 )
 const farms = tsv(
@@ -82,7 +93,7 @@ const indicator = (name, id) => entity(name).indicators.find(item => item.id ===
 
 test("fixture blocks import without blocking issues", () => {
   for (const [id, block] of Object.entries(blocks)) assert.deepEqual(block.issues, [], id)
-  assert.equal(blocks.leads.summary.selected, 2)
+  assert.equal(blocks.leads.summary.selected, 4)
   assert.equal(blocks.leads.summary.excludedByReason["Otra unidad de negocio"], 1)
   assert.equal(blocks.activities.summary.selected, 2)
 })
@@ -137,9 +148,24 @@ test("new clients: cumulative quarter value against annual target / 4", () => {
   assert.equal(clients.periods.Q3.actual, 6)
   assert.equal(clients.periods.Q3.target, 10)
   assert.equal(clients.periods.Julio.actual, 6, "monthly views show the quarter cumulative")
+})
+
+test("rule new clients: annual / 4 is not rounded, monthly × 3, cap 150%", () => {
+  const twoTerritories = indicator("Comercial Dos", "nuevos_clientes")
+  assert.equal(twoTerritories.periods.Q3.target, (8 + 5) / 4)
+  assert.equal(twoTerritories.periods.Q3.actual, 6)
+  assert.equal(twoTerritories.periods.Q3.recognizedCompliance, 1.5)
+  assert.equal(twoTerritories.cap, 1.5)
   const promoter = indicator("Promotor Uno", "nuevos_clientes")
   assert.equal(promoter.periods.Q3.actual, 5)
-  assert.equal(promoter.periods.Q3.target, 30)
+  assert.equal(promoter.periods.Q3.target, 10 * 3)
+})
+
+test("rule coverage: quarter = Σ monthly unique clients / Σ monthly targets, no extra / 3", () => {
+  const coverage = indicator("Comercial Uno", "cobertura_clientes")
+  assert.deepEqual(["Julio", "Agosto", "Septiembre"].map(month => coverage.periods[month].actual), [9, 10, 7])
+  assert.equal(coverage.periods.Q3.recognizedCompliance, 26 / 60)
+  assert.equal(indicator("Directora Ficticia", "cobertura_clientes").periods.Q3.status, "sin_meta")
 })
 
 test("recommendations and references keep blanks as missing", () => {
@@ -154,36 +180,101 @@ test("recommendations and references keep blanks as missing", () => {
   assert.equal(refs.periods.Q3.target, 20)
 })
 
-test("leads: qualified count from percentage; absence is not non-compliance", () => {
+test("rule leads: real qualified count over assigned leads; months without assignment are No aplica", () => {
   const qualified = indicator("Comercial Uno", "leads_calificados")
   assert.equal(qualified.periods.Julio.actual, 1)
   assert.equal(qualified.periods.Julio.target, 2)
-  assert.equal(qualified.periods.Agosto.status, "sin_dato")
-  assert.equal(qualified.periods.Q3.actual, 2)
+  assert.equal(qualified.periods.Agosto.status, "no_aplica")
+  assert.equal(qualified.periods.Q3.actual, 2, "never Meta Leads as numerator")
   assert.equal(qualified.periods.Q3.target, 3)
-  assert.equal(qualified.periods.Q3.status, "parcial")
+  assert.equal(qualified.periods.Q3.status, "ok")
   const onTime = indicator("Comercial Uno", "leads_calificados_tiempo")
   assert.equal(onTime.periods.Q3.actual, 1)
-  const absent = indicator("Promotor Uno", "leads_calificados")
-  assert.equal(absent.periods.Q3.status, "sin_dato")
-  assert.equal(absent.periods.Q3.contribution, null)
+  assert.equal(onTime.periods.Q3.target, 3)
 })
 
-test("activities count valid IDs by territory; targets include vacant positions", () => {
-  const territory = indicator("Alfa", "actividades_campo")
-  assert.equal(territory.periods.Q3.actual, 2)
-  assert.equal(territory.periods.Q3.target, 6)
-  assert.equal(territory.periods.Julio.actual, 1)
-  assert.equal(territory.periods.Septiembre.actual, 1)
+test("rule leads: assigned without management is 0; not assigned is No aplica; contradictory rows are not evaluated", () => {
+  const unmanaged = indicator("Comercial Dos", "leads_calificados")
+  assert.equal(unmanaged.periods.Julio.actual, 0)
+  assert.equal(unmanaged.periods.Julio.target, 2)
+  assert.equal(unmanaged.periods.Q3.recognizedCompliance, 0)
+  assert.equal(indicator("Comercial Dos", "leads_calificados_tiempo").periods.Q3.actual, 0)
+  const notAssigned = indicator("Promotor Uno", "leads_calificados")
+  assert.equal(notAssigned.periods.Q3.status, "no_aplica")
+  assert.equal(notAssigned.periods.Q3.contribution, null)
+  assert.ok(entity("Promotor Uno").results.Q3.notApplicable.includes(notAssigned.label))
+  assert.ok(!entity("Promotor Uno").results.Q3.missing.includes(notAssigned.label))
+  const contradictory = indicator("Promotor Dos", "leads_calificados")
+  assert.equal(contradictory.periods.Agosto.status, "sin_dato")
+  assert.ok(contradictory.periods.Agosto.notes.some(note => note.includes("inconsistente")))
+  assert.equal(indicator("Promotor Dos", "leads_calificados_tiempo").periods.Agosto.actual, 1)
+})
+
+test("rule attribution: individuals only get their own records; territory sums all valid records without reassigning", () => {
+  assert.equal(indicator("Alfa", "ejecucion_visitas").periods.Julio.actual, 10 + 4, "director visits in Alfa count for the territory")
+  assert.equal(indicator("Comercial Uno", "ejecucion_visitas").periods.Julio.actual, 10)
+  assert.equal(indicator("Alfa", "actividades_campo").periods.Q3.actual, 2)
+  assert.equal(indicator("Promotor Uno", "actividades_campo").periods.Q3.actual, 1)
+  assert.equal(indicator("Comercial Uno", "actividades_campo").periods.Q3.actual, 0, "activities of other owners are not reassigned")
+  assert.equal(indicator("Directora Ficticia", "actividades_campo").periods.Q3.actual, 2)
+  assert.equal(indicator("Promotor Uno", "hectareas").periods.Q3.actual, 60)
+  assert.equal(indicator("Comercial Uno", "hectareas").periods.Q3.actual, 0)
   assert.ok(reports.observations.some(note => note.includes("Persona Externa")))
 })
 
-test("farms: hectares capped at 150% and months without records count as zero", () => {
-  const hectares = indicator("Promotor Uno", "hectareas")
-  assert.equal(hectares.periods.Julio.actual, 40)
+test("rule auxiliary targets: no global defaults; without configuration they are Sin meta", () => {
+  for (const id of ["actividades_campo", "hectareas", "cultivos"]) {
+    for (const name of ["Promotor Uno", "Comercial Uno", "Alfa", "Directora Ficticia"]) {
+      assert.equal(indicator(name, id).periods.Q3.target, null, `${name} ${id}`)
+      assert.equal(indicator(name, id).periods.Q3.status, "sin_meta", `${name} ${id}`)
+    }
+  }
+  assert.ok(reports.observations.some(note => note.includes("Metas auxiliares")))
+})
+
+test("rule auxiliary targets: explicit targets apply; vacancies never get one", () => {
+  const withTargets = buildAgricolaReports({ blocks: { ...blocks, targets: prepareAgricolaBlock("targets", targets, 2026, "Q3") }, config })
+  const find = (name, id) => withTargets.entities.find(item => item.name === name).indicators.find(item => item.id === id)
+  assert.equal(find("Promotor Uno", "actividades_campo").periods.Q3.target, 3)
+  assert.equal(find("Promotor Uno", "actividades_campo").periods.Julio.target, 1)
+  const hectares = find("Promotor Uno", "hectareas")
   assert.equal(hectares.periods.Julio.recognizedCompliance, 40 / 30)
   assert.equal(hectares.periods.Septiembre.actual, 0)
   assert.equal(hectares.periods.Q3.target, 90)
+  assert.equal(find("Alfa", "actividades_campo").periods.Q3.recognizedCompliance, 2 / 6)
+  assert.equal(find("Alfa", "hectareas").periods.Q3.status, "sin_meta")
+  assert.equal(find("(Vacante) Persona Tres", "actividades_campo").periods.Q3.target, null)
+  assert.equal(find("Comercial Uno", "actividades_campo").periods.Q3.target, null, "commercial targets are not derived from promoters")
+  assert.ok(withTargets.observations.some(note => note.includes("Persona Inexistente")))
+})
+
+test("rule territories: grouped territories stay separate in the source and are evaluated together", () => {
+  const grouped = { ...config, catalog: { ...config.catalog, territoryGroups: [{ label: "Beta y Gamma", members: ["beta", "gamma"] }] } }
+  const result = buildAgricolaReports({ blocks, config: grouped })
+  const territories = result.entities.filter(item => item.kind === "territorio").map(item => item.name)
+  assert.deepEqual(territories, ["Alfa", "Beta y Gamma"])
+  const unit = result.entities.find(item => item.name === "Beta y Gamma")
+  assert.deepEqual(unit.territories, [BETA, GAMMA])
+  assert.equal(unit.indicators.find(item => item.id === "ejecucion_visitas").periods.Julio.actual, 6 + 2)
+  assert.equal(result.entities.find(item => item.name === "Comercial Dos").territoryLabel, "Beta y Gamma")
+  assert.deepEqual(result.territories.filter(item => item.operating).map(item => item.label), ["Alfa", "Beta", "Gamma"])
+})
+
+test("rule soils: shown as No aplica, never 0%, and excluded from the weights", () => {
+  for (const item of reports.entities) {
+    const soils = item.indicators.find(indicator => indicator.id === "suelos")
+    assert.equal(soils.weight, 0)
+    for (const period of reports.periods) {
+      assert.equal(soils.periods[period].status, "no_aplica")
+      assert.equal(soils.periods[period].recognizedCompliance, null)
+    }
+  }
+  assert.ok(Math.abs(entity("Comercial Uno").results.Q3.totalWeight - 1) < 1e-9)
+})
+
+test("rule activities: only the four completed types, no plots, one per ID", () => {
+  assert.equal(blocks.activities.summary.selected, 2)
+  assert.deepEqual(blocks.activities.summary.byType, { "Día de campo": 1, "Visita Formación": 1 })
 })
 
 test("vacancy without data is informative and reports stay in draft", () => {

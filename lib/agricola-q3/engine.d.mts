@@ -1,6 +1,7 @@
 import type { PreparedBlock } from "../agricola-import.mjs"
 
-export type PeriodStatus = "ok" | "parcial" | "sin_dato" | "sin_meta"
+export type PeriodStatus = "ok" | "parcial" | "sin_dato" | "sin_meta" | "no_aplica"
+export type TargetPeriodicity = "anual" | "mensual" | "trimestral"
 export type EntityKind = "individual" | "territorio" | "direccion"
 export type EntityProfile = "Director" | "Comercial" | "Promotor" | "Territorio"
 export type PositionStatus = "activo" | "vacante" | "sin_titular"
@@ -36,6 +37,7 @@ export interface EntityPeriodSummary {
   totalWeight: number
   complete: boolean
   missing: string[]
+  notApplicable: string[]
 }
 
 export interface Q3Entity {
@@ -81,22 +83,21 @@ export interface AgricolaConfig {
     territoryPrefix: string
     nonOperatingTerritories: string[]
     territoryLabels: Record<string, string>
+    territoryGroups?: { label: string; members: string[] }[]
     vacancyPattern: string
     unassignedRule: string
   }
   targets: {
-    perPromoter: { activitiesPerQuarter: number; plotsPerQuarter: number; hectaresPerMonth: number; cropsPerMonth: number }
-    commercialSumsTerritoryPromoters: boolean
-    includeVacantPositions: boolean
     director: { visitsPerMonth: number | null; coveragePerMonth: number | null }
+    newClients: Record<"commercial" | "promoters", { field: string; periodicity: TargetPeriodicity }>
+    auxiliary: string
   }
   policies: {
     blankValues: string
-    leadsAbsentEmployee: "pendiente" | "cero"
-    leadsQualifiedNumerator: "leads_calificados" | "meta_leads_historico"
     farmsWithoutRecords: "cero" | "sin_dato"
   }
   indicators: { id: string; label: string; weight: number; cap: number | null; calculationType: string; pending: string[]; criterion: string }[]
+  approvedRules: PendingRule[]
   pendingRules: PendingRule[]
 }
 
@@ -113,6 +114,7 @@ export interface AgricolaReports {
   unknownPeople: { name: string; sources: string[]; count: number }[]
   observations: string[]
   pendingRules: PendingRule[]
+  approvedRules: PendingRule[]
   rulesValidated: boolean
 }
 
@@ -121,6 +123,6 @@ export interface ReconcileCheck { block: string; check: string; expected: number
 
 export function sumField(rows: Record<string, unknown>[], field: string): { value: number | null; present: number; blanks: number }
 export function evaluateRatio(input: { actual: number | null; target: number | null; cap: number | null; weight: number }): Pick<PeriodResult, "rawCompliance" | "recognizedCompliance" | "contribution" | "status">
-export function deriveCatalog(blocks: Partial<Record<string, PreparedBlock>>, config: AgricolaConfig): { people: CatalogPerson[]; territories: CatalogTerritory[]; observations: string[] }
+export function deriveCatalog(blocks: Partial<Record<string, PreparedBlock>>, config: AgricolaConfig): { people: CatalogPerson[]; territories: CatalogTerritory[]; groups: { label: string; members: string[] }[]; observations: string[] }
 export function buildAgricolaReports(input: { blocks: Partial<Record<string, PreparedBlock>>; config: AgricolaConfig }): AgricolaReports
 export function reconcile(blocks: Partial<Record<string, PreparedBlock>>, controls: Record<string, ReconcileControl>): ReconcileCheck[]

@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useEffect, useMemo, useState } from "react"
 import type { CSSProperties } from "react"
-import { AGRICOLA_BLOCKS, prepareAgricolaBlock, prepareAgricolaRows } from "@/lib/agricola-import.mjs"
+import { AGRICOLA_BLOCKS, AUXILIARY_TARGETS_BLOCK, prepareAgricolaBlock, prepareAgricolaRows } from "@/lib/agricola-import.mjs"
 import type { PreparedBlock } from "@/lib/agricola-import.mjs"
 import { clearLoad, readLoad, readWorkbookRows, saveLoad } from "@/lib/agricola-q3/store"
 
@@ -18,7 +18,9 @@ const HELP: Record<string, string> = {
   leads: "Tabla de leads completa (no se filtra por cargo). Las personas se buscan en el catálogo armado con comerciales y promotores.",
   farms: "Tabla de fincas por territorio, empleado, cultivo y mes.",
   activities: "Lista de actividades de C4C con todos los canales, tal como se descarga (con las filas iniciales). Se aceptan solo actividades completadas de Día de campo, Evento Especial, Visita Mostrador Especial y Visita Formación del periodo.",
+  targets: "Opcional. Metas aprobadas que no vienen en los exportados: una fila por persona o territorio (nombre igual al del informe, por ejemplo «Norte y Bajo Cauca»), con meta trimestral de actividades y metas mensuales de hectáreas y cultivos. Sin esta tabla esos indicadores quedan «Sin meta». Las vacantes no reciben meta.",
 }
+const BLOCKS = [...AGRICOLA_BLOCKS.map((block) => ({ ...block, optional: false })), { ...AUXILIARY_TARGETS_BLOCK, optional: true }]
 
 export default function ImportBasesPage() {
   const router = useRouter()
@@ -33,7 +35,7 @@ export default function ImportBasesPage() {
     if (load) setStored(`${load.quarter} ${load.year}, cargado el ${new Date(load.savedAt).toLocaleString("es-CO")}`)
   }, [])
 
-  const prepared = useMemo(() => AGRICOLA_BLOCKS.map((block) => {
+  const prepared = useMemo(() => BLOCKS.map((block) => {
     const input = inputs[block.id] ?? EMPTY
     const result: PreparedBlock = input.fileRows
       ? prepareAgricolaRows(block.id, input.fileRows, year, quarter, { origin: "file" })
@@ -42,7 +44,7 @@ export default function ImportBasesPage() {
     return { ...block, input, result, loaded }
   }), [inputs, year, quarter])
 
-  const ready = prepared.every((block) => block.loaded && block.result.issues.length === 0 && block.result.records.length > 0)
+  const ready = prepared.every((block) => block.optional && !block.loaded ? true : block.loaded && block.result.issues.length === 0 && block.result.records.length > 0)
 
   function update(id: string, patch: Partial<BlockInput>) {
     setInputs((current) => ({ ...current, [id]: { ...(current[id] ?? EMPTY), ...patch } }))
@@ -61,7 +63,7 @@ export default function ImportBasesPage() {
     try {
       saveLoad({
         savedAt: new Date().toISOString(), year, quarter,
-        blocks: Object.fromEntries(prepared.map((block) => [block.id, {
+        blocks: Object.fromEntries(prepared.filter((block) => block.loaded).map((block) => [block.id, {
           records: block.result.records, issues: block.result.issues, warnings: block.result.warnings,
           summary: block.result.summary, fileName: block.input.fileName,
         }])),
@@ -149,7 +151,7 @@ export default function ImportBasesPage() {
           <button type="button" disabled={!ready} onClick={calculate} style={{ ...primaryButton, marginTop: 14, opacity: ready ? 1 : 0.5, cursor: ready ? "pointer" : "not-allowed" }}>
             Calcular y ver informes
           </button>
-          {!ready && <p style={{ color: "#52625a", fontSize: 13 }}>Carga los seis bloques y corrige las observaciones en rojo para habilitar el cálculo.</p>}
+          {!ready && <p style={{ color: "#52625a", fontSize: 13 }}>Carga los seis exportados (las metas auxiliares son opcionales) y corrige las observaciones en rojo para habilitar el cálculo.</p>}
         </section>
       </div>
     </main>

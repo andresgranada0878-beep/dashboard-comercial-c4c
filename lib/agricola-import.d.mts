@@ -10,6 +10,7 @@ export interface PreparedBlock {
  summary: BlockSummary;
 }
 export const AGRICOLA_BLOCKS: ImportBlock[];
+export const AUXILIARY_TARGETS_BLOCK: ImportBlock;
 export function detectDecimalSeparator(values: unknown[]): { decimal: "," | "."; ambiguous: boolean };
 export function parseNumber(value: unknown, decimal?: "," | "."): number | null;
 export function rawNumber(value: unknown): number | null;
