@@ -9,9 +9,7 @@ export interface PreparedBlock {
  records: Record<string, unknown>[]; issues: string[]; warnings: string[]; excluded: number;
  summary: BlockSummary;
 }
-export const AGRICOLA_BLOCKS: ImportBlock[];
-export const AUXILIARY_TARGETS_BLOCK: ImportBlock;
-export function detectDecimalSeparator(values: unknown[]): { decimal: "," | "."; ambiguous: boolean };
+export const AGRICOLA_BLOCKS: ImportBlock[];export function detectDecimalSeparator(values: unknown[]): { decimal: "," | "."; ambiguous: boolean };
 export function parseNumber(value: unknown, decimal?: "," | "."): number | null;
 export function rawNumber(value: unknown): number | null;
 export function referenceCount(ratio: number | null, target: number | null, halfStep?: number): { value: number | null; exact: boolean };

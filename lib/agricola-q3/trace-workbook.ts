@@ -1,22 +1,23 @@
-import type { AgricolaReports } from "./engine.mjs"
+import type { AgricolaReports, EntityPeriodSummary } from "./engine.mjs"
 import type { StoredLoad } from "./store"
-import { STATUS_LABELS } from "./pdf-pages"
+import { partialReason, STATUS_LABELS } from "./pdf-pages"
 
 const KIND_LABELS = { individual: "Individual", territorio: "Territorio", direccion: "Dirección" } as const
 const BLOCK_LABELS: Record<string, string> = {
   commercial: "Gestión comercial", promoters: "Gestión de promotores", technical: "Técnico",
-  leads: "Leads", farms: "Fincas", activities: "Actividades de campo", targets: "Metas auxiliares",
+  leads: "Leads", farms: "Fincas", activities: "Actividades de campo",
 }
 
 export async function downloadTraceWorkbook(reports: AgricolaReports, load: StoredLoad) {
   const XLSX = await import("xlsx")
-  const state = (value: boolean) => (value ? "Completo" : "Parcial / incompleto")
+  const state = (summary: EntityPeriodSummary) => partialReason(summary) ?? "Completo"
   const results = reports.entities.flatMap((entity) => reports.periods.map((period) => {
     const summary = entity.results[period]
     return {
       "Tipo de informe": KIND_LABELS[entity.kind], Nombre: entity.name, Rol: entity.profile, Territorios: entity.territoryLabel,
-      Posición: entity.status, Periodo: period, Resultado: summary.result, "Peso evaluado": summary.evaluatedWeight,
-      "Peso total": summary.totalWeight, Estado: state(summary.complete), "Indicadores sin dato o sin meta": summary.missing.join(", "),
+      Posición: entity.status, Periodo: period, "Resultado (aporte ponderado sobre 100)": summary.result,
+      "Cumplimiento normalizado (aporte / peso evaluado)": summary.normalized, "Peso evaluado": summary.evaluatedWeight,
+      "Peso total": summary.totalWeight, Estado: state(summary), "Indicadores sin dato o sin meta": summary.missing.join(", "),
       "Indicadores No aplica": summary.notApplicable.join(", "),
       "Estado del informe": entity.reportState, "Motivos de borrador": entity.draftReasons.join(". "),
     }
@@ -28,7 +29,7 @@ export async function downloadTraceWorkbook(reports: AgricolaReports, load: Stor
       Periodo: period, Indicador: indicator.label, "Gestión real": value.actual, Meta: value.target,
       "Cumplimiento sin tope": value.rawCompliance, "Cumplimiento reconocido": value.recognizedCompliance,
       Peso: indicator.weight, Tope: indicator.cap, Aporte: value.contribution, Estado: STATUS_LABELS[value.status],
-      Fuente: indicator.source, Alcance: indicator.scope, Fórmula: indicator.formula,
+      Fuente: indicator.source, "Origen de la gestión": indicator.attribution, Alcance: indicator.scope, Fórmula: indicator.formula,
       Observaciones: [...indicator.notes, ...value.notes].join(" "),
       "Reglas pendientes": reports.pendingRules.filter((rule) => indicator.pending.includes(rule.id)).map((rule) => rule.title).join(", "),
     }

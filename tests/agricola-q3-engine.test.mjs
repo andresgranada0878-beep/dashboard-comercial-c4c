@@ -56,15 +56,6 @@ const leads = tsv(
     ["Otra Unidad", "Comercial Uno", 9, 9, "", "100 %", "", "Julio"],
   ],
 )
-const targets = tsv(
-  ["Nombre", "Meta Actividades Trimestre", "Meta Hectáreas Mes", "Meta Cultivos Mes"],
-  [
-    ["Promotor Uno", 3, 30, 1],
-    ["Alfa", 6, "", ""],
-    ["(Vacante) Persona Tres", 3, 30, 1],
-    ["Persona Inexistente", 1, 1, 1],
-  ],
-)
 const farms = tsv(
   ["Unidad de Negocio", "des_territorio", "atr_desc_empleado", "atr_cultivo_texto", "# Fincas", "Héctareas", "Mes"],
   [
@@ -210,42 +201,78 @@ test("rule leads: assigned without management is 0; not assigned is No aplica; c
   assert.equal(indicator("Promotor Dos", "leads_calificados_tiempo").periods.Agosto.actual, 1)
 })
 
-test("rule attribution: individuals only get their own records; territory sums all valid records without reassigning", () => {
+test("rule attribution: promoters get their own field records; commercials get their assigned territory, flagged as such", () => {
   assert.equal(indicator("Alfa", "ejecucion_visitas").periods.Julio.actual, 10 + 4, "director visits in Alfa count for the territory")
   assert.equal(indicator("Comercial Uno", "ejecucion_visitas").periods.Julio.actual, 10)
   assert.equal(indicator("Alfa", "actividades_campo").periods.Q3.actual, 2)
   assert.equal(indicator("Promotor Uno", "actividades_campo").periods.Q3.actual, 1)
-  assert.equal(indicator("Comercial Uno", "actividades_campo").periods.Q3.actual, 0, "activities of other owners are not reassigned")
+  assert.equal(indicator("Promotor Uno", "actividades_campo").attribution, "Personal")
+  const assigned = indicator("Comercial Uno", "actividades_campo")
+  assert.equal(assigned.periods.Q3.actual, 2, "same field management as the territory report")
+  assert.equal(assigned.attribution, "Territorio asignado")
+  assert.ok(assigned.scope.startsWith("Territorio asignado"))
   assert.equal(indicator("Directora Ficticia", "actividades_campo").periods.Q3.actual, 2)
   assert.equal(indicator("Promotor Uno", "hectareas").periods.Q3.actual, 60)
-  assert.equal(indicator("Comercial Uno", "hectareas").periods.Q3.actual, 0)
+  assert.equal(indicator("Comercial Uno", "hectareas").periods.Q3.actual, 60)
   assert.ok(reports.observations.some(note => note.includes("Persona Externa")))
 })
 
-test("rule auxiliary targets: no global defaults; without configuration they are Sin meta", () => {
-  for (const id of ["actividades_campo", "hectareas", "cultivos"]) {
-    for (const name of ["Promotor Uno", "Comercial Uno", "Alfa", "Directora Ficticia"]) {
-      assert.equal(indicator(name, id).periods.Q3.target, null, `${name} ${id}`)
-      assert.equal(indicator(name, id).periods.Q3.status, "sin_meta", `${name} ${id}`)
-    }
-  }
-  assert.ok(reports.observations.some(note => note.includes("Metas auxiliares")))
+test("rule field targets: 3 activities, 90 ha and 3 crops per active promoter per quarter; vacancies never generate one", () => {
+  const per = config.targets.fieldTargets.perActivePromoter
+  assert.deepEqual([per.activitiesPerQuarter, per.hectaresPerQuarter, per.cropsPerQuarter, per.plotsPerQuarter], [3, 90, 3, 0])
+  const target = (name, id) => indicator(name, id).periods.Q3.target
+  assert.deepEqual(["actividades_campo", "hectareas", "cultivos"].map(id => target("Promotor Uno", id)), [3, 90, 3])
+  assert.equal(indicator("Promotor Uno", "actividades_campo").periods.Julio.target, 1)
+  assert.equal(indicator("Promotor Uno", "hectareas").periods.Julio.target, 30)
+  assert.equal(indicator("Promotor Uno", "hectareas").periods.Q3.recognizedCompliance, 60 / 90)
+  assert.equal(target("(Vacante) Persona Tres", "actividades_campo"), null)
+  assert.equal(indicator("(Vacante) Persona Tres", "actividades_campo").periods.Q3.status, "sin_meta")
+  assert.equal(target("Alfa", "actividades_campo"), 3, "Alfa: one active promoter, the vacancy does not count")
+  assert.equal(target("Alfa", "hectareas"), 90)
+  assert.equal(target("Beta", "cultivos"), 3)
+  assert.equal(target("Gamma", "actividades_campo"), null, "no active promoter: Sin meta")
+  assert.equal(target("Comercial Uno", "actividades_campo"), 3, "assigned territory Alfa")
+  assert.equal(target("Comercial Dos", "hectareas"), 90, "Beta + Gamma: one active promoter")
+  assert.deepEqual(["actividades_campo", "hectareas", "cultivos"].map(id => target("Directora Ficticia", id)), [6, 180, 6])
+  assert.ok(reports.observations.some(note => note.includes("2 promotores activos") && note.includes("Persona Tres")))
 })
 
-test("rule auxiliary targets: explicit targets apply; vacancies never get one", () => {
-  const withTargets = buildAgricolaReports({ blocks: { ...blocks, targets: prepareAgricolaBlock("targets", targets, 2026, "Q3") }, config })
-  const find = (name, id) => withTargets.entities.find(item => item.name === name).indicators.find(item => item.id === id)
-  assert.equal(find("Promotor Uno", "actividades_campo").periods.Q3.target, 3)
-  assert.equal(find("Promotor Uno", "actividades_campo").periods.Julio.target, 1)
-  const hectares = find("Promotor Uno", "hectareas")
-  assert.equal(hectares.periods.Julio.recognizedCompliance, 40 / 30)
-  assert.equal(hectares.periods.Septiembre.actual, 0)
-  assert.equal(hectares.periods.Q3.target, 90)
-  assert.equal(find("Alfa", "actividades_campo").periods.Q3.recognizedCompliance, 2 / 6)
-  assert.equal(find("Alfa", "hectareas").periods.Q3.status, "sin_meta")
-  assert.equal(find("(Vacante) Persona Tres", "actividades_campo").periods.Q3.target, null)
-  assert.equal(find("Comercial Uno", "actividades_campo").periods.Q3.target, null, "commercial targets are not derived from promoters")
-  assert.ok(withTargets.observations.some(note => note.includes("Persona Inexistente")))
+test("rule technical attribution: individuals show the assigned territory, same management as the territory report", () => {
+  for (const id of ["recomendaciones", "referencias"]) {
+    const personal = indicator("Comercial Uno", id)
+    assert.equal(personal.attribution, "Territorio asignado")
+    assert.ok(personal.scope.startsWith("Territorio asignado: Alfa"))
+    assert.ok(personal.notes.some(note => note.includes("no es gestión personal directa")))
+    assert.deepEqual(personal.periods.Q3, { ...indicator("Alfa", id).periods.Q3, notes: personal.periods.Q3.notes })
+    assert.equal(indicator("Alfa", id).attribution, "Territorio")
+  }
+})
+
+test("rule new clients: Q3 label is recovery (new + recovered) and the source discrepancy is flagged", () => {
+  const clients = indicator("Comercial Uno", "nuevos_clientes")
+  assert.equal(clients.label, "Recuperación de clientes (nuevos + recuperados)")
+  assert.ok(clients.notes.some(note => note.startsWith("Discrepancia")))
+  assert.ok(clients.pending.includes("new-clients-source"))
+  assert.equal(clients.cap, 1.5)
+})
+
+test("rule director: 20 visits per month; coverage without client universe is Sin meta and says what is missing", () => {
+  assert.equal(config.targets.director.visitsPerMonth, 20)
+  assert.equal(indicator("Directora Ficticia", "ejecucion_visitas").periods.Q3.target, 60)
+  const coverage = indicator("Directora Ficticia", "cobertura_clientes")
+  assert.equal(coverage.periods.Q3.status, "sin_meta")
+  assert.ok(coverage.notes.some(note => note.includes("universo de clientes")))
+})
+
+test("rule partial results: weights are not redistributed; normalized = points / evaluated weight; no level when partial", () => {
+  for (const item of reports.entities) {
+    const summary = item.results.Q3
+    if (summary.result === null) continue
+    const points = item.indicators.reduce((sum, indicator) => sum + (indicator.periods.Q3.contribution ?? 0), 0)
+    assert.ok(Math.abs(summary.result - points) < 1e-9, item.name)
+    assert.ok(Math.abs(summary.normalized - summary.result / summary.evaluatedWeight) < 1e-9, item.name)
+    if (summary.evaluatedWeight < summary.totalWeight - 1e-9) assert.equal(summary.complete, false, item.name)
+  }
 })
 
 test("rule territories: grouped territories stay separate in the source and are evaluated together", () => {

@@ -1,5 +1,5 @@
 {
-  "version": "agricola-q3-2026-v2",
+  "version": "agricola-q3-2026-v3",
   "sourceKey": "PYC-AGR-ANT",
   "company": "Pérez y Cardona",
   "report": "Agrícola Antioquia",
@@ -38,7 +38,18 @@
   "targets": {
     "director": {
       "visitsPerMonth": 20,
-      "coveragePerMonth": null
+      "coveragePerMonth": null,
+      "coverageMissing": "La regla histórica es universo de clientes del alcance del director / 12 (Q1 y Q2 usaron 34,67 clientes mensuales, es decir 416 clientes / 12). El exportado Q3 no trae ese universo: Gestión comercial solo tiene «Meta Cobertura y Visitas» = 1 en Dirección y los clientes visitados; no hay un conteo de clientes de la cartera del director. Falta el universo de clientes del alcance del director para Q3."
+    },
+    "fieldTargets": {
+      "perActivePromoter": {
+        "activitiesPerQuarter": 3,
+        "plotsPerQuarter": 0,
+        "hectaresPerQuarter": 90,
+        "cropsPerQuarter": 3
+      },
+      "vacanciesGenerateTarget": false,
+      "commercialScope": "territorio_asignado"
     },
     "newClients": {
       "commercial": {
@@ -49,8 +60,7 @@
         "field": "Meta Clientes Nuevos",
         "periodicity": "mensual"
       }
-    },
-    "auxiliary": "Las metas de actividades, hectáreas y cultivos no vienen en los exportados. Solo se evalúan con el bloque opcional «Metas auxiliares» (Nombre, Meta Actividades Trimestre, Meta Hectáreas Mes, Meta Cultivos Mes); sin ese bloque quedan «Sin meta». Las vacantes no reciben meta individual."
+    }
   },
   "policies": {
     "blankValues": "ausente",
@@ -64,7 +74,7 @@
       "cap": 1,
       "calculationType": "ratio",
       "pending": [],
-      "criterion": "Visitas realizadas en el periodo frente a la meta mensual de visitas multiplicada por los meses evaluados. Reconocimiento máximo 100%."
+      "criterion": "Visitas realizadas en el periodo frente a la meta mensual de visitas multiplicada por los meses evaluados. Director: 20 visitas mensuales (metodología Q1/Q2). Reconocimiento máximo 100%."
     },
     {
       "id": "cobertura_clientes",
@@ -77,14 +87,14 @@
     },
     {
       "id": "nuevos_clientes",
-      "label": "Nuevos clientes",
+      "label": "Recuperación de clientes (nuevos + recuperados)",
       "weight": 0.1,
       "cap": 1.5,
       "calculationType": "ratio_acumulado",
       "pending": [
         "new-clients-source"
       ],
-      "criterion": "Clientes nuevos (sin recuperados) acumulados del trimestre frente a la meta trimestral: meta anual / 4 o meta mensual × 3 según la fuente. Reconocimiento máximo 150%."
+      "criterion": "Clientes nuevos y recuperados con gestión o venta, acumulados del trimestre, frente a la meta trimestral derivada de «Meta Clientes Recuperar» (anual / 4) o de la meta mensual de promotores (× 3). Se usa la medida «Cant. Clientes Nuevos» de Power BI, la misma que usaba Q1/Q2. Reconocimiento máximo 150%."
     },
     {
       "id": "recomendaciones",
@@ -93,10 +103,9 @@
       "cap": 1.5,
       "calculationType": "ratio_acumulado",
       "pending": [
-        "blank-values",
-        "technical-attribution"
+        "blank-values"
       ],
-      "criterion": "Valor de recomendaciones frente al presupuesto (Ppto) del mismo periodo. Reconocimiento máximo 150%."
+      "criterion": "Valor de recomendaciones frente al presupuesto (Ppto) del mismo periodo. El exportado técnico no identifica persona: el colaborador se evalúa con la gestión técnica de su territorio asignado (no es gestión personal directa) y el informe territorial usa la misma gestión. Reconocimiento máximo 150%."
     },
     {
       "id": "referencias",
@@ -105,10 +114,9 @@
       "cap": null,
       "calculationType": "ratio",
       "pending": [
-        "references",
-        "technical-attribution"
+        "references"
       ],
-      "criterion": "Cantidad de referencias recomendadas (Meta Referencias × Referencias Recomendadas) sumada en los meses evaluados frente al portafolio mensual de referencias."
+      "criterion": "Cantidad de referencias recomendadas (Meta Referencias × Referencias Recomendadas) sumada en los meses evaluados frente al portafolio mensual de referencias. El exportado técnico no identifica persona: el colaborador se evalúa con la gestión técnica de su territorio asignado (no es gestión personal directa) y el informe territorial usa la misma gestión."
     },
     {
       "id": "leads_calificados",
@@ -135,9 +143,9 @@
       "cap": 1.5,
       "calculationType": "ratio_acumulado",
       "pending": [
-        "auxiliary-targets"
+        "commercial-field-scope"
       ],
-      "criterion": "Actividades en estado Finalizado/Completado de tipo Día de campo, Evento Especial, Visita Mostrador Especial o Visita Formación (sin parcelas), contadas una vez por ID, frente a la meta trimestral configurada. Reconocimiento máximo 150%."
+      "criterion": "Actividades en estado Finalizado/Completado de tipo Día de campo, Evento Especial, Visita Mostrador Especial o Visita Formación (sin parcelas), contadas una vez por ID, frente a 3 actividades trimestrales por promotor activo (las vacantes no generan meta). Reconocimiento máximo 150%."
     },
     {
       "id": "hectareas",
@@ -146,9 +154,9 @@
       "cap": 1.5,
       "calculationType": "ratio_acumulado",
       "pending": [
-        "auxiliary-targets"
+        "commercial-field-scope"
       ],
-      "criterion": "Hectáreas impactadas registradas en Fincas frente a la meta mensual configurada. La suma mensual no representa fincas únicas. Reconocimiento máximo 150%."
+      "criterion": "Hectáreas impactadas registradas en Fincas frente a 90 hectáreas trimestrales (30 mensuales) por promotor activo. La suma no representa fincas únicas. Reconocimiento máximo 150%."
     },
     {
       "id": "cultivos",
@@ -157,9 +165,9 @@
       "cap": 1.5,
       "calculationType": "ratio_acumulado",
       "pending": [
-        "auxiliary-targets"
+        "commercial-field-scope"
       ],
-      "criterion": "Cultivos impactados registrados en Fincas (cultivo × empleado × mes) frente a la meta mensual configurada. No representa cultivos únicos. Reconocimiento máximo 150%."
+      "criterion": "Cultivos impactados registrados en Fincas (cultivo × empleado × mes) frente a 3 cultivos trimestrales (1 mensual) por promotor activo. No representa cultivos únicos. Reconocimiento máximo 150%."
     },
     {
       "id": "gestion-cultivos-impactados",
@@ -188,8 +196,8 @@
     },
     {
       "id": "new-clients",
-      "title": "Clientes nuevos",
-      "detail": "Solo clientes nuevos, sin recuperados. Meta anual de la fuente → meta trimestral = anual / 4; meta mensual → mensual × 3. Gestión = acumulado del trimestre. Tope 150%."
+      "title": "Recuperación de clientes (nuevos + recuperados)",
+      "detail": "Metodología Q1/Q2: clientes nuevos + recuperados frente a «Meta Clientes Recuperar». Meta anual de la fuente → trimestral = anual / 4; meta mensual → mensual × 3. Gestión = acumulado del trimestre. Tope 150%. Si la medida de Power BI no incluye recuperados se marca discrepancia; no se suman recuperados supuestos."
     },
     {
       "id": "leads",
@@ -202,14 +210,29 @@
       "detail": "Solo Día de campo, Evento Especial, Visita Mostrador Especial y Visita Formación en estado Finalizado/Completado; sin parcelas."
     },
     {
-      "id": "auxiliary-targets-rule",
-      "title": "Metas auxiliares",
-      "detail": "No se asumen 3 actividades, 30 hectáreas ni 1 cultivo como regla global. Las vacantes no generan meta individual. Solo se usan metas soportadas por la configuración o la fuente; la cobertura del director queda Sin meta. No se inventan metas faltantes."
+      "id": "field-targets",
+      "title": "Metas de actividades, hectáreas y cultivos",
+      "detail": "Metodología Q1/Q2 con la modificación Q3 (parcelas no cuentan): por promotor activo y trimestre, 3 actividades, 90 hectáreas (30 mensuales) y 3 cultivos (1 mensual). Las vacantes no generan meta. Territorio = meta individual × promotores activos asignados; Dirección = suma de los promotores activos de los territorios operativos."
+    },
+    {
+      "id": "technical-attribution",
+      "title": "Recomendaciones y referencias por territorio asignado",
+      "detail": "El exportado técnico no tiene persona. La gestión técnica se asigna al colaborador mediante su territorio asignado y se presenta con origen «Territorio asignado», no como gestión personal directa. El informe individual y el territorial usan la misma gestión técnica del territorio."
     },
     {
       "id": "territories",
       "title": "Territorios",
-      "detail": "Norte y Bajo Cauca se conservan separados en el dato fuente y se evalúan como «Norte y Bajo Cauca». El informe individual solo usa gestión atribuida a la persona; el territorial suma la gestión válida ejecutada en el territorio; no se reasigna gestión ni se suma doble entre persona, territorio y dirección."
+      "detail": "Norte y Bajo Cauca se conservan separados en el dato fuente y se evalúan como «Norte y Bajo Cauca». Visitas, cobertura, leads y la gestión de campo de los promotores son personales; el informe territorial suma la gestión válida ejecutada en el territorio; no se suma doble entre persona, territorio y dirección."
+    },
+    {
+      "id": "director",
+      "title": "Director",
+      "detail": "Meta de visitas = 20 mensuales (metodología Q1/Q2); el valor 1 del exportado Q3 no se usa como meta. Cobertura: universo de clientes del alcance / 12 cuando la base lo permita; si no, Sin meta con la explicación del dato faltante."
+    },
+    {
+      "id": "partial-results",
+      "title": "Resultados parciales",
+      "detail": "No se redistribuyen pesos de indicadores No aplica, Sin dato o Sin meta. Se muestran el aporte ponderado sobre 100 y el cumplimiento normalizado sobre el peso evaluado (aporte / peso evaluado). Si el peso evaluado es menor a 100 %, el resultado es PARCIAL y no recibe nivel de desempeño."
     },
     {
       "id": "soils",
@@ -225,23 +248,18 @@
   "pendingRules": [
     {
       "id": "new-clients-source",
-      "title": "Fuente de clientes nuevos",
-      "detail": "En Gestión comercial la meta se llama «Meta Clientes Recuperar» aunque Power BI calcula «Ejec. Clientes Nuevos» = Cant. Clientes Nuevos / esa meta; se trata como meta anual de clientes nuevos (trimestral = anual / 4, sin redondeo). Confirmar que «Cant. Clientes Nuevos» no incluye recuperados. En promotores la cantidad es del territorio y se repite en cada promotor (meta 10 mensual × 3)."
+      "title": "Discrepancia: contenido de «Cant. Clientes Nuevos»",
+      "detail": "El exportado Q3 solo trae «Cant. Clientes Nuevos» (y «Ejec. Clientes Nuevos» = Cant. Clientes Nuevos / Meta Clientes Recuperar); no hay columna de recuperados ni definición de la medida. Q1/Q2 usaron esa misma medida de Power BI y la documentaron como nuevos + recuperados, pero el exportado no permite confirmar que incluya recuperados. Revisar la definición de la medida en Power BI. Mientras tanto se usa la medida tal como viene, sin sumar recuperados supuestos. En promotores la cantidad es del territorio y se repite en cada promotor (meta 10 mensual × 3)."
     },
     {
-      "id": "technical-attribution",
-      "title": "Atribución del exportado técnico",
-      "detail": "El exportado técnico solo trae territorio y grupo de artículos, no persona. Recomendaciones y referencias de un comercial o promotor son las de sus territorios asignados (con meta); la gestión en territorios sin meta no se le atribuye."
+      "id": "commercial-field-scope",
+      "title": "Actividades, hectáreas y cultivos del comercial",
+      "detail": "Como en Q1/Q2, el comercial se evalúa con la gestión de campo de su territorio asignado y la meta de sus promotores activos (origen «Territorio asignado», no gestión personal directa). Los promotores se evalúan con su gestión personal frente a 3 / 90 / 3. Confirmar."
     },
     {
       "id": "references",
       "title": "Referencias",
       "detail": "Se replica la regla histórica: suma de referencias de los tres meses frente al portafolio mensual (Meta Referencias del mes de cada territorio). Una misma referencia recomendada en varios meses se cuenta varias veces porque el exportado no trae el código de la referencia. Sin tope."
-    },
-    {
-      "id": "auxiliary-targets",
-      "title": "Metas de actividades, hectáreas y cultivos",
-      "detail": "No vienen en los exportados ni hay configuración aprobada. Sin el bloque opcional «Metas auxiliares» los tres indicadores quedan «Sin meta» y no suman."
     },
     {
       "id": "blank-values",
@@ -250,13 +268,8 @@
     },
     {
       "id": "director-scope",
-      "title": "Alcance y metas del director",
-      "detail": "Visitas, cobertura y leads son personales del director; clientes nuevos, recomendaciones, referencias, actividades, hectáreas y cultivos son consolidados de los territorios operativos (sin sumar informes individuales ni territoriales). La meta de visitas (20 mensuales) viene de la plantilla histórica; el exportado Q3 trae meta 1 en Dirección. La cobertura del director queda Sin meta."
-    },
-    {
-      "id": "not-applicable-weight",
-      "title": "Peso de indicadores No aplica",
-      "detail": "Los indicadores No aplica, Sin dato o Sin meta no suman: el resultado se muestra con el peso realmente evaluado, sin redistribuir pesos."
+      "title": "Cobertura del director",
+      "detail": "Falta el universo de clientes del alcance del director para Q3 (Q1/Q2: 416 clientes / 12 = 34,67 mensuales). Sin ese dato la cobertura de Dirección queda Sin meta. Visitas, cobertura y leads son personales del director; los demás indicadores consolidan los territorios operativos desde la fuente."
     }
   ]
 }

@@ -1,6 +1,6 @@
 import type { IndividualPdfPage } from "@/lib/pdf/export-individual-pdf"
 import type { IndividualIndicator, IndividualSource, MonthlyIndicatorValue, QuarterIndicatorValue } from "@/types/individual-dashboard"
-import type { AgricolaReports, PeriodStatus, Q3Entity } from "./engine.mjs"
+import type { AgricolaReports, EntityPeriodSummary, PeriodStatus, Q3Entity } from "./engine.mjs"
 
 export const STATUS_LABELS: Record<PeriodStatus, string> = {
   ok: "Completo",
@@ -31,11 +31,25 @@ export function formatShare(value: number) {
   return `${new Intl.NumberFormat("es-CO", { maximumFractionDigits: 0 }).format(value * 100)} %`
 }
 
+const oneDecimal = (value: number) => new Intl.NumberFormat("es-CO", { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(value * 100)
+
+export function partialReason(summary: EntityPeriodSummary) {
+  if (summary.complete) return null
+  return summary.evaluatedWeight < summary.totalWeight - 1e-9 ? "PARCIAL (peso evaluado < 100 %)" : "PARCIAL (datos incompletos en algún indicador)"
+}
+
 export function resultLabel(entity: Q3Entity, period: string) {
   const summary = entity.results[period]
   if (summary.result === null) return "Sin resultado"
   const value = `${new Intl.NumberFormat("es-CO", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(summary.result * 100)} %`
-  return summary.complete ? value : `${value} (parcial, ${formatShare(summary.evaluatedWeight)} del peso)`
+  if (summary.complete) return value
+  return `PARCIAL: ${oneDecimal(summary.result)} / 100 puntos; ${normalizedLabel(entity, period)}`
+}
+
+export function normalizedLabel(entity: Q3Entity, period: string) {
+  const summary = entity.results[period]
+  if (summary.normalized === null) return "Sin resultado"
+  return `${oneDecimal(summary.normalized)} % sobre ${formatShare(summary.evaluatedWeight)} evaluado`
 }
 
 export function toIndividualSource(entity: Q3Entity, reports: AgricolaReports, loadedAt: string): IndividualSource {
@@ -77,12 +91,13 @@ export function toPdfPage(entity: Q3Entity, reports: AgricolaReports, period: st
       const notes = [...indicator.notes, ...value.notes]
       return notes.length ? [`${indicator.label}: ${[...new Set(notes)].map((note) => note.replace(/[.\s]+$/, "")).join(". ")}.`] : []
     }),
-    ...entity.indicators.filter((indicator) => indicator.weight > 0).map((indicator) => `${indicator.label} - alcance: ${indicator.scope}. Fórmula: ${indicator.formula}.`),
+    ...entity.indicators.filter((indicator) => indicator.weight > 0).map((indicator) => `${indicator.label} - origen: ${indicator.attribution}; alcance: ${indicator.scope}. Fórmula: ${indicator.formula}.`),
     ...pendingTitles,
   ].map(pdfText)
   const summary = entity.results[period]
   const draftReasons = [...entity.draftReasons]
-  if (!summary.complete && !draftReasons.includes("Indicadores sin dato, sin meta o parciales en el trimestre")) draftReasons.push("Indicadores sin dato, sin meta o parciales en el periodo")
+  if (!summary.complete && period !== reports.quarter) draftReasons.push(`${partialReason(summary)} en el periodo`)
+  if (summary.result !== null) observations.unshift(pdfText(`Resultado: ${new Intl.NumberFormat("es-CO", { maximumFractionDigits: 1 }).format(summary.result * 100)} puntos de 100 (aporte ponderado, sin redistribuir pesos). Cumplimiento normalizado: ${normalizedLabel(entity, period)}.${summary.complete ? "" : ` ${partialReason(summary)}: sin nivel de desempeño.`}`))
   return {
     source, view: isQuarter ? "trimestral" : "mensual", month: isQuarter ? reports.months[0] : period,
     globalResult: summary.result, rows, generatedAt: loadedAt,

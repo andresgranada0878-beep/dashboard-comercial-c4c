@@ -7,7 +7,7 @@ import type { CSSProperties } from "react"
 import config from "@/config/agricola-q3-2026.json"
 import { buildAgricolaReports } from "@/lib/agricola-q3/engine.mjs"
 import type { AgricolaConfig, AgricolaReports, PeriodStatus, Q3Entity } from "@/lib/agricola-q3/engine.mjs"
-import { formatShare, resultLabel, STATUS_LABELS, toPdfPage } from "@/lib/agricola-q3/pdf-pages"
+import { formatShare, normalizedLabel, partialReason, STATUS_LABELS, toPdfPage } from "@/lib/agricola-q3/pdf-pages"
 import { readLoad, type StoredLoad } from "@/lib/agricola-q3/store"
 import { downloadTraceWorkbook } from "@/lib/agricola-q3/trace-workbook"
 import { exportIndividualPdf, exportIndividualPdfBundle } from "@/lib/pdf/export-individual-pdf"
@@ -154,18 +154,19 @@ export default function AgricolaQ3Page() {
           <h2 style={h2}>Resultados del {kind === "individual" ? "equipo" : kind === "territorio" ? "territorio" : "director"} · {periodLabel}</h2>
           <div style={{ overflowX: "auto", marginTop: 10 }}>
             <table style={table}>
-              <thead><tr>{["Nombre", "Rol", "Territorios", ...reports.periods, "Peso evaluado (periodo)", "Estado"].map((head) => <th key={head} style={th}>{head}</th>)}</tr></thead>
+              <thead><tr>{["Nombre", "Rol", "Territorios", ...reports.periods, "Peso evaluado (periodo)", "Cumplimiento normalizado (periodo)", "Estado"].map((head) => <th key={head} style={th}>{head}</th>)}</tr></thead>
               <tbody>{reports.entities.filter((entity) => entity.kind === kind).map((entity) => <tr key={entity.id} style={{ background: entity.id === selected?.id ? "#eaf5ec" : undefined, cursor: "pointer" }} onClick={() => { if (kind === "individual") setProfile("Todos"); setEntityId(entity.id) }}>
                 <td style={td}>{entity.name}{entity.status !== "activo" && <span style={{ color: "#92400e" }}> ({entity.status === "vacante" ? "vacante" : "sin titular"})</span>}</td>
                 <td style={td}>{entity.profile}</td>
                 <td style={td}>{entity.territoryLabel}</td>
                 {reports.periods.map((item) => <td key={item} style={{ ...tdNum, fontWeight: item === period ? 800 : 400 }}>{percent(entity.results[item].result)}{!entity.results[item].complete && entity.results[item].result !== null ? "*" : ""}</td>)}
                 <td style={tdNum}>{formatShare(entity.results[period].evaluatedWeight)}</td>
+                <td style={tdNum}>{percent(entity.results[period].normalized)}</td>
                 <td style={td}>{entity.reportState === "final" ? "Final" : "Borrador"}</td>
               </tr>)}</tbody>
             </table>
           </div>
-          <p style={{ color: "#52625a", fontSize: 12 }}>* Resultado parcial: algún indicador está sin dato o con datos incompletos; el porcentaje solo suma los indicadores evaluados.</p>
+          <p style={{ color: "#52625a", fontSize: 12 }}>* PARCIAL: peso evaluado menor a 100 % o datos incompletos en algún indicador. Los periodos muestran el aporte ponderado sobre 100 (sin redistribuir pesos); el cumplimiento normalizado es aporte / peso evaluado. Un resultado parcial no tiene nivel de desempeño.</p>
         </section>
 
         {reports.observations.length > 0 && <section style={panel}>
@@ -190,14 +191,15 @@ function EntityView({ entity, reports, period, periodLabel, expanded, setExpande
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: 10, marginTop: 14 }}>
         <Summary label="Periodo" value={periodLabel} />
-        <Summary label="Resultado" value={resultLabel(entity, period)} />
-        <Summary label="Nivel" value={summary.complete ? performance(summary.result) : "Sin nivel (parcial)"} />
+        <Summary label="Aporte ponderado (sobre 100)" value={summary.result === null ? "Sin resultado" : percent(summary.result)} />
+        <Summary label="Cumplimiento normalizado" value={normalizedLabel(entity, period)} />
+        <Summary label="Nivel" value={summary.complete ? performance(summary.result) : `${partialReason(summary)}: sin nivel`} />
         <Summary label="Indicadores sin dato" value={summary.missing.length ? summary.missing.join(", ") : "Ninguno"} />
       </div>
       {entity.observations.map((item, index) => <p key={index} style={{ color: "#92400e", fontSize: 13 }}>{item}</p>)}
       <div style={{ overflowX: "auto", marginTop: 14 }}>
         <table style={table}>
-          <thead><tr>{["Indicador", "Gestión real", "Meta", "Cumplimiento", "Reconocido", "Peso", "Aporte", "Estado", "Fuente", ""].map((head, index) => <th key={index} style={th}>{head}</th>)}</tr></thead>
+          <thead><tr>{["Indicador", "Gestión real", "Meta", "Cumplimiento", "Reconocido", "Peso", "Aporte", "Estado", "Origen", ""].map((head, index) => <th key={index} style={th}>{head}</th>)}</tr></thead>
           <tbody>{entity.indicators.map((indicator) => {
             const value = indicator.periods[period]
             const [color, background] = STATUS_COLORS[value.status]
@@ -212,13 +214,13 @@ function EntityView({ entity, reports, period, periodLabel, expanded, setExpande
                 <td style={tdNum}>{percent(indicator.weight, 0)}</td>
                 <td style={tdNum}>{percent(value.contribution, 2)}</td>
                 <td style={td}><span style={{ color, background, borderRadius: 999, padding: "2px 8px", fontSize: 12, fontWeight: 800 }}>{STATUS_LABELS[value.status]}</span></td>
-                <td style={td}>{indicator.source}</td>
+                <td style={td}>{indicator.attribution}</td>
                 <td style={td}><button type="button" style={linkButton} onClick={() => setExpanded(open ? null : indicator.id)}>{open ? "Ocultar" : "Detalle"}</button></td>
               </tr>
               {open && <tr><td colSpan={10} style={{ ...td, background: "#fafcfb", fontSize: 13 }}>
                 <div><strong>Criterio:</strong> {indicator.criterion}</div>
                 <div><strong>Fórmula aplicada:</strong> {indicator.formula}</div>
-                <div><strong>Alcance:</strong> {indicator.scope}</div>
+                <div><strong>Alcance:</strong> {indicator.scope} (fuente: {indicator.source})</div>
                 {[...indicator.notes, ...value.notes].map((note, index) => <div key={index}>• {note}</div>)}
                 <div style={{ marginTop: 6 }}><strong>Por mes:</strong> {reports.months.map((month) => `${month}: ${number(indicator.periods[month].actual)} / ${number(indicator.periods[month].target)} (${STATUS_LABELS[indicator.periods[month].status]})`).join(" · ")}</div>
                 {indicator.pending.length > 0 && <div style={{ color: "#92400e", marginTop: 6 }}>Pendiente de validación: {reports.pendingRules.filter((rule) => indicator.pending.includes(rule.id)).map((rule) => rule.title).join(", ")}</div>}

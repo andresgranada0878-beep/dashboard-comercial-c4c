@@ -26,13 +26,17 @@ export interface Q3Indicator {
   pending: string[]
   formula: string
   source: string
+  attribution: string
   scope: string
   notes: string[]
   periods: Record<string, PeriodResult>
 }
 
 export interface EntityPeriodSummary {
+  /** Weighted points over 100 (no redistribution). */
   result: number | null
+  /** result / evaluatedWeight. */
+  normalized: number | null
   evaluatedWeight: number
   totalWeight: number
   complete: boolean
@@ -88,9 +92,13 @@ export interface AgricolaConfig {
     unassignedRule: string
   }
   targets: {
-    director: { visitsPerMonth: number | null; coveragePerMonth: number | null }
+    director: { visitsPerMonth: number | null; coveragePerMonth: number | null; coverageMissing: string }
+    fieldTargets: {
+      perActivePromoter: { activitiesPerQuarter: number; plotsPerQuarter: number; hectaresPerQuarter: number; cropsPerQuarter: number }
+      vacanciesGenerateTarget: boolean
+      commercialScope: "territorio_asignado" | "personal"
+    }
     newClients: Record<"commercial" | "promoters", { field: string; periodicity: TargetPeriodicity }>
-    auxiliary: string
   }
   policies: {
     blankValues: string

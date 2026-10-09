@@ -9,13 +9,13 @@ Estado: borrador para revisión. Los informes se calculan y descargan, pero llev
 3. `/agricola-q3`: informes individuales (comerciales y promotores), por territorio y de dirección; periodos julio, agosto, septiembre y trimestre. Cada indicador muestra gestión real, meta, cumplimiento sin tope y reconocido, peso, aporte, estado (completo, parcial, sin dato, sin meta, no aplica), fuente, alcance, fórmula y observaciones.
 4. Descargas: PDF del informe seleccionado, PDF con todos los informes de cada tipo y Excel de trazabilidad (resultados, trazabilidad por indicador y periodo, reglas pendientes, observaciones y conciliación).
 
-Los datos se procesan en el navegador y quedan en `sessionStorage` de la pestaña. No se suben al servidor ni al repositorio. El catálogo de personas y territorios se arma con los exportados cargados; el repositorio solo guarda reglas, pesos y topes. El bloque opcional «Metas auxiliares» se carga junto con los seis exportados.
+Los datos se procesan en el navegador y quedan en `sessionStorage` de la pestaña. No se suben al servidor ni al repositorio. El catálogo de personas y territorios se arma con los exportados cargados; el repositorio solo guarda reglas, pesos y topes.
 
 ## Código
 
 - `lib/agricola-import.mjs`, `lib/pasted-table.mjs`, `lib/field-activities.mjs`: lectura y normalización de los bloques.
 - `lib/agricola-q3/engine.mjs`: catálogo derivado, cálculo de indicadores, resultados ponderados y conciliación. Sin dependencias de la interfaz.
-- `config/agricola-q3-2026.json`: pesos, topes, metas auxiliares, políticas y reglas pendientes.
+- `config/agricola-q3-2026.json`: pesos, topes, metas por promotor activo, políticas, reglas aprobadas y pendientes.
 - `lib/agricola-q3/pdf-pages.ts` y `lib/pdf/export-individual-pdf.ts`: PDFs con el mismo formato del informe individual. Sin parámetros adicionales el PDF de Q1/Q2 no cambia.
 - Pruebas con datos ficticios: `tests/agricola-q3-engine.test.mjs`, `tests/agricola-import.test.mjs`, `tests/field-activities.test.mjs`, `tests/auth-session.test.mjs` (`pnpm test`).
 
@@ -24,14 +24,16 @@ Los datos se procesan en el navegador y quedan en `sessionStorage` de la pestañ
 Las reglas de negocio aprobadas están en `approvedRules` de la configuración y se muestran en la página y en el Excel de trazabilidad.
 
 - Catálogo: una persona tiene asignados los territorios donde su fila trae meta; las filas sin meta son visitas en otros territorios (cuentan en sus visitas, no cambian su alcance). Quien tiene meta en Dirección es el director. Nombres que empiezan por «(Vacante)» son vacantes; nombres en mayúsculas sostenidas son posiciones sin titular. Las vacantes se conservan y no se reasignan.
-- Territorios: Norte y Bajo Cauca se conservan separados en la fuente y se evalúan como «Norte y Bajo Cauca» (`catalog.territoryGroups`). El informe individual solo usa gestión atribuida a la persona (sus filas, sus actividades como propietario, sus fincas); el territorial suma la gestión válida del territorio sin reasignarla; dirección consolida los territorios operativos desde la fuente, sin sumar informes.
-- Pesos: visitas 10 %, cobertura 10 %, clientes nuevos 10 %, recomendaciones 20 %, referencias 10 %, leads calificados 10 %, leads a tiempo 10 %, actividades 10 %, hectáreas 5 %, cultivos 5 %. Gestión de cultivos (promedio de hectáreas y cultivos) es informativa. Suelos se muestra como No aplica, peso 0.
-- Resultado: suma de aportes de los indicadores evaluados, con el peso evaluado visible. Sin dato, Sin meta y No aplica no suman; no se redistribuyen pesos ni se asigna nivel a un resultado parcial.
-- Cobertura: clientes únicos por mes (Clientes Visitados); trimestre = Σ clientes únicos mensuales / Σ metas mensuales, sin dividir de nuevo entre 3. La cobertura del director queda Sin meta.
-- Clientes nuevos: acumulado del trimestre; meta anual de la fuente / 4 (sin redondeo) o meta mensual × 3, según `targets.newClients`. Tope 150 %.
+- Territorios: Norte y Bajo Cauca se conservan separados en la fuente y se evalúan como «Norte y Bajo Cauca» (`catalog.territoryGroups`). El informe territorial suma la gestión válida del territorio sin reasignarla; dirección consolida los territorios operativos desde la fuente, sin sumar informes.
+- Origen de la gestión (columna «Origen» en la página, el PDF y el Excel): «Personal» para visitas, cobertura, leads y, en promotores, actividades y fincas a su nombre. «Territorio asignado» para recomendaciones y referencias de cualquier individual (el exportado técnico no trae persona) y para actividades, hectáreas y cultivos de los comerciales. No es gestión personal directa: el informe territorial usa exactamente la misma gestión.
+- Pesos: visitas 10 %, cobertura 10 %, recuperación de clientes 10 %, recomendaciones 20 %, referencias 10 %, leads calificados 10 %, leads a tiempo 10 %, actividades 10 %, hectáreas 5 %, cultivos 5 %. Gestión de cultivos (promedio de hectáreas y cultivos) es informativa. Suelos se muestra como No aplica, peso 0.
+- Resultado: dos valores, sin redistribuir pesos. A) Aporte ponderado sobre 100 = suma de aportes de los indicadores evaluados. B) Cumplimiento normalizado = aporte / peso evaluado (por ejemplo 41,4 / 70 % = 59,1 %). Sin dato, Sin meta y No aplica no suman. Si el peso evaluado es menor a 100 % o algún indicador tiene datos incompletos, el resultado es PARCIAL y no tiene nivel de desempeño.
+- Cobertura: clientes únicos por mes (Clientes Visitados); trimestre = Σ clientes únicos mensuales / Σ metas mensuales, sin dividir de nuevo entre 3.
+- Director: meta de 20 visitas mensuales (metodología Q1/Q2; el 1 del exportado no se usa). Cobertura histórica = universo de clientes del alcance / 12 por mes (Q1/Q2: 416 / 12 = 34,67); el exportado Q3 no trae ese universo, así que queda Sin meta hasta tenerlo (`targets.director.coveragePerMonth`).
+- Recuperación de clientes (nuevos + recuperados): acumulado del trimestre de «Cant. Clientes Nuevos» contra «Meta Clientes Recuperar» / 4 (comerciales, sin redondeo) o meta mensual × 3 (promotores), como en Q1/Q2. Tope 150 %. Discrepancia en revisión: el exportado no permite confirmar si «Cant. Clientes Nuevos» incluye recuperados; se usa tal como viene, sin sumar recuperados supuestos.
 - Leads: numerador = cantidad real de calificados (porcentaje × Meta Leads), nunca Meta Leads; a tiempo = Calificados Oportunos; meta = leads asignados. Asignados sin gestión = 0; sin leads asignados = No aplica; un registro con porcentaje vacío pero con gestión se informa como inconsistente y no se evalúa.
 - Actividades: completadas de Día de campo, Evento Especial, Visita Mostrador Especial y Visita Formación, por fecha de inicio en el trimestre, una vez por ID, sin parcelas; un ID repetido con datos distintos se excluye y se informa. Propietarios sin correspondencia en el catálogo se informan y cuentan en su territorio.
-- Metas de actividades, hectáreas y cultivos: no hay metas globales. Solo se evalúan con el bloque opcional «Metas auxiliares» (Nombre, Meta Actividades Trimestre, Meta Hectáreas Mes, Meta Cultivos Mes), que se carga como los exportados y no se guarda en el repositorio. Las vacantes y posiciones sin titular no reciben meta.
+- Metas de actividades, hectáreas y cultivos (`targets.fieldTargets`): por promotor activo y trimestre, 3 actividades, 90 hectáreas (30 al mes) y 3 cultivos (1 al mes); las parcelas no cuentan en Q3. Las vacantes y posiciones sin titular no generan meta. Territorio = meta individual × promotores activos asignados (sin promotores activos: Sin meta). Comercial = meta de su territorio asignado. Director = suma de los promotores activos de los territorios operativos.
 - Fincas: hectáreas y cultivos impactados solo de la fuente de fincas; sin identificador de finca, la suma no se presenta como fincas o cultivos únicos.
 - Celdas vacías: dato ausente, nunca cero. Si todo el alcance está vacío el indicador queda sin dato.
 - Referencias: cantidad = Meta Referencias × proporción recomendada. Al pegar, si la proporción no tiene decimales suficientes para una cantidad exacta, la carga se bloquea.
@@ -39,7 +41,7 @@ Las reglas de negocio aprobadas están en `approvedRules` de la configuración y
 
 ## Reglas pendientes de validación
 
-Están en `pendingRules` de la configuración y se muestran en la página y en los PDF: fuente de clientes nuevos (la meta comercial se llama «Meta Clientes Recuperar»), atribución del exportado técnico (no trae persona), referencias, metas auxiliares, celdas vacías, alcance y metas del director (20 visitas mensuales de la plantilla histórica) y peso de los indicadores No aplica. Al validarlas: ajustar la configuración, poner `rulesValidated: true` y volver a revisar las pruebas.
+Están en `pendingRules` de la configuración y se muestran en la página y en los PDF: contenido de «Cant. Clientes Nuevos» (si incluye recuperados), alcance de campo de los comerciales (territorio asignado), referencias, celdas vacías y universo de clientes del director para la cobertura. Al validarlas: ajustar la configuración, poner `rulesValidated: true` y volver a revisar las pruebas.
 
 ## Galagro (pendiente)
 
