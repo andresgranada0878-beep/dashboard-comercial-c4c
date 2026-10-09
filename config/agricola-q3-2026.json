@@ -182,7 +182,7 @@
     {
       "id": "coverage",
       "title": "Cobertura",
-      "detail": "Mide clientes únicos gestionados, no visitas. Clientes únicos por mes; trimestre = Σ clientes únicos mensuales / Σ metas mensuales, sin dividir de nuevo entre 3. El detalle mensual se conserva para trazabilidad."
+      "detail": "Mide clientes únicos gestionados, no visitas. Clientes únicos por mes; trimestre = Σ clientes únicos mensuales / Σ metas mensuales, sin dividir de nuevo entre 3. El detalle mensual se conserva para trazabilidad. Promotores: meta individual mensual = Meta Cobertura del territorio / promotores activos del territorio en ese mes (las vacantes no cuentan y su cobertura es No aplica); la gestión son los clientes visitados personalmente, sin dividir; el trimestre suma las metas individuales mensuales, así que la meta territorial cuenta una sola vez."
     },
     {
       "id": "new-clients",
