@@ -1,0 +1,126 @@
+import type { PreparedBlock } from "../agricola-import.mjs"
+
+export type PeriodStatus = "ok" | "parcial" | "sin_dato" | "sin_meta"
+export type EntityKind = "individual" | "territorio" | "direccion"
+export type EntityProfile = "Director" | "Comercial" | "Promotor" | "Territorio"
+export type PositionStatus = "activo" | "vacante" | "sin_titular"
+
+export interface PeriodResult {
+  actual: number | null
+  target: number | null
+  rawCompliance: number | null
+  recognizedCompliance: number | null
+  contribution: number | null
+  status: PeriodStatus
+  notes: string[]
+}
+
+export interface Q3Indicator {
+  id: string
+  label: string
+  weight: number
+  cap: number | null
+  calculationType: string
+  criterion: string
+  pending: string[]
+  formula: string
+  source: string
+  scope: string
+  notes: string[]
+  periods: Record<string, PeriodResult>
+}
+
+export interface EntityPeriodSummary {
+  result: number | null
+  evaluatedWeight: number
+  totalWeight: number
+  complete: boolean
+  missing: string[]
+}
+
+export interface Q3Entity {
+  id: string
+  kind: EntityKind
+  profile: EntityProfile
+  name: string
+  cargo: string
+  territories: string[]
+  territoryLabel: string
+  status: PositionStatus
+  indicators: Q3Indicator[]
+  results: Record<string, EntityPeriodSummary>
+  pendingRules: string[]
+  observations: string[]
+  reportState: "borrador" | "final"
+  draftReasons: string[]
+}
+
+export interface PendingRule { id: string; title: string; detail: string }
+export interface CatalogTerritory { name: string; label: string; operating: boolean }
+export interface CatalogPerson {
+  name: string
+  key: string
+  profile: "Director" | "Comercial" | "Promotor"
+  cargo: string
+  territories: string[]
+  otherTerritories: string[]
+  status: PositionStatus
+}
+
+export interface AgricolaConfig {
+  version: string
+  sourceKey: string
+  company: string
+  report: string
+  year: number
+  quarter: string
+  months: string[]
+  rulesValidated: boolean
+  catalog: {
+    source: string
+    territoryPrefix: string
+    nonOperatingTerritories: string[]
+    territoryLabels: Record<string, string>
+    vacancyPattern: string
+    unassignedRule: string
+  }
+  targets: {
+    perPromoter: { activitiesPerQuarter: number; plotsPerQuarter: number; hectaresPerMonth: number; cropsPerMonth: number }
+    commercialSumsTerritoryPromoters: boolean
+    includeVacantPositions: boolean
+    director: { visitsPerMonth: number | null; coveragePerMonth: number | null }
+  }
+  policies: {
+    blankValues: string
+    leadsAbsentEmployee: "pendiente" | "cero"
+    leadsQualifiedNumerator: "leads_calificados" | "meta_leads_historico"
+    farmsWithoutRecords: "cero" | "sin_dato"
+  }
+  indicators: { id: string; label: string; weight: number; cap: number | null; calculationType: string; pending: string[]; criterion: string }[]
+  pendingRules: PendingRule[]
+}
+
+export interface AgricolaReports {
+  version: string
+  report: string
+  company: string
+  year: number
+  quarter: string
+  months: string[]
+  periods: string[]
+  entities: Q3Entity[]
+  territories: CatalogTerritory[]
+  unknownPeople: { name: string; sources: string[]; count: number }[]
+  observations: string[]
+  pendingRules: PendingRule[]
+  rulesValidated: boolean
+}
+
+export interface ReconcileControl { read?: number; selected?: number; months?: Record<string, number>; byType?: Record<string, number> }
+export interface ReconcileCheck { block: string; check: string; expected: number | string; actual: number | string; ok: boolean }
+
+export function sumField(rows: Record<string, unknown>[], field: string): { value: number | null; present: number; blanks: number }
+export function evaluateRatio(input: { actual: number | null; target: number | null; cap: number | null; weight: number }): Pick<PeriodResult, "rawCompliance" | "recognizedCompliance" | "contribution" | "status">
+export function deriveCatalog(blocks: Partial<Record<string, PreparedBlock>>, config: AgricolaConfig): { people: CatalogPerson[]; territories: CatalogTerritory[]; observations: string[] }
+export function buildAgricolaReports(input: { blocks: Partial<Record<string, PreparedBlock>>; config: AgricolaConfig }): AgricolaReports
+export function reconcile(blocks: Partial<Record<string, PreparedBlock>>, controls: Record<string, ReconcileControl>): ReconcileCheck[]

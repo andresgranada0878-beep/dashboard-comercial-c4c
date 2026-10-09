@@ -261,6 +261,14 @@ export default function ExecutiveSummaryPage() {
                   Volver al informe individual
                 </Link>
 
+                <Link href="/agricola-q3" style={secondaryButton}>
+                  Agrícola Q3
+                </Link>
+
+                <Link href="/cargar-datos" style={secondaryButton}>
+                  Cargar datos
+                </Link>
+
                 <button
                   type="button"
                   onClick={() => void loadData()}

@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "test": "node --test \"tests/*.test.mjs\"",
     "build:data": "node scripts/build-individual-data.mjs && node scripts/expand-antioquia-team.mjs && node scripts/expand-galagro-nacional-team.mjs && node scripts/normalize-galagro-nacional-indicators.mjs && node scripts/build-galagro-nacional-director.mjs && node scripts/dedupe-galagro-nacional-director.mjs",
     "sync:drive": "node scripts/sync-drive.mjs",
     "refresh:data": "pnpm sync:drive && pnpm build:data"

@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   description:
     'Portal de resultados individuales C4C para Agrícola Antioquia, Galagro Antioquia y Galagro Nacional, con vista mensual y trimestral.',
   generator: 'v0.app',
+  robots: { index: false, follow: false },
 }
 
 export const viewport: Viewport = {

@@ -1,13 +1,18 @@
 import fs from "node:fs/promises"
 import path from "node:path"
-import { NextResponse } from "next/server"
+import { NextResponse, type NextRequest } from "next/server"
+import { readAuthConfig, SESSION_COOKIE, verifySessionToken } from "@/lib/auth/session.mjs"
 import type { IndividualDashboardPayload } from "@/types/individual-dashboard"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
 export const revalidate = 0
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const auth = readAuthConfig()
+  if (!auth || !verifySessionToken(request.cookies.get(SESSION_COOKIE)?.value, auth.secret)) {
+    return NextResponse.json({ error: "Sesión requerida" }, { status: 401, headers: { "Cache-Control": "no-store" } })
+  }
   try {
     const filePath = path.join(process.cwd(), "data", "generated", "individual-c4c.json")
     const contents = await fs.readFile(filePath, "utf8")

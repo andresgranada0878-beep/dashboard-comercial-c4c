@@ -12,9 +12,27 @@ Incluye vista trimestral validada contra los archivos Excel y una vista mensual 
 ## Ejecutar
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
+pnpm test
 ```
+
+## Acceso
+
+Todas las páginas, la API y las descargas exigen sesión. La contraseña se valida en el servidor (`proxy.ts` y `app/api/auth/login`) contra un hash scrypt; la sesión es una cookie firmada HttpOnly, Secure y SameSite=Lax que dura 8 horas. Sin las dos variables siguientes el sitio responde 503 (falla cerrado):
+
+```text
+AUTH_PASSWORD_HASH   hash de la contraseña (generar con: node scripts/hash-password.mjs)
+AUTH_SECRET          secreto de firma de sesiones (lo genera el mismo script)
+```
+
+En local se guardan en `.env.local` (ignorado por Git). En Vercel se configuran como variables de entorno del entorno correspondiente (Preview o Production). Cambiar `AUTH_SECRET` cierra todas las sesiones.
+
+La contraseña no protege archivos que estén en el repositorio público de GitHub: los Excel históricos de `data/` siguen siendo visibles allí mientras el repositorio sea público.
+
+## Agrícola Antioquia Q3
+
+`/cargar-datos` recibe los seis exportados de Power BI y C4C (pegados o en .xlsx) y `/agricola-q3` muestra los informes individuales, por territorio y de dirección, mensuales y trimestrales, con descarga en PDF y Excel de trazabilidad. Los datos se procesan en el navegador y quedan solo en la pestaña (sessionStorage); no se envían al servidor ni se guardan en el repositorio. Metodología y reglas pendientes: `docs/Q3-preparation.md`.
 
 ## Datos usados por la página
 
@@ -54,6 +72,5 @@ Los Excel están ignorados por Git. No deben publicarse en el repositorio ni que
 ## Alcance pendiente
 
 - Conexión autenticada con los tres modelos de Power BI.
-- Inclusión de todos los colaboradores, no solo los casos guardados en los Excel de validación.
-- Reportes de director y territorio.
-- Descarga en PDF.
+- Inclusión de todos los colaboradores en Q1/Q2, no solo los casos guardados en los Excel de validación.
+- Validación de las reglas Q3 marcadas como pendientes y extensión del flujo de carga a Galagro.
