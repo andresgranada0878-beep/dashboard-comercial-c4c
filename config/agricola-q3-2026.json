@@ -1,5 +1,5 @@
 {
-  "version": "agricola-q3-2026-v3",
+  "version": "agricola-q3-2026-v4",
   "sourceKey": "PYC-AGR-ANT",
   "company": "Pérez y Cardona",
   "report": "Agrícola Antioquia",
@@ -91,10 +91,8 @@
       "weight": 0.1,
       "cap": 1.5,
       "calculationType": "ratio_acumulado",
-      "pending": [
-        "new-clients-source"
-      ],
-      "criterion": "Clientes nuevos y recuperados con gestión o venta, acumulados del trimestre, frente a la meta trimestral derivada de «Meta Clientes Recuperar» (anual / 4) o de la meta mensual de promotores (× 3). Se usa la medida «Cant. Clientes Nuevos» de Power BI, la misma que usaba Q1/Q2. Reconocimiento máximo 150%."
+      "pending": [],
+      "criterion": "Medida exportada «Cant. Clientes Nuevos» (la misma de Q1/Q2), acumulada del trimestre, frente a la meta trimestral derivada de «Meta Clientes Recuperar» (anual / 4) o de la meta mensual de promotores (× 3). No se suman recuperados supuestos. Advertencia: la fuente no permite verificar si la medida incluye clientes recuperados. Reconocimiento máximo 150%."
     },
     {
       "id": "recomendaciones",
@@ -102,9 +100,7 @@
       "weight": 0.2,
       "cap": 1.5,
       "calculationType": "ratio_acumulado",
-      "pending": [
-        "blank-values"
-      ],
+      "pending": [],
       "criterion": "Valor de recomendaciones frente al presupuesto (Ppto) del mismo periodo. El exportado técnico no identifica persona: el colaborador se evalúa con la gestión técnica de su territorio asignado (no es gestión personal directa) y el informe territorial usa la misma gestión. Reconocimiento máximo 150%."
     },
     {
@@ -142,10 +138,8 @@
       "weight": 0.1,
       "cap": 1.5,
       "calculationType": "ratio_acumulado",
-      "pending": [
-        "commercial-field-scope"
-      ],
-      "criterion": "Actividades en estado Finalizado/Completado de tipo Día de campo, Evento Especial, Visita Mostrador Especial o Visita Formación (sin parcelas), contadas una vez por ID, frente a 3 actividades trimestrales por promotor activo (las vacantes no generan meta). Reconocimiento máximo 150%."
+      "pending": [],
+      "criterion": "Actividades en estado Finalizado/Completado de tipo Día de campo, Evento Especial, Visita Mostrador Especial o Visita Formación (sin parcelas), contadas una vez por ID, frente a 3 actividades trimestrales por promotor activo (las vacantes no generan meta). RTC: alcance territorio asignado. Reconocimiento máximo 150%."
     },
     {
       "id": "hectareas",
@@ -153,10 +147,8 @@
       "weight": 0.05,
       "cap": 1.5,
       "calculationType": "ratio_acumulado",
-      "pending": [
-        "commercial-field-scope"
-      ],
-      "criterion": "Hectáreas impactadas registradas en Fincas frente a 90 hectáreas trimestrales (30 mensuales) por promotor activo. La suma no representa fincas únicas. Reconocimiento máximo 150%."
+      "pending": [],
+      "criterion": "Hectáreas impactadas registradas en Fincas frente a 90 hectáreas trimestrales (30 mensuales) por promotor activo. RTC: alcance territorio asignado. La suma no representa fincas únicas. Reconocimiento máximo 150%."
     },
     {
       "id": "cultivos",
@@ -164,10 +156,8 @@
       "weight": 0.05,
       "cap": 1.5,
       "calculationType": "ratio_acumulado",
-      "pending": [
-        "commercial-field-scope"
-      ],
-      "criterion": "Cultivos impactados registrados en Fincas (cultivo × empleado × mes) frente a 3 cultivos trimestrales (1 mensual) por promotor activo. No representa cultivos únicos. Reconocimiento máximo 150%."
+      "pending": [],
+      "criterion": "Cultivos impactados registrados en Fincas (cultivo × empleado × mes) frente a 3 cultivos trimestrales (1 mensual) por promotor activo. RTC: alcance territorio asignado. No representa cultivos únicos. Reconocimiento máximo 150%."
     },
     {
       "id": "gestion-cultivos-impactados",
@@ -197,7 +187,7 @@
     {
       "id": "new-clients",
       "title": "Recuperación de clientes (nuevos + recuperados)",
-      "detail": "Metodología Q1/Q2: clientes nuevos + recuperados frente a «Meta Clientes Recuperar». Meta anual de la fuente → trimestral = anual / 4; meta mensual → mensual × 3. Gestión = acumulado del trimestre. Tope 150%. Si la medida de Power BI no incluye recuperados se marca discrepancia; no se suman recuperados supuestos."
+      "detail": "Medida exportada «Cant. Clientes Nuevos» frente a «Meta Clientes Recuperar» (metodología Q1/Q2). Meta anual de la fuente → trimestral = anual / 4; meta mensual → mensual × 3. Gestión = acumulado del trimestre. Tope 150%. No se suman recuperados supuestos. Advertencia (no bloquea el cálculo): la fuente no permite verificar si la medida incluye clientes recuperados."
     },
     {
       "id": "leads",
@@ -212,7 +202,12 @@
     {
       "id": "field-targets",
       "title": "Metas de actividades, hectáreas y cultivos",
-      "detail": "Metodología Q1/Q2 con la modificación Q3 (parcelas no cuentan): por promotor activo y trimestre, 3 actividades, 90 hectáreas (30 mensuales) y 3 cultivos (1 mensual). Las vacantes no generan meta. Territorio = meta individual × promotores activos asignados; Dirección = suma de los promotores activos de los territorios operativos."
+      "detail": "Metodología Q1/Q2 con la modificación Q3 (parcelas no cuentan): por promotor activo y trimestre, 3 actividades, 90 hectáreas (30 mensuales) y 3 cultivos (1 mensual). Las vacantes no generan meta. Territorio = meta individual × promotores activos asignados; Dirección = suma de las metas territoriales."
+    },
+    {
+      "id": "commercial-field-scope",
+      "title": "Actividades, hectáreas y cultivos del RTC",
+      "detail": "Como en la metodología histórica, el comercial (RTC) se evalúa con la gestión de campo de su territorio asignado y la meta de los promotores activos de ese territorio. Se muestra «Alcance: territorio asignado»; no se presenta como autoría individual. Los promotores se evalúan con su gestión personal."
     },
     {
       "id": "technical-attribution",
@@ -232,7 +227,12 @@
     {
       "id": "partial-results",
       "title": "Resultados parciales",
-      "detail": "No se redistribuyen pesos de indicadores No aplica, Sin dato o Sin meta. Se muestran el aporte ponderado sobre 100 y el cumplimiento normalizado sobre el peso evaluado (aporte / peso evaluado). Si el peso evaluado es menor a 100 %, el resultado es PARCIAL y no recibe nivel de desempeño."
+      "detail": "No se redistribuyen pesos de indicadores No aplica, Sin dato o Sin meta. Se muestran el aporte ponderado sobre 100 y el cumplimiento normalizado sobre el peso evaluado (aporte / peso evaluado). Si el peso evaluado es menor a 100 %, el resultado es PARCIAL y no recibe nivel de desempeño. Con 100 % de peso evaluado, si alguna fuente requerida tiene datos incompletos o valores cuya ausencia no puede distinguirse de cero, se conserva «PARCIAL (datos incompletos en algún indicador)» sin nivel de desempeño."
+    },
+    {
+      "id": "blank-values",
+      "title": "Celdas vacías",
+      "detail": "Los vacíos se conservan como datos ausentes, nunca como cero. Si todos los valores de un indicador están vacíos, el indicador queda sin dato y no suma al resultado; si solo algunos lo están, el indicador y el resultado quedan parciales."
     },
     {
       "id": "soils",
@@ -247,24 +247,9 @@
   ],
   "pendingRules": [
     {
-      "id": "new-clients-source",
-      "title": "Discrepancia: contenido de «Cant. Clientes Nuevos»",
-      "detail": "El exportado Q3 solo trae «Cant. Clientes Nuevos» (y «Ejec. Clientes Nuevos» = Cant. Clientes Nuevos / Meta Clientes Recuperar); no hay columna de recuperados ni definición de la medida. Q1/Q2 usaron esa misma medida de Power BI y la documentaron como nuevos + recuperados, pero el exportado no permite confirmar que incluya recuperados. Revisar la definición de la medida en Power BI. Mientras tanto se usa la medida tal como viene, sin sumar recuperados supuestos. En promotores la cantidad es del territorio y se repite en cada promotor (meta 10 mensual × 3)."
-    },
-    {
-      "id": "commercial-field-scope",
-      "title": "Actividades, hectáreas y cultivos del comercial",
-      "detail": "Como en Q1/Q2, el comercial se evalúa con la gestión de campo de su territorio asignado y la meta de sus promotores activos (origen «Territorio asignado», no gestión personal directa). Los promotores se evalúan con su gestión personal frente a 3 / 90 / 3. Confirmar."
-    },
-    {
       "id": "references",
       "title": "Referencias",
       "detail": "Se replica la regla histórica: suma de referencias de los tres meses frente al portafolio mensual (Meta Referencias del mes de cada territorio). Una misma referencia recomendada en varios meses se cuenta varias veces porque el exportado no trae el código de la referencia. Sin tope."
-    },
-    {
-      "id": "blank-values",
-      "title": "Celdas vacías",
-      "detail": "Los vacíos se conservan como datos ausentes. Si todos los valores de un indicador están vacíos, el indicador queda sin dato y no suma al resultado; si solo algunos lo están, el resultado se marca como parcial."
     },
     {
       "id": "director-scope",

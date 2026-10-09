@@ -234,6 +234,11 @@ test("rule field targets: 3 activities, 90 ha and 3 crops per active promoter pe
   assert.equal(target("Comercial Uno", "actividades_campo"), 3, "assigned territory Alfa")
   assert.equal(target("Comercial Dos", "hectareas"), 90, "Beta + Gamma: one active promoter")
   assert.deepEqual(["actividades_campo", "hectareas", "cultivos"].map(id => target("Directora Ficticia", id)), [6, 180, 6])
+  for (const id of ["actividades_campo", "hectareas", "cultivos"]) {
+    const territorial = ["Alfa", "Beta", "Gamma"].reduce((sum, name) => sum + (target(name, id) ?? 0), 0)
+    assert.equal(target("Directora Ficticia", id), territorial, "director = sum of territorial targets")
+  }
+  assert.ok(indicator("Comercial Uno", "cultivos").notes.includes("Alcance: territorio asignado. Gestión del territorio, no autoría individual; el informe territorial usa la misma gestión."))
   assert.ok(reports.observations.some(note => note.includes("2 promotores activos") && note.includes("Persona Tres")))
 })
 
@@ -242,17 +247,18 @@ test("rule technical attribution: individuals show the assigned territory, same 
     const personal = indicator("Comercial Uno", id)
     assert.equal(personal.attribution, "Territorio asignado")
     assert.ok(personal.scope.startsWith("Territorio asignado: Alfa"))
-    assert.ok(personal.notes.some(note => note.includes("no es gestión personal directa")))
+    assert.ok(personal.notes.some(note => note.startsWith("Alcance: territorio asignado") && note.includes("no autoría individual")))
     assert.deepEqual(personal.periods.Q3, { ...indicator("Alfa", id).periods.Q3, notes: personal.periods.Q3.notes })
     assert.equal(indicator("Alfa", id).attribution, "Territorio")
   }
 })
 
-test("rule new clients: Q3 label is recovery (new + recovered) and the source discrepancy is flagged", () => {
+test("rule new clients: exported measure against Meta Clientes Recuperar, with a non-blocking warning", () => {
   const clients = indicator("Comercial Uno", "nuevos_clientes")
   assert.equal(clients.label, "Recuperación de clientes (nuevos + recuperados)")
-  assert.ok(clients.notes.some(note => note.startsWith("Discrepancia")))
-  assert.ok(clients.pending.includes("new-clients-source"))
+  assert.ok(clients.notes.some(note => note.includes("La fuente no permite verificar si la medida incluye clientes recuperados.")))
+  assert.deepEqual(clients.pending, [])
+  assert.equal(clients.periods.Q3.status, "ok")
   assert.equal(clients.cap, 1.5)
 })
 
