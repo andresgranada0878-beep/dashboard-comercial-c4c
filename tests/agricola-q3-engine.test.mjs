@@ -504,19 +504,19 @@ test("duplicate rows and periods outside the quarter are reported", () => {
 })
 
 
-test("Q3 cobertura oficial: Gloria Norte + Bajo Cauca = 232 mensuales, 696 trimestrales; conserva meta ante fila faltante", () => {
+test("Q3 cobertura oficial: promotor Norte + Bajo Cauca = 232 mensuales, 696 trimestrales; conserva meta ante fila faltante", () => {
   const head = ["Territorio", "Empleado", "Meta Cobertura", "Clientes Visitados", "Cobertura Clientes", "Meta Visitas ", "Cant. Visitas", "Ejec. Visitas", "Meta Clientes Nuevos", "Cant. Clientes Nuevos", "Ejec. Clientes Nuevos", "Mes"]
   const north = "PYC AGRÍCOLA ANT NORTE"
   const bajoCauca = "PYC AGRÍCOLA ANT BAJO CAUCA"
   const rows = ["Julio", "Agosto", "Septiembre"].flatMap((month, i) => [
-    [north, "Gloria Marela", 232, [31, 33, 40][i], "", 60, 41, "", 10, 10, "", month],
-    [bajoCauca, "Gloria Marela", 10, 0, "", 60, 0, "", 10, 0, "", month],
+    [north, "Promotor Grupo Ejemplo", 232, [31, 33, 40][i], "", 60, 41, "", 10, 10, "", month],
+    [bajoCauca, "Promotor Grupo Ejemplo", 10, 0, "", 60, 0, "", 10, 0, "", month],
   ])
   const reportFor = sourceRows => buildAgricolaReports({
     blocks: { ...blocks, promoters: prepareAgricolaBlock("promoters", tsv(head, sourceRows), 2026, "Q3") },
     config,
   })
-  const coverageFor = report => report.entities.find(item => item.name === "Gloria Marela").indicators.find(item => item.id === "cobertura_clientes").periods
+  const coverageFor = report => report.entities.find(item => item.name === "Promotor Grupo Ejemplo").indicators.find(item => item.id === "cobertura_clientes").periods
   const result = coverageFor(reportFor(rows))
   assert.deepEqual(["Julio", "Agosto", "Septiembre"].map(month => result[month].target), [232, 232, 232])
   assert.equal(result.Q3.target, 696)
@@ -526,4 +526,44 @@ test("Q3 cobertura oficial: Gloria Norte + Bajo Cauca = 232 mensuales, 696 trime
   assert.equal(missing.Agosto.target, 232)
   assert.equal(missing.Q3.target, 696)
   assert.ok(missing.Agosto.notes.some(note => note.includes("Falta fila de Norte")))
+})
+
+
+test("Q3 metas territoriales validadas: 8 territorios, plazas compartidas, vacantes y control del total Power BI", () => {
+  const head = ["Territorio", "Empleado", "Meta Cobertura", "Clientes Visitados", "Cobertura Clientes", "Meta Visitas ", "Cant. Visitas", "Ejec. Visitas", "Meta Clientes Nuevos", "Cant. Clientes Nuevos", "Ejec. Clientes Nuevos", "Mes"]
+  const positions = [
+    ["BAJO CAUCA", "Promotor Norte Ejemplo", 10],
+    ["NORTE", "Promotor Norte Ejemplo", 232],
+    ["CÓRDOBA", "Promotor Córdoba Ejemplo", 163],
+    ["ORIENTE A", "Promotor Oriente A Uno", 343],
+    ["ORIENTE A", "Promotor Oriente A Dos", 343],
+    ["ORIENTE B", "Promotor Oriente B Uno", 277],
+    ["ORIENTE B", "Promotor Oriente B Dos", 277],
+    ["SUROESTE", "Promotor Suroeste Uno", 180],
+    ["SUROESTE", "Promotor Suroeste Dos", 180],
+    ["SUROESTE", "(Vacante) Promotor Suroeste", 180],
+    ["URABÁ", "(Vacante) Promotor Urabá", 49],
+    ["VALLE ABURRÁ", "Promotor Valle Ejemplo", 95],
+  ]
+  const rows = config.months.flatMap(month => positions.map(([territory, employee, target]) =>
+    ["PYC AGRÍCOLA ANT " + territory, employee, target, 0, "", 60, 0, "", 10, 0, "", month]))
+  const result = buildAgricolaReports({
+    blocks: { ...blocks, promoters: prepareAgricolaBlock("promoters", tsv(head, rows), 2026, "Q3") },
+    config,
+  })
+  const quarterTarget = name => result.entities.find(item => item.name === name).indicators
+    .find(item => item.id === "cobertura_clientes").periods.Q3.target
+  assert.equal(quarterTarget("Promotor Norte Ejemplo"), 696, "232 × 3; Bajo Cauca no agrega 10 × 3")
+  assert.equal(quarterTarget("Promotor Córdoba Ejemplo"), 489)
+  assert.equal(quarterTarget("Promotor Oriente A Uno"), 514.5, "343 × 3 / 2 plazas")
+  assert.equal(quarterTarget("Promotor Oriente A Dos"), 514.5)
+  assert.equal(quarterTarget("Promotor Oriente B Uno"), 415.5, "277 × 3 / 2 plazas")
+  assert.equal(quarterTarget("Promotor Oriente B Dos"), 415.5)
+  assert.equal(quarterTarget("Promotor Suroeste Uno"), 180, "180 × 3 / 3 plazas, incluida vacante con meta")
+  assert.equal(quarterTarget("Promotor Suroeste Dos"), 180)
+  assert.equal(quarterTarget("Promotor Valle Ejemplo"), 285)
+  assert.equal(quarterTarget("(Vacante) Promotor Suroeste"), null)
+  assert.equal(quarterTarget("(Vacante) Promotor Urabá"), null)
+  assert.equal(Object.values(config.targets.promoterCoverage.monthlyTerritoryTargets).reduce((a,b) => a+b,0), 1349)
+  assert.ok(result.observations.some(line => line.includes("COBERTURA POR CONCILIAR") && line.includes("1336") && line.includes("1349")))
 })
