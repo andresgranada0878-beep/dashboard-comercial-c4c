@@ -1,5 +1,5 @@
 {
-  "version": "agricola-q3-2026-v7",
+  "version": "agricola-q3-2026-v8",
   "sourceKey": "PYC-AGR-ANT",
   "company": "Pérez y Cardona",
   "report": "Agrícola Antioquia",
@@ -121,7 +121,7 @@
       "cap": 1.5,
       "calculationType": "ratio_acumulado",
       "pending": [],
-      "criterion": "Valor de recomendaciones frente al presupuesto (Ppto) del mismo periodo. El exportado técnico no identifica persona: el colaborador se evalúa con la gestión técnica de su territorio asignado (no es gestión personal directa) y el informe territorial usa la misma gestión. Reconocimiento máximo 150%."
+      "criterion": "Valor de recomendaciones frente al valor de ventas del mismo periodo (Σ Valor Recomendaciones / Σ Valor Ventas); «Ppto» no es la meta del indicador. El exportado técnico no identifica persona: el colaborador se evalúa con la gestión técnica de su territorio asignado (no es gestión personal directa), igual que el informe territorial. Reconocimiento máximo 150%."
     },
     {
       "id": "referencias",
