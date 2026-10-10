@@ -1,5 +1,5 @@
 {
-  "version": "agricola-q3-2026-v5",
+  "version": "agricola-q3-2026-v6",
   "sourceKey": "PYC-AGR-ANT",
   "company": "Pérez y Cardona",
   "report": "Agrícola Antioquia",
@@ -77,7 +77,9 @@
       "overlappingTerritoryRule": "Para un mismo promotor asignado simultáneamente a Norte y Bajo Cauca, se conserva la mayor cuota territorial mensual, no su suma. No se aplica entre colaboradores distintos.",
       "reportedPowerBiTotal": 1336,
       "reconciliationStatus": "pendiente",
-      "reconciliationNote": "El total de la tabla Power BI es 1.336; la suma visible de sus ocho filas territoriales es 1.349. Diferencia 13 por conciliar en el origen antes de dar por validado el consolidado. No ajustar metas individuales para forzar el subtotal."
+      "reconciliationNote": "El total de la tabla Power BI es 1.336; la suma visible de sus ocho filas territoriales es 1.349. Diferencia 13 por conciliar en el origen antes de dar por validado el consolidado. No ajustar metas individuales para forzar el subtotal.",
+      "methodology": "por_plazas_promotores",
+      "allocationRule": "La Meta Cobertura mensual de cada territorio se divide entre el número de plazas de promotor asignadas al territorio: titulares activos, vacantes y posiciones sin titular con meta definida. No cuentan plazas residuales sin meta. La cuota de la vacante no se redistribuye a los titulares. La gestión de clientes visitados de cada persona no se divide. Norte y Bajo Cauca comparten una sola meta por promotor asignado a ambos, tomando la mayor cuota individual, no su suma."
     }
   },
   "policies": {
@@ -198,7 +200,7 @@
     {
       "id": "coverage",
       "title": "Cobertura",
-      "detail": "Mide clientes únicos gestionados, no visitas. Clientes únicos por mes; trimestre = Σ clientes únicos mensuales / Σ metas mensuales, sin dividir de nuevo entre 3. El detalle mensual se conserva para trazabilidad. Promotores: meta individual mensual = Meta Cobertura del territorio / plazas de promotor asignadas al territorio (titulares y vacantes con meta de cobertura en el exportado del trimestre; una vacante sin meta es residual y no cuenta). La vacante queda No aplica y su parte no se redistribuye. Sin una fuente confiable de estado activo/inactivo no se infiere inactividad: gestión 0 contra la meta = 0 %, y un mes sin filas conserva la meta y se marca para revisión. El informe territorial conserva la meta territorial completa; la gestión son los clientes visitados personalmente, sin dividir; el trimestre suma las metas individuales mensuales, así que la meta territorial cuenta una sola vez."
+      "detail": "Mide clientes únicos gestionados, no visitas. Clientes únicos por mes; trimestre = Σ clientes únicos mensuales / Σ metas mensuales, sin dividir de nuevo entre 3. El detalle mensual se conserva para trazabilidad. Promotores: meta individual mensual = Meta Cobertura del territorio / plazas de promotor asignadas al territorio (titulares y plazas vacantes o sin titular con meta de cobertura en el exportado del trimestre; las posiciones sin meta son residuales y no cuentan). Las vacantes y posiciones sin titular quedan No aplica y su parte no se redistribuye. Sin una fuente confiable de estado activo/inactivo no se infiere inactividad: gestión 0 contra la meta = 0 %, y un mes sin filas conserva la meta y se marca para revisión. El informe territorial conserva la meta territorial completa; la gestión son los clientes visitados personalmente, sin dividir; el trimestre suma las metas individuales mensuales, así que la meta territorial cuenta una sola vez."
     },
     {
       "id": "new-clients",
