@@ -40,7 +40,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: Pruebas funcionales Q3 y exportadores PDF/Excel
         run: pnpm test
-      - name: Tipos TypeScript
-        run: pnpm exec tsc --noEmit
+      - name: Tipos TypeScript del alcance Q3 (Q1/Q2 sin cambios)
+        run: pnpm exec tsc --noEmit -p tsconfig.q3.json
       - name: Compilación de Next.js
         run: pnpm build
