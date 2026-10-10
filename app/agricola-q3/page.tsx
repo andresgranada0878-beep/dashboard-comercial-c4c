@@ -74,6 +74,9 @@ export default function AgricolaQ3Page() {
 
   const loadedAt = load.savedAt
   const periodLabel = period === reports.quarter ? `${reports.quarter} (${reports.months.join(", ")})` : `${period} ${reports.year}`
+  const coverageTerritorialTotal = Object.values(config.targets.promoterCoverage.monthlyTerritoryTargets).reduce((sum, value) => sum + value, 0)
+  const coverageSourceTotal = config.targets.promoterCoverage.reportedPowerBiTotal
+  const coverageDifference = coverageTerritorialTotal - coverageSourceTotal
 
   async function run(label: string, task: () => Promise<void>) {
     setBusy(label)
@@ -107,6 +110,10 @@ export default function AgricolaQ3Page() {
       </header>
 
       <div style={{ maxWidth: 1380, margin: "0 auto", padding: "18px 24px 60px" }}>
+        {coverageDifference !== 0 && <section role="status" style={{ ...panel, background: "#fffbeb", borderColor: "#eab308" }}>
+          <strong style={{ color: "#92400e" }}>Cobertura: conciliación pendiente con Power BI.</strong>
+          <span style={{ color: "#92400e" }}> Las ocho metas territoriales visibles suman {number(coverageTerritorialTotal)}, mientras que el total de Power BI indica {number(coverageSourceTotal)} (diferencia de {number(Math.abs(coverageDifference))} clientes). Se preservan las metas territoriales individuales y no se fuerza el total hasta verificar el origen.</span>
+        </section>}
         {!reports.rulesValidated && <section role="status" style={{ ...panel, background: "#fffbeb", borderColor: "#f59e0b" }}>
           <strong style={{ color: "#92400e" }}>Borrador para revisión — no son resultados finales.</strong>
           <span style={{ color: "#92400e" }}> Hay {reports.pendingRules.length} reglas pendientes de validación. Los indicadores sin dato, sin meta o no aplica no suman y el resultado se muestra con el peso realmente evaluado.</span>
