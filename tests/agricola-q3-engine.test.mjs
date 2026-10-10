@@ -381,7 +381,7 @@ test("rule territories: grouped territories stay separate in the source and are 
   assert.deepEqual(result.territories.filter(item => item.operating).map(item => item.label), ["Alfa", "Beta", "Gamma"])
 })
 
-test("rule references: a grouped evaluation unit sums its management and takes the portfolio once; the director keeps the consolidated Σ / 3", () => {
+test("rule references: a grouped evaluation unit sums its management and takes the portfolio once, also in the director's consolidated Σ / 3", () => {
   const grouped = { ...config, catalog: { ...config.catalog, territoryGroups: [{ label: "Beta y Gamma", members: ["beta", "gamma"] }] } }
   const gammaRows = ["Julio", "Agosto", "Septiembre"].map(month => [GAMMA, "Grupo 1", "$100.000", "", 10, "0,2", month].join("\t")).join("\n")
   const withGamma = { ...blocks, technical: prepareAgricolaBlock("technical", technical + "\n" + gammaRows, 2026, "Q3") }
@@ -398,9 +398,33 @@ test("rule references: a grouped evaluation unit sums its management and takes t
   assert.ok(!references("Alfa").notes.some(note => note.includes("una sola vez")))
   const director = references("Directora Ficticia")
   assert.equal(director.periods.Q3.actual, 9 + 6)
-  assert.equal(director.periods.Q3.target, 20 + 10 + 10, "approved director methodology: Σ Meta Referencias of the scope / 3")
+  assert.equal(director.periods.Julio.target, 20 + 10, "Alfa 20 + Beta y Gamma 10 once, never 20 + 10 + 10")
+  assert.equal(director.periods.Q3.target, 20 + 10, "same evaluation units as the territorial reports")
+  for (const item of result.entities.filter(entity => entity.kind === "territorio")) {
+    assert.ok(director.periods.Q3.target >= references(item.name).periods.Q3.target, item.name)
+  }
+  assert.equal(director.periods.Q3.target, result.entities.filter(item => item.kind === "territorio").reduce((sum, item) => sum + references(item.name).periods.Q3.target, 0), "director target = Σ of the evaluation units' portfolios")
   const ungrouped = buildAgricolaReports({ blocks: withGamma, config })
-  assert.equal(ungrouped.entities.find(item => item.name === "Gamma").indicators.find(item => item.id === "referencias").periods.Q3.target, 10)
+  const ungroupedRefs = name => ungrouped.entities.find(item => item.name === name).indicators.find(item => item.id === "referencias")
+  assert.equal(ungroupedRefs("Gamma").periods.Q3.target, 10)
+  assert.equal(ungroupedRefs("Directora Ficticia").periods.Q3.target, 20 + 10 + 10, "separate units each keep their portfolio")
+})
+
+test("rule references (director): Norte and Bajo Cauca count the 302 portfolio once — 519 / (7 × 302) = 24,55 %", () => {
+  const sources = ["ALFA", "BETA", "GAMMA", "DELTA", "EPSILON", "ZETA", "NORTE", "BAJO CAUCA"].map(name => `PYC AGRÍCOLA ANT ${name}`)
+  const share = { "PYC AGRÍCOLA ANT ALFA": { Julio: "0,5", Agosto: "0,5", Septiembre: "0,5" }, "PYC AGRÍCOLA ANT BETA": { Julio: "0,5" }, "PYC AGRÍCOLA ANT NORTE": { Julio: "0,25" }, "PYC AGRÍCOLA ANT BAJO CAUCA": { Agosto: "0,345" } }
+  const rows = ["Julio", "Agosto", "Septiembre"].flatMap(month => sources.flatMap(territory => [
+    [territory, "Grupo 1", "", "", 200, share[territory]?.[month] ?? "", month],
+    [territory, "Grupo 2", "", "", 102, "", month],
+  ]))
+  const header = ["Territorio", "Grupo Artículos", "Ppto", "Valor Recomendaciones", "Meta Referencias", "Referencias Recomendadas", "Mes"]
+  const scaled = buildAgricolaReports({ blocks: { ...blocks, technical: prepareAgricolaBlock("technical", tsv(header, rows), 2026, "Q3") }, config })
+  const references = name => scaled.entities.find(item => item.name === name)?.indicators.find(item => item.id === "referencias")
+  const director = references("Directora Ficticia").periods.Q3
+  assert.equal(director.actual, 519, "numerator unchanged: Σ REF CANTIDAD of every source territory")
+  assert.equal(director.target, 7 * 302, "2.114, never 8 × 302 = 2.416")
+  assert.equal(Number((director.rawCompliance * 100).toFixed(2)), 24.55)
+  for (const month of ["Julio", "Agosto", "Septiembre"]) assert.equal(references("Directora Ficticia").periods[month].target, 7 * 302, month)
 })
 
 test("rule soils: shown as No aplica, never 0%, and excluded from the weights", () => {
