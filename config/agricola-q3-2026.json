@@ -187,7 +187,7 @@
     {
       "id": "new-clients",
       "title": "Recuperación de clientes (nuevos + recuperados)",
-      "detail": "Medida exportada «Cant. Clientes Nuevos» frente a «Meta Clientes Recuperar» (metodología Q1/Q2). Meta anual de la fuente → trimestral = anual / 4; meta mensual → mensual × 3. Gestión = acumulado del trimestre. Tope 150%. No se suman recuperados supuestos. Advertencia (no bloquea el cálculo): la fuente no permite verificar si la medida incluye clientes recuperados."
+      "detail": "Medida exportada «Cant. Clientes Nuevos» frente a «Meta Clientes Recuperar» (metodología Q1/Q2). Meta anual de la fuente → trimestral = anual / 4; meta mensual → mensual × 3. Gestión = acumulado del trimestre. Tope 150%. No se suman recuperados supuestos. Promotores, como la fórmula Q1/Q2: valor territorial sin dividir frente a la meta personal (10 mensuales × 3); vacantes y posiciones sin titular = No aplica. Advertencia (no bloquea el cálculo): la fuente no permite verificar si la medida incluye clientes recuperados."
     },
     {
       "id": "leads",

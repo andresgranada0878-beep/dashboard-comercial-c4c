@@ -148,8 +148,11 @@ test("rule new clients: annual / 4 is not rounded, monthly × 3, cap 150%", () =
   assert.equal(twoTerritories.periods.Q3.recognizedCompliance, 1.5)
   assert.equal(twoTerritories.cap, 1.5)
   const promoter = indicator("Promotor Uno", "nuevos_clientes")
-  assert.equal(promoter.periods.Q3.actual, 5)
-  assert.equal(promoter.periods.Q3.target, 10 * 3)
+  assert.equal(promoter.periods.Q3.actual, 5, "territorial value, not split among promoters")
+  assert.equal(promoter.periods.Q3.target, 10 * 3, "personal target, as in the Q1/Q2 formula")
+  const vacancy = indicator("(Vacante) Persona Tres", "nuevos_clientes")
+  assert.equal(vacancy.periods.Q3.status, "no_aplica")
+  assert.equal(vacancy.periods.Q3.contribution, null)
 })
 
 test("rule coverage: quarter = Σ monthly unique clients / Σ monthly targets, no extra / 3", () => {
