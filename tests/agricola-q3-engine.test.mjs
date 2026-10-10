@@ -152,27 +152,21 @@ test("rule new clients: annual / 4 is not rounded, monthly × 3, cap 150%", () =
   assert.equal(vacancy.periods.Q3.contribution, null)
 })
 
-test("rule new clients (promoters): pending source validation — no compliance, no contribution, result stays partial", () => {
+test("rule new clients (promoters): published historical rule MIN(150 %, source value / 90), with a methodology note", () => {
   const promoter = indicator("Promotor Uno", "nuevos_clientes")
-  for (const period of ["Julio", "Agosto", "Septiembre", "Q3"]) {
-    const value = promoter.periods[period]
-    assert.equal(value.status, "pendiente_fuente", period)
-    assert.equal(value.rawCompliance, null, period)
-    assert.equal(value.recognizedCompliance, null, `${period}: neither 0 % nor 150 %`)
-    assert.equal(value.contribution, null, period)
-  }
-  assert.equal(promoter.periods.Q3.actual, 5, "source value kept for traceability")
-  assert.deepEqual(promoter.pending, ["promoter-new-clients-source"])
-  assert.ok(promoter.notes.some(note => note.startsWith("Pendiente validación de fuente")))
-  const summary = entity("Promotor Uno").results.Q3
-  assert.ok(summary.pendingSource.includes(promoter.label))
-  assert.ok(!summary.withoutData.includes(promoter.label) && !summary.notApplicable.includes(promoter.label))
-  assert.ok(summary.evaluatedWeight <= summary.totalWeight - promoter.weight + 1e-9)
-  assert.equal(summary.complete, false)
-  assert.ok(entity("Promotor Uno").pendingRules.includes("promoter-new-clients-source"))
-  assert.ok(!entity("Comercial Uno").pendingRules.includes("promoter-new-clients-source"))
-  assert.equal(indicator("Comercial Uno", "nuevos_clientes").periods.Q3.status, "ok", "commercials unchanged")
-  assert.equal(indicator("Alfa", "nuevos_clientes").periods.Q3.status !== "pendiente_fuente", true, "territories unchanged")
+  assert.equal(promoter.periods.Q3.actual, 5, "territorial value as exported, not split among promoters")
+  assert.equal(promoter.periods.Q3.target, 90, "30 × 3, neither /30 nor /270")
+  assert.equal(promoter.periods.Q3.recognizedCompliance, 5 / 90)
+  assert.equal(promoter.periods.Q3.status, "ok")
+  assert.ok(promoter.notes.some(note => note.startsWith("Para continuidad con la metodología reportada en Q1 y Q2") && note.includes("se conserva trazabilidad del dato de origen")))
+  assert.deepEqual(promoter.pending, [])
+  const header = ["Territorio", "Empleado", "Meta Cobertura", "Clientes Visitados", "Cobertura Clientes", "Meta Visitas ", "Cant. Visitas", "Ejec. Visitas", "Meta Clientes Nuevos", "Cant. Clientes Nuevos", "Ejec. Clientes Nuevos", "Mes"]
+  const rows = ["Julio", "Agosto", "Septiembre"].map(month => [ALFA, "Promotor Uno", 30, 6, "", 60, 50, "", 10, 240, "", month])
+  const high = buildAgricolaReports({ blocks: { ...blocks, promoters: prepareAgricolaBlock("promoters", tsv(header, rows), 2026, "Q3") }, config })
+  const capped = high.entities.find(item => item.name === "Promotor Uno").indicators.find(item => item.id === "nuevos_clientes").periods.Q3
+  assert.ok(Math.abs(capped.rawCompliance - 240 / 90) < 1e-9)
+  assert.equal(capped.recognizedCompliance, 1.5)
+  assert.equal(indicator("Comercial Uno", "nuevos_clientes").periods.Q3.target, 10, "commercials unchanged")
 })
 
 test("rule coverage: quarter = Σ monthly unique clients / Σ monthly targets, no extra / 3", () => {

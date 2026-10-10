@@ -58,7 +58,8 @@
       },
       "promoters": {
         "field": "Meta Clientes Nuevos",
-        "periodicity": "mensual"
+        "periodicity": "mensual",
+        "quarterTarget": 90
       }
     }
   },
@@ -92,7 +93,7 @@
       "cap": 1.5,
       "calculationType": "ratio_acumulado",
       "pending": [],
-      "criterion": "Medida exportada «Cant. Clientes Nuevos» (la misma de Q1/Q2), acumulada del trimestre, frente a la meta trimestral derivada de «Meta Clientes Recuperar» (anual / 4) o de la meta mensual de promotores (× 3). No se suman recuperados supuestos. Advertencia: la fuente no permite verificar si la medida incluye clientes recuperados. Reconocimiento máximo 150%."
+      "criterion": "Medida exportada «Cant. Clientes Nuevos» (la misma de Q1/Q2), acumulada del trimestre, frente a la meta trimestral derivada de «Meta Clientes Recuperar» (anual / 4) o, en promotores, frente a la meta trimestral histórica publicada de 90 (30 × 3). No se suman recuperados supuestos. Advertencia: la fuente no permite verificar si la medida incluye clientes recuperados. Reconocimiento máximo 150%."
     },
     {
       "id": "recomendaciones",
@@ -187,7 +188,7 @@
     {
       "id": "new-clients",
       "title": "Recuperación de clientes (nuevos + recuperados)",
-      "detail": "Medida exportada «Cant. Clientes Nuevos» frente a «Meta Clientes Recuperar» (metodología Q1/Q2). Meta anual de la fuente → trimestral = anual / 4; meta mensual → mensual × 3. Gestión = acumulado del trimestre. Tope 150%. No se suman recuperados supuestos. Promotores: Pendiente validación de fuente (ver reglas pendientes); sin cumplimiento ni aporte mientras no se confirme la definición de la medida; vacantes y posiciones sin titular = No aplica. Advertencia (no bloquea el cálculo): la fuente no permite verificar si la medida incluye clientes recuperados."
+      "detail": "Medida exportada «Cant. Clientes Nuevos» frente a «Meta Clientes Recuperar» (metodología Q1/Q2). Meta anual de la fuente → trimestral = anual / 4; meta mensual → mensual × 3. Gestión = acumulado del trimestre. Tope 150%. No se suman recuperados supuestos. Promotores (continuidad con la regla publicada en Q1/Q2): cumplimiento = MIN(150 %, Cant. Clientes Nuevos del exportado Q3 tal como llega / 90), meta trimestral 30 × 3; no se usa /30 ni /270. Vacantes y posiciones sin titular = No aplica. La fuente Q3 presenta una escala diferente frente a periodos anteriores; se conserva el dato de origen para revisión futura. Advertencia (no bloquea el cálculo): la fuente no permite verificar si la medida incluye clientes recuperados."
     },
     {
       "id": "leads",
@@ -246,11 +247,6 @@
     }
   ],
   "pendingRules": [
-    {
-      "id": "promoter-new-clients-source",
-      "title": "Fuente de Recuperación de clientes en promotores",
-      "detail": "Pendiente validación de fuente. «Cant. Clientes Nuevos» del exportado de promotores trae el mismo valor en julio, agosto y septiembre, repetido en todas las plazas del territorio, y no guarda relación consistente con Gestión comercial (p. ej. Oriente A 240 frente a 10 del comercial). Hasta confirmar la definición de la medida en Power BI, el indicador de promotores no recibe cumplimiento ni aporta al resultado (no es 0 % ni 150 %) y el resultado queda PARCIAL. Vacantes: No aplica. Comerciales, territorios y dirección no cambian."
-    },
     {
       "id": "references",
       "title": "Referencias",

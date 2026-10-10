@@ -1,6 +1,6 @@
 import type { PreparedBlock } from "../agricola-import.mjs"
 
-export type PeriodStatus = "ok" | "parcial" | "sin_dato" | "sin_meta" | "no_aplica" | "pendiente_fuente"
+export type PeriodStatus = "ok" | "parcial" | "sin_dato" | "sin_meta" | "no_aplica"
 export type TargetPeriodicity = "anual" | "mensual" | "trimestral"
 export type EntityKind = "individual" | "territorio" | "direccion"
 export type EntityProfile = "Director" | "Comercial" | "Promotor" | "Territorio"
@@ -44,8 +44,6 @@ export interface EntityPeriodSummary {
   withoutData: string[]
   withoutTarget: string[]
   notApplicable: string[]
-  /** Indicators whose source definition is pending validation: no compliance, no contribution. */
-  pendingSource: string[]
 }
 
 export interface Q3Entity {
@@ -102,7 +100,7 @@ export interface AgricolaConfig {
       vacanciesGenerateTarget: boolean
       commercialScope: "territorio_asignado" | "personal"
     }
-    newClients: Record<"commercial" | "promoters", { field: string; periodicity: TargetPeriodicity }>
+    newClients: Record<"commercial" | "promoters", { field: string; periodicity: TargetPeriodicity; quarterTarget?: number }>
   }
   policies: {
     blankValues: string

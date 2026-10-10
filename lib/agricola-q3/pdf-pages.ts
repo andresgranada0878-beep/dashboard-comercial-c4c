@@ -8,7 +8,6 @@ export const STATUS_LABELS: Record<PeriodStatus, string> = {
   sin_dato: "Sin dato",
   sin_meta: "Sin meta",
   no_aplica: "No aplica",
-  pendiente_fuente: "Pendiente validación de fuente",
 }
 
 export const KIND_TITLES: Record<Q3Entity["kind"], string> = {

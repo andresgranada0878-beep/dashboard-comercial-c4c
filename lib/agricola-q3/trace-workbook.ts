@@ -18,8 +18,7 @@ export async function downloadTraceWorkbook(reports: AgricolaReports, load: Stor
       Posición: entity.status, Periodo: period, "Resultado (aporte ponderado sobre 100)": summary.result,
       "Cumplimiento normalizado (aporte / peso evaluado)": summary.normalized, "Peso evaluado": summary.evaluatedWeight,
       "Peso total": summary.totalWeight, Estado: state(summary), "Indicadores sin dato": summary.withoutData.join(", "), "Indicadores sin meta": summary.withoutTarget.join(", "),
-      "Indicadores No aplica": summary.notApplicable.join(", "), "Indicadores pendientes de validación de fuente": summary.pendingSource.join(", "),
-      "Estado del informe": entity.reportState, "Motivos de borrador": entity.draftReasons.join(". "),
+      "Indicadores No aplica": summary.notApplicable.join(", "),      "Estado del informe": entity.reportState, "Motivos de borrador": entity.draftReasons.join(". "),
     }
   }))
   const trace = reports.entities.flatMap((entity) => entity.indicators.flatMap((indicator) => reports.periods.map((period) => {
