@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "incremental": false
+  },
+  "include": [
+    "next-env.d.ts",
+    "app/agricola-q3/**/*.tsx",
+    "app/cargar-datos/**/*.tsx",
+    "lib/agricola-q3/**/*.ts",
+    "lib/agricola-q3/**/*.mts",
+    "lib/agricola-import.d.mts",
+    "lib/pdf/export-individual-pdf.ts",
+    "lib/auth/**/*.ts",
+    "proxy.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
