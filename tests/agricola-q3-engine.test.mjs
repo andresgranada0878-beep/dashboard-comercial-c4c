@@ -567,3 +567,26 @@ test("Q3 metas territoriales validadas: 8 territorios, plazas compartidas, vacan
   assert.equal(Object.values(config.targets.promoterCoverage.monthlyTerritoryTargets).reduce((a,b) => a+b,0), 1349)
   assert.ok(result.observations.some(line => line.includes("COBERTURA POR CONCILIAR") && line.includes("1336") && line.includes("1349")))
 })
+
+test("Q3 cobertura por plazas: plazas sin titular con meta entran en divisor; sin meta no cuentan", () => {
+  const header = ["Territorio", "Empleado", "Meta Cobertura", "Clientes Visitados", "Cobertura Clientes", "Meta Visitas ", "Cant. Visitas", "Ejec. Visitas", "Meta Clientes Nuevos", "Cant. Clientes Nuevos", "Ejec. Clientes Nuevos", "Mes"]
+  const territory = "PYC AGRÍCOLA ANT SUROESTE"
+  const rows = config.months.flatMap(month => [
+    [territory, "Promotor Activo Ejemplo", 180, 0, "", 60, 0, "", 10, 0, "", month],
+    [territory, "(Vacante) Plaza Ejemplo", 180, "", "", 60, "", "", 10, "", "", month],
+    [territory, "POSICION SIN TITULAR", 180, "", "", 60, "", "", 10, "", "", month],
+    [territory, "(Vacante) Sin Meta Ejemplo", "", "", "", "", "", "", "", "", "", month],
+  ])
+  const report = buildAgricolaReports({
+    blocks: { ...blocks, promoters: prepareAgricolaBlock("promoters", tsv(header, rows), 2026, "Q3") },
+    config,
+  })
+  const find = name => report.entities.find(entity => entity.name === name).indicators
+    .find(indicator => indicator.id === "cobertura_clientes").periods.Q3
+  assert.equal(config.targets.promoterCoverage.methodology, "por_plazas_promotores")
+  assert.equal(find("Promotor Activo Ejemplo").target, 180, "180 mensuales / 3 plazas × 3 meses")
+  assert.equal(find("Promotor Activo Ejemplo").recognizedCompliance, 0)
+  assert.equal(find("(Vacante) Plaza Ejemplo").status, "no_aplica")
+  assert.equal(find("POSICION SIN TITULAR").status, "no_aplica")
+  assert.equal(find("(Vacante) Sin Meta Ejemplo").status, "no_aplica")
+})
