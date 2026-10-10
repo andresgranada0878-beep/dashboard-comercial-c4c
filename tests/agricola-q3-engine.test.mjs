@@ -213,10 +213,16 @@ test("Q3 meta visitas cargada por promotor se toma una vez en trimestre; no modi
   assert.equal(visits.periods.Q3.actual, originalVisits.periods.Q3.actual, "se conserva gestión")
   assert.equal(visits.periods.Q3.recognizedCompliance, 1, "tope 100 %")
   assert.ok(Math.abs(visits.periods.Julio.target - 37 / 3) < 1e-9)
-  assert.equal(promotor.indicators.find(item => item.id === "cobertura_clientes").periods.Q3.target,
-    indicator("Promotor Uno", "cobertura_clientes").periods.Q3.target)
+  assert.equal(promotor.indicators.find(item => item.id === "cobertura_clientes").periods.Q3.target, 37,
+    "la meta Q3 de cobertura es la misma meta trimestral de visitas")
+  assert.equal(promotor.indicators.find(item => item.id === "cobertura_clientes").periods.Q3.actual,
+    indicator("Promotor Uno", "cobertura_clientes").periods.Q3.actual,
+    "la gestión de clientes visitados permanece intacta")
+  assert.ok(Math.abs(promotor.indicators.find(item => item.id === "cobertura_clientes").periods.Agosto.target - 37 / 3) < 1e-9)
   const unchanged = adjusted.entities.find(item => item.name === "Promotor Dos").indicators.find(item => item.id === "ejecucion_visitas")
   assert.equal(unchanged.periods.Q3.target, indicator("Promotor Dos", "ejecucion_visitas").periods.Q3.target)
+  assert.equal(adjusted.entities.find(item => item.name === "Promotor Dos").indicators.find(item => item.id === "cobertura_clientes").periods.Q3.target,
+    indicator("Promotor Dos", "cobertura_clientes").periods.Q3.target, "no cambia cartera de promotores sin meta cargada")
   assert.equal(adjusted.entities.find(item => item.name === "Comercial Uno").indicators.find(item => item.id === "ejecucion_visitas").periods.Q3.target,
     indicator("Comercial Uno", "ejecucion_visitas").periods.Q3.target)
   assert.equal(adjusted.entities.find(item => item.name === "(Vacante) Persona Tres").indicators.find(item => item.id === "ejecucion_visitas").periods.Q3.status, "no_aplica")
