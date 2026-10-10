@@ -1,5 +1,5 @@
 {
-  "version": "agricola-q3-2026-v6",
+  "version": "agricola-q3-2026-v7",
   "sourceKey": "PYC-AGR-ANT",
   "company": "Pérez y Cardona",
   "report": "Agrícola Antioquia",
@@ -76,8 +76,8 @@
       },
       "overlappingTerritoryRule": "Para un mismo promotor asignado simultáneamente a Norte y Bajo Cauca, se conserva la mayor cuota territorial mensual, no su suma. No se aplica entre colaboradores distintos.",
       "reportedPowerBiTotal": 1336,
-      "reconciliationStatus": "pendiente",
-      "reconciliationNote": "El total de la tabla Power BI es 1.336; la suma visible de sus ocho filas territoriales es 1.349. Diferencia 13 por conciliar en el origen antes de dar por validado el consolidado. No ajustar metas individuales para forzar el subtotal.",
+      "reconciliationStatus": "aceptada_sin_ajuste",
+      "reconciliationNote": "Por instrucción del responsable de C4C, se acepta la diferencia de 13 clientes entre el total general mostrado en Power BI (1.336) y la suma de ocho metas territoriales visibles (1.349). Se conservan sin cambios las ocho metas territoriales, el reparto por plazas y los cumplimientos calculados. Esta diferencia no bloquea ni marca como borrador los informes Q3; el registro se conserva únicamente como antecedente de auditoría.",
       "methodology": "por_plazas_promotores",
       "allocationRule": "La Meta Cobertura mensual de cada territorio se divide entre el número de plazas de promotor asignadas al territorio: titulares activos, vacantes y posiciones sin titular con meta definida. No cuentan plazas residuales sin meta. La cuota de la vacante no se redistribuye a los titulares. La gestión de clientes visitados de cada persona no se divide. Norte y Bajo Cauca comparten una sola meta por promotor asignado a ambos, tomando la mayor cuota individual, no su suma."
     }
