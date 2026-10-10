@@ -83,25 +83,32 @@ const reports = buildAgricolaReports({ blocks, config })
 const entity = name => reports.entities.find(item => item.name === name)
 const indicator = (name, id) => entity(name).indicators.find(item => item.id === id)
 
-test("Q3 sin promotor: solo el comercial aprobado queda con campo N/A y resultado normalizado", () => {
+test("Q3 sin promotor: Jairo no recibe metas de recomendaciones referencias ni campo; resultado sobre 50%", () => {
   const promoterWithoutBeta = promoters.split("\n").filter(row => !row.includes("\tPromotor Dos\t")).join("\n")
   const specialBlocks = { ...blocks, promoters: prepareAgricolaBlock("promoters", promoterWithoutBeta, 2026, "Q3") }
   const baseline = buildAgricolaReports({ blocks: specialBlocks, config })
   const custom = { ...config, targets: { ...config.targets, fieldTargets: { ...config.targets.fieldTargets,
-    commercialWithoutPromoter: { people: ["Comercial Dos"], kpisNotApplicable: ["actividades_campo", "hectareas", "cultivos"], normalizeByApplicableWeight: true },
+    commercialWithoutPromoter: { people: ["Comercial Dos"], kpisNotApplicable: ["recomendaciones", "referencias", "actividades_campo", "hectareas", "cultivos"], normalizeByApplicableWeight: true },
   } } }
   const updated = buildAgricolaReports({ blocks: specialBlocks, config: custom })
   const before = baseline.entities.find(item => item.name === "Comercial Dos")
   const after = updated.entities.find(item => item.name === "Comercial Dos")
-  for (const id of ["actividades_campo", "hectareas", "cultivos"]) {
+  for (const id of ["recomendaciones", "referencias", "actividades_campo", "hectareas", "cultivos"]) {
     const metric = after.indicators.find(item => item.id === id)
     assert.equal(metric.periods.Q3.status, "no_aplica")
     assert.equal(metric.periods.Q3.target, null)
   }
-  assert.ok(Math.abs(after.results.Q3.evaluatedWeight - 0.8) < 1e-12)
-  assert.ok(Math.abs(after.results.Q3.applicableWeight - 0.8) < 1e-12, "floating-point weights sum to 80%")
+  assert.ok(Math.abs(after.results.Q3.evaluatedWeight - 0.5) < 1e-12)
+  assert.ok(Math.abs(after.results.Q3.applicableWeight - 0.5) < 1e-12, "floating-point weights sum to 50%")
   assert.equal(after.results.Q3.normalizedToApplicableWeight, true)
-  assert.ok(Math.abs(after.results.Q3.result - before.results.Q3.result / 0.8) < 1e-9)
+  assert.equal(after.results.Q3.missing.length, 0, "no falta un KPI evaluable")
+  for (const id of ["ejecucion_visitas","cobertura_clientes","nuevos_clientes","leads_calificados","leads_calificados_tiempo"]) {
+    const original = before.indicators.find(item => item.id === id).periods.Q3
+    const current = after.indicators.find(item => item.id === id).periods.Q3
+    assert.equal(current.actual, original.actual, "no se altera la gestión comercial propia")
+    assert.equal(current.target, original.target, "no se altera la meta comercial propia")
+  }
+  assert.ok(Math.abs(after.results.Q3.result - before.results.Q3.result / 0.5) < 1e-9)
   assert.equal(after.results.Q3.rawWeightedResult, before.results.Q3.result)
   assert.equal(after.results.Q3.complete, true)
   assert.equal(after.reportState, "final")
