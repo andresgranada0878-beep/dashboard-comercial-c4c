@@ -1,5 +1,5 @@
 {
-  "version": "agricola-q3-2026-v11",
+  "version": "agricola-q3-2026-v12",
   "sourceKey": "PYC-AGR-ANT",
   "company": "Pérez y Cardona",
   "report": "Agrícola Antioquia",
@@ -113,7 +113,14 @@
         ],
         "rationale": "Meta Q3 de Carolina: únicamente Norte 84 clientes/visitas al mes × 3 = 252. No agregar 10 de Bajo Cauca por mes; conservar su gestión registrada en ambos territorios."
       }
-    ]
+    ],
+    "promoterVisits": {
+      "monthlyTarget": 60,
+      "quarterTarget": 180,
+      "periodicity": "mensual",
+      "scope": "promotores_activos",
+      "policy": "Cada promotor técnico activo tiene meta fija de 60 visitas cada mes (julio, agosto, septiembre), 180 visitas Q3. Este valor no procede de la cartera municipal importada, que SOLO determina la meta de cobertura. Vacantes/posiciones sin titular: No aplica."
+    }
   },
   "policies": {
     "blankValues": "ausente",
@@ -127,7 +134,7 @@
       "cap": 1,
       "calculationType": "ratio",
       "pending": [],
-      "criterion": "Visitas realizadas en el periodo frente a la meta mensual de visitas multiplicada por los meses evaluados. Director: 20 visitas mensuales (metodología Q1/Q2). Reconocimiento máximo 100%."
+      "criterion": "Promotores técnicos activos: 60 visitas al mes, 180 en julio-septiembre Q3; no se usa la cartera municipal para visitas. Comerciales y dirección: conservar sus metas originales (director 20 visitas mensuales). Reconocimiento máximo 100%."
     },
     {
       "id": "cobertura_clientes",
@@ -136,7 +143,7 @@
       "cap": 1,
       "calculationType": "ratio",
       "pending": [],
-      "criterion": "Clientes únicos gestionados (Clientes Visitados) de cada mes frente a la meta mensual. Trimestre = Σ clientes únicos mensuales / Σ metas mensuales; no se divide de nuevo entre 3. Reconocimiento máximo 100%."
+      "criterion": "Promotores con asignación municipal importada: meta de cobertura = número de clientes asignados por municipio en el Q3, una sola vez, SIN asociarla a las 180 visitas; los que no tienen asignación conservan la regla territorial histórica. Comerciales y director: metas originales. Clientes visitados = suma de los meses; reconocimiento máximo 100%."
     },
     {
       "id": "nuevos_clientes",
