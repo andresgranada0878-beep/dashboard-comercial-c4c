@@ -186,6 +186,33 @@ test("rule new clients: YTD annual /12 × 9 rounded to whole clients", () => {
   assert.equal(vacancy.periods.Q3.contribution, null)
 })
 
+test("Carolina: meta anual Norte 68, meta acumulada septiembre 51, gestión 32", () => {
+  const name = "Carolina María Escobar Londoño"
+  const rows = ["Julio", "Agosto", "Septiembre"].flatMap(month => [
+    ["PYC AGRÍCOLA ANT NORTE", name, 84, 28, "", 35, "", 68, 30, "", month],
+    ["PYC AGRÍCOLA ANT BAJO CAUCA", name, 10, 5, "", 6, "", 9, 2, "", month],
+  ])
+  const records = prepareAgricolaBlock("commercial", commercial + "\n" + rows.map(row => row.join("\t")).join("\n"), 2026, "Q3")
+  const conf = { ...config, targets: { ...config.targets,
+    newClients: { ...config.targets.newClients, commercial: {
+      ...config.targets.newClients.commercial,
+      targetExclusions: [{ person: name, excludedTerritories: ["bajo cauca"] }],
+    }},
+  }}
+  const result = buildAgricolaReports({ blocks: { ...blocks, commercial: records }, config: conf })
+  const q = result.entities.find(item => item.name === name).indicators.find(item => item.id === "nuevos_clientes").periods
+  assert.equal(q.Q3.actual, 32)
+  assert.equal(q.Q3.target, 51)
+  assert.equal(q.Q3.target - q.Q3.actual, 19)
+  assert.equal(q.Q3.recognizedCompliance, 32/51)
+  assert.equal(q.Julio.actual, null)
+  assert.equal(q.Agosto.actual, null)
+  assert.equal(q.Septiembre.actual, 32)
+  assert.equal(q.Julio.target, 40)
+  assert.equal(q.Agosto.target, 45)
+  assert.equal(q.Septiembre.target, 51)
+})
+
 test("rule new clients (promoters): published historical rule MIN(150 %, source value / 90), with a methodology note", () => {
   const promoter = indicator("Promotor Uno", "nuevos_clientes")
   assert.equal(promoter.periods.Q3.actual, 5, "territorial value as exported, not split among promoters")
