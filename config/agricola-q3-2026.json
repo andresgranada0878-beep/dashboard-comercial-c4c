@@ -1,5 +1,5 @@
 {
-  "version": "agricola-q3-2026-v12",
+  "version": "agricola-q3-2026-v13",
   "sourceKey": "PYC-AGR-ANT",
   "company": "Pérez y Cardona",
   "report": "Agrícola Antioquia",
@@ -103,7 +103,9 @@
       "reconciliationStatus": "aceptada_sin_ajuste",
       "reconciliationNote": "Por instrucción del responsable de C4C, se acepta la diferencia de 13 clientes entre el total general mostrado en Power BI (1.336) y la suma de ocho metas territoriales visibles (1.349). Se conservan sin cambios las ocho metas territoriales, el reparto por plazas y los cumplimientos calculados. Esta diferencia no bloquea ni marca como borrador los informes Q3; el registro se conserva únicamente como antecedente de auditoría.",
       "methodology": "por_plazas_promotores",
-      "allocationRule": "La Meta Cobertura mensual de cada territorio se divide entre el número de plazas de promotor asignadas al territorio: titulares activos, vacantes y posiciones sin titular con meta definida. No cuentan plazas residuales sin meta. La cuota de la vacante no se redistribuye a los titulares. La gestión de clientes visitados de cada persona no se divide. Norte y Bajo Cauca comparten una sola meta por promotor asignado a ambos, tomando la mayor cuota individual, no su suma."
+      "allocationRule": "La Meta Cobertura mensual de cada territorio se divide entre el número de plazas de promotor asignadas al territorio: titulares activos, vacantes y posiciones sin titular con meta definida. No cuentan plazas residuales sin meta. La cuota de la vacante no se redistribuye a los titulares. La gestión de clientes visitados de cada persona no se divide. Norte y Bajo Cauca comparten una sola meta por promotor asignado a ambos, tomando la mayor cuota individual, no su suma.",
+      "monthlyAssignedPortfolio": true,
+      "monthlyAssignedPortfolioRule": "Cartera asignada por municipio representa la meta de cobertura de CADA MES para el promotor activo. Meta Q3 = clientes asignados × 3. NO cambiar meta fija de visitas (60 mensuales, 180 Q3), ni gestión real, ni metas de comerciales/director, ni el valor de cartera municipal. Ejemplo Edison: 115 al mes = 345 en Q3."
     },
     "commercialVisitCoverageExceptions": [
       {
@@ -143,7 +145,7 @@
       "cap": 1,
       "calculationType": "ratio",
       "pending": [],
-      "criterion": "Promotores con asignación municipal importada: meta de cobertura = número de clientes asignados por municipio en el Q3, una sola vez, SIN asociarla a las 180 visitas; los que no tienen asignación conservan la regla territorial histórica. Comerciales y director: metas originales. Clientes visitados = suma de los meses; reconocimiento máximo 100%."
+      "criterion": "Promotores activos con cartera municipal importada: meta mensual de cobertura = número de clientes asignados por municipios; meta Q3 = cartera × 3 meses. Cada cliente debe visitarse una vez por mes; no confundir con meta fija de visitas de 60 por mes. Promotores sin cartera importada mantienen reparto territorial mensual; comerciales y director mantienen sus metas. Gestión = suma de clientes visitados por mes, con posible repetición entre meses; reconocimiento máximo 100%."
     },
     {
       "id": "nuevos_clientes",
