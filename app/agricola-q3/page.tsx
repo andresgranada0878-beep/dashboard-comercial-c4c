@@ -104,6 +104,7 @@ export default function AgricolaQ3Page() {
             </div>
             <Link href="/" style={secondaryButton}>Informe individual Q1/Q2</Link>
             <Link href="/cargar-datos" style={secondaryButton}>Cargar datos</Link>
+            <Link href="/cartera-municipios" style={secondaryButton}>Cartera por municipio</Link>
             <form action="/api/auth/logout" method="post" style={{ margin: 0 }}><button type="submit" style={secondaryButton}>Salir</button></form>
           </div>
         </div>
