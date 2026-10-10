@@ -83,6 +83,36 @@ const reports = buildAgricolaReports({ blocks, config })
 const entity = name => reports.entities.find(item => item.name === name)
 const indicator = (name, id) => entity(name).indicators.find(item => item.id === id)
 
+test("Q3 sin promotor: solo el comercial aprobado queda con campo N/A y resultado normalizado", () => {
+  const promoterWithoutBeta = promoters.split("\n").filter(row => !row.includes("\tPromotor Dos\t")).join("\n")
+  const specialBlocks = { ...blocks, promoters: prepareAgricolaBlock("promoters", promoterWithoutBeta, 2026, "Q3") }
+  const baseline = buildAgricolaReports({ blocks: specialBlocks, config })
+  const custom = { ...config, targets: { ...config.targets, fieldTargets: { ...config.targets.fieldTargets,
+    commercialWithoutPromoter: { people: ["Comercial Dos"], kpisNotApplicable: ["actividades_campo", "hectareas", "cultivos"], normalizeByApplicableWeight: true },
+  } } }
+  const updated = buildAgricolaReports({ blocks: specialBlocks, config: custom })
+  const before = baseline.entities.find(item => item.name === "Comercial Dos")
+  const after = updated.entities.find(item => item.name === "Comercial Dos")
+  for (const id of ["actividades_campo", "hectareas", "cultivos"]) {
+    const metric = after.indicators.find(item => item.id === id)
+    assert.equal(metric.periods.Q3.status, "no_aplica")
+    assert.equal(metric.periods.Q3.target, null)
+  }
+  assert.equal(after.results.Q3.evaluatedWeight, 0.8)
+  assert.equal(after.results.Q3.applicableWeight, 0.8)
+  assert.equal(after.results.Q3.normalizedToApplicableWeight, true)
+  assert.ok(Math.abs(after.results.Q3.result - before.results.Q3.result / 0.8) < 1e-9)
+  assert.equal(after.results.Q3.rawWeightedResult, before.results.Q3.result)
+  assert.equal(after.results.Q3.complete, true)
+  assert.equal(after.reportState, "final")
+  assert.equal(updated.entities.find(item => item.name === "Comercial Uno").results.Q3.result,
+    baseline.entities.find(item => item.name === "Comercial Uno").results.Q3.result,
+    "La excepción no modifica otro comercial.")
+  assert.equal(updated.entities.find(item => item.name === "Gamma").results.Q3.result,
+    baseline.entities.find(item => item.name === "Gamma").results.Q3.result,
+    "Tampoco modifica el territorio.")
+})
+
 test("fixture blocks import without blocking issues", () => {
   for (const [id, block] of Object.entries(blocks)) assert.deepEqual(block.issues, [], id)
   assert.equal(blocks.leads.summary.selected, 5)
