@@ -252,6 +252,9 @@ export function DashboardShell() {
               </div>
               <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
                 <a href="/resumen" style={{ ...secondaryButton, textDecoration: "none", display: "inline-flex", alignItems: "center" }}>Resumen ejecutivo</a>
+                <a href="/agricola-q3" style={{ ...secondaryButton, textDecoration: "none", display: "inline-flex", alignItems: "center" }}>Agrícola Q3</a>
+                <a href="/cargar-datos" style={{ ...secondaryButton, textDecoration: "none", display: "inline-flex", alignItems: "center" }}>Cargar datos</a>
+                <form action="/api/auth/logout" method="post" style={{ margin: 0 }}><button type="submit" style={secondaryButton}>Salir</button></form>
                 <button onClick={() => void loadData()} type="button" style={secondaryButton}>Actualizar datos</button>
                 <button
                     type="button"

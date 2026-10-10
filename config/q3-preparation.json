@@ -1,0 +1,65 @@
+{
+  "year": 2026,
+  "quarter": "Q3",
+  "months": [
+    "Julio",
+    "Agosto",
+    "Septiembre"
+  ],
+  "status": "pending_validation",
+  "sources": [
+    {
+      "sourceKey": "PYC-AGR-ANT",
+      "file": "informe Q3 - Final.xlsx",
+      "requiredSheets": [
+        "mensual",
+        "Director",
+        "Tabla dinam gestion comercial",
+        "Tecnico",
+        "Leads",
+        "Act Campo",
+        "Fincas"
+      ]
+    },
+    {
+      "sourceKey": "GAL-ANT",
+      "file": "informe Q3 - Galagro Ant Final.xlsx",
+      "requiredSheets": [
+        "mensual",
+        "Director",
+        "Tabla dinam gestion comercial",
+        "Tecnico",
+        "Leads",
+        "Act Campo",
+        "Fincas"
+      ]
+    },
+    {
+      "sourceKey": "GAL-NAC",
+      "file": "informe Q3 - Galagro Nacional.xlsx",
+      "requiredSheets": [
+        "mensual",
+        "Tabla dinam gestion comercial",
+        "Tecnico",
+        "Leads",
+        "Act Campo",
+        "Fincas"
+      ],
+      "profile": "Comercial"
+    },
+    {
+      "sourceKey": "GAL-NAC",
+      "file": "informe Q3 - Galagro Nacional - Promotor.xlsx",
+      "requiredSheets": [
+        "mensual",
+        "Tabla dinam gestion comercial",
+        "Tecnico",
+        "Leads",
+        "Act Campo",
+        "Fincas"
+      ],
+      "profile": "Promotor"
+    }
+  ]
+}
+

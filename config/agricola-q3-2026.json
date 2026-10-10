@@ -1,0 +1,326 @@
+{
+  "version": "agricola-q3-2026-v14",
+  "sourceKey": "PYC-AGR-ANT",
+  "company": "Pérez y Cardona",
+  "report": "Agrícola Antioquia",
+  "year": 2026,
+  "quarter": "Q3",
+  "months": [
+    "Julio",
+    "Agosto",
+    "Septiembre"
+  ],
+  "rulesValidated": true,
+  "catalog": {
+    "source": "El catálogo de personas y territorios se arma con los exportados cargados (Gestión comercial y Gestión de promotores); no se guarda en el repositorio.",
+    "territoryPrefix": "^pyc agricola ant(ioquia)?\\s+",
+    "nonOperatingTerritories": [
+      "direccion",
+      "dir tecnica"
+    ],
+    "territoryLabels": {
+      "valle aburra": "Valle de Aburrá",
+      "direccion": "Dirección",
+      "dir tecnica": "Dirección Técnica"
+    },
+    "territoryGroups": [
+      {
+        "label": "Norte y Bajo Cauca",
+        "members": [
+          "norte",
+          "bajo cauca"
+        ]
+      }
+    ],
+    "vacancyPattern": "^\\(vacante\\)",
+    "unassignedRule": "Nombre en mayúsculas sostenidas (código de posición, sin persona asignada)"
+  },
+  "targets": {
+    "director": {
+      "visitsPerMonth": 20,
+      "coverageUniverse": 400,
+      "coverageMissing": "La regla histórica es universo de clientes del alcance del director / 12 (Q1 y Q2 usaron 34,67 clientes mensuales, es decir 416 clientes / 12). Sin universo configurado la cobertura del director queda Sin meta; «Meta Cobertura y Visitas» = 1 de la fila Dirección no es una meta."
+    },
+    "fieldTargets": {
+      "perActivePromoter": {
+        "activitiesPerQuarter": 3,
+        "plotsPerQuarter": 0,
+        "hectaresPerQuarter": 90,
+        "cropsPerQuarter": 3
+      },
+      "vacanciesGenerateTarget": false,
+      "commercialScope": "territorio_asignado",
+      "commercialWithoutPromoter": {
+        "people": [
+          "Jairo Jesús Morales Doria"
+        ],
+        "kpisNotApplicable": [
+          "recomendaciones",
+          "referencias",
+          "actividades_campo",
+          "hectareas",
+          "cultivos"
+        ],
+        "normalizeByApplicableWeight": true,
+        "note": "Excepción aprobada exclusivamente para Jairo Jesús Morales Doria, comercial de Córdoba sin promotor técnico activo en Q3. Recomendaciones (20%), referencias (10%), actividades de campo (10%), hectáreas (5%) y cultivos (5%) pertenecen a la gestión del promotor y son No aplica. Resultado global normalizado sobre el 50% evaluable (visitas, cobertura, clientes nuevos/recuperados y dos KPI de leads). No modifica otros comerciales, territorios, promotores, director ni cifras reales."
+      }
+    },
+    "newClients": {
+      "commercial": {
+        "field": "Meta Clientes Recuperar",
+        "periodicity": "anual",
+        "methodology": "acumulado_anual_al_cierre_Q3",
+        "monthsElapsedAtQuarterEnd": 9,
+        "rounding": "nearest_integer",
+        "targetExclusions": [
+          {
+            "person": "Carolina María Escobar Londoño",
+            "excludedTerritories": [
+              "bajo cauca"
+            ],
+            "reason": "Meta anual personal Norte 68; a septiembre 68 × 9/12 = 51. Se conserva gestión real 32 (Norte 30 + Bajo Cauca 2), pendiente 19 para meta acumulada septiembre."
+          }
+        ]
+      },
+      "promoters": {
+        "field": "Meta Clientes Nuevos",
+        "periodicity": "mensual",
+        "quarterTarget": 90
+      }
+    },
+    "promoterCoverage": {
+      "source": "Power BI - Gestión Comercial Promotor Técnico (metas territoriales validadas para Q3 2026)",
+      "monthlyTerritoryTargets": {
+        "bajo cauca": 10,
+        "cordoba": 163,
+        "norte": 232,
+        "oriente a": 343,
+        "oriente b": 277,
+        "suroeste": 180,
+        "uraba": 49,
+        "valle aburra": 95
+      },
+      "overlappingTerritoryRule": "Para un mismo promotor asignado simultáneamente a Norte y Bajo Cauca, se conserva la mayor cuota territorial mensual, no su suma. No se aplica entre colaboradores distintos.",
+      "reportedPowerBiTotal": 1336,
+      "reconciliationStatus": "aceptada_sin_ajuste",
+      "reconciliationNote": "Por instrucción del responsable de C4C, se acepta la diferencia de 13 clientes entre el total general mostrado en Power BI (1.336) y la suma de ocho metas territoriales visibles (1.349). Se conservan sin cambios las ocho metas territoriales, el reparto por plazas y los cumplimientos calculados. Esta diferencia no bloquea ni marca como borrador los informes Q3; el registro se conserva únicamente como antecedente de auditoría.",
+      "methodology": "por_plazas_promotores",
+      "allocationRule": "La Meta Cobertura mensual de cada territorio se divide entre el número de plazas de promotor asignadas al territorio: titulares activos, vacantes y posiciones sin titular con meta definida. No cuentan plazas residuales sin meta. La cuota de la vacante no se redistribuye a los titulares. La gestión de clientes visitados de cada persona no se divide. Norte y Bajo Cauca comparten una sola meta por promotor asignado a ambos, tomando la mayor cuota individual, no su suma.",
+      "monthlyAssignedPortfolio": true,
+      "monthlyAssignedPortfolioRule": "Cartera asignada por municipio representa la meta de cobertura de CADA MES para el promotor activo. Meta Q3 = clientes asignados × 3. NO cambiar meta fija de visitas (60 mensuales, 180 Q3), ni gestión real, ni metas de comerciales/director, ni el valor de cartera municipal. Ejemplo Edison: 115 al mes = 345 en Q3."
+    },
+    "commercialVisitCoverageExceptions": [
+      {
+        "person": "Carolina María Escobar Londoño",
+        "excludedTerritories": [
+          "bajo cauca"
+        ],
+        "rationale": "Meta Q3 de Carolina: únicamente Norte 84 clientes/visitas al mes × 3 = 252. No agregar 10 de Bajo Cauca por mes; conservar su gestión registrada en ambos territorios."
+      }
+    ],
+    "promoterVisits": {
+      "monthlyTarget": 60,
+      "quarterTarget": 180,
+      "periodicity": "mensual",
+      "scope": "promotores_activos",
+      "policy": "Cada promotor técnico activo tiene meta fija de 60 visitas cada mes (julio, agosto, septiembre), 180 visitas Q3. Este valor no procede de la cartera municipal importada, que SOLO determina la meta de cobertura. Vacantes/posiciones sin titular: No aplica."
+    }
+  },
+  "policies": {
+    "blankValues": "ausente",
+    "farmsWithoutRecords": "cero"
+  },
+  "indicators": [
+    {
+      "id": "ejecucion_visitas",
+      "label": "Ejecución visitas",
+      "weight": 0.1,
+      "cap": 1,
+      "calculationType": "ratio",
+      "pending": [],
+      "criterion": "Promotores técnicos activos: 60 visitas al mes, 180 en julio-septiembre Q3; no se usa la cartera municipal para visitas. Comerciales y dirección: conservar sus metas originales (director 20 visitas mensuales). Reconocimiento máximo 100%."
+    },
+    {
+      "id": "cobertura_clientes",
+      "label": "Cobertura clientes",
+      "weight": 0.1,
+      "cap": 1,
+      "calculationType": "ratio",
+      "pending": [],
+      "criterion": "Promotores activos con cartera municipal importada: meta mensual de cobertura = número de clientes asignados por municipios; meta Q3 = cartera × 3 meses. Cada cliente debe visitarse una vez por mes; no confundir con meta fija de visitas de 60 por mes. Promotores sin cartera importada mantienen reparto territorial mensual; comerciales y director mantienen sus metas. Gestión = suma de clientes visitados por mes, con posible repetición entre meses; reconocimiento máximo 100%."
+    },
+    {
+      "id": "nuevos_clientes",
+      "label": "Recuperación de clientes (nuevos + recuperados)",
+      "weight": 0.1,
+      "cap": 1.5,
+      "calculationType": "ratio_acumulado",
+      "pending": [],
+      "criterion": "Comerciales y dirección: Cant. Clientes Nuevos/Recuperados es un acumulado del año enero-septiembre, NO gestión aislada Q3. Meta anual de «Meta Clientes Recuperar» prorrateada al mes de cierre (septiembre = 9/12), redondeada al entero más cercano. No sumar acumulados repetidos. Carolina: gestión 32, meta anual Norte 68, meta acumulada septiembre 51 y faltante 19. En promotores se conserva por ahora la meta trimestral histórica publicada de 90. Reconocimiento máximo 150%."
+    },
+    {
+      "id": "recomendaciones",
+      "label": "Recomendaciones",
+      "weight": 0.2,
+      "cap": 1.5,
+      "calculationType": "ratio_acumulado",
+      "pending": [],
+      "criterion": "Valor de recomendaciones frente al valor de ventas del mismo periodo (Σ Valor Recomendaciones / Σ Valor Ventas); «Ppto» no es la meta del indicador. El exportado técnico no identifica persona: el colaborador se evalúa con la gestión técnica de su territorio asignado (no es gestión personal directa), igual que el informe territorial. Reconocimiento máximo 150%."
+    },
+    {
+      "id": "referencias",
+      "label": "Referencias",
+      "weight": 0.1,
+      "cap": null,
+      "calculationType": "ratio",
+      "pending": [],
+      "criterion": "Cantidad de referencias recomendadas (Meta Referencias × Referencias Recomendadas) sumada en los meses evaluados frente al portafolio vigente de referencias, tomado una sola vez por unidad de evaluación. El exportado técnico no identifica persona: el colaborador se evalúa con la gestión técnica de su territorio asignado (no es gestión personal directa) y el informe territorial usa la misma gestión."
+    },
+    {
+      "id": "leads_calificados",
+      "label": "Leads calificados",
+      "weight": 0.1,
+      "cap": 1,
+      "calculationType": "ratio_acumulado",
+      "pending": [],
+      "criterion": "Leads calificados (Σ Meta Leads de las filas del titular, como el Excel publicado Q1/Q2) frente a la meta: mínimo 1 lead por mes evaluado, o la Meta Leads del mes si es mayor (trimestre completo: mínimo 3). Sin leads registrados = 0. Vacantes y posiciones sin titular: No aplica."
+    },
+    {
+      "id": "leads_calificados_tiempo",
+      "label": "Leads calificados a tiempo",
+      "weight": 0.1,
+      "cap": 1,
+      "calculationType": "ratio_acumulado",
+      "pending": [],
+      "criterion": "Leads gestionados dentro del plazo definido (Calificados Oportunos) frente a la meta: mínimo 1 lead por mes evaluado, o la Meta Leads del mes si es mayor (trimestre completo: mínimo 3). Sin leads registrados = 0. Vacantes y posiciones sin titular: No aplica."
+    },
+    {
+      "id": "actividades_campo",
+      "label": "Impacto en clientes (Actividades de campo)",
+      "weight": 0.1,
+      "cap": 1.5,
+      "calculationType": "ratio_acumulado",
+      "pending": [],
+      "criterion": "Se cuentan las actividades de campo finalizadas de tipo Día de campo, Evento Especial, Visita Mostrador Especial y Visita Formación, una por ID. Se excluyen parcelas y estados no finalizados. Comparación con la meta trimestral aprobada; reconocimiento máximo 150%."
+    },
+    {
+      "id": "hectareas",
+      "label": "Hectáreas de cultivos impactados",
+      "weight": 0.05,
+      "cap": 1.5,
+      "calculationType": "ratio_acumulado",
+      "pending": [],
+      "criterion": "Hectáreas impactadas registradas en Fincas frente a 90 hectáreas trimestrales (30 mensuales) por promotor activo. La suma no representa fincas únicas. Reconocimiento máximo 150%."
+    },
+    {
+      "id": "cultivos",
+      "label": "Cultivos impactados",
+      "weight": 0.05,
+      "cap": 1.5,
+      "calculationType": "ratio_acumulado",
+      "pending": [],
+      "criterion": "Cultivos impactados registrados en Fincas (cultivo × empleado × mes) frente a 3 cultivos trimestrales (1 mensual) por promotor activo. No representa cultivos únicos. Reconocimiento máximo 150%."
+    },
+    {
+      "id": "gestion-cultivos-impactados",
+      "label": "Gestión de Cultivos Impactados",
+      "weight": 0,
+      "cap": 1.5,
+      "calculationType": "promedio",
+      "pending": [],
+      "criterion": "Promedio del cumplimiento de hectáreas y cultivos impactados. Informativo: no suma al resultado."
+    },
+    {
+      "id": "suelos",
+      "label": "Suelos",
+      "weight": 0,
+      "cap": null,
+      "calculationType": "no_aplica",
+      "pending": [],
+      "criterion": "Excluido de Q3 mientras no exista una fuente confirmada. Se muestra como No aplica; la ausencia de fuente no se convierte en 0%."
+    }
+  ],
+  "approvedRules": [
+    {
+      "id": "coverage",
+      "title": "Cobertura",
+      "detail": "Mide clientes únicos gestionados, no visitas. Clientes únicos por mes; trimestre = Σ clientes únicos mensuales / Σ metas mensuales, sin dividir de nuevo entre 3. El detalle mensual se conserva para trazabilidad. Promotores: meta individual mensual = Meta Cobertura del territorio / plazas de promotor asignadas al territorio (titulares y plazas vacantes o sin titular con meta de cobertura en el exportado del trimestre; las posiciones sin meta son residuales y no cuentan). Las vacantes y posiciones sin titular quedan No aplica y su parte no se redistribuye. Sin una fuente confiable de estado activo/inactivo no se infiere inactividad: gestión 0 contra la meta = 0 %, y un mes sin filas conserva la meta y se marca para revisión. El informe territorial conserva la meta territorial completa; la gestión son los clientes visitados personalmente, sin dividir; el trimestre suma las metas individuales mensuales, así que la meta territorial cuenta una sola vez."
+    },
+    {
+      "id": "new-clients",
+      "title": "Recuperación de clientes (nuevos + recuperados)",
+      "detail": "Medida exportada «Cant. Clientes Nuevos» frente a «Meta Clientes Recuperar» (metodología Q1/Q2). Meta anual de la fuente → trimestral = anual / 4; meta mensual → mensual × 3. Gestión = acumulado del trimestre. Tope 150%. No se suman recuperados supuestos. Promotores (continuidad con la regla publicada en Q1/Q2): cumplimiento = MIN(150 %, Cant. Clientes Nuevos del exportado Q3 tal como llega / 90), meta trimestral 30 × 3; no se usa /30 ni /270. Vacantes y posiciones sin titular = No aplica. La fuente Q3 presenta una escala diferente frente a periodos anteriores; se conserva el dato de origen para revisión futura. Advertencia (no bloquea el cálculo): la fuente no permite verificar si la medida incluye clientes recuperados."
+    },
+    {
+      "id": "leads",
+      "title": "Leads",
+      "detail": "Fórmula publicada Q1/Q2: gestión mensual de leads calificados = Σ Meta Leads de las filas del titular en el mes (no porcentaje × Meta Leads); leads a tiempo = Σ Calificados Oportunos; meta mensual = mayor entre 1 y Meta Leads, la misma para ambos indicadores. Un mes sin registros cuenta 0 contra 1, así que un titular sin leads queda 0 / 3 en el trimestre y conserva el 10 % de cada indicador; nunca No aplica por ausencia de registros. Vacantes y posiciones sin titular: No aplica; sus filas se conservan en la fuente y la trazabilidad («Registro asociado a usuario de vacante; excluido del cálculo por no existir evidencia de titular activo o gestión atribuible.») pero no suman numerador ni meta, ni en el informe individual ni en el territorial. Territorio = suma de gestión y metas mensuales de los titulares con territorio asignado."
+    },
+    {
+      "id": "activities",
+      "title": "Actividades",
+      "detail": "Solo Día de campo, Evento Especial, Visita Mostrador Especial y Visita Formación en estado Finalizado/Completado; sin parcelas."
+    },
+    {
+      "id": "field-targets",
+      "title": "Metas de actividades, hectáreas y cultivos",
+      "detail": "Metodología Q1/Q2 con la modificación Q3 (parcelas no cuentan): por promotor activo y trimestre, 3 actividades, 90 hectáreas (30 mensuales) y 3 cultivos (1 mensual). Las vacantes no generan meta. Territorio = meta individual × promotores activos asignados; Dirección = suma de las metas territoriales."
+    },
+    {
+      "id": "commercial-field-scope",
+      "title": "Actividades, hectáreas y cultivos del RTC",
+      "detail": "Como en la metodología histórica, el comercial (RTC) se evalúa con la gestión de campo de su territorio asignado y la meta de los promotores activos de ese territorio. Se muestra «Alcance: territorio asignado»; no se presenta como autoría individual. Los promotores se evalúan con su gestión personal."
+    },
+    {
+      "id": "technical-attribution",
+      "title": "Recomendaciones y referencias por territorio asignado",
+      "detail": "El exportado técnico no tiene persona. La gestión técnica se asigna al colaborador mediante su territorio asignado y se presenta con origen «Territorio asignado», no como gestión personal directa. El informe individual y el territorial usan la misma gestión técnica del territorio."
+    },
+    {
+      "id": "territories",
+      "title": "Territorios",
+      "detail": "Norte y Bajo Cauca se conservan separados en el dato fuente y se evalúan como «Norte y Bajo Cauca». Visitas, cobertura, leads y la gestión de campo de los promotores son personales; el informe territorial suma la gestión válida ejecutada en el territorio; no se suma doble entre persona, territorio y dirección."
+    },
+    {
+      "id": "director",
+      "title": "Director",
+      "detail": "Meta de visitas = 20 mensuales (metodología Q1/Q2); el valor 1 del exportado Q3 no se usa como meta. Cobertura: universo de clientes del alcance / 12 cuando la base lo permita; si no, Sin meta con la explicación del dato faltante."
+    },
+    {
+      "id": "partial-results",
+      "title": "Resultados parciales",
+      "detail": "No se redistribuyen pesos de indicadores No aplica, Sin dato o Sin meta. Se muestran el aporte ponderado sobre 100 y el cumplimiento normalizado sobre el peso evaluado (aporte / peso evaluado). Si el peso evaluado es menor a 100 %, el resultado es PARCIAL y no recibe nivel de desempeño. Una celda vacía en una fila existente no hace parcial el resultado (ver «Celdas vacías»); solo un mes sin filas de la fuente lo deja «PARCIAL (datos incompletos en algún indicador)»."
+    },
+    {
+      "id": "blank-values",
+      "title": "Celdas vacías",
+      "detail": "Regla SUMIFS de Q1/Q2: si la fila del territorio, persona y mes existe en el exportado y el valor de gestión viene vacío, la gestión es 0 y no se marca Parcial ni Sin dato (Power BI exporta el cero como vacío). Sin dato solo cuando no existe la fila necesaria, falta la fuente o no hay información suficiente para calcular. Vacantes y posiciones sin titular: el vacío no se convierte en 0 %, queda No aplica. Territorio sin titular activo (comercial y promotores vacantes o sin titular): No aplica en todos los indicadores, sin metas ni cumplimiento; el consolidado del director conserva sus filas técnicas."
+    },
+    {
+      "id": "director-scope",
+      "title": "Cobertura del director",
+      "detail": "Universo anual de clientes visitables del director = 400, a cubrir una vez en el año. Meta mensual = 400 / 12 = 33,33; meta trimestral = 400 / 12 × 3 = 100 (no 400). Gestión = clientes visitados personalmente por el director. «Meta Cobertura y Visitas» = 1 de la fila Dirección no se usa como meta. Visitas, cobertura y leads son personales del director; los demás indicadores consolidan los territorios operativos desde la fuente."
+    },
+    {
+      "id": "references",
+      "title": "Referencias",
+      "detail": "Lógica histórica Q1/Q2. REF CANTIDAD por fila = Referencias Recomendadas × Meta Referencias, sin redondeo previo. Gestión Q3 = Σ REF CANTIDAD de julio, agosto y septiembre; una misma referencia puede contarse de nuevo en meses distintos porque el exportado no trae código de referencia y no es posible deduplicar de forma fiable. Meta = portafolio vigente (Meta Referencias), tomado una sola vez para el periodo: no se multiplica por meses, empleados ni territorios de una agrupación (Q3 = 302 en Oriente A, Oriente B, Suroeste, Valle de Aburrá y Norte y Bajo Cauca; nunca 604). Norte y Bajo Cauca es una sola unidad: se suma la gestión de ambos y la meta es 302, también dentro del consolidado del director. Sin tope."
+    },
+    {
+      "id": "director-references",
+      "title": "Referencias del director",
+      "detail": "Corrección metodológica desde Q3; Q1/Q2 se conservan sin modificación por corresponder a resultados históricos publicados. Al director se aplica la misma metodología consolidada y auditable de los territorios: REF CANTIDAD = Referencias Recomendadas × Meta Referencias, sin redondeo previo; gestión = Σ REF CANTIDAD de los territorios del alcance consolidado del director; meta = Σ Meta Referencias del mismo alcance y periodo / 3, con las mismas unidades lógicas de evaluación: el portafolio de cada unidad se toma una sola vez (Norte y Bajo Cauca = 302 una vez; Q3 = 7 × 302 = 2.114, no 2.416). No se replica la fórmula histórica del director: Q1 dependía de filas auxiliares manuales con una fórmula distinta a la territorial, y Q2 tenía enlaces externos rotos y se publicó con estado Inconsistencia (su 58,22 % coincide con Valle de Aburrá)."
+    },
+    {
+      "id": "soils",
+      "title": "Suelos",
+      "detail": "Excluido de Q3 mientras no exista fuente confirmada. Se muestra No aplica; nunca 0%."
+    },
+    {
+      "id": "farms",
+      "title": "Hectáreas y cultivos",
+      "detail": "Solo de la fuente válida de fincas/visitas. Hectáreas = hectáreas impactadas / meta; Cultivos = cultivos impactados / meta. Sin cálculo de fincas únicas mientras no exista un ID confiable."
+    }
+  ],
+  "pendingRules": []
+}

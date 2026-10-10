@@ -29,4 +29,17 @@ data/*.xlsx
 
 data/fuentes/
 
+# Exportados reales, pruebas locales y archivos generados con datos reales (informes, trazabilidad)
+scratch/
+e2e-out/
+downloads/
+Downloads/
+data - *.xlsx
+Listadeactividades*.xlsx
+trazabilidad-*.xlsx
+informe-c4c-*.pdf
+informes-*.pdf
+*-borrador.pdf
+*-borrador.xlsx
+
 google-service-account.json
