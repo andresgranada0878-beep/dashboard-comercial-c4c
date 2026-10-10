@@ -80,7 +80,7 @@ export default function ImportBasesPage() {
             summary: block.result.summary, fileName: block.input.fileName,
           }])),
           ...(preparedVisitTargets ? { visitTargets: { records: preparedVisitTargets.records, issues: preparedVisitTargets.issues,
-            warnings: ["Metas de visitas Q3 importadas por promotor; asignación municipal preliminar."],
+            warnings: ["Metas de cobertura Q3 por cartera municipal importadas por promotor; la meta de visitas se mantiene fija en 60 mensuales."],
             summary: { origin: "file", read: preparedVisitTargets.summary.read, selected: preparedVisitTargets.summary.selected,
               excludedByReason: {}, months: {}, blanks: {} }, fileName: targetsInput.fileName,
           } } : {}),
@@ -145,9 +145,9 @@ export default function ImportBasesPage() {
         ))}
 
         <section style={{ ...panel, borderColor: "#245c3a", background: "#f2fbf4" }}>
-          <h2 style={{ margin: 0 }}>Meta visitas Q3 por promotor — cartera asignada (opcional)</h2>
-          <p style={{ color: "#52625a", fontSize: 13 }}>Importa Excel con columnas «Promotor» y «Meta visitas Q3». Para cada promotor, la cifra es la <strong>meta del trimestre completo</strong> (no se multiplica por tres). Modifica exclusivamente la meta de ejecución de visitas. La cobertura, la gestión real, los comerciales, los territorios y la dirección permanecen intactos. Las plazas sin asignación conservan la meta anterior.</p>
-          <input type="file" accept=".xlsx" aria-label="Archivo de metas de visitas Q3 por promotor" onChange={(event) => void onVisitTargetsFile(event.target.files?.[0])} />
+          <h2 style={{ margin: 0 }}>Meta de cobertura Q3 por promotor — cartera asignada (opcional)</h2>
+          <p style={{ color: "#52625a", fontSize: 13 }}>Importa Excel con columnas «Promotor» y «Meta cobertura Q3» (se admite también el encabezado anterior «Meta visitas Q3»). Para cada promotor, la cifra es la <strong>meta de cobertura del trimestre completo</strong>, tomada una sola vez (no se multiplica por tres). <strong>No cambia la meta de visitas:</strong> cada promotor activo tiene 60 mensuales y 180 Q3. Se conservan la gestión real, las metas de comerciales y director, y la cobertura de promotores sin asignación importada.</p>
+          <input type="file" accept=".xlsx" aria-label="Archivo de metas de cobertura Q3 por promotor" onChange={(event) => void onVisitTargetsFile(event.target.files?.[0])} />
           {targetsInput.fileName && <p style={{ fontSize: 13 }}>{targetsInput.fileName} · {preparedVisitTargets?.summary.selected ?? 0} metas válidas. <button type="button" style={linkButton} onClick={() => setTargetsInput(EMPTY)}>Quitar archivo</button></p>}
           {targetsInput.fileError && <p role="alert" style={{ color: "#9f1239" }}>{targetsInput.fileError}</p>}
           {preparedVisitTargets?.issues.map((issue, i) => <p key={i} role="alert" style={{ color: "#9f1239" }}>{issue}</p>)}
