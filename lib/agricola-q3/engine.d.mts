@@ -1,6 +1,6 @@
 import type { PreparedBlock } from "../agricola-import.mjs"
 
-export type PeriodStatus = "ok" | "parcial" | "sin_dato" | "sin_meta" | "no_aplica"
+export type PeriodStatus = "ok" | "parcial" | "sin_dato" | "sin_meta" | "no_aplica" | "pendiente_fuente"
 export type TargetPeriodicity = "anual" | "mensual" | "trimestral"
 export type EntityKind = "individual" | "territorio" | "direccion"
 export type EntityProfile = "Director" | "Comercial" | "Promotor" | "Territorio"
@@ -44,6 +44,8 @@ export interface EntityPeriodSummary {
   withoutData: string[]
   withoutTarget: string[]
   notApplicable: string[]
+  /** Indicators whose source definition is pending validation: no compliance, no contribution. */
+  pendingSource: string[]
 }
 
 export interface Q3Entity {

@@ -147,12 +147,32 @@ test("rule new clients: annual / 4 is not rounded, monthly × 3, cap 150%", () =
   assert.equal(twoTerritories.periods.Q3.actual, 6)
   assert.equal(twoTerritories.periods.Q3.recognizedCompliance, 1.5)
   assert.equal(twoTerritories.cap, 1.5)
-  const promoter = indicator("Promotor Uno", "nuevos_clientes")
-  assert.equal(promoter.periods.Q3.actual, 5, "territorial value, not split among promoters")
-  assert.equal(promoter.periods.Q3.target, 10 * 3, "personal target, as in the Q1/Q2 formula")
   const vacancy = indicator("(Vacante) Persona Tres", "nuevos_clientes")
   assert.equal(vacancy.periods.Q3.status, "no_aplica")
   assert.equal(vacancy.periods.Q3.contribution, null)
+})
+
+test("rule new clients (promoters): pending source validation — no compliance, no contribution, result stays partial", () => {
+  const promoter = indicator("Promotor Uno", "nuevos_clientes")
+  for (const period of ["Julio", "Agosto", "Septiembre", "Q3"]) {
+    const value = promoter.periods[period]
+    assert.equal(value.status, "pendiente_fuente", period)
+    assert.equal(value.rawCompliance, null, period)
+    assert.equal(value.recognizedCompliance, null, `${period}: neither 0 % nor 150 %`)
+    assert.equal(value.contribution, null, period)
+  }
+  assert.equal(promoter.periods.Q3.actual, 5, "source value kept for traceability")
+  assert.deepEqual(promoter.pending, ["promoter-new-clients-source"])
+  assert.ok(promoter.notes.some(note => note.startsWith("Pendiente validación de fuente")))
+  const summary = entity("Promotor Uno").results.Q3
+  assert.ok(summary.pendingSource.includes(promoter.label))
+  assert.ok(!summary.withoutData.includes(promoter.label) && !summary.notApplicable.includes(promoter.label))
+  assert.ok(summary.evaluatedWeight <= summary.totalWeight - promoter.weight + 1e-9)
+  assert.equal(summary.complete, false)
+  assert.ok(entity("Promotor Uno").pendingRules.includes("promoter-new-clients-source"))
+  assert.ok(!entity("Comercial Uno").pendingRules.includes("promoter-new-clients-source"))
+  assert.equal(indicator("Comercial Uno", "nuevos_clientes").periods.Q3.status, "ok", "commercials unchanged")
+  assert.equal(indicator("Alfa", "nuevos_clientes").periods.Q3.status !== "pendiente_fuente", true, "territories unchanged")
 })
 
 test("rule coverage: quarter = Σ monthly unique clients / Σ monthly targets, no extra / 3", () => {

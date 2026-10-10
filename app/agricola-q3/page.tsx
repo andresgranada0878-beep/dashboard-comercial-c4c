@@ -44,6 +44,7 @@ const STATUS_COLORS: Record<PeriodStatus, [string, string]> = {
   sin_dato: ["#475569", "#f1f5f9"],
   sin_meta: ["#9f1239", "#ffe4e6"],
   no_aplica: ["#334155", "#e2e8f0"],
+  pendiente_fuente: ["#92400e", "#ffedd5"],
 }
 
 export default function AgricolaQ3Page() {
@@ -109,7 +110,7 @@ export default function AgricolaQ3Page() {
       <div style={{ maxWidth: 1380, margin: "0 auto", padding: "18px 24px 60px" }}>
         {!reports.rulesValidated && <section role="status" style={{ ...panel, background: "#fffbeb", borderColor: "#f59e0b" }}>
           <strong style={{ color: "#92400e" }}>Borrador para revisión — no son resultados finales.</strong>
-          <span style={{ color: "#92400e" }}> Hay {reports.pendingRules.length} reglas pendientes de validación. Los indicadores sin dato, sin meta o no aplica no suman y el resultado se muestra con el peso realmente evaluado.</span>
+          <span style={{ color: "#92400e" }}> Hay {reports.pendingRules.length} reglas pendientes de validación. Los indicadores sin dato, sin meta, no aplica o pendientes de validación de fuente no suman y el resultado se muestra con el peso realmente evaluado.</span>
           <details style={{ marginTop: 8 }}>
             <summary style={{ cursor: "pointer", fontWeight: 800, color: "#92400e" }}>Ver reglas pendientes</summary>
             <ul style={{ margin: "8px 0 0", paddingLeft: 18, fontSize: 13 }}>{reports.pendingRules.map((rule) => <li key={rule.id} style={{ marginBottom: 6 }}><strong>{rule.title}:</strong> {rule.detail}</li>)}</ul>
@@ -196,6 +197,7 @@ function EntityView({ entity, reports, period, periodLabel, expanded, setExpande
         <Summary label="Nivel" value={summary.complete ? performance(summary.result) : `${PARTIAL_LEVEL} (${partialDetail(summary)})`} />
         <Summary label="Indicadores sin dato" value={summary.withoutData.length ? summary.withoutData.join(", ") : "Ninguno"} />
         {summary.withoutTarget.length > 0 && <Summary label="Indicadores sin meta" value={summary.withoutTarget.join(", ")} />}
+        {summary.pendingSource.length > 0 && <Summary label="Pendiente validación de fuente" value={summary.pendingSource.join(", ")} />}
       </div>
       {entity.observations.map((item, index) => <p key={index} style={{ color: "#92400e", fontSize: 13 }}>{item}</p>)}
       <div style={{ overflowX: "auto", marginTop: 14 }}>
