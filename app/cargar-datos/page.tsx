@@ -80,7 +80,7 @@ export default function ImportBasesPage() {
             summary: block.result.summary, fileName: block.input.fileName,
           }])),
           ...(preparedVisitTargets ? { visitTargets: { records: preparedVisitTargets.records, issues: preparedVisitTargets.issues,
-            warnings: ["Metas de cobertura Q3 por cartera municipal importadas por promotor; la meta de visitas se mantiene fija en 60 mensuales."],
+            warnings: ["Cartera municipal de cobertura mensual importada por promotor (meta Q3 = cartera × 3); meta de visitas fija 60 mensuales."],
             summary: { origin: "file", read: preparedVisitTargets.summary.read, selected: preparedVisitTargets.summary.selected,
               excludedByReason: {}, months: {}, blanks: {} }, fileName: targetsInput.fileName,
           } } : {}),
@@ -145,8 +145,8 @@ export default function ImportBasesPage() {
         ))}
 
         <section style={{ ...panel, borderColor: "#245c3a", background: "#f2fbf4" }}>
-          <h2 style={{ margin: 0 }}>Meta de cobertura Q3 por promotor — cartera asignada (opcional)</h2>
-          <p style={{ color: "#52625a", fontSize: 13 }}>Importa Excel con columnas «Promotor» y «Meta cobertura Q3» (se admite también el encabezado anterior «Meta visitas Q3»). Para cada promotor, la cifra es la <strong>meta de cobertura del trimestre completo</strong>, tomada una sola vez (no se multiplica por tres). <strong>No cambia la meta de visitas:</strong> cada promotor activo tiene 60 mensuales y 180 Q3. Se conservan la gestión real, las metas de comerciales y director, y la cobertura de promotores sin asignación importada.</p>
+          <h2 style={{ margin: 0 }}>Meta de cobertura mensual por promotor — cartera asignada (opcional)</h2>
+          <p style={{ color: "#52625a", fontSize: 13 }}>Importa Excel con columnas «Promotor» y «Meta cobertura mensual» (también se admiten las cabeceras anteriores «Meta cobertura Q3» y «Meta visitas Q3», que ahora se interpretan como <strong>cartera mensual</strong>). Cada promotor activo debe cubrir esa cartera <strong>una vez por mes</strong>: meta Q3 = clientes asignados × 3. <strong>La meta de visitas no cambia:</strong> 60 mensuales y 180 Q3. Se conservan gestiones reales, metas de comerciales/director y cobertura de promotores sin asignación importada.</p>
           <input type="file" accept=".xlsx" aria-label="Archivo de metas de cobertura Q3 por promotor" onChange={(event) => void onVisitTargetsFile(event.target.files?.[0])} />
           {targetsInput.fileName && <p style={{ fontSize: 13 }}>{targetsInput.fileName} · {preparedVisitTargets?.summary.selected ?? 0} metas válidas. <button type="button" style={linkButton} onClick={() => setTargetsInput(EMPTY)}>Quitar archivo</button></p>}
           {targetsInput.fileError && <p role="alert" style={{ color: "#9f1239" }}>{targetsInput.fileError}</p>}
