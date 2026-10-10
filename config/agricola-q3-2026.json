@@ -1,5 +1,5 @@
 {
-  "version": "agricola-q3-2026-v4",
+  "version": "agricola-q3-2026-v5",
   "sourceKey": "PYC-AGR-ANT",
   "company": "Pérez y Cardona",
   "report": "Agrícola Antioquia",
@@ -74,7 +74,10 @@
         "uraba": 49,
         "valle aburra": 95
       },
-      "overlappingTerritoryRule": "Para un mismo promotor asignado simultáneamente a Norte y Bajo Cauca, se conserva la mayor cuota territorial mensual, no su suma. No se aplica entre colaboradores distintos."
+      "overlappingTerritoryRule": "Para un mismo promotor asignado simultáneamente a Norte y Bajo Cauca, se conserva la mayor cuota territorial mensual, no su suma. No se aplica entre colaboradores distintos.",
+      "reportedPowerBiTotal": 1336,
+      "reconciliationStatus": "pendiente",
+      "reconciliationNote": "El total de la tabla Power BI es 1.336; la suma visible de sus ocho filas territoriales es 1.349. Diferencia 13 por conciliar en el origen antes de dar por validado el consolidado. No ajustar metas individuales para forzar el subtotal."
     }
   },
   "policies": {
