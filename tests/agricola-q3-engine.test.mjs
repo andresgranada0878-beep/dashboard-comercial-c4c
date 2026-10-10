@@ -502,3 +502,28 @@ test("duplicate rows and periods outside the quarter are reported", () => {
   const otherQuarter = prepareAgricolaBlock("farms", farms.replace("Julio", "Abril"), 2026, "Q3")
   assert.equal(otherQuarter.summary.excludedByReason["Mes fuera del periodo"], 1)
 })
+
+
+test("Q3 cobertura oficial: Gloria Norte + Bajo Cauca = 232 mensuales, 696 trimestrales; conserva meta ante fila faltante", () => {
+  const head = ["Territorio", "Empleado", "Meta Cobertura", "Clientes Visitados", "Cobertura Clientes", "Meta Visitas ", "Cant. Visitas", "Ejec. Visitas", "Meta Clientes Nuevos", "Cant. Clientes Nuevos", "Ejec. Clientes Nuevos", "Mes"]
+  const north = "PYC AGRÍCOLA ANT NORTE"
+  const bajoCauca = "PYC AGRÍCOLA ANT BAJO CAUCA"
+  const rows = ["Julio", "Agosto", "Septiembre"].flatMap((month, i) => [
+    [north, "Gloria Marela", 232, [31, 33, 40][i], "", 60, 41, "", 10, 10, "", month],
+    [bajoCauca, "Gloria Marela", 10, 0, "", 60, 0, "", 10, 0, "", month],
+  ])
+  const reportFor = sourceRows => buildAgricolaReports({
+    blocks: { ...blocks, promoters: prepareAgricolaBlock("promoters", tsv(head, sourceRows), 2026, "Q3") },
+    config,
+  })
+  const coverageFor = report => report.entities.find(item => item.name === "Gloria Marela").indicators.find(item => item.id === "cobertura_clientes").periods
+  const result = coverageFor(reportFor(rows))
+  assert.deepEqual(["Julio", "Agosto", "Septiembre"].map(month => result[month].target), [232, 232, 232])
+  assert.equal(result.Q3.target, 696)
+  assert.equal(result.Q3.actual, 104)
+  assert.ok(Math.abs(result.Q3.recognizedCompliance - 104 / 696) < 1e-12)
+  const missing = coverageFor(reportFor(rows.filter(row => !(row[0] === north && row[11] === "Agosto"))))
+  assert.equal(missing.Agosto.target, 232)
+  assert.equal(missing.Q3.target, 696)
+  assert.ok(missing.Agosto.notes.some(note => note.includes("Falta fila de Norte")))
+})
