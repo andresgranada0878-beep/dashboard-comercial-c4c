@@ -174,24 +174,25 @@ test("recommendations and references keep blanks as missing", () => {
   assert.equal(refs.periods.Q3.target, 20)
 })
 
-test("rule coverage (promoters): territorial target split among the month's active promoters; personal clients not split; vacancies are No aplica", () => {
+test("rule coverage (promoters): territorial target split among assigned promoters; an inactive month is No aplica and its share is not moved; vacancies are No aplica", () => {
   const header = ["Territorio", "Empleado", "Meta Cobertura", "Clientes Visitados", "Cobertura Clientes", "Meta Visitas ", "Cant. Visitas", "Ejec. Visitas", "Meta Clientes Nuevos", "Cant. Clientes Nuevos", "Ejec. Clientes Nuevos", "Mes"]
   const rows = ["Julio", "Agosto", "Septiembre"].flatMap(month => [
     [ALFA, "Promotor Uno", 30, 6, "", 60, 50, "", 10, 5, "", month],
     [ALFA, "(Vacante) Persona Tres", 30, "", "", 60, "", "", 10, 5, "", month],
-    ...(month === "Septiembre" ? [] : [[ALFA, "Promotor Cuatro", 30, 9, "", 60, 40, "", 10, 5, "", month]]),
+    month === "Septiembre" ? [ALFA, "Promotor Cuatro", 30, 0, "", 60, 0, "", 10, 5, "", month] : [ALFA, "Promotor Cuatro", 30, 9, "", 60, 40, "", 10, 5, "", month],
     [BETA, "Promotor Dos", 12, 6, "", 60, 30, "", 10, 1, "", month],
   ])
   const split = buildAgricolaReports({ blocks: { ...blocks, promoters: prepareAgricolaBlock("promoters", tsv(header, rows), 2026, "Q3") }, config })
   const coverageOf = name => split.entities.find(item => item.name === name).indicators.find(item => item.id === "cobertura_clientes").periods
   const uno = coverageOf("Promotor Uno")
-  assert.deepEqual(["Julio", "Agosto", "Septiembre"].map(month => uno[month].target), [15, 15, 30], "divisor changes month to month")
+  assert.deepEqual(["Julio", "Agosto", "Septiembre"].map(month => uno[month].target), [15, 15, 15], "the inactive colleague keeps counting in the divisor")
   assert.equal(uno.Q3.actual, 18, "personal clients are never split")
-  assert.equal(uno.Q3.target, 60)
+  assert.equal(uno.Q3.target, 45)
   const cuatro = coverageOf("Promotor Cuatro")
+  assert.equal(cuatro.Septiembre.status, "no_aplica", "0 clients and 0 visits all month = inactive")
   assert.equal(cuatro.Q3.actual, 18)
   assert.equal(cuatro.Q3.target, 30)
-  assert.equal(uno.Q3.target + cuatro.Q3.target, 30 * 3, "the territorial target is counted once")
+  assert.equal(uno.Q3.target + cuatro.Q3.target + 15, 30 * 3, "the territorial target is counted once; the inactive share is not reassigned")
   assert.equal(coverageOf("Promotor Dos").Q3.target, 36)
   assert.equal(coverageOf("(Vacante) Persona Tres").Q3.status, "no_aplica")
   assert.equal(indicator("Promotor Uno", "cobertura_clientes").periods.Q3.target, 90, "single active promoter keeps the full target")
