@@ -1,0 +1,46 @@
+name: Q3 verificación sin despliegue
+
+on:
+  push:
+    branches:
+      - prepare/q3-2026
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "lib/agricola-q3/**"
+      - "lib/agricola-import.mjs"
+      - "lib/pasted-table.mjs"
+      - "lib/field-activities.mjs"
+      - "config/agricola-q3-2026.json"
+      - "tests/**"
+      - ".github/workflows/q3-validate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: q3-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Tests y compilación
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Pruebas funcionales Q3 y exportadores PDF/Excel
+        run: pnpm test
+      - name: Tipos TypeScript
+        run: pnpm exec tsc --noEmit
+      - name: Compilación de Next.js
+        run: pnpm build
