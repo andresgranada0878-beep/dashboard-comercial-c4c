@@ -168,18 +168,18 @@ test("regla Carolina Q3: solo se excluye la meta Bajo Cauca de visitas y cobertu
   }
 })
 
-test("new clients: cumulative quarter value against annual target / 4", () => {
+test("new clients: accumulated January–September, annual target scaled by 9/12", () => {
   const clients = indicator("Comercial Uno", "nuevos_clientes")
   assert.equal(clients.periods.Q3.actual, 6)
-  assert.equal(clients.periods.Q3.target, 10)
-  assert.equal(clients.periods.Julio.actual, 6, "monthly views show the quarter cumulative")
+  assert.equal(clients.periods.Q3.target, 30)
+  assert.equal(clients.periods.Julio.actual, null, "no verified historical snapshot")
 })
 
-test("rule new clients: annual / 4 is not rounded, monthly × 3, cap 150%", () => {
+test("rule new clients: YTD annual /12 × 9 rounded to whole clients", () => {
   const twoTerritories = indicator("Comercial Dos", "nuevos_clientes")
-  assert.equal(twoTerritories.periods.Q3.target, (8 + 5) / 4)
+  assert.equal(twoTerritories.periods.Q3.target, 10)
   assert.equal(twoTerritories.periods.Q3.actual, 6)
-  assert.equal(twoTerritories.periods.Q3.recognizedCompliance, 1.5)
+  assert.equal(twoTerritories.periods.Q3.recognizedCompliance, 0.6)
   assert.equal(twoTerritories.cap, 1.5)
   const vacancy = indicator("(Vacante) Persona Tres", "nuevos_clientes")
   assert.equal(vacancy.periods.Q3.status, "no_aplica")
@@ -200,7 +200,7 @@ test("rule new clients (promoters): published historical rule MIN(150 %, source 
   const capped = high.entities.find(item => item.name === "Promotor Uno").indicators.find(item => item.id === "nuevos_clientes").periods.Q3
   assert.ok(Math.abs(capped.rawCompliance - 240 / 90) < 1e-9)
   assert.equal(capped.recognizedCompliance, 1.5)
-  assert.equal(indicator("Comercial Uno", "nuevos_clientes").periods.Q3.target, 10, "commercials unchanged")
+  assert.equal(indicator("Comercial Uno", "nuevos_clientes").periods.Q3.target, 30, "commercial YTD target updated")
 })
 
 test("rule coverage: quarter = Σ monthly unique clients / Σ monthly targets, no extra / 3", () => {
