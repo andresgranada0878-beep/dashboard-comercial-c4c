@@ -7,6 +7,7 @@ import type { CSSProperties } from "react"
 import { AGRICOLA_BLOCKS, prepareAgricolaBlock, prepareAgricolaRows } from "@/lib/agricola-import.mjs"
 import type { PreparedBlock } from "@/lib/agricola-import.mjs"
 import { clearLoad, readLoad, readWorkbookRows, saveLoad } from "@/lib/agricola-q3/store"
+import { prepareVisitTargetsRows } from "@/lib/agricola-q3/visit-targets.mjs"
 
 type BlockInput = { text: string; fileName: string | null; fileRows: unknown[][] | null; fileError: string | null }
 const EMPTY: BlockInput = { text: "", fileName: null, fileRows: null, fileError: null }
@@ -25,6 +26,7 @@ export default function ImportBasesPage() {
   const [year, setYear] = useState(2026)
   const [quarter, setQuarter] = useState("Q3")
   const [inputs, setInputs] = useState<Record<string, BlockInput>>({})
+  const [targetsInput, setTargetsInput] = useState<BlockInput>(EMPTY)
   const [stored, setStored] = useState<string | null>(null)
   const [saveError, setSaveError] = useState<string | null>(null)
 
@@ -42,10 +44,21 @@ export default function ImportBasesPage() {
     return { ...block, input, result, loaded }
   }), [inputs, year, quarter])
 
-  const ready = prepared.every((block) => block.loaded && block.result.issues.length === 0 && block.result.records.length > 0)
+  const preparedVisitTargets = useMemo(() => targetsInput.fileRows ? prepareVisitTargetsRows(targetsInput.fileRows) : null, [targetsInput.fileRows])
+  const ready = prepared.every((block) => block.loaded && block.result.issues.length === 0 && block.result.records.length > 0) && (!preparedVisitTargets || preparedVisitTargets.issues.length === 0)
 
   function update(id: string, patch: Partial<BlockInput>) {
     setInputs((current) => ({ ...current, [id]: { ...(current[id] ?? EMPTY), ...patch } }))
+  }
+
+  async function onVisitTargetsFile(file?: File) {
+    if (!file) return
+    try {
+      const fileRows = await readWorkbookRows(file)
+      setTargetsInput({ ...EMPTY, fileRows, fileName: file.name })
+    } catch {
+      setTargetsInput({ ...EMPTY, fileError: "No se pudo leer el archivo de metas (.xlsx)." })
+    }
   }
 
   async function onFile(id: string, file: File | undefined) {
@@ -61,10 +74,17 @@ export default function ImportBasesPage() {
     try {
       saveLoad({
         savedAt: new Date().toISOString(), year, quarter,
-        blocks: Object.fromEntries(prepared.map((block) => [block.id, {
-          records: block.result.records, issues: block.result.issues, warnings: block.result.warnings,
-          summary: block.result.summary, fileName: block.input.fileName,
-        }])),
+        blocks: {
+          ...Object.fromEntries(prepared.map((block) => [block.id, {
+            records: block.result.records, issues: block.result.issues, warnings: block.result.warnings,
+            summary: block.result.summary, fileName: block.input.fileName,
+          }])),
+          ...(preparedVisitTargets ? { visitTargets: { records: preparedVisitTargets.records, issues: preparedVisitTargets.issues,
+            warnings: ["Metas de visitas Q3 importadas por promotor; asignación municipal preliminar."],
+            summary: { origin: "file", read: preparedVisitTargets.summary.read, selected: preparedVisitTargets.summary.selected,
+              excludedByReason: {}, months: {}, blanks: {} }, fileName: targetsInput.fileName,
+          } } : {}),
+        },
       })
       router.push("/agricola-q3")
     } catch {
@@ -123,6 +143,15 @@ export default function ImportBasesPage() {
             {block.loaded && <BlockSummary block={block.result} />}
           </section>
         ))}
+
+        <section style={{ ...panel, borderColor: "#245c3a", background: "#f2fbf4" }}>
+          <h2 style={{ margin: 0 }}>Meta visitas Q3 por promotor — cartera asignada (opcional)</h2>
+          <p style={{ color: "#52625a", fontSize: 13 }}>Importa Excel con columnas «Promotor» y «Meta visitas Q3». Para cada promotor, la cifra es la <strong>meta del trimestre completo</strong> (no se multiplica por tres). Modifica exclusivamente la meta de ejecución de visitas. La cobertura, la gestión real, los comerciales, los territorios y la dirección permanecen intactos. Las plazas sin asignación conservan la meta anterior.</p>
+          <input type="file" accept=".xlsx" aria-label="Archivo de metas de visitas Q3 por promotor" onChange={(event) => void onVisitTargetsFile(event.target.files?.[0])} />
+          {targetsInput.fileName && <p style={{ fontSize: 13 }}>{targetsInput.fileName} · {preparedVisitTargets?.summary.selected ?? 0} metas válidas. <button type="button" style={linkButton} onClick={() => setTargetsInput(EMPTY)}>Quitar archivo</button></p>}
+          {targetsInput.fileError && <p role="alert" style={{ color: "#9f1239" }}>{targetsInput.fileError}</p>}
+          {preparedVisitTargets?.issues.map((issue, i) => <p key={i} role="alert" style={{ color: "#9f1239" }}>{issue}</p>)}
+        </section>
 
         <section style={panel}>
           <h2 style={{ margin: 0, fontSize: 19 }}>Conciliación de la carga</h2>
