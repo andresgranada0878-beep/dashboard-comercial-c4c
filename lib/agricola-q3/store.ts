@@ -29,10 +29,11 @@ export function clearLoad() {
   window.sessionStorage.removeItem(STORAGE_KEY)
 }
 
-export async function readWorkbookRows(file: File): Promise<unknown[][]> {
+export async function readWorkbookRows(file: File, sheetName?: string): Promise<unknown[][]> {
   const XLSX = await import("xlsx")
   const workbook = XLSX.read(await file.arrayBuffer(), { type: "array" })
-  const sheet = workbook.Sheets[workbook.SheetNames[0]]
-  if (!sheet) return []
+  const name = sheetName ?? workbook.SheetNames[0]
+  const sheet = workbook.Sheets[name]
+  if (!sheet) throw new Error("Hoja no encontrada en el archivo: " + name)
   return XLSX.utils.sheet_to_json<unknown[]>(sheet, { header: 1, defval: null, raw: true, blankrows: true })
 }
