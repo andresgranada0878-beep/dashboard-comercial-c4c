@@ -37,13 +37,13 @@ const promoters = tsv(
   ]),
 )
 const technical = tsv(
-  ["Territorio", "Grupo Artículos", "Ppto", "Valor Recomendaciones", "Meta Referencias", "Referencias Recomendadas", "Mes"],
+  ["Territorio", "Grupo Artículos", "Ppto", "Valor Recomendaciones", "Valor Ventas", "Meta Referencias", "Referencias Recomendadas", "Mes"],
   ["Julio", "Agosto", "Septiembre"].flatMap(month => [
-    [ALFA, "Grupo 1", "$1.000.000", "$500.000", 10, "0,3", month],
-    [ALFA, "Grupo 2", "$500.000", "", 10, "", month],
-    [BETA, "Grupo 1", "$200.000", "", 10, "", month],
-    [DIR, "Grupo 1", "", "", 10, "", month],
-    [DIRT, "Grupo 1", "", "", 10, "", month],
+    [ALFA, "Grupo 1", "$1.000.000", "$500.000", "$2.000.000", 10, "0,3", month],
+    [ALFA, "Grupo 2", "$500.000", "", "$1.000.000", 10, "", month],
+    [BETA, "Grupo 1", "$200.000", "", "$400.000", 10, "", month],
+    [DIR, "Grupo 1", "", "", "", 10, "", month],
+    [DIRT, "Grupo 1", "", "", "", 10, "", month],
   ]),
 )
 const leads = tsv(
@@ -126,7 +126,7 @@ test("multi-territory person sums both territories; blanks in existing rows are 
   assert.equal(recs.periods.Q3.actual, 0, "every group blank in existing technical rows: 0, not Sin dato")
   assert.equal(recs.periods.Q3.status, "ok")
   assert.equal(recs.periods.Q3.recognizedCompliance, 0)
-  assert.equal(recs.periods.Q3.target, 600000)
+  assert.equal(recs.periods.Q3.target, 1200000)
   assert.equal(indicator("Comercial Dos", "referencias").periods.Q3.recognizedCompliance, 0)
 })
 
@@ -188,8 +188,10 @@ test("rule coverage: quarter = Σ monthly unique clients / Σ monthly targets, n
 test("recommendations and references: blank groups count as 0 and do not make the result partial", () => {
   const recs = indicator("Comercial Uno", "recomendaciones")
   assert.equal(recs.periods.Julio.actual, 500000)
-  assert.equal(recs.periods.Julio.target, 1500000)
+  assert.equal(recs.periods.Julio.target, 3000000)
   assert.equal(recs.periods.Julio.status, "ok")
+  assert.equal(recs.formula, "Σ Valor Recomendaciones / Σ Valor Ventas")
+  assert.equal(recs.periods.Julio.recognizedCompliance, 500000 / 3000000, "el indicador usa ventas, no presupuesto")
   assert.ok(recs.periods.Julio.notes.some(note => note.startsWith("1 de 2 grupos sin Valor Recomendaciones") && note.includes("regla SUMIFS Q1/Q2")))
   assert.ok(!entity("Comercial Uno").indicators.some(item => item.periods.Q3.status === "parcial"))
   const refs = indicator("Comercial Uno", "referencias")
@@ -383,7 +385,7 @@ test("rule territories: grouped territories stay separate in the source and are 
 
 test("rule references: a grouped evaluation unit sums its management and takes the portfolio once, also in the director's consolidated Σ / 3", () => {
   const grouped = { ...config, catalog: { ...config.catalog, territoryGroups: [{ label: "Beta y Gamma", members: ["beta", "gamma"] }] } }
-  const gammaRows = ["Julio", "Agosto", "Septiembre"].map(month => [GAMMA, "Grupo 1", "$100.000", "", 10, "0,2", month].join("\t")).join("\n")
+  const gammaRows = ["Julio", "Agosto", "Septiembre"].map(month => [GAMMA, "Grupo 1", "$100.000", "", "$150.000", 10, "0,2", month].join("\t")).join("\n")
   const withGamma = { ...blocks, technical: prepareAgricolaBlock("technical", technical + "\n" + gammaRows, 2026, "Q3") }
   const result = buildAgricolaReports({ blocks: withGamma, config: grouped })
   const references = name => result.entities.find(item => item.name === name).indicators.find(item => item.id === "referencias")
@@ -414,10 +416,10 @@ test("rule references (director): Norte and Bajo Cauca count the 302 portfolio o
   const sources = ["ALFA", "BETA", "GAMMA", "DELTA", "EPSILON", "ZETA", "NORTE", "BAJO CAUCA"].map(name => `PYC AGRÍCOLA ANT ${name}`)
   const share = { "PYC AGRÍCOLA ANT ALFA": { Julio: "0,5", Agosto: "0,5", Septiembre: "0,5" }, "PYC AGRÍCOLA ANT BETA": { Julio: "0,5" }, "PYC AGRÍCOLA ANT NORTE": { Julio: "0,25" }, "PYC AGRÍCOLA ANT BAJO CAUCA": { Agosto: "0,345" } }
   const rows = ["Julio", "Agosto", "Septiembre"].flatMap(month => sources.flatMap(territory => [
-    [territory, "Grupo 1", "", "", 200, share[territory]?.[month] ?? "", month],
-    [territory, "Grupo 2", "", "", 102, "", month],
+    [territory, "Grupo 1", "", "", "", 200, share[territory]?.[month] ?? "", month],
+    [territory, "Grupo 2", "", "", "", 102, "", month],
   ]))
-  const header = ["Territorio", "Grupo Artículos", "Ppto", "Valor Recomendaciones", "Meta Referencias", "Referencias Recomendadas", "Mes"]
+  const header = ["Territorio", "Grupo Artículos", "Ppto", "Valor Recomendaciones", "Valor Ventas", "Meta Referencias", "Referencias Recomendadas", "Mes"]
   const scaled = buildAgricolaReports({ blocks: { ...blocks, technical: prepareAgricolaBlock("technical", tsv(header, rows), 2026, "Q3") }, config })
   const references = name => scaled.entities.find(item => item.name === name)?.indicators.find(item => item.id === "referencias")
   const director = references("Directora Ficticia").periods.Q3
@@ -449,7 +451,7 @@ test("territory without an active holder is No aplica: no targets, no compliance
   const withDelta = {
     ...blocks,
     commercial: prepareAgricolaBlock("commercial", commercial + "\n" + ["Julio", "Agosto", "Septiembre"].map(month => [DELTA, "(Vacante) Comercial Delta", 10, "", "", "", "", 4, "", "", month].join("\t")).join("\n"), 2026, "Q3"),
-    technical: prepareAgricolaBlock("technical", technical + "\n" + ["Julio", "Agosto", "Septiembre"].map(month => [DELTA, "Grupo 1", "$300.000", "", 10, "", month].join("\t")).join("\n"), 2026, "Q3"),
+    technical: prepareAgricolaBlock("technical", technical + "\n" + ["Julio", "Agosto", "Septiembre"].map(month => [DELTA, "Grupo 1", "$300.000", "", "$900.000", 10, "", month].join("\t")).join("\n"), 2026, "Q3"),
   }
   const result = buildAgricolaReports({ blocks: withDelta, config })
   const delta = result.entities.find(item => item.kind === "territorio" && item.name === "Delta")
@@ -461,7 +463,7 @@ test("territory without an active holder is No aplica: no targets, no compliance
   assert.equal(vacancy.indicators.find(item => item.id === "ejecucion_visitas").periods.Q3.status, "no_aplica", "a blank vacancy row is not 0 %")
   assert.equal(result.entities.find(item => item.name === "Alfa").results.Q3.applicable, true)
   const directorRecs = result.entities.find(item => item.kind === "direccion").indicators.find(item => item.id === "recomendaciones").periods.Q3
-  assert.equal(directorRecs.target, 4500000 + 600000 + 900000, "the consolidated keeps the technical budget of every operating territory")
+  assert.equal(directorRecs.target, 9000000 + 1200000 + 2700000, "se toma venta y no Ppto de cada territorio operativo")
   assert.equal(directorRecs.status, "ok")
 })
 
