@@ -283,7 +283,7 @@ test("recommendations and references: blank groups count as 0 and do not make th
   assert.equal(refs.periods.Q3.target, 20)
 })
 
-test("Q3 meta visitas cargada por promotor se toma una vez en trimestre; no modifica cobertura ni comerciales", () => {
+test("Promotores Q3: visitas fijas 60 mensual/180 trimestre; cobertura municipal importada no se modifica", () => {
   const adjusted = buildAgricolaReports({
     blocks: { ...blocks, visitTargets: { records: [{ Promotor: "Promotor Uno", "Meta visitas Q3": 37 }] } },
     config,
@@ -291,20 +291,24 @@ test("Q3 meta visitas cargada por promotor se toma una vez en trimestre; no modi
   const promotor = adjusted.entities.find(item => item.name === "Promotor Uno")
   const visits = promotor.indicators.find(item => item.id === "ejecucion_visitas")
   const originalVisits = indicator("Promotor Uno", "ejecucion_visitas")
-  assert.equal(visits.periods.Q3.target, 37, "cartera total es meta trimestral, no mensual por 3")
+  assert.equal(visits.periods.Q3.target, 180, "cartera municipal NO modifica la meta de visitas")
   assert.equal(visits.periods.Q3.actual, originalVisits.periods.Q3.actual, "se conserva gestión")
-  assert.equal(visits.periods.Q3.recognizedCompliance, 1, "tope 100 %")
-  assert.ok(Math.abs(visits.periods.Julio.target - 37 / 3) < 1e-9)
+  assert.equal(visits.periods.Q3.recognizedCompliance, 150 / 180, "visitas 50 × 3 frente a 180")
+  assert.equal(visits.periods.Julio.target, 60)
   assert.equal(promotor.indicators.find(item => item.id === "cobertura_clientes").periods.Q3.target, 37,
-    "la meta Q3 de cobertura es la misma meta trimestral de visitas")
+    "la cobertura sigue siendo el total de clientes de cartera municipal Q3")
   assert.equal(promotor.indicators.find(item => item.id === "cobertura_clientes").periods.Q3.actual,
     indicator("Promotor Uno", "cobertura_clientes").periods.Q3.actual,
     "la gestión de clientes visitados permanece intacta")
   assert.ok(Math.abs(promotor.indicators.find(item => item.id === "cobertura_clientes").periods.Agosto.target - 37 / 3) < 1e-9)
   const unchanged = adjusted.entities.find(item => item.name === "Promotor Dos").indicators.find(item => item.id === "ejecucion_visitas")
-  assert.equal(unchanged.periods.Q3.target, indicator("Promotor Dos", "ejecucion_visitas").periods.Q3.target)
+  assert.equal(unchanged.periods.Q3.target, 180, "todos los promotores activos: 180 visitas Q3")
   assert.equal(adjusted.entities.find(item => item.name === "Promotor Dos").indicators.find(item => item.id === "cobertura_clientes").periods.Q3.target,
     indicator("Promotor Dos", "cobertura_clientes").periods.Q3.target, "no cambia cartera de promotores sin meta cargada")
+  assert.deepEqual(["Julio", "Agosto", "Septiembre"].map(m => visits.periods[m].target), [60, 60, 60],
+    "la meta fija aplica incluso cuando se importa otra meta municipal para cobertura")
+  assert.equal(indicator("Promotor Uno", "ejecucion_visitas").periods.Q3.target, 180,
+    "la meta fija se aplica aun sin importación municipal")
   assert.equal(adjusted.entities.find(item => item.name === "Comercial Uno").indicators.find(item => item.id === "ejecucion_visitas").periods.Q3.target,
     indicator("Comercial Uno", "ejecucion_visitas").periods.Q3.target)
   assert.equal(adjusted.entities.find(item => item.name === "(Vacante) Persona Tres").indicators.find(item => item.id === "ejecucion_visitas").periods.Q3.status, "no_aplica")
@@ -739,5 +743,5 @@ test("Q3 visitas promotores: la meta personal mensual no se divide entre plazas 
   assert.equal(visits.Agosto.actual, null)
   assert.equal(visits.Q3.status, "parcial", "el reporte expone el estado parcial, no el campo interno partial")
   assert.equal(coverage.Q3.target, 415.5, "cobertura sí se divide entre dos plazas")
-  assert.ok(entity.indicators.find(item => item.id === "ejecucion_visitas").notes.some(note => note.includes("Mes sin meta personal")))
+  assert.ok(entity.indicators.find(item => item.id === "ejecucion_visitas").notes.some(note => note.includes("independiente de la cartera municipal")))
 })
