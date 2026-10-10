@@ -53,6 +53,7 @@ const leads = tsv(
     ["Agrícola Antioquia", "Comercial Uno", 1, "", 1, "100 %", "", "Septiembre"],
     ["Agrícola Antioquia", "Comercial Dos", 2, "", "", "", "", "Julio"],
     ["Agrícola Antioquia", "Promotor Dos", 1, 1, "", "", 1, "Agosto"],
+    ["Agrícola Antioquia", "(Vacante) Persona Tres", 1, 1, "", "", 1, "Septiembre"],
     ["Otra Unidad", "Comercial Uno", 9, 9, "", "100 %", "", "Julio"],
   ],
 )
@@ -84,7 +85,7 @@ const indicator = (name, id) => entity(name).indicators.find(item => item.id ===
 
 test("fixture blocks import without blocking issues", () => {
   for (const [id, block] of Object.entries(blocks)) assert.deepEqual(block.issues, [], id)
-  assert.equal(blocks.leads.summary.selected, 4)
+  assert.equal(blocks.leads.summary.selected, 5)
   assert.equal(blocks.leads.summary.excludedByReason["Otra unidad de negocio"], 1)
   assert.equal(blocks.activities.summary.selected, 2)
 })
@@ -218,25 +219,25 @@ test("rule coverage (promoters): territorial target split among plazas (titulars
   assert.equal(indicator("Promotor Uno", "cobertura_clientes").periods.Q3.target, 45, "base fixture: Uno + the vacancy = 2 plazas")
 })
 
-test("rule leads: real qualified count; monthly target = max(1, Meta Leads); a month without records is 0 against 1", () => {
+test("rule leads (published Q1/Q2 formula): qualified = Σ Meta Leads of the rows; monthly target = max(1, Meta Leads); a month without records is 0 against 1", () => {
   const qualified = indicator("Comercial Uno", "leads_calificados")
-  assert.equal(qualified.periods.Julio.actual, 1)
+  assert.equal(qualified.periods.Julio.actual, 2, "Σ Meta Leads, not percentage × Meta Leads")
   assert.equal(qualified.periods.Julio.target, 2)
   assert.equal(qualified.periods.Agosto.actual, 0)
   assert.equal(qualified.periods.Agosto.target, 1)
-  assert.equal(qualified.periods.Q3.actual, 2, "never Meta Leads as numerator")
+  assert.equal(qualified.periods.Q3.actual, 2 + 0 + 1)
   assert.equal(qualified.periods.Q3.target, 2 + 1 + 1)
+  assert.equal(qualified.formula, "Σ Meta Leads de las filas del titular / Σ meta mensual (mayor entre 1 y Meta Leads)")
   assert.equal(qualified.periods.Q3.status, "ok")
   const onTime = indicator("Comercial Uno", "leads_calificados_tiempo")
   assert.equal(onTime.periods.Q3.actual, 1)
   assert.equal(onTime.periods.Q3.target, 4)
 })
 
-test("rule leads: an active person without leads is 0 / 3 and keeps the weight; only vacancies are No aplica; contradictory rows are not evaluated", () => {
+test("rule leads: an active person without leads is 0 / 3 and keeps the weight; vacancy rows stay in the source but are excluded everywhere", () => {
   const unmanaged = indicator("Comercial Dos", "leads_calificados")
-  assert.equal(unmanaged.periods.Julio.actual, 0)
+  assert.equal(unmanaged.periods.Julio.actual, 2, "historical formula: the empty percentage does not matter")
   assert.equal(unmanaged.periods.Julio.target, 2)
-  assert.equal(unmanaged.periods.Q3.recognizedCompliance, 0)
   assert.equal(indicator("Comercial Dos", "leads_calificados_tiempo").periods.Q3.actual, 0)
   for (const id of ["leads_calificados", "leads_calificados_tiempo"]) {
     const none = indicator("Promotor Uno", id)
@@ -245,12 +246,22 @@ test("rule leads: an active person without leads is 0 / 3 and keeps the weight; 
     assert.equal(none.periods.Q3.status, "ok")
     assert.equal(none.periods.Q3.contribution, 0)
     assert.ok(!entity("Promotor Uno").results.Q3.notApplicable.includes(none.label))
-    assert.equal(indicator("(Vacante) Persona Tres", id).periods.Q3.status, "no_aplica")
+    const vacancy = indicator("(Vacante) Persona Tres", id)
+    for (const period of ["Julio", "Agosto", "Septiembre", "Q3"]) {
+      assert.equal(vacancy.periods[period].status, "no_aplica", `${id} ${period}: the vacancy row gives no compliance`)
+      assert.equal(vacancy.periods[period].contribution, null)
+    }
+    assert.ok(vacancy.notes.some(note => note.startsWith("Registro asociado a usuario de vacante; excluido del cálculo por no existir evidencia de titular activo o gestión atribuible.") && note.includes("Septiembre")))
+    const alfa = indicator("Alfa", id)
+    assert.equal(alfa.periods.Q3.target, 4 + 3, "territory = Comercial Uno + Promotor Uno; the vacancy row adds no target")
+    assert.equal(alfa.periods.Septiembre.target, 1 + 1)
+    assert.ok(alfa.notes.some(note => note.startsWith("Registro asociado a usuario de vacante")))
   }
-  assert.equal(indicator("Alfa", "leads_calificados").periods.Q3.target, 4 + 3, "territory = Comercial Uno + Promotor Uno; the vacancy adds nothing")
-  const contradictory = indicator("Promotor Dos", "leads_calificados")
-  assert.equal(contradictory.periods.Agosto.status, "sin_dato")
-  assert.ok(contradictory.periods.Agosto.notes.some(note => note.includes("inconsistente")))
+  assert.equal(indicator("Alfa", "leads_calificados_tiempo").periods.Q3.actual, 1, "only Comercial Uno's on-time lead; the vacancy's is excluded")
+  assert.equal(entity("(Vacante) Persona Tres").results.Q3.notApplicable.includes("Leads calificados"), true)
+  const noPercent = indicator("Promotor Dos", "leads_calificados")
+  assert.equal(noPercent.periods.Agosto.status, "ok")
+  assert.equal(noPercent.periods.Agosto.actual, 1, "Σ Meta Leads even with the percentage empty")
   assert.equal(indicator("Promotor Dos", "leads_calificados_tiempo").periods.Agosto.actual, 1)
 })
 

@@ -122,7 +122,7 @@
       "cap": 1,
       "calculationType": "ratio_acumulado",
       "pending": [],
-      "criterion": "Cantidad real de leads calificados frente a la meta: mínimo 1 lead por mes evaluado, o la Meta Leads del mes si es mayor (trimestre completo: mínimo 3). Sin leads registrados = 0. Vacantes y posiciones sin titular: No aplica."
+      "criterion": "Leads calificados (Σ Meta Leads de las filas del titular, como el Excel publicado Q1/Q2) frente a la meta: mínimo 1 lead por mes evaluado, o la Meta Leads del mes si es mayor (trimestre completo: mínimo 3). Sin leads registrados = 0. Vacantes y posiciones sin titular: No aplica."
     },
     {
       "id": "leads_calificados_tiempo",
@@ -193,7 +193,7 @@
     {
       "id": "leads",
       "title": "Leads",
-      "detail": "Numerador de leads calificados = cantidad real de leads calificados (nunca Meta Leads). Leads a tiempo = gestión real dentro del plazo (Calificados Oportunos). Metodología Q1/Q2: meta mensual = mayor entre 1 y Meta Leads; un mes sin registros cuenta 0 contra 1, así que una persona activa sin leads queda 0 / 3 en el trimestre y conserva el 10 % de cada indicador. Asignados sin gestión = 0. No aplica solo para vacantes, posiciones sin titular o perfiles a los que no corresponde el indicador. Territorio = suma de las metas mensuales de las personas con territorio asignado."
+      "detail": "Fórmula publicada Q1/Q2: gestión mensual de leads calificados = Σ Meta Leads de las filas del titular en el mes (no porcentaje × Meta Leads); leads a tiempo = Σ Calificados Oportunos; meta mensual = mayor entre 1 y Meta Leads, la misma para ambos indicadores. Un mes sin registros cuenta 0 contra 1, así que un titular sin leads queda 0 / 3 en el trimestre y conserva el 10 % de cada indicador; nunca No aplica por ausencia de registros. Vacantes y posiciones sin titular: No aplica; sus filas se conservan en la fuente y la trazabilidad («Registro asociado a usuario de vacante; excluido del cálculo por no existir evidencia de titular activo o gestión atribuible.») pero no suman numerador ni meta, ni en el informe individual ni en el territorial. Territorio = suma de gestión y metas mensuales de los titulares con territorio asignado."
     },
     {
       "id": "activities",
