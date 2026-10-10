@@ -143,6 +143,31 @@ test("director: personal visits use the configured target and include other terr
   assert.ok(!indicator("Alfa", "referencias").notes.some(note => note.startsWith("Corrección metodológica")))
 })
 
+test("regla Carolina Q3: solo se excluye la meta Bajo Cauca de visitas y cobertura individuales", () => {
+  // ALFA/BETA del fixture representan Norte/Bajo Cauca: se conserva toda la gestión,
+  // pero solo participa la cuota del territorio principal en el denominador personal.
+  const withoutExtraQuota = { ...config, targets: { ...config.targets,
+    commercialVisitCoverageExceptions: [{ person: "Comercial Dos", excludedTerritories: ["gamma"] }] } }
+  const result = buildAgricolaReports({ blocks, config: withoutExtraQuota })
+  const personal = result.entities.find(item => item.name === "Comercial Dos")
+  for (const id of ["ejecucion_visitas", "cobertura_clientes"]) {
+    const before = indicator("Comercial Dos", id).periods
+    const after = personal.indicators.find(item => item.id === id).periods
+    assert.equal(after.Q3.actual, before.Q3.actual, "se incluye toda la gestión real")
+    assert.equal(after.Q3.target, 30, "solo BETA 10 mensual × 3; GAMMA 5 no se suma")
+    assert.equal(after.Julio.target, 10)
+  }
+  for (const name of ["Beta", "Gamma", "Directora Ficticia"]) {
+    const baseline = entity(name), next = result.entities.find(item => item.name === name)
+    if (!baseline || !next) continue
+    for (const id of ["ejecucion_visitas", "cobertura_clientes"]) {
+      assert.equal(next.indicators.find(item => item.id === id).periods.Q3.target,
+        baseline.indicators.find(item => item.id === id).periods.Q3.target,
+        "las metas territoriales y dirección no cambian")
+    }
+  }
+})
+
 test("new clients: cumulative quarter value against annual target / 4", () => {
   const clients = indicator("Comercial Uno", "nuevos_clientes")
   assert.equal(clients.periods.Q3.actual, 6)
