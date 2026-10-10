@@ -547,10 +547,8 @@ test("Q3 metas territoriales validadas: 8 territorios, plazas compartidas, vacan
   ]
   const rows = config.months.flatMap(month => positions.map(([territory, employee, target]) =>
     ["PYC AGRÍCOLA ANT " + territory, employee, target, 0, "", 60, 0, "", 10, 0, "", month]))
-  const result = buildAgricolaReports({
-    blocks: { ...blocks, promoters: prepareAgricolaBlock("promoters", tsv(head, rows), 2026, "Q3") },
-    config,
-  })
+  const inputBlocks = { ...blocks, promoters: prepareAgricolaBlock("promoters", tsv(head, rows), 2026, "Q3") }
+  const result = buildAgricolaReports({ blocks: inputBlocks, config })
   const quarterTarget = name => result.entities.find(item => item.name === name).indicators
     .find(item => item.id === "cobertura_clientes").periods.Q3.target
   assert.equal(quarterTarget("Promotor Norte Ejemplo"), 696, "232 × 3; Bajo Cauca no agrega 10 × 3")
@@ -565,10 +563,22 @@ test("Q3 metas territoriales validadas: 8 territorios, plazas compartidas, vacan
   assert.equal(quarterTarget("(Vacante) Promotor Suroeste"), null)
   assert.equal(quarterTarget("(Vacante) Promotor Urabá"), null)
   assert.equal(Object.values(config.targets.promoterCoverage.monthlyTerritoryTargets).reduce((a,b) => a+b,0), 1349)
-  assert.ok(result.observations.some(line => line.includes("COBERTURA POR CONCILIAR") && line.includes("1336") && line.includes("1349")))
+  assert.equal(config.targets.promoterCoverage.reconciliationStatus, "aceptada_sin_ajuste")
+  assert.ok(!result.observations.some(line => line.includes("COBERTURA POR CONCILIAR")), "Diferencia aceptada no se presenta como pendiente")
   const affected = result.entities.find(item => item.name === "Promotor Norte Ejemplo")
-  assert.equal(affected.reportState, "borrador", "la diferencia Power BI impide presentar resultados definitivos")
-  assert.ok(affected.draftReasons.some(reason => reason.includes("diferencia de 13 clientes")))
+  assert.ok(!affected.draftReasons.some(reason => reason.includes("diferencia de 13 clientes")), "Diferencia aceptada no bloquea informes")
+  // El control se conserva cuando una discrepancia futura sí esté pendiente.
+  const pendingConfig = {
+    ...config,
+    targets: {
+      ...config.targets,
+      promoterCoverage: { ...config.targets.promoterCoverage, reconciliationStatus: "pendiente" },
+    },
+  }
+  const pendingReport = buildAgricolaReports({ blocks: inputBlocks, config: pendingConfig })
+  const pendingPerson = pendingReport.entities.find(item => item.name === "Promotor Norte Ejemplo")
+  assert.ok(pendingReport.observations.some(line => line.includes("COBERTURA POR CONCILIAR")))
+  assert.ok(pendingPerson.draftReasons.some(reason => reason.includes("diferencia de 13 clientes")))
 })
 
 test("Q3 cobertura por plazas: plazas sin titular con meta entran en divisor; sin meta no cuentan", () => {
