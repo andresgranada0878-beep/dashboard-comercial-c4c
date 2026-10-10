@@ -1,6 +1,6 @@
 import test from "node:test"
 import assert from "node:assert/strict"
-import { rawNumber, prepareAgricolaBlock, technicalReferenceCount } from "../lib/agricola-import.mjs"
+import { rawNumber, prepareAgricolaBlock, prepareAgricolaRows, technicalReferenceCount } from "../lib/agricola-import.mjs"
 test("numbers preserve missing values and support decimal commas and percentages",()=>{
  assert.equal(rawNumber(""),null);assert.equal(rawNumber("1.234,50"),1234.5);assert.equal(rawNumber("12,5%"),0.125);assert.ok(Number.isNaN(rawNumber("abc")))
 })
