@@ -613,7 +613,7 @@ test("Q3 visitas promotores: la meta personal mensual no se divide entre plazas 
   assert.equal(visits.Q3.target, 180)
   assert.equal(visits.Q3.actual, 91)
   assert.equal(visits.Agosto.actual, null)
-  assert.equal(visits.Q3.partial, true)
+  assert.equal(visits.Q3.status, "parcial", "el reporte expone el estado parcial, no el campo interno partial")
   assert.equal(coverage.Q3.target, 415.5, "cobertura sí se divide entre dos plazas")
   assert.ok(entity.indicators.find(item => item.id === "ejecucion_visitas").notes.some(note => note.includes("Mes sin meta personal")))
 })
