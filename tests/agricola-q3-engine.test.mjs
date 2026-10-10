@@ -590,3 +590,30 @@ test("Q3 cobertura por plazas: plazas sin titular con meta entran en divisor; si
   assert.equal(find("POSICION SIN TITULAR").status, "no_aplica")
   assert.equal(find("(Vacante) Sin Meta Ejemplo").status, "no_aplica")
 })
+
+
+test("Q3 visitas promotores: la meta personal mensual no se divide entre plazas y un mes sin fila no borra la meta", () => {
+  const header = ["Territorio", "Empleado", "Meta Cobertura", "Clientes Visitados", "Cobertura Clientes", "Meta Visitas ", "Cant. Visitas", "Ejec. Visitas", "Meta Clientes Nuevos", "Cant. Clientes Nuevos", "Ejec. Clientes Nuevos", "Mes"]
+  const territory = "PYC AGRÍCOLA ANT ORIENTE B"
+  const rows = [
+    [territory, "Promotor Ejemplo Uno", 277, 18, "", 60, 45, "", 10, 0, "", "Julio"],
+    [territory, "Promotor Ejemplo Dos", 277, 11, "", 60, 30, "", 10, 0, "", "Julio"],
+    [territory, "Promotor Ejemplo Dos", 277, 12, "", 60, 31, "", 10, 0, "", "Agosto"],
+    [territory, "Promotor Ejemplo Uno", 277, 20, "", 60, 46, "", 10, 0, "", "Septiembre"],
+    [territory, "Promotor Ejemplo Dos", 277, 10, "", 60, 29, "", 10, 0, "", "Septiembre"],
+  ]
+  const report = buildAgricolaReports({
+    blocks: { ...blocks, promoters: prepareAgricolaBlock("promoters", tsv(header, rows), 2026, "Q3") },
+    config,
+  })
+  const entity = report.entities.find(item => item.name === "Promotor Ejemplo Uno")
+  const visits = entity.indicators.find(item => item.id === "ejecucion_visitas").periods
+  const coverage = entity.indicators.find(item => item.id === "cobertura_clientes").periods
+  assert.deepEqual(config.months.map(month => visits[month].target), [60, 60, 60])
+  assert.equal(visits.Q3.target, 180)
+  assert.equal(visits.Q3.actual, 91)
+  assert.equal(visits.Agosto.actual, null)
+  assert.equal(visits.Q3.partial, true)
+  assert.equal(coverage.Q3.target, 415.5, "cobertura sí se divide entre dos plazas")
+  assert.ok(entity.indicators.find(item => item.id === "ejecucion_visitas").notes.some(note => note.includes("Mes sin meta personal")))
+})
