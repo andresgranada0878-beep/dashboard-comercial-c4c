@@ -110,7 +110,7 @@ export default function AgricolaQ3Page() {
       </header>
 
       <div style={{ maxWidth: 1380, margin: "0 auto", padding: "18px 24px 60px" }}>
-        {coverageDifference !== 0 && <section role="status" style={{ ...panel, background: "#fffbeb", borderColor: "#eab308" }}>
+        {coverageDifference !== 0 && config.targets.promoterCoverage.reconciliationStatus !== "aceptada_sin_ajuste" && <section role="status" style={{ ...panel, background: "#fffbeb", borderColor: "#eab308" }}>
           <strong style={{ color: "#92400e" }}>Cobertura: conciliación pendiente con Power BI.</strong>
           <span style={{ color: "#92400e" }}> Las ocho metas territoriales visibles suman {number(coverageTerritorialTotal)}, mientras que el total de Power BI indica {number(coverageSourceTotal)} (diferencia de {number(Math.abs(coverageDifference))} clientes). Se preservan las metas territoriales individuales y no se fuerza el total hasta verificar el origen.</span>
         </section>}
