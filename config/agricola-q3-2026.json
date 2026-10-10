@@ -1,5 +1,5 @@
 {
-  "version": "agricola-q3-2026-v9",
+  "version": "agricola-q3-2026-v10",
   "sourceKey": "PYC-AGR-ANT",
   "company": "Pérez y Cardona",
   "report": "Agrícola Antioquia",
@@ -54,7 +54,19 @@
     "newClients": {
       "commercial": {
         "field": "Meta Clientes Recuperar",
-        "periodicity": "anual"
+        "periodicity": "anual",
+        "methodology": "acumulado_anual_al_cierre_Q3",
+        "monthsElapsedAtQuarterEnd": 9,
+        "rounding": "nearest_integer",
+        "targetExclusions": [
+          {
+            "person": "Carolina María Escobar Londoño",
+            "excludedTerritories": [
+              "bajo cauca"
+            ],
+            "reason": "Meta anual personal Norte 68; a septiembre 68 × 9/12 = 51. Se conserva gestión real 32 (Norte 30 + Bajo Cauca 2), pendiente 19 para meta acumulada septiembre."
+          }
+        ]
       },
       "promoters": {
         "field": "Meta Clientes Nuevos",
@@ -121,7 +133,7 @@
       "cap": 1.5,
       "calculationType": "ratio_acumulado",
       "pending": [],
-      "criterion": "Medida exportada «Cant. Clientes Nuevos» (la misma de Q1/Q2), acumulada del trimestre, frente a la meta trimestral derivada de «Meta Clientes Recuperar» (anual / 4) o, en promotores, frente a la meta trimestral histórica publicada de 90 (30 × 3). No se suman recuperados supuestos. Advertencia: la fuente no permite verificar si la medida incluye clientes recuperados. Reconocimiento máximo 150%."
+      "criterion": "Comerciales y dirección: Cant. Clientes Nuevos/Recuperados es un acumulado del año enero-septiembre, NO gestión aislada Q3. Meta anual de «Meta Clientes Recuperar» prorrateada al mes de cierre (septiembre = 9/12), redondeada al entero más cercano. No sumar acumulados repetidos. Carolina: gestión 32, meta anual Norte 68, meta acumulada septiembre 51 y faltante 19. En promotores se conserva por ahora la meta trimestral histórica publicada de 90. Reconocimiento máximo 150%."
     },
     {
       "id": "recomendaciones",
@@ -166,7 +178,7 @@
       "cap": 1.5,
       "calculationType": "ratio_acumulado",
       "pending": [],
-      "criterion": "Actividades en estado Finalizado/Completado de tipo Día de campo, Evento Especial, Visita Mostrador Especial o Visita Formación (sin parcelas), contadas una vez por ID, frente a 3 actividades trimestrales por promotor activo (las vacantes no generan meta). Reconocimiento máximo 150%."
+      "criterion": "Se cuentan las actividades de campo finalizadas de tipo Día de campo, Evento Especial, Visita Mostrador Especial y Visita Formación, una por ID. Se excluyen parcelas y estados no finalizados. Comparación con la meta trimestral aprobada; reconocimiento máximo 150%."
     },
     {
       "id": "hectareas",
