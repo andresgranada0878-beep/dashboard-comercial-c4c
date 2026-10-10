@@ -566,6 +566,9 @@ test("Q3 metas territoriales validadas: 8 territorios, plazas compartidas, vacan
   assert.equal(quarterTarget("(Vacante) Promotor Urabá"), null)
   assert.equal(Object.values(config.targets.promoterCoverage.monthlyTerritoryTargets).reduce((a,b) => a+b,0), 1349)
   assert.ok(result.observations.some(line => line.includes("COBERTURA POR CONCILIAR") && line.includes("1336") && line.includes("1349")))
+  const affected = result.entities.find(item => item.name === "Promotor Norte Ejemplo")
+  assert.equal(affected.reportState, "borrador", "la diferencia Power BI impide presentar resultados definitivos")
+  assert.ok(affected.draftReasons.some(reason => reason.includes("diferencia de 13 clientes")))
 })
 
 test("Q3 cobertura por plazas: plazas sin titular con meta entran en divisor; sin meta no cuentan", () => {
