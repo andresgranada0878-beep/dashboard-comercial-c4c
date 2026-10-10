@@ -54,5 +54,5 @@ export async function downloadTraceWorkbook(reports: AgricolaReports, load: Stor
   add(pending, "Reglas")
   add(observations, "Observaciones")
   add(reconciliation, "Conciliación")
-  XLSX.writeFile(workbook, `trazabilidad-agricola-antioquia-${reports.quarter.toLowerCase()}-${reports.year}-borrador.xlsx`)
+  XLSX.writeFile(workbook, `trazabilidad-agricola-antioquia-${reports.quarter.toLowerCase()}-${reports.year}${reports.rulesValidated ? "" : "-borrador"}.xlsx`)
 }

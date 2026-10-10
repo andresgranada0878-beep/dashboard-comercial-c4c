@@ -10,7 +10,7 @@
     "Agosto",
     "Septiembre"
   ],
-  "rulesValidated": false,
+  "rulesValidated": true,
   "catalog": {
     "source": "El catálogo de personas y territorios se arma con los exportados cargados (Gestión comercial y Gestión de promotores); no se guarda en el repositorio.",
     "territoryPrefix": "^pyc agricola ant(ioquia)?\\s+",
@@ -110,10 +110,8 @@
       "weight": 0.1,
       "cap": null,
       "calculationType": "ratio",
-      "pending": [
-        "references"
-      ],
-      "criterion": "Cantidad de referencias recomendadas (Meta Referencias × Referencias Recomendadas) sumada en los meses evaluados frente al portafolio mensual de referencias. El exportado técnico no identifica persona: el colaborador se evalúa con la gestión técnica de su territorio asignado (no es gestión personal directa) y el informe territorial usa la misma gestión."
+      "pending": [],
+      "criterion": "Cantidad de referencias recomendadas (Meta Referencias × Referencias Recomendadas) sumada en los meses evaluados frente al portafolio vigente de referencias, tomado una sola vez por unidad de evaluación. El exportado técnico no identifica persona: el colaborador se evalúa con la gestión técnica de su territorio asignado (no es gestión personal directa) y el informe territorial usa la misma gestión."
     },
     {
       "id": "leads_calificados",
@@ -241,6 +239,11 @@
       "detail": "Universo anual de clientes visitables del director = 400, a cubrir una vez en el año. Meta mensual = 400 / 12 = 33,33; meta trimestral = 400 / 12 × 3 = 100 (no 400). Gestión = clientes visitados personalmente por el director. «Meta Cobertura y Visitas» = 1 de la fila Dirección no se usa como meta. Visitas, cobertura y leads son personales del director; los demás indicadores consolidan los territorios operativos desde la fuente."
     },
     {
+      "id": "references",
+      "title": "Referencias",
+      "detail": "Lógica histórica Q1/Q2. REF CANTIDAD por fila = Referencias Recomendadas × Meta Referencias, sin redondeo previo. Gestión Q3 = Σ REF CANTIDAD de julio, agosto y septiembre; una misma referencia puede contarse de nuevo en meses distintos porque el exportado no trae código de referencia y no es posible deduplicar de forma fiable. Meta = portafolio vigente (Meta Referencias), tomado una sola vez para el periodo: no se multiplica por meses, empleados ni territorios de una agrupación (Q3 = 302 en Oriente A, Oriente B, Suroeste, Valle de Aburrá y Norte y Bajo Cauca; nunca 604). Norte y Bajo Cauca es una sola unidad: se suma la gestión de ambos y la meta es 302. Sin tope."
+    },
+    {
       "id": "director-references",
       "title": "Referencias del director",
       "detail": "Corrección metodológica desde Q3; Q1/Q2 se conservan sin modificación por corresponder a resultados históricos publicados. Al director se aplica la misma metodología consolidada y auditable de los territorios: REF CANTIDAD = Referencias Recomendadas × Meta Referencias, sin redondeo previo; gestión = Σ REF CANTIDAD de los territorios del alcance consolidado del director; meta = Σ Meta Referencias del mismo alcance y periodo / 3. No se replica la fórmula histórica del director: Q1 dependía de filas auxiliares manuales con una fórmula distinta a la territorial, y Q2 tenía enlaces externos rotos y se publicó con estado Inconsistencia (su 58,22 % coincide con Valle de Aburrá)."
@@ -256,11 +259,5 @@
       "detail": "Solo de la fuente válida de fincas/visitas. Hectáreas = hectáreas impactadas / meta; Cultivos = cultivos impactados / meta. Sin cálculo de fincas únicas mientras no exista un ID confiable."
     }
   ],
-  "pendingRules": [
-    {
-      "id": "references",
-      "title": "Referencias",
-      "detail": "Se replica la regla histórica: suma de referencias de los tres meses frente al portafolio mensual (Meta Referencias del mes de cada territorio). Una misma referencia recomendada en varios meses se cuenta varias veces porque el exportado no trae el código de la referencia. Sin tope."
-    }
-  ]
+  "pendingRules": []
 }

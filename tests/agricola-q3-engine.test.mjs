@@ -381,6 +381,28 @@ test("rule territories: grouped territories stay separate in the source and are 
   assert.deepEqual(result.territories.filter(item => item.operating).map(item => item.label), ["Alfa", "Beta", "Gamma"])
 })
 
+test("rule references: a grouped evaluation unit sums its management and takes the portfolio once; the director keeps the consolidated Σ / 3", () => {
+  const grouped = { ...config, catalog: { ...config.catalog, territoryGroups: [{ label: "Beta y Gamma", members: ["beta", "gamma"] }] } }
+  const gammaRows = ["Julio", "Agosto", "Septiembre"].map(month => [GAMMA, "Grupo 1", "$100.000", "", 10, "0,2", month].join("\t")).join("\n")
+  const withGamma = { ...blocks, technical: prepareAgricolaBlock("technical", technical + "\n" + gammaRows, 2026, "Q3") }
+  const result = buildAgricolaReports({ blocks: withGamma, config: grouped })
+  const references = name => result.entities.find(item => item.name === name).indicators.find(item => item.id === "referencias")
+  const unit = references("Beta y Gamma")
+  assert.equal(unit.periods.Julio.actual, 2, "Beta 0 + Gamma 10 × 0,2")
+  assert.equal(unit.periods.Julio.target, 10, "portfolio once, never Beta 10 + Gamma 10")
+  assert.equal(unit.periods.Q3.actual, 6)
+  assert.equal(unit.periods.Q3.target, 10)
+  assert.ok(unit.notes.some(note => note.includes("una sola vez")))
+  assert.deepEqual(references("Comercial Dos").periods.Q3, unit.periods.Q3, "the holder uses the same evaluation unit")
+  assert.equal(references("Alfa").periods.Q3.target, 20, "single territories are unchanged")
+  assert.ok(!references("Alfa").notes.some(note => note.includes("una sola vez")))
+  const director = references("Directora Ficticia")
+  assert.equal(director.periods.Q3.actual, 9 + 6)
+  assert.equal(director.periods.Q3.target, 20 + 10 + 10, "approved director methodology: Σ Meta Referencias of the scope / 3")
+  const ungrouped = buildAgricolaReports({ blocks: withGamma, config })
+  assert.equal(ungrouped.entities.find(item => item.name === "Gamma").indicators.find(item => item.id === "referencias").periods.Q3.target, 10)
+})
+
 test("rule soils: shown as No aplica, never 0%, and excluded from the weights", () => {
   for (const item of reports.entities) {
     const soils = item.indicators.find(indicator => indicator.id === "suelos")
@@ -419,14 +441,23 @@ test("territory without an active holder is No aplica: no targets, no compliance
   assert.equal(directorRecs.status, "ok")
 })
 
-test("vacancy without data is informative and reports stay in draft", () => {
+test("vacancy without data is informative; reports are final only when complete and every rule is validated", () => {
   const vacancy = entity("(Vacante) Persona Tres")
   assert.equal(vacancy.indicators.find(item => item.id === "ejecucion_visitas").periods.Q3.status, "no_aplica", "blank management of a vacancy is not converted to 0 %")
   assert.ok(vacancy.observations.some(note => note.includes("vacante")))
-  for (const item of reports.entities) assert.equal(item.reportState, "borrador")
-  const summary = entity("Comercial Uno").results.Q3
-  assert.equal(summary.complete, true, "100 % evaluated and blanks counted as 0: complete, still a draft while rules are pending")
-  assert.deepEqual(entity("Comercial Uno").draftReasons, ["Reglas pendientes de validación"])
+  assert.equal(config.rulesValidated, true)
+  assert.deepEqual(config.pendingRules, [])
+  assert.equal(entity("Comercial Uno").results.Q3.complete, true)
+  assert.equal(entity("Comercial Uno").reportState, "final")
+  assert.deepEqual(entity("Comercial Uno").draftReasons, [])
+  for (const item of reports.entities) {
+    assert.equal(item.reportState, item.draftReasons.length ? "borrador" : "final", item.name)
+    assert.ok(!item.draftReasons.includes("Reglas pendientes de validación"), item.name)
+  }
+  assert.equal(vacancy.reportState, "borrador", "partial reports keep the draft mark with their reason")
+  const pending = buildAgricolaReports({ blocks, config: { ...config, rulesValidated: false } })
+  for (const item of pending.entities) assert.equal(item.reportState, "borrador")
+  assert.deepEqual(pending.entities.find(item => item.name === "Comercial Uno").draftReasons, ["Reglas pendientes de validación"])
 })
 
 test("ratio evaluation applies caps and never invents targets", () => {

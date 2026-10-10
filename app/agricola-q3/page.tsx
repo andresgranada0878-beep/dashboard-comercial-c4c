@@ -83,7 +83,7 @@ export default function AgricolaQ3Page() {
   const bundle = (target: Kind) => {
     const entities = reports.entities.filter((entity) => entity.kind === target)
     const name = { individual: "individuales", territorio: "territoriales", direccion: "direccion" }[target]
-    return run(target, () => exportIndividualPdfBundle(entities.map((entity) => toPdfPage(entity, reports, period, loadedAt)), `informes-${name}-agricola-antioquia-${period}-${reports.year}-borrador`))
+    return run(target, () => exportIndividualPdfBundle(entities.map((entity) => toPdfPage(entity, reports, period, loadedAt)), `informes-${name}-agricola-antioquia-${period}-${reports.year}${reports.rulesValidated ? "" : "-borrador"}`))
   }
 
   return (
@@ -114,10 +114,12 @@ export default function AgricolaQ3Page() {
             <summary style={{ cursor: "pointer", fontWeight: 800, color: "#92400e" }}>Ver reglas pendientes</summary>
             <ul style={{ margin: "8px 0 0", paddingLeft: 18, fontSize: 13 }}>{reports.pendingRules.map((rule) => <li key={rule.id} style={{ marginBottom: 6 }}><strong>{rule.title}:</strong> {rule.detail}</li>)}</ul>
           </details>
-          {reports.approvedRules.length > 0 && <details style={{ marginTop: 8 }}>
+        </section>}
+        {reports.approvedRules.length > 0 && <section style={panel}>
+          <details>
             <summary style={{ cursor: "pointer", fontWeight: 800, color: "#245c3a" }}>Ver reglas aprobadas aplicadas</summary>
             <ul style={{ margin: "8px 0 0", paddingLeft: 18, fontSize: 13 }}>{reports.approvedRules.map((rule) => <li key={rule.id} style={{ marginBottom: 6 }}><strong>{rule.title}:</strong> {rule.detail}</li>)}</ul>
-          </details>}
+          </details>
         </section>}
 
         <section style={panel}>
@@ -136,7 +138,7 @@ export default function AgricolaQ3Page() {
 
         <section style={panel}>
           <h2 style={h2}>Descargas</h2>
-          <p style={{ color: "#52625a", fontSize: 13, marginTop: 4 }}>Los PDF usan el formato del informe individual existente y llevan la marca de borrador, el estado de cada indicador, las observaciones y las reglas pendientes. Periodo: {periodLabel}.</p>
+          <p style={{ color: "#52625a", fontSize: 13, marginTop: 4 }}>Los PDF usan el formato del informe individual existente y llevan el estado de cada indicador y las observaciones; los informes parciales o con reglas pendientes llevan la marca de borrador. Periodo: {periodLabel}.</p>
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
             <button type="button" disabled={!selected || busy !== null} style={primaryButton} onClick={() => selected && run("one", () => exportIndividualPdf(toPdfPage(selected, reports, period, loadedAt)))}>
               {busy === "one" ? "Generando…" : "PDF del informe seleccionado"}

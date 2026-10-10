@@ -345,7 +345,7 @@ function drawReport(
     const finalY = (doc as jsPDF & { lastAutoTable?: { finalY: number } }).lastAutoTable?.finalY ?? tableY
     autoTable(doc, {
       startY: finalY + 6,
-      head: [["Observaciones, alcance y reglas pendientes de validación"]],
+      head: [["Observaciones y alcance"]],
       body: extras.observations.map((item) => [item]),
       theme: "grid",
       margin: { left: 14, right: 14, bottom: 18 },

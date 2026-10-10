@@ -1,13 +1,13 @@
 # Q3 2026 — Agrícola Antioquia desde exportados
 
-Estado: borrador para revisión. Los informes se calculan y descargan, pero llevan la marca de borrador mientras `rulesValidated` sea `false` en `config/agricola-q3-2026.json`. Q1 y Q2 no cambian: siguen saliendo de `data/generated/individual-c4c.json`.
+Estado: reglas validadas (`rulesValidated: true` en `config/agricola-q3-2026.json`, sin reglas pendientes); pendiente la revisión visual final antes de publicar. Los informes con resultado PARCIAL o con indicadores No aplica por territorio sin titular conservan la marca de borrador con su motivo. Q1 y Q2 no cambian: siguen saliendo de `data/generated/individual-c4c.json`.
 
 ## Flujo
 
 1. `/cargar-datos`: pegar cada exportado con sus encabezados o cargar el .xlsx. Seis bloques: Gestión comercial, Gestión de promotores, Técnico, Leads, Fincas y Actividades de campo (todos los canales, con las filas iniciales de C4C).
 2. La página detecta encabezados (sin importar mayúsculas, tildes ni espacios), separador decimal, porcentajes y montos con `$`, filtra la unidad Agrícola Antioquia y los meses del trimestre, y muestra la conciliación: leídos, válidos, excluidos por motivo, registros por mes, celdas vacías y actividades por tipo. Cualquier observación en rojo bloquea el cálculo.
 3. `/agricola-q3`: informes individuales (comerciales y promotores), por territorio y de dirección; periodos julio, agosto, septiembre y trimestre. Cada indicador muestra gestión real, meta, cumplimiento sin tope y reconocido, peso, aporte, estado (completo, parcial, sin dato, sin meta, no aplica), fuente, alcance, fórmula y observaciones.
-4. Descargas: PDF del informe seleccionado, PDF con todos los informes de cada tipo y Excel de trazabilidad (resultados, trazabilidad por indicador y periodo, reglas pendientes, observaciones y conciliación).
+4. Descargas: PDF del informe seleccionado, PDF con todos los informes de cada tipo y Excel de trazabilidad (resultados, trazabilidad por indicador y periodo, reglas aprobadas y pendientes, observaciones y conciliación).
 
 Los datos se procesan en el navegador y quedan en `sessionStorage` de la pestaña. No se suben al servidor ni al repositorio. El catálogo de personas y territorios se arma con los exportados cargados; el repositorio solo guarda reglas, pesos y topes.
 
@@ -36,13 +36,13 @@ Las reglas de negocio aprobadas están en `approvedRules` de la configuración y
 - Metas de actividades, hectáreas y cultivos (`targets.fieldTargets`): por promotor activo y trimestre, 3 actividades, 90 hectáreas (30 al mes) y 3 cultivos (1 al mes); las parcelas no cuentan en Q3. Las vacantes y posiciones sin titular no generan meta. Territorio = meta individual × promotores activos asignados (sin promotores activos: Sin meta). RTC (comercial) = gestión y meta de su territorio asignado, mostrado como «Alcance: territorio asignado», nunca como autoría individual. Dirección = suma de las metas territoriales.
 - Fincas: hectáreas y cultivos impactados solo de la fuente de fincas; sin identificador de finca, la suma no se presenta como fincas o cultivos únicos.
 - Celdas vacías (regla SUMIFS Q1/Q2): si la fila del territorio, persona y mes existe y la gestión viene vacía, cuenta como 0 y no deja el indicador Parcial ni Sin dato. Sin dato solo cuando falta la fila, la fuente o la información para calcular. Vacantes y posiciones sin titular: el vacío queda No aplica, no 0 %. Un territorio sin titular activo (p. ej. Urabá Q3) queda No aplica en todos los indicadores.
-- Referencias: cantidad = Meta Referencias × proporción recomendada. Al pegar, si la proporción no tiene decimales suficientes para una cantidad exacta, la carga se bloquea.
+- Referencias (lógica histórica Q1/Q2): REF CANTIDAD = Referencias Recomendadas × Meta Referencias, sin redondeo previo; gestión Q3 = Σ REF CANTIDAD de julio, agosto y septiembre (una referencia puede repetirse entre meses: el exportado no trae código de referencia). Meta = portafolio vigente (Meta Referencias), una sola vez para el periodo y por unidad de evaluación: no se multiplica por meses, empleados ni territorios agrupados. Q3 = 302 en todos los territorios; Norte y Bajo Cauca suma la gestión de ambos contra 302, nunca 604 (36 / 302 = 11,92 %). Al pegar, si la proporción no tiene decimales suficientes para una cantidad exacta, la carga se bloquea.
 - Dirección y Dirección Técnica del exportado técnico solo repiten Meta Referencias y se excluyen del consolidado.
 - Referencias del director: corrección metodológica desde Q3; Q1/Q2 se conservan sin modificación por corresponder a resultados históricos publicados. Gestión = Σ REF CANTIDAD (Referencias Recomendadas × Meta Referencias, sin redondeo) de los territorios del alcance consolidado; meta = Σ Meta Referencias del mismo alcance y periodo / 3 (Q3: 519 / 2.416 = 21,48 %). No se replica la fórmula histórica: Q1 usaba filas auxiliares manuales con otra fórmula y Q2 tenía enlaces rotos y se publicó como Inconsistencia (58,22 % = valor de Valle de Aburrá).
 
 ## Reglas pendientes de validación
 
-Están en `pendingRules` de la configuración y se muestran en la página y en los PDF: referencias (conteo por mes sin código de referencia). La cobertura del director quedó aprobada (universo de 400 clientes). Al validarlas: ajustar la configuración, poner `rulesValidated: true` y volver a revisar las pruebas.
+Ninguna: `pendingRules` está vacío y `rulesValidated` es `true`. Si se agrega una regla pendiente, volver a poner `rulesValidated: false`; los informes y descargas vuelven a marcarse como borrador.
 
 ## Galagro (pendiente)
 
