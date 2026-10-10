@@ -26,8 +26,11 @@ test("Cobertura: conserva entero y rechaza cantidad no entera", () => {
 })
 
 
-test("Cobertura municipal: encabezado nuevo produce el mismo dato que el archivo anterior", () => {
+test("Cobertura municipal: encabezado mensual y anteriores producen la misma cartera cargada", () => {
   const output = prepareVisitTargetsRows([["Promotor", "Meta cobertura Q3"], ["Promotor Ejemplo", 149]])
   assert.deepEqual(output.issues, [])
   assert.equal(output.records[0]["Meta visitas Q3"], 149, "compatibilidad con el motor existente de cobertura")
+  const newest = prepareVisitTargetsRows([["Promotor", "Meta cobertura mensual"], ["Promotor Ejemplo", 149]])
+  assert.deepEqual(newest.issues, [])
+  assert.deepEqual(newest.records, output.records, "la misma cartera mensual bajo encabezado actualizado")
 })
