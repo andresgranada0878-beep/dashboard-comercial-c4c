@@ -1,5 +1,5 @@
 {
-  "version": "agricola-q3-2026-v10",
+  "version": "agricola-q3-2026-v11",
   "sourceKey": "PYC-AGR-ANT",
   "company": "Pérez y Cardona",
   "report": "Agrícola Antioquia",
@@ -49,7 +49,19 @@
         "cropsPerQuarter": 3
       },
       "vacanciesGenerateTarget": false,
-      "commercialScope": "territorio_asignado"
+      "commercialScope": "territorio_asignado",
+      "commercialWithoutPromoter": {
+        "people": [
+          "Jairo Jesús Morales Doria"
+        ],
+        "kpisNotApplicable": [
+          "actividades_campo",
+          "hectareas",
+          "cultivos"
+        ],
+        "normalizeByApplicableWeight": true,
+        "note": "Excepción aprobada para Jairo, comercial de Córdoba sin promotor técnico activo en Q3: 20% de indicadores de campo No aplica y resultado evaluado sobre 80% de peso aplicable. No afecta otros comerciales, territorios o director."
+      }
     },
     "newClients": {
       "commercial": {
