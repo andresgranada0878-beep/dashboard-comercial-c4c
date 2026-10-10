@@ -182,7 +182,7 @@ test("rule coverage: quarter = Σ monthly unique clients / Σ monthly targets, n
   const coverage = indicator("Comercial Uno", "cobertura_clientes")
   assert.deepEqual(["Julio", "Agosto", "Septiembre"].map(month => coverage.periods[month].actual), [9, 10, 7])
   assert.equal(coverage.periods.Q3.recognizedCompliance, 26 / 60)
-  assert.equal(indicator("Directora Ficticia", "cobertura_clientes").periods.Q3.status, "sin_meta")
+  assert.equal(indicator("Directora Ficticia", "cobertura_clientes").periods.Q3.status, "ok")
 })
 
 test("recommendations and references: blank groups count as 0 and do not make the result partial", () => {
@@ -340,15 +340,22 @@ test("rule new clients: exported measure against Meta Clientes Recuperar, with a
   assert.equal(clients.cap, 1.5)
 })
 
-test("rule director: 20 visits per month; coverage without client universe is Sin meta and says what is missing", () => {
+test("rule director: 20 visits per month; coverage = annual universe of 400 clients / 12 per month (Q3 target 100, never 400 nor the Dirección row's 1)", () => {
   assert.equal(config.targets.director.visitsPerMonth, 20)
   assert.equal(indicator("Directora Ficticia", "ejecucion_visitas").periods.Q3.target, 60)
+  assert.equal(config.targets.director.coverageUniverse, 400)
   const coverage = indicator("Directora Ficticia", "cobertura_clientes")
-  assert.equal(coverage.periods.Q3.status, "sin_meta")
-  assert.ok(coverage.notes.some(note => note.includes("universo de clientes")))
-  const summary = entity("Directora Ficticia").results.Q3
-  assert.ok(summary.withoutTarget.includes(coverage.label))
-  assert.ok(!summary.withoutData.includes(coverage.label))
+  assert.ok(Math.abs(coverage.periods.Julio.target - 400 / 12) < 1e-9)
+  assert.ok(Math.abs(coverage.periods.Q3.target - 100) < 1e-9)
+  assert.equal(coverage.periods.Q3.actual, 4 + 2 + 3, "clients visited personally, including other territories")
+  assert.ok(Math.abs(coverage.periods.Q3.recognizedCompliance - 0.09) < 1e-9)
+  assert.equal(coverage.periods.Q3.status, "ok")
+  assert.ok(coverage.notes.some(note => note.includes("400 / 12") && note.includes("no se usa como meta")))
+  assert.deepEqual(entity("Directora Ficticia").pendingRules.includes("director-scope"), false)
+  const withoutUniverse = buildAgricolaReports({ blocks, config: { ...config, targets: { ...config.targets, director: { ...config.targets.director, coverageUniverse: null } } } })
+  const missing = withoutUniverse.entities.find(item => item.kind === "direccion")
+  assert.equal(missing.indicators.find(item => item.id === "cobertura_clientes").periods.Q3.status, "sin_meta")
+  assert.ok(missing.results.Q3.withoutTarget.includes(coverage.label))
 })
 
 test("rule partial results: weights are not redistributed; normalized = points / evaluated weight; no level when partial", () => {

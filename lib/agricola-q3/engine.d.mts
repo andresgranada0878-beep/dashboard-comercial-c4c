@@ -96,7 +96,7 @@ export interface AgricolaConfig {
     unassignedRule: string
   }
   targets: {
-    director: { visitsPerMonth: number | null; coveragePerMonth: number | null; coverageMissing: string }
+    director: { visitsPerMonth: number | null; coverageUniverse: number | null; coverageMissing: string }
     fieldTargets: {
       perActivePromoter: { activitiesPerQuarter: number; plotsPerQuarter: number; hectaresPerQuarter: number; cropsPerQuarter: number }
       vacanciesGenerateTarget: boolean
