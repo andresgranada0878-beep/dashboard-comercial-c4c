@@ -7,7 +7,7 @@ import type { CSSProperties } from "react"
 import config from "@/config/agricola-q3-2026.json"
 import { buildAgricolaReports } from "@/lib/agricola-q3/engine.mjs"
 import type { AgricolaConfig, AgricolaReports, PeriodStatus, Q3Entity } from "@/lib/agricola-q3/engine.mjs"
-import { formatPoints, formatShare, normalizedLabel, PARTIAL_LEVEL, partialDetail, STATUS_LABELS, toPdfPage } from "@/lib/agricola-q3/pdf-pages"
+import { formatPoints, formatShare, incompleteLevel, normalizedLabel, STATUS_LABELS, toPdfPage } from "@/lib/agricola-q3/pdf-pages"
 import { readLoad, type StoredLoad } from "@/lib/agricola-q3/store"
 import { downloadTraceWorkbook } from "@/lib/agricola-q3/trace-workbook"
 import { exportIndividualPdf, exportIndividualPdfBundle } from "@/lib/pdf/export-individual-pdf"
@@ -166,7 +166,7 @@ export default function AgricolaQ3Page() {
               </tr>)}</tbody>
             </table>
           </div>
-          <p style={{ color: "#52625a", fontSize: 12 }}>* PARCIAL: peso evaluado menor a 100 % o datos incompletos en algún indicador. Los periodos muestran el aporte ponderado sobre 100 (sin redistribuir pesos); el cumplimiento normalizado es aporte / peso evaluado. Un resultado parcial no tiene nivel de desempeño.</p>
+          <p style={{ color: "#52625a", fontSize: 12 }}>* PARCIAL: peso evaluado menor a 100 % o un mes sin filas en la fuente de algún indicador (una celda vacía en una fila existente cuenta como 0). Los periodos muestran el aporte ponderado sobre 100 (sin redistribuir pesos); el cumplimiento normalizado es aporte / peso evaluado. Un resultado parcial no tiene nivel de desempeño.</p>
         </section>
 
         {reports.observations.length > 0 && <section style={panel}>
@@ -193,7 +193,7 @@ function EntityView({ entity, reports, period, periodLabel, expanded, setExpande
         <Summary label="Periodo" value={periodLabel} />
         <Summary label="Aporte ponderado (sobre 100)" value={formatPoints(summary.result)} />
         <Summary label="Cumplimiento normalizado" value={normalizedLabel(entity, period)} />
-        <Summary label="Nivel" value={summary.complete ? performance(summary.result) : `${PARTIAL_LEVEL} (${partialDetail(summary)})`} />
+        <Summary label="Nivel" value={summary.complete ? performance(summary.result) : incompleteLevel(summary)} />
         <Summary label="Indicadores sin dato" value={summary.withoutData.length ? summary.withoutData.join(", ") : "Ninguno"} />
         {summary.withoutTarget.length > 0 && <Summary label="Indicadores sin meta" value={summary.withoutTarget.join(", ")} />}      </div>
       {entity.observations.map((item, index) => <p key={index} style={{ color: "#92400e", fontSize: 13 }}>{item}</p>)}

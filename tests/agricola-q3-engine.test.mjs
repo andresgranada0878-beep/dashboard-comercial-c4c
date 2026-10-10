@@ -115,15 +115,19 @@ test("visits and coverage compare monthly targets and sum them for the quarter",
   assert.equal(coverage.periods.Q3.target, 60)
 })
 
-test("multi-territory person sums both territories and blanks stay partial", () => {
+test("multi-territory person sums both territories; blanks in existing rows are management 0 (Q1/Q2 SUMIFS)", () => {
   const visits = indicator("Comercial Dos", "ejecucion_visitas")
   assert.equal(visits.periods.Julio.target, 15)
   assert.equal(visits.periods.Agosto.actual, 5)
-  assert.equal(visits.periods.Agosto.status, "parcial")
+  assert.equal(visits.periods.Agosto.target, 15)
+  assert.equal(visits.periods.Agosto.status, "ok")
+  assert.ok(visits.periods.Agosto.notes.some(note => note.includes("vacío tratado como gestión 0")))
   const recs = indicator("Comercial Dos", "recomendaciones")
-  assert.equal(recs.periods.Q3.actual, null)
-  assert.equal(recs.periods.Q3.status, "sin_dato")
+  assert.equal(recs.periods.Q3.actual, 0, "every group blank in existing technical rows: 0, not Sin dato")
+  assert.equal(recs.periods.Q3.status, "ok")
+  assert.equal(recs.periods.Q3.recognizedCompliance, 0)
   assert.equal(recs.periods.Q3.target, 600000)
+  assert.equal(indicator("Comercial Dos", "referencias").periods.Q3.recognizedCompliance, 0)
 })
 
 test("director: personal visits use the configured target and include other territories", () => {
@@ -177,11 +181,13 @@ test("rule coverage: quarter = Σ monthly unique clients / Σ monthly targets, n
   assert.equal(indicator("Directora Ficticia", "cobertura_clientes").periods.Q3.status, "sin_meta")
 })
 
-test("recommendations and references keep blanks as missing", () => {
+test("recommendations and references: blank groups count as 0 and do not make the result partial", () => {
   const recs = indicator("Comercial Uno", "recomendaciones")
   assert.equal(recs.periods.Julio.actual, 500000)
   assert.equal(recs.periods.Julio.target, 1500000)
-  assert.equal(recs.periods.Julio.status, "parcial")
+  assert.equal(recs.periods.Julio.status, "ok")
+  assert.ok(recs.periods.Julio.notes.some(note => note.startsWith("1 de 2 grupos sin Valor Recomendaciones") && note.includes("regla SUMIFS Q1/Q2")))
+  assert.ok(!entity("Comercial Uno").indicators.some(item => item.periods.Q3.status === "parcial"))
   const refs = indicator("Comercial Uno", "referencias")
   assert.equal(refs.periods.Julio.actual, 3)
   assert.equal(refs.periods.Julio.target, 20)
@@ -381,14 +387,35 @@ test("rule activities: only the four completed types, no plots, one per ID", () 
   assert.deepEqual(blocks.activities.summary.byType, { "Día de campo": 1, "Visita Formación": 1 })
 })
 
+test("territory without an active holder is No aplica: no targets, no compliance", () => {
+  const DELTA = "PYC AGRÍCOLA ANT DELTA"
+  const withDelta = {
+    ...blocks,
+    commercial: prepareAgricolaBlock("commercial", commercial + "\n" + ["Julio", "Agosto", "Septiembre"].map(month => [DELTA, "(Vacante) Comercial Delta", 10, "", "", "", "", 4, "", "", month].join("\t")).join("\n"), 2026, "Q3"),
+    technical: prepareAgricolaBlock("technical", technical + "\n" + ["Julio", "Agosto", "Septiembre"].map(month => [DELTA, "Grupo 1", "$300.000", "", 10, "", month].join("\t")).join("\n"), 2026, "Q3"),
+  }
+  const result = buildAgricolaReports({ blocks: withDelta, config })
+  const delta = result.entities.find(item => item.kind === "territorio" && item.name === "Delta")
+  for (const item of delta.indicators) for (const period of result.periods) assert.equal(item.periods[period].status, "no_aplica", `${item.id} ${period}`)
+  assert.equal(delta.results.Q3.applicable, false)
+  assert.equal(delta.results.Q3.result, null)
+  assert.ok(delta.draftReasons.includes("No aplica: territorio sin titular activo"))
+  const vacancy = result.entities.find(item => item.name === "(Vacante) Comercial Delta")
+  assert.equal(vacancy.indicators.find(item => item.id === "ejecucion_visitas").periods.Q3.status, "no_aplica", "a blank vacancy row is not 0 %")
+  assert.equal(result.entities.find(item => item.name === "Alfa").results.Q3.applicable, true)
+  const directorRecs = result.entities.find(item => item.kind === "direccion").indicators.find(item => item.id === "recomendaciones").periods.Q3
+  assert.equal(directorRecs.target, 4500000 + 600000 + 900000, "the consolidated keeps the technical budget of every operating territory")
+  assert.equal(directorRecs.status, "ok")
+})
+
 test("vacancy without data is informative and reports stay in draft", () => {
   const vacancy = entity("(Vacante) Persona Tres")
-  assert.equal(vacancy.indicators.find(item => item.id === "ejecucion_visitas").periods.Q3.status, "sin_dato")
+  assert.equal(vacancy.indicators.find(item => item.id === "ejecucion_visitas").periods.Q3.status, "no_aplica", "blank management of a vacancy is not converted to 0 %")
   assert.ok(vacancy.observations.some(note => note.includes("vacante")))
   for (const item of reports.entities) assert.equal(item.reportState, "borrador")
   const summary = entity("Comercial Uno").results.Q3
-  assert.equal(summary.complete, false)
-  assert.ok(summary.evaluatedWeight <= summary.totalWeight)
+  assert.equal(summary.complete, true, "100 % evaluated and blanks counted as 0: complete, still a draft while rules are pending")
+  assert.deepEqual(entity("Comercial Uno").draftReasons, ["Reglas pendientes de validación"])
 })
 
 test("ratio evaluation applies caps and never invents targets", () => {

@@ -39,8 +39,15 @@ export function partialDetail(summary: EntityPeriodSummary) {
   return summary.evaluatedWeight < summary.totalWeight - 1e-9 ? "peso evaluado < 100 %" : "datos incompletos en algún indicador"
 }
 
+export const NOT_APPLICABLE_LEVEL = "NO APLICA · Territorio sin titular activo"
+
+export function incompleteLevel(summary: EntityPeriodSummary) {
+  return summary.applicable ? `${PARTIAL_LEVEL} (${partialDetail(summary)})` : NOT_APPLICABLE_LEVEL
+}
+
 export function partialReason(summary: EntityPeriodSummary) {
   if (summary.complete) return null
+  if (!summary.applicable) return "NO APLICA (territorio sin titular activo)"
   return `PARCIAL (${partialDetail(summary)})`
 }
 
@@ -51,6 +58,7 @@ export function formatPoints(value: number | null) {
 
 export function resultLabel(entity: Q3Entity, period: string) {
   const summary = entity.results[period]
+  if (!summary.applicable) return "No aplica"
   if (summary.result === null) return "Sin resultado"
   const value = `${new Intl.NumberFormat("es-CO", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(summary.result * 100)} %`
   if (summary.complete) return value
@@ -59,6 +67,7 @@ export function resultLabel(entity: Q3Entity, period: string) {
 
 export function normalizedLabel(entity: Q3Entity, period: string) {
   const summary = entity.results[period]
+  if (!summary.applicable) return "No aplica"
   if (summary.normalized === null) return "Sin resultado"
   return `${oneDecimal(summary.normalized)} % sobre ${formatShare(summary.evaluatedWeight)} evaluado`
 }
@@ -107,7 +116,7 @@ export function toPdfPage(entity: Q3Entity, reports: AgricolaReports, period: st
   ].map(pdfText)
   const summary = entity.results[period]
   const draftReasons = [...entity.draftReasons]
-  if (!summary.complete && period !== reports.quarter) draftReasons.push(`${partialReason(summary)} en el periodo`)
+  if (!summary.complete && summary.applicable && period !== reports.quarter) draftReasons.push(`${partialReason(summary)} en el periodo`)
   if (summary.result !== null) observations.unshift(pdfText(`Resultado: ${new Intl.NumberFormat("es-CO", { maximumFractionDigits: 1 }).format(summary.result * 100)} puntos de 100 (aporte ponderado, sin redistribuir pesos). Cumplimiento normalizado: ${normalizedLabel(entity, period)}.${summary.complete ? "" : ` ${PARTIAL_LEVEL} (${partialDetail(summary)}).`}`))
   return {
     source, view: isQuarter ? "trimestral" : "mensual", month: isQuarter ? reports.months[0] : period,
@@ -115,7 +124,7 @@ export function toPdfPage(entity: Q3Entity, reports: AgricolaReports, period: st
     extras: {
       reportTitle: KIND_TITLES[entity.kind],
       resultLabel: resultLabel(entity, period),
-      levelLabel: summary.complete ? undefined : PARTIAL_LEVEL,
+      levelLabel: summary.complete ? undefined : summary.applicable ? PARTIAL_LEVEL : NOT_APPLICABLE_LEVEL,
       draftReasons: (entity.reportState === "final" && summary.complete ? [] : draftReasons).map(pdfText),
       statusByIndicator: Object.fromEntries(entity.indicators.map((indicator) => [indicator.id, STATUS_LABELS[indicator.periods[period].status]])),
       observations,

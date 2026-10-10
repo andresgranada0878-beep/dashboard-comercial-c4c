@@ -40,6 +40,8 @@ export interface EntityPeriodSummary {
   evaluatedWeight: number
   totalWeight: number
   complete: boolean
+  /** False when every weighted indicator is No aplica (territory without an active holder). */
+  applicable: boolean
   missing: string[]
   withoutData: string[]
   withoutTarget: string[]

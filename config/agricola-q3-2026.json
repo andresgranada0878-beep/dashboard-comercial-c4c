@@ -228,12 +228,12 @@
     {
       "id": "partial-results",
       "title": "Resultados parciales",
-      "detail": "No se redistribuyen pesos de indicadores No aplica, Sin dato o Sin meta. Se muestran el aporte ponderado sobre 100 y el cumplimiento normalizado sobre el peso evaluado (aporte / peso evaluado). Si el peso evaluado es menor a 100 %, el resultado es PARCIAL y no recibe nivel de desempeño. Con 100 % de peso evaluado, si alguna fuente requerida tiene datos incompletos o valores cuya ausencia no puede distinguirse de cero, se conserva «PARCIAL (datos incompletos en algún indicador)» sin nivel de desempeño."
+      "detail": "No se redistribuyen pesos de indicadores No aplica, Sin dato o Sin meta. Se muestran el aporte ponderado sobre 100 y el cumplimiento normalizado sobre el peso evaluado (aporte / peso evaluado). Si el peso evaluado es menor a 100 %, el resultado es PARCIAL y no recibe nivel de desempeño. Una celda vacía en una fila existente no hace parcial el resultado (ver «Celdas vacías»); solo un mes sin filas de la fuente lo deja «PARCIAL (datos incompletos en algún indicador)»."
     },
     {
       "id": "blank-values",
       "title": "Celdas vacías",
-      "detail": "Los vacíos se conservan como datos ausentes, nunca como cero. Si todos los valores de un indicador están vacíos, el indicador queda sin dato y no suma al resultado; si solo algunos lo están, el indicador y el resultado quedan parciales."
+      "detail": "Regla SUMIFS de Q1/Q2: si la fila del territorio, persona y mes existe en el exportado y el valor de gestión viene vacío, la gestión es 0 y no se marca Parcial ni Sin dato (Power BI exporta el cero como vacío). Sin dato solo cuando no existe la fila necesaria, falta la fuente o no hay información suficiente para calcular. Vacantes y posiciones sin titular: el vacío no se convierte en 0 %, queda No aplica. Territorio sin titular activo (comercial y promotores vacantes o sin titular): No aplica en todos los indicadores, sin metas ni cumplimiento; el consolidado del director conserva sus filas técnicas."
     },
     {
       "id": "soils",
