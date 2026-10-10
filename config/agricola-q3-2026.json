@@ -236,6 +236,11 @@
       "detail": "Regla SUMIFS de Q1/Q2: si la fila del territorio, persona y mes existe en el exportado y el valor de gestión viene vacío, la gestión es 0 y no se marca Parcial ni Sin dato (Power BI exporta el cero como vacío). Sin dato solo cuando no existe la fila necesaria, falta la fuente o no hay información suficiente para calcular. Vacantes y posiciones sin titular: el vacío no se convierte en 0 %, queda No aplica. Territorio sin titular activo (comercial y promotores vacantes o sin titular): No aplica en todos los indicadores, sin metas ni cumplimiento; el consolidado del director conserva sus filas técnicas."
     },
     {
+      "id": "director-references",
+      "title": "Referencias del director",
+      "detail": "Corrección metodológica desde Q3; Q1/Q2 se conservan sin modificación por corresponder a resultados históricos publicados. Al director se aplica la misma metodología consolidada y auditable de los territorios: REF CANTIDAD = Referencias Recomendadas × Meta Referencias, sin redondeo previo; gestión = Σ REF CANTIDAD de los territorios del alcance consolidado del director; meta = Σ Meta Referencias del mismo alcance y periodo / 3. No se replica la fórmula histórica del director: Q1 dependía de filas auxiliares manuales con una fórmula distinta a la territorial, y Q2 tenía enlaces externos rotos y se publicó con estado Inconsistencia (su 58,22 % coincide con Valle de Aburrá)."
+    },
+    {
       "id": "soils",
       "title": "Suelos",
       "detail": "Excluido de Q3 mientras no exista fuente confirmada. Se muestra No aplica; nunca 0%."

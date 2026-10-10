@@ -137,6 +137,10 @@ test("director: personal visits use the configured target and include other terr
   assert.ok(visits.notes.some(note => note.includes("otros territorios")))
   const references = indicator("Directora Ficticia", "referencias")
   assert.equal(references.periods.Julio.target, 30, "Dirección rows only repeat the portfolio and are excluded")
+  assert.equal(references.periods.Q3.actual, 9, "Σ REF CANTIDAD of the consolidated territories, same as the territorial rule")
+  assert.equal(references.periods.Q3.target, 30, "Σ Meta Referencias of the scope over the three months / 3")
+  assert.ok(references.notes.some(note => note.startsWith("Corrección metodológica desde Q3; Q1/Q2 se conservan sin modificación")))
+  assert.ok(!indicator("Alfa", "referencias").notes.some(note => note.startsWith("Corrección metodológica")))
 })
 
 test("new clients: cumulative quarter value against annual target / 4", () => {

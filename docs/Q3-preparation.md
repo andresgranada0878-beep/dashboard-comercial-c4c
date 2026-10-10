@@ -38,6 +38,7 @@ Las reglas de negocio aprobadas están en `approvedRules` de la configuración y
 - Celdas vacías (regla SUMIFS Q1/Q2): si la fila del territorio, persona y mes existe y la gestión viene vacía, cuenta como 0 y no deja el indicador Parcial ni Sin dato. Sin dato solo cuando falta la fila, la fuente o la información para calcular. Vacantes y posiciones sin titular: el vacío queda No aplica, no 0 %. Un territorio sin titular activo (p. ej. Urabá Q3) queda No aplica en todos los indicadores.
 - Referencias: cantidad = Meta Referencias × proporción recomendada. Al pegar, si la proporción no tiene decimales suficientes para una cantidad exacta, la carga se bloquea.
 - Dirección y Dirección Técnica del exportado técnico solo repiten Meta Referencias y se excluyen del consolidado.
+- Referencias del director: corrección metodológica desde Q3; Q1/Q2 se conservan sin modificación por corresponder a resultados históricos publicados. Gestión = Σ REF CANTIDAD (Referencias Recomendadas × Meta Referencias, sin redondeo) de los territorios del alcance consolidado; meta = Σ Meta Referencias del mismo alcance y periodo / 3 (Q3: 519 / 2.416 = 21,48 %). No se replica la fórmula histórica: Q1 usaba filas auxiliares manuales con otra fórmula y Q2 tenía enlaces rotos y se publicó como Inconsistencia (58,22 % = valor de Valle de Aburrá).
 
 ## Reglas pendientes de validación
 
