@@ -201,6 +201,27 @@ test("recommendations and references: blank groups count as 0 and do not make th
   assert.equal(refs.periods.Q3.target, 20)
 })
 
+test("Q3 meta visitas cargada por promotor se toma una vez en trimestre; no modifica cobertura ni comerciales", () => {
+  const adjusted = buildAgricolaReports({
+    blocks: { ...blocks, visitTargets: { records: [{ Promotor: "Promotor Uno", "Meta visitas Q3": 37 }] } },
+    config,
+  })
+  const promotor = adjusted.entities.find(item => item.name === "Promotor Uno")
+  const visits = promotor.indicators.find(item => item.id === "ejecucion_visitas")
+  const originalVisits = indicator("Promotor Uno", "ejecucion_visitas")
+  assert.equal(visits.periods.Q3.target, 37, "cartera total es meta trimestral, no mensual por 3")
+  assert.equal(visits.periods.Q3.actual, originalVisits.periods.Q3.actual, "se conserva gestión")
+  assert.equal(visits.periods.Q3.recognizedCompliance, 1, "tope 100 %")
+  assert.ok(Math.abs(visits.periods.Julio.target - 37 / 3) < 1e-9)
+  assert.equal(promotor.indicators.find(item => item.id === "cobertura_clientes").periods.Q3.target,
+    indicator("Promotor Uno", "cobertura_clientes").periods.Q3.target)
+  const unchanged = adjusted.entities.find(item => item.name === "Promotor Dos").indicators.find(item => item.id === "ejecucion_visitas")
+  assert.equal(unchanged.periods.Q3.target, indicator("Promotor Dos", "ejecucion_visitas").periods.Q3.target)
+  assert.equal(adjusted.entities.find(item => item.name === "Comercial Uno").indicators.find(item => item.id === "ejecucion_visitas").periods.Q3.target,
+    indicator("Comercial Uno", "ejecucion_visitas").periods.Q3.target)
+  assert.equal(adjusted.entities.find(item => item.name === "(Vacante) Persona Tres").indicators.find(item => item.id === "ejecucion_visitas").periods.Q3.status, "no_aplica")
+})
+
 test("rule coverage (promoters): territorial target split among plazas (titulars + current vacancies); zero management is 0 %, never inferred inactivity", () => {
   const header = ["Territorio", "Empleado", "Meta Cobertura", "Clientes Visitados", "Cobertura Clientes", "Meta Visitas ", "Cant. Visitas", "Ejec. Visitas", "Meta Clientes Nuevos", "Cant. Clientes Nuevos", "Ejec. Clientes Nuevos", "Mes"]
   const rows = ["Julio", "Agosto", "Septiembre"].flatMap(month => [
