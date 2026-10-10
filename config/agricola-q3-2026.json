@@ -61,6 +61,20 @@
         "periodicity": "mensual",
         "quarterTarget": 90
       }
+    },
+    "promoterCoverage": {
+      "source": "Power BI - Gestión Comercial Promotor Técnico (metas territoriales validadas para Q3 2026)",
+      "monthlyTerritoryTargets": {
+        "bajo cauca": 10,
+        "cordoba": 163,
+        "norte": 232,
+        "oriente a": 343,
+        "oriente b": 277,
+        "suroeste": 180,
+        "uraba": 49,
+        "valle aburra": 95
+      },
+      "overlappingTerritoryRule": "Para un mismo promotor asignado simultáneamente a Norte y Bajo Cauca, se conserva la mayor cuota territorial mensual, no su suma. No se aplica entre colaboradores distintos."
     }
   },
   "policies": {
