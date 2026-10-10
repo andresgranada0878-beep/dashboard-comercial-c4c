@@ -99,7 +99,7 @@ test("Q3 sin promotor: solo el comercial aprobado queda con campo N/A y resultad
     assert.equal(metric.periods.Q3.target, null)
   }
   assert.equal(after.results.Q3.evaluatedWeight, 0.8)
-  assert.equal(after.results.Q3.applicableWeight, 0.8)
+  assert.ok(Math.abs(after.results.Q3.applicableWeight - 0.8) < 1e-12, "floating-point weights sum to 80%")
   assert.equal(after.results.Q3.normalizedToApplicableWeight, true)
   assert.ok(Math.abs(after.results.Q3.result - before.results.Q3.result / 0.8) < 1e-9)
   assert.equal(after.results.Q3.rawWeightedResult, before.results.Q3.result)
