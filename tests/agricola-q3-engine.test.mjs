@@ -283,7 +283,7 @@ test("recommendations and references: blank groups count as 0 and do not make th
   assert.equal(refs.periods.Q3.target, 20)
 })
 
-test("Promotores Q3: visitas fijas 60 mensual/180 trimestre; cobertura municipal importada no se modifica", () => {
+test("Promotores Q3: visitas fijas 180; cartera asignada cobertura mensual que suma x3 en Q3", () => {
   const adjusted = buildAgricolaReports({
     blocks: { ...blocks, visitTargets: { records: [{ Promotor: "Promotor Uno", "Meta visitas Q3": 37 }] } },
     config,
@@ -295,12 +295,18 @@ test("Promotores Q3: visitas fijas 60 mensual/180 trimestre; cobertura municipal
   assert.equal(visits.periods.Q3.actual, originalVisits.periods.Q3.actual, "se conserva gestión")
   assert.equal(visits.periods.Q3.recognizedCompliance, 150 / 180, "visitas 50 × 3 frente a 180")
   assert.equal(visits.periods.Julio.target, 60)
-  assert.equal(promotor.indicators.find(item => item.id === "cobertura_clientes").periods.Q3.target, 37,
-    "la cobertura sigue siendo el total de clientes de cartera municipal Q3")
+  assert.equal(promotor.indicators.find(item => item.id === "cobertura_clientes").periods.Q3.target, 111,
+    "la cartera municipal mensual de 37 clientes se evalúa los 3 meses: 111 Q3")
   assert.equal(promotor.indicators.find(item => item.id === "cobertura_clientes").periods.Q3.actual,
     indicator("Promotor Uno", "cobertura_clientes").periods.Q3.actual,
     "la gestión de clientes visitados permanece intacta")
-  assert.ok(Math.abs(promotor.indicators.find(item => item.id === "cobertura_clientes").periods.Agosto.target - 37 / 3) < 1e-9)
+  assert.ok(Math.abs(promotor.indicators.find(item => item.id === "cobertura_clientes").periods.Agosto.target - 37) < 1e-9)
+  assert.equal(promotor.indicators.find(item => item.id === "cobertura_clientes").periods.Julio.target, 37,
+    "se debe cubrir toda la cartera cada mes");
+  assert.equal(promotor.indicators.find(item => item.id === "cobertura_clientes").periods.Septiembre.target, 37,
+    "misma meta mensual de cobertura, sin alterar la cartera importada");
+  assert.equal(promotor.indicators.find(item => item.id === "cobertura_clientes").periods.Q3.recognizedCompliance,
+    60 / 111, "gestión de 20 × 3 frente a meta de 37 × 3");
   const unchanged = adjusted.entities.find(item => item.name === "Promotor Dos").indicators.find(item => item.id === "ejecucion_visitas")
   assert.equal(unchanged.periods.Q3.target, 180, "todos los promotores activos: 180 visitas Q3")
   assert.equal(adjusted.entities.find(item => item.name === "Promotor Dos").indicators.find(item => item.id === "cobertura_clientes").periods.Q3.target,
