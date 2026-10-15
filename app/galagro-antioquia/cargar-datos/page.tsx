@@ -7,7 +7,7 @@ import type { CSSProperties } from "react"
 import { AGRICOLA_BLOCKS, prepareAgricolaBlock, prepareAgricolaRows } from "@/lib/agricola-import.mjs"
 import type { PreparedBlock } from "@/lib/agricola-import.mjs"
 import { clearLoad, readLoad, saveLoad } from "@/lib/galagro-antioquia-q3/store"
-import { readWorkbookRows } from "@/lib/galagro-antioquia/q3/store"
+import { readWorkbookRows } from "@/lib/agricola-q3/store"
 
 type BlockInput = { text: string; fileName: string | null; fileRows: unknown[][] | null; fileError: string | null }
 const EMPTY: BlockInput = { text: "", fileName: null, fileRows: null, fileError: null }
