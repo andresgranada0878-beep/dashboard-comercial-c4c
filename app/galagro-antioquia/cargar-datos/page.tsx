@@ -28,10 +28,16 @@ export default function GalagroImportBasesPage() {
   const [inputs, setInputs] = useState<Record<string, BlockInput>>({})
   const [stored, setStored] = useState<string | null>(null)
   const [saveError, setSaveError] = useState<string | null>(null)
+  const [activeAliases, setActiveAliases] = useState("")
+  const [directorName, setDirectorName] = useState("")
 
   useEffect(() => {
     const load = readLoad()
-    if (load) setStored(`${load.quarter} ${load.year}, cargado el ${new Date(load.savedAt).toLocaleString("es-CO")}`)
+    if (load) {
+      setStored(`${load.quarter} ${load.year}, cargado el ${new Date(load.savedAt).toLocaleString("es-CO")}`)
+      setActiveAliases((load.rosterOverrides?.activeAliases ?? []).join("\n"))
+      setDirectorName(load.rosterOverrides?.directorName ?? "")
+    }
   }, [])
 
   const prepared = useMemo(() => AGRICOLA_BLOCKS.map((block) => {
@@ -62,6 +68,7 @@ export default function GalagroImportBasesPage() {
     try {
       saveLoad({
         savedAt: new Date().toISOString(), year, quarter,
+        rosterOverrides: { activeAliases: activeAliases.split(/[,;\n]+/).map(value => value.trim()).filter(Boolean), directorName: directorName.trim() },
         blocks: {
           ...Object.fromEntries(prepared.map((block) => [block.id, {
             records: block.result.records, issues: block.result.issues, warnings: block.result.warnings,
@@ -97,6 +104,18 @@ export default function GalagroImportBasesPage() {
         </div>}
 
         <section style={panel}><strong>Período fijo: julio, agosto y septiembre de 2026 (Q3).</strong> Los informes Q1 y Q2 no se modifican.</section>
+        <section style={panel}>
+          <h2 style={{ fontSize: 18, marginTop: 0 }}>Correcciones de catálogo (solo esta sesión)</h2>
+          <p style={{ fontSize: 13, color: "#52625a" }}>Escribe el nombre sin «(Vacante)» cuando Power BI etiquete equivocadamente a una persona activa. La fuente original permanece intacta. Si la directora no figura en los exportados, identifica su nombre; sus indicadores personales quedarán Sin dato.</p>
+          <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+            <label style={{ ...label, flex: "1 1 330px" }}>Colaboradores activos mal rotulados como vacante (uno por línea)
+              <textarea style={{ ...field, minHeight: 65 }} value={activeAliases} onChange={event => setActiveAliases(event.target.value)} placeholder="Nombre de la persona" />
+            </label>
+            <label style={{ ...label, flex: "1 1 240px" }}>Directora sin gestión personal en el exportado
+              <input style={field} value={directorName} onChange={event => setDirectorName(event.target.value)} placeholder="Nombre de la directora" />
+            </label>
+          </div>
+        </section>
 
         {prepared.map((block) => (
           <section key={block.id} style={panel}>
