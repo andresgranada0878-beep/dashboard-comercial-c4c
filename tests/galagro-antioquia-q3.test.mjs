@@ -111,3 +111,20 @@ test("Dirección Galagro se informa sin titular ni gestión personal inventada",
   assert.equal(hectare.attribution,"Territorio asignado")
   assert.equal(dir.reportState,"borrador")
 })
+
+test("Alias VACANTE mal rotulado se reconoce como activo sin cambiar los datos originales", () => {
+  const config={...cfg,catalog:{...cfg.catalog,activeNameOverrides:["Persona Demo"],directorName:"Directora Ejemplo"}}
+  const blocks={
+    commercial:{records:[{Territorio:gal,Empleado:"Comercial Demo","Meta Cobertura y Visitas":10,"Clientes Visitados":1,"Cant. Visitas":1,"Meta Clientes Recuperar":12,"Cant. Clientes Nuevos":1,Mes:"Julio"}]},
+    promoters:{records:[{Territorio:gal,Empleado:"(Vacante) Persona Demo","Meta Cobertura":8,"Clientes Visitados":2,"Meta Visitas":20,"Cant. Visitas":4,"Meta Clientes Nuevos":10,"Cant. Clientes Nuevos":1,Mes:"Julio"}]},
+    leads:{records:[{"Unidad de Negocio":"GALAGRO ANTIOQUIA",Empleado:"(Vacante) Persona Demo","Meta Leads":1,"Leads calificados":1,"Calificados Oportunos":1,"Fuera de Tiempo":0,Mes:"Julio"}]},
+    technical:{records:[]},farms:{records:[]},activities:{records:[]},
+  }
+  const result=buildAgricolaReports({blocks,config})
+  const promoter=result.entities.find(x=>x.kind==="individual" && x.profile==="Promotor")
+  assert.equal(promoter.name,"Persona Demo")
+  assert.equal(promoter.status,"activo")
+  assert.equal(promoter.indicators.find(x=>x.id==="leads_calificados").periods.Julio.actual,1)
+  assert.equal(result.entities.find(x=>x.kind==="direccion")?.name,"Directora Ejemplo")
+  assert.equal(blocks.promoters.records[0].Empleado,"(Vacante) Persona Demo")
+})
