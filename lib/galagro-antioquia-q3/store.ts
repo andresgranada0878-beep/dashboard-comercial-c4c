@@ -1,6 +1,6 @@
-import type { StoredLoad } from "@/lib/agricola-q3/store"
+import type { StoredLoad as BaseStoredLoad } from "@/lib/agricola-q3/store"
 
-export type { StoredLoad } from "@/lib/agricola-q3/store"
+export type StoredLoad = BaseStoredLoad & { rosterOverrides?: { activeAliases: string[]; directorName: string } }
 
 // Almacenamiento aislado: no lee ni modifica los datos de Agrícola Antioquia.
 const STORAGE_KEY = "c4c-galagro-antioquia-q3-v1"
