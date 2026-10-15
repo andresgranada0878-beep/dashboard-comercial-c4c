@@ -1,0 +1,41 @@
+name: Validación Galagro Antioquia Q3
+
+on:
+  push:
+    branches:
+      - feature/galagro-antioquia-q3
+  pull_request:
+    branches:
+      - prepare/q3-2026
+    paths:
+      - "app/galagro-antioquia/**"
+      - "config/galagro-antioquia-q3-2026.json"
+      - "lib/galagro-antioquia-q3/**"
+      - "lib/agricola-import.mjs"
+      - "lib/agricola-q3/engine.mjs"
+      - "tests/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Pruebas Q3, TypeScript y build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Pruebas de regresión Agrícola + Galagro
+        run: pnpm test
+      - name: TypeScript del módulo Q3
+        run: pnpm exec tsc --noEmit -p tsconfig.q3.json
+      - name: Compilación de Next.js completa
+        run: pnpm build
