@@ -1,0 +1,251 @@
+{
+  "version": "galagro-antioquia-q3-2026-v1",
+  "sourceKey": "GAL-ANT",
+  "company": "Galagro",
+  "report": "Galagro Antioquia",
+  "year": 2026,
+  "quarter": "Q3",
+  "months": [
+    "Julio",
+    "Agosto",
+    "Septiembre"
+  ],
+  "rulesValidated": false,
+  "catalog": {
+    "source": "Catálogo construido con los registros de Galagro Antioquia cargados en el navegador; sin datos personales versionados.",
+    "territoryPrefix": "^galagro\\s+",
+    "nonOperatingTerritories": [
+      "direccion",
+      "dir tecnica",
+      "direccion tecnica",
+      "direccion ant",
+      "direccion ant.",
+      "dir ant",
+      "dir ant.",
+      "direccion tecnica ant",
+      "direccion tecnica ant."
+    ],
+    "territoryLabels": {},
+    "territoryGroups": [],
+    "vacancyPattern": "^\\(vacante\\)",
+    "unassignedRule": "Nombre en mayúsculas sostenidas sin titular identificado"
+  },
+  "targets": {
+    "director": {
+      "visitsPerMonth": null,
+      "coverageUniverse": null,
+      "coverageMissing": "Pendiente confirmar el universo y la meta del director de Galagro Antioquia; no se trasladan los valores de Agrícola."
+    },
+    "fieldTargets": {
+      "perActivePromoter": {
+        "activitiesPerQuarter": 3,
+        "plotsPerQuarter": 0,
+        "hectaresPerQuarter": 90,
+        "cropsPerQuarter": 3
+      },
+      "vacanciesGenerateTarget": false,
+      "commercialScope": "territorio_asignado",
+      "commercialWithoutPromoter": {
+        "people": [],
+        "kpisNotApplicable": [],
+        "normalizeByApplicableWeight": false
+      }
+    },
+    "newClients": {
+      "commercial": {
+        "field": "Meta Clientes Recuperar",
+        "periodicity": "anual",
+        "methodology": "acumulado_anual_al_cierre_Q3",
+        "monthsElapsedAtQuarterEnd": 9,
+        "rounding": "nearest_integer",
+        "targetExclusions": []
+      },
+      "promoters": {
+        "field": "Meta Clientes Nuevos",
+        "periodicity": "mensual",
+        "quarterTarget": null
+      }
+    },
+    "promoterCoverage": {
+      "source": "Gestión de promotores Galagro Antioquia Q3: Meta Cobertura por territorio",
+      "monthlyTerritoryTargets": {},
+      "reportedPowerBiTotal": null,
+      "reconciliationStatus": "pendiente_de_validacion",
+      "methodology": "por_plazas_promotores",
+      "allocationRule": "Para cada territorio, Meta Cobertura mensual dividida entre plazas asignadas identificadas; sin redistribuir cuotas de vacantes.",
+      "monthlyAssignedPortfolio": false
+    },
+    "commercialVisitCoverageExceptions": [],
+    "promoterVisits": {
+      "monthlyTarget": null,
+      "quarterTarget": null,
+      "periodicity": "mensual",
+      "methodology": "fuente",
+      "scope": "promotores_activos",
+      "policy": "Meta mensual de visitas tomada de la columna Meta Visitas del exportado propio de Galagro. Sin registro: Sin meta."
+    }
+  },
+  "policies": {
+    "blankValues": "ausente",
+    "farmsWithoutRecords": "cero"
+  },
+  "indicators": [
+    {
+      "id": "ejecucion_visitas",
+      "label": "Ejecución visitas",
+      "weight": 0.1,
+      "cap": 1,
+      "calculationType": "ratio",
+      "pending": [],
+      "criterion": "Visitas personales frente a la meta mensual de su fuente. Promotores: Meta Visitas del exportado Galagro. Director: Sin meta mientras no se confirme."
+    },
+    {
+      "id": "cobertura_clientes",
+      "label": "Cobertura clientes",
+      "weight": 0.1,
+      "cap": 1,
+      "calculationType": "ratio",
+      "pending": [],
+      "criterion": "Clientes visitados mensualmente frente a meta comercial/promotor de Galagro. Sin trasladar cartera municipal de Agrícola."
+    },
+    {
+      "id": "nuevos_clientes",
+      "label": "Recuperación de clientes (nuevos + recuperados)",
+      "weight": 0.1,
+      "cap": 1.5,
+      "calculationType": "ratio_acumulado",
+      "pending": [],
+      "criterion": "Gestión acumulada de nuevos/recuperados versus meta propia de Galagro. Periodicidad de las medidas pendiente de revisión."
+    },
+    {
+      "id": "recomendaciones",
+      "label": "Recomendaciones",
+      "weight": 0.2,
+      "cap": 1.5,
+      "calculationType": "ratio_acumulado",
+      "pending": [],
+      "criterion": "Σ Valor Recomendaciones / Σ Valor Ventas, comparando el mismo período y territorio."
+    },
+    {
+      "id": "referencias",
+      "label": "Referencias",
+      "weight": 0.1,
+      "cap": null,
+      "calculationType": "ratio",
+      "pending": [],
+      "criterion": "Cantidad referida frente a portafolio vigente del ámbito evaluado, sin triplicar la meta por mes."
+    },
+    {
+      "id": "leads_calificados",
+      "label": "Leads calificados",
+      "weight": 0.1,
+      "cap": 1,
+      "calculationType": "ratio_acumulado",
+      "pending": [],
+      "criterion": "Gestión de leads del titular frente a la meta de cada mes; vacantes no generan cumplimiento."
+    },
+    {
+      "id": "leads_calificados_tiempo",
+      "label": "Leads calificados a tiempo",
+      "weight": 0.1,
+      "cap": 1,
+      "calculationType": "ratio_acumulado",
+      "pending": [],
+      "criterion": "Calificados oportunos frente a meta mensual de leads; no confundir gestionados y oportunos."
+    },
+    {
+      "id": "actividades_campo",
+      "label": "Impacto en clientes (Actividades de campo)",
+      "weight": 0.1,
+      "cap": 1.5,
+      "calculationType": "ratio_acumulado",
+      "pending": [],
+      "criterion": "Día de campo, Evento Especial, Visita Mostrador Especial, Visita Formación, únicamente Completado y por ID; sin parcelas."
+    },
+    {
+      "id": "hectareas",
+      "label": "Hectáreas de cultivos impactados",
+      "weight": 0.05,
+      "cap": 1.5,
+      "calculationType": "ratio_acumulado",
+      "pending": [],
+      "criterion": "Σ Héctareas de Fincas frente a 90 ha trimestrales por promotor activo, pendiente de conciliación con meta Galagro Q3."
+    },
+    {
+      "id": "cultivos",
+      "label": "Cultivos impactados",
+      "weight": 0.05,
+      "cap": 1.5,
+      "calculationType": "ratio_acumulado",
+      "pending": [],
+      "criterion": "Registros de cultivos de Fincas frente a 3 cultivos trimestrales por promotor activo; no son cultivos únicos."
+    },
+    {
+      "id": "gestion-cultivos-impactados",
+      "label": "Gestión de Cultivos Impactados",
+      "weight": 0,
+      "cap": 1.5,
+      "calculationType": "promedio",
+      "pending": [],
+      "criterion": "Promedio informativo de cumplimiento en hectáreas y cultivos; sin peso adicional."
+    },
+    {
+      "id": "suelos",
+      "label": "Suelos",
+      "weight": 0,
+      "cap": null,
+      "calculationType": "no_aplica",
+      "pending": [],
+      "criterion": "No aplica en Q3 mientras no se disponga de fuente validada."
+    }
+  ],
+  "approvedRules": [
+    {
+      "id": "unit",
+      "title": "Unidad independiente",
+      "detail": "Sólo registros Galagro Antioquia (GAL-ANT); nunca se incorporan registros Agrícola ni Galagro Nacional."
+    },
+    {
+      "id": "activities",
+      "title": "Actividades de campo",
+      "detail": "Cuatro tipos admitidos, estado Completado, Q3 2026, ID único, excluyendo parcelas y otros canales."
+    },
+    {
+      "id": "weights",
+      "title": "Ponderaciones",
+      "detail": "10 % visitas, 10 % cobertura, 10 % nuevos clientes, 20 % recomendaciones, 10 % referencias, 10 % leads, 10 % leads a tiempo, 10 % campo, 5 % hectáreas, 5 % cultivos."
+    },
+    {
+      "id": "source",
+      "title": "Trazabilidad y privacidad",
+      "detail": "Los seis archivos se importan en el navegador y quedan sólo en la sesión de la pestaña. No se guardan en el repositorio."
+    }
+  ],
+  "pendingRules": [
+    {
+      "id": "galagro-data",
+      "title": "Conciliación de fuentes Q3",
+      "detail": "Faltan carga y conciliación de Gestión comercial, Promotores, Técnico, Leads, Fincas y las actividades generales para Galagro Antioquia Q3."
+    },
+    {
+      "id": "galagro-director",
+      "title": "Metas de dirección",
+      "detail": "No se ha confirmado meta de visitas ni universo de cobertura del director Galagro; se muestran Sin meta, nunca se copian de Agrícola."
+    },
+    {
+      "id": "galagro-new-clients",
+      "title": "Clientes nuevos / recuperados",
+      "detail": "Validar que las columnas de Galagro para comerciales y promotores representen los acumulados y la periodicidad de las metas de Q3; los cálculos quedan en borrador."
+    },
+    {
+      "id": "galagro-field-targets",
+      "title": "Metas de campo y referencias",
+      "detail": "Confirmar con Galagro Antioquia las metas Q3 de actividades, hectáreas, cultivos y la base del portafolio de referencias; no utilizar metas territoriales de Agrícola."
+    },
+    {
+      "id": "galagro-promoter-visits",
+      "title": "Metas de visitas de promotores",
+      "detail": "Meta obtenida de Meta Visitas del exportado Galagro por mes, pendiente de conciliación. No aplicar 60 visitas/mes aprobadas para Agrícola."
+    }
+  ]
+}
