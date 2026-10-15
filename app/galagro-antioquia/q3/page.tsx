@@ -59,7 +59,11 @@ export default function GalagroAntioquiaQ3Page() {
 
   const reports: AgricolaReports | null = useMemo(() => {
     if (!load) return null
-    return buildAgricolaReports({ blocks: load.blocks as unknown as Record<string, PreparedBlock>, config: config as unknown as AgricolaConfig })
+    const effectiveConfig = { ...config, catalog: { ...config.catalog,
+      activeNameOverrides: load.rosterOverrides?.activeAliases ?? [],
+      directorName: load.rosterOverrides?.directorName ?? "",
+    } }
+    return buildAgricolaReports({ blocks: load.blocks as unknown as Record<string, PreparedBlock>, config: effectiveConfig as unknown as AgricolaConfig })
   }, [load])
 
   const candidates = useMemo(() => (reports?.entities ?? []).filter((entity) => entity.kind === kind && (kind !== "individual" || profile === "Todos" || entity.profile === profile)), [reports, kind, profile])
