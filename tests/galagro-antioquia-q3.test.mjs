@@ -62,3 +62,52 @@ test("Metas Galagro nunca heredan 60 visitas fijas ni universo agrícola", () =>
   assert.equal(person.reportState,"borrador")
   assert.equal(result.report,"Galagro Antioquia")
 })
+
+test("La carga real de Galagro acepta fincas sin nombre de empleado y protege la autoría", () => {
+  const columns=["Unidad de Negocio","Territorio","Cultivo","# Fincas","Héctareas","Mes"]
+  const x=prepareAgricolaRows("farms",[columns,["GALAGRO ANTIOQUIA",gal,"Hortensia",10,19,"Julio"]],2026,"Q3",{sourceKey:"GAL-ANT"})
+  assert.equal(x.issues.length,0)
+  assert.equal(x.records.length,1)
+  assert.equal(x.records[0].des_territorio,gal)
+  assert.equal(x.records[0].atr_cultivo_texto,"Hortensia")
+  assert.equal(x.records[0].atr_desc_empleado,null)
+  assert.match(x.warnings.join(" "),/sin empleado/)
+})
+
+test("La carga real de Galagro acepta aliases atr_desc_empleado y Ejecución en Leads", () => {
+  const columns=["Unidad de Negocio","atr_desc_empleado","Meta Leads","Calificados Oportunos","Fuera de Tiempo","Ejecución","Pendientes","Mes"]
+  const x=prepareAgricolaRows("leads",[columns,["GALAGRO ANTIOQUIA","(Vacante) Karen P.",1,null,1,1,null,"Julio"]],2026,"Q3",{sourceKey:"GAL-ANT"})
+  assert.equal(x.issues.length,0)
+  assert.equal(x.records.length,1)
+  assert.equal(x.records[0].Empleado,"(Vacante) Karen P.")
+  assert.equal(x.records[0]["Leads calificados"],1)
+})
+
+test("Movimientos sin meta y sin ID del comercial Galagro se conservan, con advertencia", () => {
+  const rows=[hCommercial,m(gal,"Comercial Demo","Julio"),
+    [gal,"Apoyo Comercial",null,2,1,null,null,"Julio"],
+    [gal,"Apoyo Comercial",null,1,3,null,null,"Julio"]]
+  const x=prepareAgricolaRows("commercial",rows,2026,"Q3",{sourceKey:"GAL-ANT"})
+  assert.equal(x.issues.length,0)
+  assert.equal(x.records.length,3)
+  assert.match(x.warnings.join(" "),/sin meta ni ID/)
+})
+
+test("Dirección Galagro se informa sin titular ni gestión personal inventada", () => {
+  const blocks={commercial:{records:["Julio","Agosto","Septiembre"].map(Mes=>({Territorio:gal,Empleado:"Comercial Demo","Meta Cobertura y Visitas":12,"Clientes Visitados":5,"Cant. Visitas":6,"Meta Clientes Recuperar":48,"Cant. Clientes Nuevos":4,Mes}))},
+  promoters:{records:["Julio","Agosto","Septiembre"].map(Mes=>({Territorio:gal,Empleado:"Promotora Demo","Meta Cobertura":15,"Clientes Visitados":5,"Meta Visitas":60,"Cant. Visitas":10,"Meta Clientes Nuevos":10,"Cant. Clientes Nuevos":2,Mes}))},
+  farms:{records:[{des_territorio:gal,atr_desc_empleado:null,atr_cultivo_texto:"Hortensia","Héctareas":25,Mes:"Julio"}]},
+  technical:{records:[]},leads:{records:[]},activities:{records:[]}}
+  const result=buildAgricolaReports({blocks,config:cfg})
+  const dir=result.entities.find(entity=>entity.kind==="direccion")
+  assert.ok(dir)
+  for (const id of ["ejecucion_visitas","cobertura_clientes","leads_calificados","leads_calificados_tiempo"]) {
+    const p=dir.indicators.find(ind=>ind.id===id).periods.Q3
+    assert.equal(p.status,"sin_dato")
+  }
+  const promoter=result.entities.find(entity=>entity.kind==="individual" && entity.profile==="Promotor")
+  const hectare=promoter.indicators.find(ind=>ind.id==="hectareas")
+  assert.equal(hectare.periods.Q3.actual,25)
+  assert.equal(hectare.attribution,"Territorio asignado")
+  assert.equal(dir.reportState,"borrador")
+})
