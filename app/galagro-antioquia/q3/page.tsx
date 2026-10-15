@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { Fragment, useEffect, useMemo, useState } from "react"
 import type { CSSProperties } from "react"
@@ -95,7 +96,7 @@ export default function GalagroAntioquiaQ3Page() {
           </div>
           <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
             <div style={{ width: 150, height: 54, background: "#ffffff", border: "1px solid #e4ece6", borderRadius: 12, padding: 6 }}>
-              <strong style={{ display: "block", fontSize: 24, letterSpacing: "0.04em", textAlign: "center", marginTop: 6 }}>GALAGRO</strong>
+              <Image src="/logos/galagro.png" alt="Galagro" width={1000} height={700} priority style={{ width: "100%", height: "100%", objectFit: "contain" }} />
             </div>
             <Link href="/" style={secondaryButton}>Informe individual Q1/Q2</Link>
             <Link href="/galagro-antioquia/cargar-datos" style={secondaryButton}>Cargar datos</Link>
